@@ -2,5 +2,12 @@
 
 Level_1::Level_1() : Level("Level_1", "Levels/Level_1_back.png")
 {
-    dbg_log("Level 1 loaded! (Level_1.cpp)");
+
+}
+
+void Level_1::render(sf::RenderWindow* window)
+{
+    Level::render(window);
+    auto testSprite = sf::Sprite(AssetManager::getTexture("TestChar.png"));
+    window->draw(testSprite);
 }

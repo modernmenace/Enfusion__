@@ -26,7 +26,8 @@ void Game::update()
 void Game::render()
 {
     mWindow.clear(sf::Color::Cyan);
-    mWindow.draw(testSprite);
+    //mWindow.draw(testSprite);
+    levelManager.getCurrentLevel().render(&mWindow);
     mWindow.display();
 }
 

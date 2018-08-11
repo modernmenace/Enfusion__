@@ -11,12 +11,12 @@ public:
 
     virtual void initialize();
     virtual void update();
-    virtual void render();
+    virtual void render(sf::RenderWindow* window);
 
     static std::string getLevelName();
 
-private:
-    sf::Texture background;
+protected:
+    sf::RectangleShape background;
     std::string levelName;
 
 };

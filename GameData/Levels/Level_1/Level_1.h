@@ -8,6 +8,8 @@ class Level_1 : public Level {
 public:
     Level_1();
 
+    void render(sf::RenderWindow* window) override;
+
 };
 
 #endif //ENFUSION_LEVEL_1_H
