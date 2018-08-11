@@ -1,16 +1,22 @@
 #include "Game.h"
 
-Game::Game() : mWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE), mPlayer()
+Game::Game() : mWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE)
 {
     run();
 }
 
 void Game::run() {
+    initialize();
     while (mWindow.isOpen()) {
         processEvents();
         update();
         render();
     }
+}
+
+void Game::initialize()
+{
+    testSprite = sf::Sprite(AssetManager::getTexture("TestChar.png"));
 }
 
 void Game::update()
@@ -19,8 +25,8 @@ void Game::update()
 
 void Game::render()
 {
-    mWindow.clear();
-    mWindow.draw(mPlayer);
+    mWindow.clear(sf::Color::Cyan);
+    mWindow.draw(testSprite);
     mWindow.display();
 }
 

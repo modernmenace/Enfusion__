@@ -2,7 +2,8 @@
 #define ENFUSION_GAME_H
 
 #include <SFML/Graphics.hpp>
-#include "Misc/Engine.h"
+#include "Core/Engine.h"
+#include "Core/AssetManager.h"
 
 class Game {
 
@@ -11,12 +12,14 @@ public:
     void run();
 
 private:
-    void             processEvents();
-    void             update();
-    void             render();
+    void initialize();
+    void processEvents();
+    void update();
+    void render();
 
+    AssetManager manager;
     sf::RenderWindow mWindow;
-    sf::CircleShape  mPlayer;
+    sf::Sprite testSprite;
 
 };
 
