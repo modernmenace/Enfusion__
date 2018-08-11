@@ -25,7 +25,6 @@ sf::Texture &AssetManager::getTexture(std::string const &fileName)
     {
         // create an element in the texture map
         auto &texture = texMap[fileName];
-        dbg_log RESOURCE_PATH + fileName dbg_end;
         texture.loadFromFile(RESOURCE_PATH + fileName);
         return texture;
     }

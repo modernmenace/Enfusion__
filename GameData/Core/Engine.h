@@ -10,8 +10,7 @@
 
 #define RESOURCE_PATH "Resources/"
 
-//Debugging features
-#define dbg_log std::cout <<
-#define dbg_end << std::endl;
+//Useful macros
+#define dbg_log(message) std::cout << message << std::endl;
 
 #endif //ENFUSION_ENGINE_H

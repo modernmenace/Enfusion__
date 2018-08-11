@@ -3,7 +3,7 @@ project(Enfusion__)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(Enfusion__ main.cpp GameData/Game.cpp GameData/Game.h GameData/Core/Engine.h GameData/Core/AssetManager.cpp GameData/Core/AssetManager.h)
+add_executable(Enfusion__ main.cpp GameData/Game.cpp GameData/Game.h GameData/Core/Engine.h GameData/Core/AssetManager.cpp GameData/Core/AssetManager.h GameData/Levels/Level.cpp GameData/Levels/Level.h)
 
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake_modules")
 
