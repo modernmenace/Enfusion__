@@ -37,6 +37,9 @@ void Game::processEvents() {
     {
         if (event.type == sf::Event::Closed)
             mWindow.close();
+
+        if (event.type == sf::Event::KeyPressed)
+            levelManager.getCurrentLevel().handleInput(event.key.code);
     }
 }
 

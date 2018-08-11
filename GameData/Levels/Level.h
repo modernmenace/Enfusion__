@@ -12,6 +12,7 @@ public:
     virtual void initialize();
     virtual void update();
     virtual void render(sf::RenderWindow* window);
+    virtual void handleInput(sf::Keyboard::Key key); //called on key press
 
     static std::string getLevelName();
 

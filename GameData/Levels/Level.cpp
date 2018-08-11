@@ -10,6 +10,7 @@ Level::Level(std::string levelName, std::string background)
 //virtual functions (overridden)
 void Level::initialize() {}
 void Level::update() {}
+void Level::handleInput(sf::Keyboard::Key key) {}
 void Level::render(sf::RenderWindow* window)
 {
     window->draw(background);

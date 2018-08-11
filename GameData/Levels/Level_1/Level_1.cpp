@@ -20,3 +20,8 @@ void Level_1::render(sf::RenderWindow* window)
     Level::render(window);
     player.render(window);
 }
+
+void Level_1::handleInput(sf::Keyboard::Key key)
+{
+    player.handleInput(key);
+}
