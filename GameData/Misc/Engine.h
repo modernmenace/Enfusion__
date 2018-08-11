@@ -1,0 +1,9 @@
+#ifndef ENFUSION_ENGINE_H
+#define ENFUSION_ENGINE_H
+
+#define WINDOW_TITLE __TIME__
+
+#define WINDOW_WIDTH 1280
+#define WINDOW_HEIGHT 960
+
+#endif //ENFUSION_ENGINE_H

@@ -3,7 +3,7 @@ project(Enfusion__)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(Enfusion__ main.cpp GameData/Game.cpp GameData/Game.h)
+add_executable(Enfusion__ main.cpp GameData/Game.cpp GameData/Game.h GameData/Misc/Engine.h)
 
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake_modules")
 
