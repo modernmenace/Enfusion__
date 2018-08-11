@@ -1,12 +1,13 @@
 #ifndef ENFUSION_LEVEL_H
 #define ENFUSION_LEVEL_H
 
+#include <SFML/Graphics.hpp>
 #include "../Core/Engine.h"
 
 class Level {
 
 public:
-    Level();
+    Level(std::string levelName, std::string background);
 
     virtual void initialize();
     virtual void update();
@@ -14,6 +15,7 @@ public:
 
 private:
     std::string levelName;
+    sf::Texture background;
 
 };
 

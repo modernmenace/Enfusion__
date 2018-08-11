@@ -3,7 +3,6 @@
 
 #include <SFML/Graphics.hpp>
 #include "Core/Engine.h"
-#include "Core/AssetManager.h"
 
 class Game {
 
