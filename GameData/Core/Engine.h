@@ -13,5 +13,6 @@
 
 //Useful macros
 #define dbg_log(message) std::cout << message << std::endl;
+#define dbg_err(message) std::cout << "ERROR: " << message << std::endl;
 
 #endif //ENFUSION_ENGINE_H

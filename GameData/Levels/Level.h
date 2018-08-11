@@ -13,9 +13,11 @@ public:
     virtual void update();
     virtual void render();
 
+    static std::string getLevelName();
+
 private:
-    std::string levelName;
     sf::Texture background;
+    std::string levelName;
 
 };
 

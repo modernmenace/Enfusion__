@@ -1,7 +1,6 @@
 #ifndef ENFUSION_ASSETMANAGER_H
 #define ENFUSION_ASSETMANAGER_H
 
-
 #include <SFML/Graphics.hpp>
 #include <map>
 #include "Engine.h"

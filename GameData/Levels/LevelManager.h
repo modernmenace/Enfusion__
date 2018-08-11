@@ -5,7 +5,7 @@
 #include "Level.h"
 #include "Level_1/Level_1.h"
 
-static class LevelManager {
+class LevelManager {
 
 public:
     LevelManager(std::string initialLevel);
@@ -13,7 +13,9 @@ public:
     Level& getCurrentLevel();
 
 private:
-    Level currentLevel;
+    Level* currentLevel;
+
+    static LevelManager* sInstance;
 
 };
 

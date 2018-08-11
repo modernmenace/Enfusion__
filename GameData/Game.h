@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "Core/Engine.h"
+#include "Levels/LevelManager.h"
 
 class Game {
 
@@ -17,6 +18,7 @@ private:
     void render();
 
     AssetManager manager;
+    LevelManager levelManager;
     sf::RenderWindow mWindow;
     sf::Sprite testSprite;
 
