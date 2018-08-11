@@ -16,17 +16,17 @@ void Game::run() {
 
 void Game::initialize()
 {
-    testSprite = sf::Sprite(AssetManager::getTexture("TestChar.png"));
+    levelManager.getCurrentLevel().initialize();
 }
 
 void Game::update()
 {
+    levelManager.getCurrentLevel().update();
 }
 
 void Game::render()
 {
     mWindow.clear(sf::Color::Cyan);
-    //mWindow.draw(testSprite);
     levelManager.getCurrentLevel().render(&mWindow);
     mWindow.display();
 }

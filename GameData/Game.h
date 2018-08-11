@@ -19,8 +19,8 @@ private:
 
     AssetManager manager;
     LevelManager levelManager;
+
     sf::RenderWindow mWindow;
-    sf::Sprite testSprite;
 
 };
 
