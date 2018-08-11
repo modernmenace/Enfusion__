@@ -10,28 +10,45 @@ void Player::update()
 
 }
 
-void Player::handleInput(sf::Keyboard::Key key)
-{
-    auto x = sprite.getPosition().x;
-    auto y = sprite.getPosition().y;
+void Player::handleInput(sf::Keyboard::Key key) {
+    // check for diagonals
+    // probe with isKeyPressed
 
-    switch (key)
+    if (key == sf::Keyboard::W)
     {
-        case sf::Keyboard::W:
-            //move up
-            y -= speed;
-            break;
-        case sf::Keyboard::A:
-            x -= speed;
-            break;
-        case sf::Keyboard::S:
-            y += speed;
-            break;
-        case sf::Keyboard::D:
-            x += speed;
-            break;
-        default:
-            break;
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+            sprite.move(-speed, -speed);
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+            sprite.move(speed, -speed);
+        else
+            sprite.move(0, -speed);
     }
-    sprite.setPosition(x, y);
+    else if (key == sf::Keyboard::A)
+    {
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+            sprite.move(-speed, -speed);
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+            sprite.move(-speed, speed);
+        else
+            sprite.move(-speed, 0);
+    }
+    else if (key == sf::Keyboard::S)
+    {
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+            sprite.move(-speed, speed);
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+            sprite.move(speed, speed);
+        else
+            sprite.move(0, speed);
+    }
+    else if (key == sf::Keyboard::D)
+    {
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+            sprite.move(speed, -speed);
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+            sprite.move(speed, speed);
+        else
+            sprite.move(speed, 0);
+    }
+
 }

@@ -12,7 +12,7 @@ public:
     void handleInput(sf::Keyboard::Key key);
 
 private:
-    int speed = 10;
+    int speed = 15;
 };
 
 
