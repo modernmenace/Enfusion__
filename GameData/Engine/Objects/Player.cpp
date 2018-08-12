@@ -1,6 +1,6 @@
 #include "Player.h"
 
-Player::Player(std::string spriteName, sf::Vector2f position) : GameObject(spriteName, position)
+Player::Player(std::string spriteName, sf::Vector2f position) : GameObject(spriteName, position), animator(Animator::AnimatorType::PLAYER)
 {
     // setup player animations
     animator.setupAnimator(std::map<Animator::Animations, sf::Texture>

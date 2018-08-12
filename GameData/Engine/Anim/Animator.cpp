@@ -5,30 +5,42 @@
  *
  *  DESC: The animator class is attached to the player/AI which require animation
  *
- *  NOTE: Plain gameobjects are currently not supported, as all enumed animations are currently required
+ *  NOTE: Only the PLAYER animator is currently implemented (in progress)
  *
  *  USAGE: < fill later >
  *
  */
+
+ Animator::Animator(Animator::AnimatorType type)
+{
+     this->type = type;
+}
 
 /*
  *  Setup Animator
  *
  *  DESC: This function is called to setup the animation array for the animator
  *
- *  NOTE: Possible improvements include an optimized check loop, or an option to not
- *        require every animation
+ *        Provided animations are checked by the required animation map, to ensure
+ *        we have all necessary animations
  *
  */
 
 bool Animator::setupAnimator(std::map<Animator::Animations, sf::Texture> animationMap) {
 
     auto validMap = true;
-    for (int a = Animations::UNUSED_BOT + 1; a != Animations::UNUSED_TOP; a++) {
-        if (animationMap.count(static_cast<Animations>(a)) == 0) {
-            validMap = false;
-            break;
-        }
+
+    //check that all required animations are provided
+    if (requiredAnimations.count(type) != 0)
+    {
+        for (auto it = requiredAnimations.begin(); it != requiredAnimations.end(); it++)
+            if (it->first == type)
+                if(animationMap.count(static_cast<Animations>(it->second)) == 0)
+                {
+                    validMap = false;
+                    dbg_err("Animator: Missing animation '" << it->second << "' required by current animator type.")
+                    break;
+                }
     }
 
     if (validMap)
@@ -55,5 +67,13 @@ bool Animator::setupAnimator(std::map<Animator::Animations, sf::Texture> animati
 sf::Texture& Animator::getAnimation(Animations animation)
 {
     assert(animatorSetUp);
-    return anims.at(animation);
+
+    try
+    {
+        return anims.at(animation);
+    }
+    catch (std::out_of_range&)
+    {
+        dbg_err("Animator: Error loading animation '" << animation << "'")
+    }
 }
