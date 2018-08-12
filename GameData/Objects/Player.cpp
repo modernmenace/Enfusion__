@@ -11,8 +11,8 @@ void Player::update()
 }
 
 void Player::handleInput(sf::Keyboard::Key key) {
-    // check for diagonals
-    // probe with isKeyPressed
+    // holy shit is this buggy
+    // please come back to this
 
     if (key == sf::Keyboard::W)
     {
