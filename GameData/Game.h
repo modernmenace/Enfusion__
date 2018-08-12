@@ -5,6 +5,8 @@
 #include "Core/Engine.h"
 #include "Levels/LevelManager.h"
 
+#define LEVEL levelManager.getCurrentLevel()
+
 class Game {
 
 public:

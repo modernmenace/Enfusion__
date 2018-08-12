@@ -5,6 +5,7 @@ Game::Game() : mWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE)
     run();
 }
 
+// Need to come back and multi-thread this
 void Game::run() {
     initialize();
     while (mWindow.isOpen()) {
@@ -16,18 +17,18 @@ void Game::run() {
 
 void Game::initialize()
 {
-    levelManager.getCurrentLevel().initialize();
+    LEVEL.initialize();
 }
 
 void Game::update()
 {
-    levelManager.getCurrentLevel().update();
+    LEVEL.update();
 }
 
 void Game::render()
 {
     mWindow.clear(sf::Color::Cyan);
-    levelManager.getCurrentLevel().render(&mWindow);
+    LEVEL.render(&mWindow);
     mWindow.display();
 }
 
@@ -39,7 +40,7 @@ void Game::processEvents() {
             mWindow.close();
 
         if (event.type == sf::Event::KeyPressed)
-            levelManager.getCurrentLevel().handleInput(event.key.code);
+            LEVEL.handleInput(event.key.code);
     }
 }
 
