@@ -24,7 +24,7 @@
 bool Animator::setupAnimator(std::map<Animator::Animations, sf::Texture> animationMap) {
 
     auto validMap = true;
-    for (int a = Animations::UNUSED_BOT; a != Animations::UNUSED_TOP; a++) {
+    for (int a = Animations::UNUSED_BOT + 1; a != Animations::UNUSED_TOP; a++) {
         if (animationMap.count(static_cast<Animations>(a)) == 0) {
             validMap = false;
             break;
@@ -32,7 +32,10 @@ bool Animator::setupAnimator(std::map<Animator::Animations, sf::Texture> animati
     }
 
     if (validMap)
+    {
+        this->anims = animationMap;
         animatorSetUp = true;
+    }
     else
     {
         dbg_err("Animator: Invalid Animation Map Received")
