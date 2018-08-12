@@ -2,6 +2,7 @@
 #define ENFUSION_LEVEL_1_H
 
 #include "../../Objects/Player.h"
+#include "../../AI/Agent.h"
 #include "../Level.h"
 
 class Level_1 : public Level {
@@ -16,6 +17,7 @@ public:
 
 private:
     Player player;
+    std::vector<Agent> ai;
 
 };
 

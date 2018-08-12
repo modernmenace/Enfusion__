@@ -4,7 +4,7 @@
 #include <iostream>
 #include "AssetManager.h"
 
-// If true, debug messages are enabled
+// if true, debug messages are enabled
 #define DEBUG_BUILD true
 
 #define WINDOW_TITLE __TIME__
@@ -12,10 +12,15 @@
 #define WINDOW_WIDTH  1920
 #define WINDOW_HEIGHT 1080
 
+// resource paths
 #define RESOURCE_PATH        "Resources/"
 #define RESOURCE_PATH_OBJECT "Objects/"
+#define RESOURCE_PATH_AI     "AI/"
 
-//Useful macros
+// scale data
+#define GLOBAL_SCALE_GAMEOBJECT sf::Vector2f(2.5f, 2.5f)
+
+// useful macros
 #if DEBUG_BUILD
     #define dbg_log(message) std::cout << message << std::endl;
     #define dbg_err(message) std::cout << "ERROR: " << message << std::endl;
