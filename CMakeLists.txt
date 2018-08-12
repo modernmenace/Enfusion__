@@ -3,7 +3,7 @@ project(Enfusion__)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(Enfusion__ main.cpp GameData/Game.cpp GameData/Game.h GameData/Core/Engine.h GameData/Core/AssetManager.cpp GameData/Core/AssetManager.h GameData/Levels/Level.cpp GameData/Levels/Level.h GameData/Levels/Level_1/Level_1.cpp GameData/Levels/Level_1/Level_1.h GameData/Levels/LevelManager.cpp GameData/Levels/LevelManager.h GameData/Objects/GameObject.cpp GameData/Objects/GameObject.h GameData/Objects/Player.cpp GameData/Objects/Player.h GameData/AI/Agent.cpp GameData/AI/Agent.h GameData/Anim/Animator.cpp GameData/Anim/Animator.h)
+add_executable(Enfusion__ main.cpp GameData/Game.cpp GameData/Game.h GameData/Engine/Core/Engine.h GameData/Engine/Core/AssetManager.cpp GameData/Engine/Core/AssetManager.h GameData/Engine/Lvl/Level.cpp GameData/Engine/Lvl/Level.h GameData/Levels/Level_1/Level_1.cpp GameData/Levels/Level_1/Level_1.h GameData/Engine/Lvl/LevelManager.cpp GameData/Engine/Lvl/LevelManager.h GameData/Engine/Objects/GameObject.cpp GameData/Engine/Objects/GameObject.h GameData/Engine/Objects/Player.cpp GameData/Engine/Objects/Player.h GameData/Engine/AI/Agent.cpp GameData/Engine/AI/Agent.h GameData/Engine/Anim/Animator.cpp GameData/Engine/Anim/Animator.h)
 
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake_modules")
 

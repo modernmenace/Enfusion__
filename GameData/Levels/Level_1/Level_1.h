@@ -1,9 +1,9 @@
 #ifndef ENFUSION_LEVEL_1_H
 #define ENFUSION_LEVEL_1_H
 
-#include "../../Objects/Player.h"
-#include "../../AI/Agent.h"
-#include "../Level.h"
+#include "../../Engine/Objects/Player.h"
+#include "../../Engine/AI/Agent.h"
+#include "../../Engine/Lvl/Level.h"
 
 class Level_1 : public Level {
 

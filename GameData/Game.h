@@ -2,8 +2,8 @@
 #define ENFUSION_GAME_H
 
 #include <SFML/Graphics.hpp>
-#include "Core/Engine.h"
-#include "Levels/LevelManager.h"
+#include "Engine/Core/Engine.h"
+#include "Engine/Lvl/LevelManager.h"
 
 #define LEVEL levelManager.getCurrentLevel()
 
