@@ -1,6 +1,10 @@
 #ifndef ENFUSION_ANIMATOR_H
 #define ENFUSION_ANIMATOR_H
 
+#include <assert.h>
+#include <map>
+#include "../Core/Engine.h"
+
 class Animator {
 
 public:
@@ -13,8 +17,12 @@ public:
         WALK,
     };
 
-private:
+    void setupAnimator(std::map<Animations, sf::Texture>);
+    sf::Texture& getAnimation(Animations animation);
 
+private:
+    bool animatorSetUp = false;
+    std::map<Animations, sf::Texture> anims;
 
 };
 
