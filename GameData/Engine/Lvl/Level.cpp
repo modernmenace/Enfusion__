@@ -1,5 +1,16 @@
 #include "Level.h"
 
+/*
+ *  Level
+ *
+ *  DESC: Base class for all game levels, contains virtual functions
+ *
+ *  NOTE: This class will definitely be expanded in the future
+ *
+ *  USAGE: All levels inherit from this base class
+ *          EX: Level 1() : public Level("Level_1", "background.png");
+ */
+
 Level::Level(std::string levelName, std::string background)
 {
     this->levelName = levelName;

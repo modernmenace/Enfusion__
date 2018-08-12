@@ -4,6 +4,14 @@
 #include <iostream>
 #include "AssetManager.h"
 
+/*
+ *  Engine
+ *
+ *  DESC: Core engine header, stores key definitions used
+ *        throughout the engine
+ *
+ */
+
 // if true, debug messages are enabled
 #define DEBUG_BUILD true
 
