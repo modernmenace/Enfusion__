@@ -22,10 +22,7 @@
  */
 
 bool Animator::setupAnimator(std::map<Animator::Animations, sf::Texture> animationMap) {
-    // setup animations
-    // then check w/ assert to make sure all are set up
 
-    //iterate over animations and verify
     auto validMap = true;
     for (int a = Animations::UNUSED_BOT; a != Animations::UNUSED_TOP; a++) {
         if (animationMap.count(static_cast<Animations>(a)) == 0) {
