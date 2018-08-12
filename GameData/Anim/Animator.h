@@ -9,15 +9,17 @@ class Animator {
 
 public:
 
-    Animator();
-
     enum Animations
     {
+        UNUSED_BOT,
+
         IDLE,
         WALK,
+
+        UNUSED_TOP
     };
 
-    void setupAnimator(std::map<Animations, sf::Texture>);
+    bool setupAnimator(std::map<Animations, sf::Texture> animationMap);
     sf::Texture& getAnimation(Animations animation);
 
 private:

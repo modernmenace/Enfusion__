@@ -1,17 +1,56 @@
 #include "Animator.h"
 
-Animator::Animator()
-{
+/*
+ *  Animator
+ *
+ *  DESC: The animator class is attached to the player/AI which require animation
+ *
+ *  NOTE: Plain gameobjects are currently not supported, as all enumed animations are currently required
+ *
+ *  USAGE: < fill later >
+ *
+ */
 
-}
+/*
+ *  Setup Animator
+ *
+ *  DESC: This function is called to setup the animation array for the animator
+ *
+ *  NOTE: Possible improvements include an optimized check loop, or an option to not
+ *        require every animation
+ *
+ */
 
-void Animator::setupAnimator(std::map<Animator::Animations, sf::Texture>)
-{
+bool Animator::setupAnimator(std::map<Animator::Animations, sf::Texture> animationMap) {
     // setup animations
     // then check w/ assert to make sure all are set up
 
-    animatorSetUp = true;
+    //iterate over animations and verify
+    auto validMap = true;
+    for (int a = Animations::UNUSED_BOT; a != Animations::UNUSED_TOP; a++) {
+        if (animationMap.count(static_cast<Animations>(a)) == 0) {
+            validMap = false;
+            break;
+        }
+    }
+
+    if (validMap)
+        animatorSetUp = true;
+    else
+    {
+        dbg_err("Animator: Invalid Animation Map Received")
+    }
+
+    return animatorSetUp;
 }
+
+/*
+ *  Get Animation
+ *
+ *  DESC: This function is used to return an animation texture for
+ *        the specified animation (Performs assertion to check animator is set up)
+ *
+ */
 
 sf::Texture& Animator::getAnimation(Animations animation)
 {
