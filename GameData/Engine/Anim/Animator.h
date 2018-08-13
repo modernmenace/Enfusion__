@@ -43,6 +43,12 @@ public:
         UNUSED_TOP
     };
 
+    enum MovementDirection
+    {
+        LEFT,
+        RIGHT
+    };
+
     /*
      *  Required Animations
      *
@@ -51,21 +57,22 @@ public:
      *
      */
 
-    const std::map<AnimatorType, Animations> requiredAnimations
-            {
-                    { AnimatorType ::PLAYER, Animations ::WALK }
-            };
-
     Animator(AnimatorType type = AnimatorType::OBJECT);
 
     bool setupAnimator(std::map<Animations, sf::Texture> animationMap);
     sf::Texture& getAnimation(Animations animation);
+    sf::Texture& getMovementAnimation(MovementDirection direction);
 
 private:
     bool animatorSetUp = false;
     std::map<Animations, sf::Texture> anims;
 
     AnimatorType type;
+
+    const std::map<AnimatorType, Animations> requiredAnimations
+            {
+                { AnimatorType :: PLAYER, Animations :: WALK }
+            };
 
 };
 

@@ -4,6 +4,8 @@
 #include "GameObject.h"
 #include "../Anim/Animator.h"
 
+#define MovementDirection Animator::MovementDirection
+
 enum State
 {
     IDLE,
@@ -23,13 +25,15 @@ private:
 
     void switchState(State nextState);
 
-    State    currentState;
-    Animator animator;
+    State             currentState;
+    Animator          animator;
+
+    MovementDirection currentDirection = MovementDirection::RIGHT;
 
     const std::map<State, Animator::Animations> animStateMap
     {
-        { State::IDLE, Animator::Animations::IDLE },
-        { State::WALK, Animator::Animations::WALK }
+        { State :: IDLE, Animator::Animations :: IDLE },
+        { State :: WALK, Animator::Animations :: WALK }
     };
 
 };

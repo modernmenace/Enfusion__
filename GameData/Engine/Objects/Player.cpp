@@ -5,8 +5,8 @@ Player::Player(std::string spriteName, sf::Vector2f position) : GameObject(sprit
     // setup player animations
     animator.setupAnimator(std::map<Animator::Animations, sf::Texture>
             {
-                    { Animator::Animations::IDLE, AssetManager::getTexture(RESOURCE_PATH_OBJECT + std::string("Anim/Player_Walk.gif")) },
-                    { Animator::Animations::WALK, AssetManager::getTexture(RESOURCE_PATH_OBJECT + std::string("Anim/Player_Walk.gif")) }
+                    { Animator::Animations::IDLE, AssetManager::getTexture(RESOURCE_PATH_OBJECT + std::string("Anim/Player_Walk.png")) },
+                    { Animator::Animations::WALK, AssetManager::getTexture(RESOURCE_PATH_OBJECT + std::string("Anim/Player_Walk.png")) }
             });
 
     switchState(State::IDLE);
@@ -20,7 +20,6 @@ void Player::update()
 
 void Player::switchState(State nextState)
 {
-    // apparently sfml has no gif support, move to animated sprite sheets
     sprite.setTexture(animator.getAnimation(animStateMap.at(nextState)));
     currentState = nextState;
 }
@@ -40,12 +39,17 @@ void Player::handleInput(sf::Keyboard::Key key) {
     }
     else if (key == sf::Keyboard::A)
     {
+        if (currentDirection == MovementDirection::RIGHT)
+            FLIP_SPRITE(sprite)
+
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
             sprite.move(-speed, -speed);
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
             sprite.move(-speed, speed);
         else
             sprite.move(-speed, 0);
+
+        currentDirection = MovementDirection::LEFT;
     }
     else if (key == sf::Keyboard::S)
     {
@@ -58,12 +62,17 @@ void Player::handleInput(sf::Keyboard::Key key) {
     }
     else if (key == sf::Keyboard::D)
     {
+        if (currentDirection == MovementDirection::LEFT)
+            FLIP_SPRITE(sprite)
+
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
             sprite.move(speed, -speed);
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
             sprite.move(speed, speed);
         else
             sprite.move(speed, 0);
+
+        currentDirection = MovementDirection::RIGHT;
     }
 
 }

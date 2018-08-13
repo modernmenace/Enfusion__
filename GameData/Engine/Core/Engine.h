@@ -25,10 +25,12 @@
 #define RESOURCE_PATH_OBJECT "Objects/"
 #define RESOURCE_PATH_AI     "AI/"
 
+#define MISSING_TEXTURE      "MissingTexture.png"
+
 // scale data
 #define GLOBAL_SCALE_GAMEOBJECT sf::Vector2f(2.5f, 2.5f)
 
-// useful macros
+// debug macros
 #if DEBUG_BUILD
     #define dbg_log(message) std::cout << message << std::endl;
     #define dbg_err(message) std::cout << "ERROR: " << message << std::endl;
@@ -36,5 +38,8 @@
     #define dbg_log(message)
     #define dbg_err(message)
 #endif
+
+// other useful macros
+#define FLIP_SPRITE(Sprite_Name) Sprite_Name.scale(-1.f,1.f);
 
 #endif //ENFUSION_ENGINE_H

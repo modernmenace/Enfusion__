@@ -30,7 +30,6 @@ bool Animator::setupAnimator(std::map<Animator::Animations, sf::Texture> animati
 
     auto validMap = true;
 
-    //check that all required animations are provided
     if (requiredAnimations.count(type) != 0)
     {
         for (auto it = requiredAnimations.begin(); it != requiredAnimations.end(); it++)
@@ -74,6 +73,22 @@ sf::Texture& Animator::getAnimation(Animations animation)
     }
     catch (std::out_of_range&)
     {
-        dbg_err("Animator: Error loading animation '" << animation << "'")
+        dbg_err("Animator: Error loading animation '" << animation << "' for animator type '" << type << "'")
+        return AssetManager::getTexture(MISSING_TEXTURE);
     }
+}
+
+/*
+ *  Get Movement Animation
+ *
+ *  DESC: Called when a player/AI is moving
+ *
+ *  NOTE: Make this modular to support left/right/up/down animations
+ *        but only if they are available (future)
+ *
+ */
+
+sf::Texture& Animator::getMovementAnimation(Animator::MovementDirection direction)
+{
+    return AssetManager::getTexture(MISSING_TEXTURE);
 }
