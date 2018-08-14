@@ -1,6 +1,7 @@
 #include "Player.h"
 
-Player::Player(std::string spriteName, sf::Vector2f position) : GameObject(spriteName, position), animator(Animator::AnimatorType::PLAYER)
+Player::Player(std::string spriteName, sf::Vector2f position) : GameObject(spriteName, position),
+                    animator(Animator::AnimatorType::PLAYER, sf::IntRect(0, 0, 32, 64))
 {
     // setup player animations
     animator.setupAnimator(std::map<Animator::Animations, sf::Texture>
@@ -20,7 +21,7 @@ void Player::update()
 
 void Player::switchState(State nextState)
 {
-    sprite.setTexture(animator.getAnimation(animStateMap.at(nextState)));
+    animator.setSpriteAnimation(&sprite, animStateMap.at(nextState));
     currentState = nextState;
 }
 

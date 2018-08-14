@@ -57,17 +57,20 @@ public:
      *
      */
 
-    Animator(AnimatorType type = AnimatorType::OBJECT);
+    Animator(AnimatorType type = AnimatorType::OBJECT, sf::IntRect spriteSize = sf::IntRect(0, 0, 64, 64));
 
     bool setupAnimator(std::map<Animations, sf::Texture> animationMap);
     sf::Texture& getAnimation(Animations animation);
     sf::Texture& getMovementAnimation(MovementDirection direction);
+
+    void setSpriteAnimation(sf::Sprite* sprite, Animations animations);
 
 private:
     bool animatorSetUp = false;
     std::map<Animations, sf::Texture> anims;
 
     AnimatorType type;
+    sf::IntRect  spriteSize;
 
     const std::map<AnimatorType, Animations> requiredAnimations
             {

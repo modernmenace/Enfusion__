@@ -11,6 +11,7 @@
 
 Game::Game() : mWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE), levelManager("Level_1")
 {
+
     run();
 }
 
@@ -23,6 +24,7 @@ Game::Game() : mWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE)
 
 void Game::run() {
     initialize();
+
     while (mWindow.isOpen()) {
         processEvents();
         update();

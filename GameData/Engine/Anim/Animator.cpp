@@ -11,9 +11,10 @@
  *
  */
 
- Animator::Animator(Animator::AnimatorType type)
+ Animator::Animator(Animator::AnimatorType type, sf::IntRect spriteSize)
 {
-     this->type = type;
+     this->type       = type;
+     this->spriteSize = spriteSize;
 }
 
 /*
@@ -91,4 +92,17 @@ sf::Texture& Animator::getAnimation(Animations animation)
 sf::Texture& Animator::getMovementAnimation(Animator::MovementDirection direction)
 {
     return AssetManager::getTexture(MISSING_TEXTURE);
+}
+
+/*
+ *  Set Sprite Animatios
+ *
+ *  DESC: Called to update a sprite with the texture for the given animation
+ *
+ */
+
+void Animator::setSpriteAnimation(sf::Sprite* sprite, Animator::Animations anim)
+{
+    sprite->setTexture(getAnimation(anim), true);
+    sprite->setTextureRect(spriteSize);
 }
