@@ -103,6 +103,8 @@ sf::Texture& Animator::getMovementAnimation(Animator::MovementDirection directio
 
 void Animator::setSpriteAnimation(sf::Sprite* sprite, Animator::Animations anim)
 {
+    assert(animatorSetUp);
+
     sprite->setTexture(getAnimation(anim), true);
     sprite->setTextureRect(spriteSize);
 }
