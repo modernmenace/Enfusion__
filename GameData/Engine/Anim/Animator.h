@@ -63,6 +63,7 @@ public:
     sf::Texture& getAnimation(Animations animation);
     sf::Texture& getMovementAnimation(MovementDirection direction);
 
+    void update(sf::Sprite* sprite);
     void setSpriteAnimation(sf::Sprite* sprite, Animations animations);
 
 private:
@@ -71,6 +72,9 @@ private:
 
     AnimatorType type;
     sf::IntRect  spriteSize;
+    sf::IntRect  currentSprite;
+
+    sf::Clock    animationclock;
 
     const std::map<AnimatorType, Animations> requiredAnimations
             {

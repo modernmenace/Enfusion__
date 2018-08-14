@@ -16,6 +16,7 @@ Player::Player(std::string spriteName, sf::Vector2f position) : GameObject(sprit
 void Player::update()
 {
     // handle state switching ??
+    animator.update(&sprite);
 
 }
 

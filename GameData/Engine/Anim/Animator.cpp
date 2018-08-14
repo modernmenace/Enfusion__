@@ -13,8 +13,9 @@
 
  Animator::Animator(Animator::AnimatorType type, sf::IntRect spriteSize)
 {
-     this->type       = type;
-     this->spriteSize = spriteSize;
+     this->type          = type;
+     this->spriteSize    = spriteSize;
+     this->currentSprite = spriteSize;
 }
 
 /*
@@ -47,6 +48,7 @@ bool Animator::setupAnimator(std::map<Animator::Animations, sf::Texture> animati
     {
         this->anims = animationMap;
         animatorSetUp = true;
+        animationclock.restart();
     }
     else
     {
@@ -54,6 +56,27 @@ bool Animator::setupAnimator(std::map<Animator::Animations, sf::Texture> animati
     }
 
     return animatorSetUp;
+}
+
+/*
+ *  Update
+ *
+ *  DESC: < fill this in >
+ *
+ */
+
+void Animator::update(sf::Sprite* sprite)
+{
+    if (animationclock.getElapsedTime().asSeconds() > 0.5f)
+    {
+        dbg_log("updating animation")
+
+        //works check to see if we exceed sprite sheet width somehow
+        currentSprite.left += spriteSize.width;
+        sprite->setTextureRect(currentSprite);
+
+        animationclock.restart();
+    }
 }
 
 /*
@@ -104,5 +127,5 @@ sf::Texture& Animator::getMovementAnimation(Animator::MovementDirection directio
 void Animator::setSpriteAnimation(sf::Sprite* sprite, Animator::Animations anim)
 {
     sprite->setTexture(getAnimation(anim), true);
-    sprite->setTextureRect(spriteSize);
+    sprite->setTextureRect(currentSprite);
 }
