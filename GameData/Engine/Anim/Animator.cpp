@@ -16,6 +16,9 @@
      this->type          = type;
      this->spriteSize    = spriteSize;
      this->currentSprite = spriteSize;
+
+    sprite_bottom = 0;
+    sprite_top = spriteSize.width + spriteSize.width;
 }
 
 /*
@@ -72,7 +75,17 @@ void Animator::update(sf::Sprite* sprite)
         dbg_log("updating animation")
 
         //works check to see if we exceed sprite sheet width somehow
-        currentSprite.left += spriteSize.width;
+        if (currentSprite.left < sprite_top)
+            if (animUp)
+                currentSprite.left += spriteSize.width;
+            else if (currentSprite.left > sprite_bottom)
+                currentSprite.left -= spriteSize.width;
+        else
+        {
+            animUp = !animUp;
+            currentSprite.left -= spriteSize.width;
+        }
+
         sprite->setTextureRect(currentSprite);
 
         animationclock.restart();

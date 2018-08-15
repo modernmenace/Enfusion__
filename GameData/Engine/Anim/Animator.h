@@ -81,6 +81,10 @@ private:
                 { AnimatorType :: PLAYER, Animations :: WALK }
             };
 
+    bool animUp = true;
+    int sprite_bottom;
+    int sprite_top;
+
 };
 
 
