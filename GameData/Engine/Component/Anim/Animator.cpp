@@ -70,6 +70,8 @@ bool Animator::setupAnimator(std::map<Animator::Animations, sf::Texture> animati
 
 void Animator::update(sf::Sprite* sprite)
 {
+    assert(animatorSetUp);
+
     if (animationclock.getElapsedTime().asSeconds() > 0.5f)
     {
         dbg_log("updating animation")

@@ -1,6 +1,6 @@
 #include "Player.h"
 
-Player::Player(std::string spriteName, sf::Vector2f position) : GameObject(spriteName, position),
+Player::Player(std::string spriteName, sf::Vector2f position) : Entity(spriteName, position),
                     animator(Animator::AnimatorType::PLAYER, sf::IntRect(0, 0, 32, 64))
 {
     // setup player animations

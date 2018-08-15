@@ -20,6 +20,8 @@
 #define WINDOW_WIDTH  1920
 #define WINDOW_HEIGHT 1080
 
+#define MAX_COMPONENTS 5
+
 // resource paths
 #define RESOURCE_PATH        "Resources/"
 #define RESOURCE_PATH_OBJECT "Objects/"

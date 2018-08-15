@@ -1,8 +1,8 @@
 #ifndef ENFUSION_PLAYER_H
 #define ENFUSION_PLAYER_H
 
-#include "GameObject.h"
-#include "../Anim/Animator.h"
+#include "Entity.h"
+#include "../Component/Anim/Animator.h"
 
 #define MovementDirection Animator::MovementDirection
 
@@ -12,7 +12,7 @@ enum State
     WALK
 };
 
-class Player : public GameObject {
+class Player : public Entity {
 
 public:
     Player(std::string spriteName, sf::Vector2f position);

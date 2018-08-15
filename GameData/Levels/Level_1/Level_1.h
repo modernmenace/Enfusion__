@@ -1,7 +1,7 @@
 #ifndef ENFUSION_LEVEL_1_H
 #define ENFUSION_LEVEL_1_H
 
-#include "../../Engine/Objects/Player.h"
+#include "../../Engine/Entity/Player.h"
 #include "../../Engine/AI/Agent.h"
 #include "../../Engine/Lvl/Level.h"
 
