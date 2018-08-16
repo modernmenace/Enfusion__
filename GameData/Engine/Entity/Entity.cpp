@@ -37,8 +37,3 @@ void Entity::render(sf::RenderWindow *window)
     for (auto& c : components)
         c->render(window);
 }
-
-void Entity::addComponent(Component *c)
-{
-    //TODO:Check components dont exceed max size, initialize, add to vector (push_back)
-}
