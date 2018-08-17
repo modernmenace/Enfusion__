@@ -15,13 +15,12 @@ public:
     virtual void update();
     virtual void render(sf::RenderWindow *window);
 
-    //TODO: Learn More
-    // https://youtu.be/XsvI8Sng6dk?t=952
-    template <typename T, typename... TArgs>
-    T& addComponent(TArgs&&... args)
+    template <typename T, typename tArgs>
+    void addComponent(tArgs arguments)
     {
-        T* c(new T(std::forward<TArgs>(args)...));
+        //std::forward -> tArgs -> T
     }
+
 
 protected:
     sf::Sprite   sprite;

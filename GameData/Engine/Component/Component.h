@@ -3,6 +3,8 @@
 
 #include "../Core/Engine.h"
 
+using ComponentID = std::size_t;
+
 class Entity;
 
 class Component {
@@ -16,6 +18,12 @@ public:
 
     //TODO: Deal with destructors
     virtual ~Component()      {}
+
+    inline ComponentID getComponentID()
+    {
+        static ComponentID lastID = 0;
+        return lastID++;
+    }
 
 
 };
