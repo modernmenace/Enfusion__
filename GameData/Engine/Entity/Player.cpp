@@ -1,6 +1,6 @@
 #include "Player.h"
 
-Player::Player(std::string spriteName, sf::Vector2f position) : Entity(spriteName, position),
+Player::Player(std::string spriteName, sf::Vector2f position) : Entity(position),
                     animator(Animator::AnimatorType::PLAYER, sf::IntRect(0, 0, 32, 64))
 {
     // setup player animations
@@ -12,26 +12,26 @@ Player::Player(std::string spriteName, sf::Vector2f position) : Entity(spriteNam
 
     switchState(State::IDLE);
 
-    addComponent<Sprite>();
+    addComponent<Sprite>(spriteName);
 }
 
 void Player::update()
 {
     Entity::update();
-    animator.update(&sprite);
+    //animator.update(&sprite);
 
 }
 
 void Player::switchState(State nextState)
 {
-    animator.setSpriteAnimation(&sprite, animStateMap.at(nextState));
+    //animator.setSpriteAnimation(&sprite, animStateMap.at(nextState));
     currentState = nextState;
 }
 
 void Player::handleInput(sf::Keyboard::Key key) {
     // holy shit is this buggy
     // please come back to this
-
+/*
     if (key == sf::Keyboard::W)
     {
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
@@ -78,5 +78,6 @@ void Player::handleInput(sf::Keyboard::Key key) {
 
         currentDirection = MovementDirection::RIGHT;
     }
+    */
 
 }

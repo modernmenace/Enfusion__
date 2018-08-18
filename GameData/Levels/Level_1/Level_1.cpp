@@ -1,6 +1,6 @@
 #include "Level_1.h"
 
-Level_1::Level_1() : Level("Level_1", "Levels/Level_1_back.png"), player("Player.png", sf::Vector2f(600, 300))
+Level_1::Level_1() : Level("Level_1", "Levels/Level_1_back.png"), player("Objects/Player.png", sf::Vector2f(600, 300))
 {
 
 }
