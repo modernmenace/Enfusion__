@@ -7,7 +7,7 @@ void Sprite::initialize()
 
 void Sprite::update()
 {
-
+    dbg_log("updating sprite")
 }
 
 void Sprite::render(sf::RenderWindow *window)

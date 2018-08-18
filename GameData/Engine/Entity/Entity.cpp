@@ -1,4 +1,5 @@
 #include "Entity.h"
+#include "../Component/Base/Sprite.h"
 
 /*
  *  Entity
@@ -22,7 +23,7 @@ Entity::Entity(std::string spriteName, sf::Vector2f position)
 
 void Entity::initialize()
 {
-
+    this->addComponent<Sprite>();
 }
 
 void Entity::update()

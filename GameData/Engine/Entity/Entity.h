@@ -15,10 +15,24 @@ public:
     virtual void update();
     virtual void render(sf::RenderWindow *window);
 
-    template <typename T, typename tArgs>
-    void addComponent(tArgs arguments)
+    //TODO: Fix up this argument version
+    /*
+    template <typename T, typename... tArgs>
+    void addComponent(tArgs&&... arguments)
     {
-        //std::forward -> tArgs -> T
+        T* c(new T(std::forward<tArgs>(arguments)...));
+        std::unique_ptr<Component> uPtr {c};
+        components.push_back(std::move(uPtr));
+        c->initialize();
+    } */
+
+    template <typename T>
+    void addComponent()
+    {
+        T* c(new T());
+        std::unique_ptr<Component> uPtr {c};
+        components.push_back(std::move(uPtr));
+        c->initialize();
     }
 
 

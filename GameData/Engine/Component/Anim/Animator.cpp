@@ -74,7 +74,6 @@ void Animator::update(sf::Sprite* sprite)
 
     if (animationclock.getElapsedTime().asSeconds() > 0.5f)
     {
-        dbg_log("updating animation")
 
         //works check to see if we exceed sprite sheet width somehow
         if (currentSprite.left < sprite_top)
