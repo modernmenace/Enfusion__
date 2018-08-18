@@ -21,11 +21,6 @@ Entity::Entity(std::string spriteName, sf::Vector2f position)
     this->sprite.setScale(GLOBAL_SCALE_GAMEOBJECT);
 }
 
-void Entity::initialize()
-{
-    this->addComponent<Sprite>();
-}
-
 void Entity::update()
 {
     for (auto& c : components)

@@ -7,6 +7,7 @@ Level_1::Level_1() : Level("Level_1", "Levels/Level_1_back.png"), player("Player
 
 void Level_1::initialize()
 {
+    player.initialize();
     ai.push_back(Agent("Enemy_Wizard.png", sf::Vector2f(800, 100)));
 }
 

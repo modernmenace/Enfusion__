@@ -2,12 +2,12 @@
 
 void Sprite::initialize()
 {
-    dbg_log("Initializing sprite")
+    dbg_log("Entity has a sprite!")
 }
 
 void Sprite::update()
 {
-    dbg_log("updating sprite")
+
 }
 
 void Sprite::render(sf::RenderWindow *window)

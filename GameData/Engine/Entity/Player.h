@@ -3,6 +3,7 @@
 
 #include "Entity.h"
 #include "../Component/Anim/Animator.h"
+#include "../Component/Base/Sprite.h"
 
 #define MovementDirection Animator::MovementDirection
 

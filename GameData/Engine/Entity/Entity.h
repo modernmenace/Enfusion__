@@ -11,7 +11,7 @@ class Entity {
 public:
     Entity(std::string spriteName, sf::Vector2f position);
 
-    virtual void initialize();
+    virtual void initialize() {}
     virtual void update();
     virtual void render(sf::RenderWindow *window);
 
@@ -27,12 +27,14 @@ public:
     } */
 
     template <typename T>
-    void addComponent()
+    T& addComponent()
     {
         T* c(new T());
         std::unique_ptr<Component> uPtr {c};
         components.push_back(std::move(uPtr));
+        c->entity = this;
         c->initialize();
+        return *c;
     }
 
 

@@ -11,11 +11,13 @@ Player::Player(std::string spriteName, sf::Vector2f position) : Entity(spriteNam
             });
 
     switchState(State::IDLE);
+
+    addComponent<Sprite>();
 }
 
 void Player::update()
 {
-    // handle state switching ??
+    Entity::update();
     animator.update(&sprite);
 
 }

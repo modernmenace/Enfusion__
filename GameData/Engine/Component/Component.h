@@ -12,7 +12,7 @@ class Component {
 public:
     Entity *entity;
 
-    virtual void initialize() {}
+    virtual void initialize() { dbg_log("initializing component") }
     virtual void update()     {}
     virtual void render(sf::RenderWindow* window)     {}
 
