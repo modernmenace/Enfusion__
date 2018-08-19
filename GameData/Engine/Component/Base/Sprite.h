@@ -6,7 +6,6 @@
 class Sprite : public Component {
 
 public:
-
     Sprite(std::string spriteName = MISSING_TEXTURE);
 
     void initialize() override;

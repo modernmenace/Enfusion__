@@ -1,9 +1,8 @@
 #ifndef ENFUSION_COMPONENT_H
 #define ENFUSION_COMPONENT_H
 
+#include "../Core/ComponentManager.h"
 #include "../Core/Engine.h"
-
-using ComponentID = std::size_t;
 
 class Entity;
 

@@ -2,12 +2,18 @@
 #define ENFUSION_GAMEOBJECT_H
 
 #include "../Core/Engine.h"
+#include "../Core/ComponentManager.h"
 #include "../Component/Component.h"
 
-// bitset -> allows us to find if entity has selection of components, compare
-// array -> array of pointers length of max components
-using ComponentBitSet = std::bitset<MAX_COMPONENTS>;
-using ComponentArray  = std::array<Component*, MAX_COMPONENTS>;
+/*
+ *  Entity
+ *
+ *  DESC: Base class for all entities, contains templates
+ *        and functions shared by all entities
+ *
+ *        TODO: Find way to store and check/get components
+ *
+ */
 
 class Component;
 
