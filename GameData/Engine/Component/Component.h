@@ -12,12 +12,14 @@ class Component {
 public:
     Entity *entity;
 
-    virtual void initialize() { dbg_log("initializing component") }
-    virtual void update()     {}
-    virtual void render(sf::RenderWindow* window)     {}
+    virtual void initialize()                     {}
+    virtual void update()                         {}
+    virtual void render(sf::RenderWindow* window) {}
 
     //TODO: Deal with destructors
     virtual ~Component()      {}
+
+private:
 
 
 

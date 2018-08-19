@@ -10,7 +10,6 @@ public:
     Sprite(std::string spriteName = MISSING_TEXTURE);
 
     void initialize() override;
-    void update() override;
     void render(sf::RenderWindow* window) override;
 
 private:

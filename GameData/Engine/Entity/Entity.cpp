@@ -7,10 +7,8 @@
  *  DESC: Base class for all entities, contains virtual functions
  *
  *  NOTE: This class will definitely be expanded in the future
- *        TODO: Turn sprite into its own component
  *
- *  USAGE: All entities inherit from this base class
- *          EX: Rock(sf::Vector2f position) : public Entity("Rock.png", position);
+ *  USAGE: < Coming Soon >
  */
 
 Entity::Entity(sf::Vector2f position)
