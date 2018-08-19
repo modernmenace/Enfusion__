@@ -10,6 +10,8 @@
 
 Sprite::Sprite(std::string spriteName)
 {
+    dbg_log("Component Regsistered: " << registered)
+    REGISTER_COMPONENT
     this->spriteName = spriteName;
 }
 

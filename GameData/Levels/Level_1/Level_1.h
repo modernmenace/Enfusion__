@@ -17,7 +17,8 @@ public:
 
 private:
     Player player;
-    std::vector<Agent> ai;
+    std::vector<Entity*> entities;
+    std::vector<Entity*> ai;
 
 };
 

@@ -2,16 +2,16 @@
 #define ENFUSION_AGENT_H
 
 #include "../Core/Engine.h"
+#include "../Entity/Entity.h"
+#include "../Component/Base/Sprite.h"
 
-class Agent {
+class Agent : public Entity {
 
 public:
     Agent(std::string spriteName, sf::Vector2f position);
-
-    void render(sf::RenderWindow *window);
+    void render(sf::RenderWindow* window);
 
 private:
-    sf::Sprite   sprite;
     sf::Vector2f position;
 
 };

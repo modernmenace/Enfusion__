@@ -2,28 +2,30 @@
 
 Level_1::Level_1() : Level("Level_1", "Levels/Level_1_back.png"), player("Objects/Player.png", sf::Vector2f(600, 300))
 {
-
+    //TODO: pointers are required for new entities, try switching to a template to make this easier
+    Agent* a = new Agent("AI/Enemy_Wizard.png", sf::Vector2f(100, 100));
+    entities.emplace_back(&player);
+    entities.emplace_back(a);
 }
 
 void Level_1::initialize()
 {
-    player.initialize();
-    ai.push_back(Agent("Enemy_Wizard.png", sf::Vector2f(800, 100)));
+    for(auto &e : entities)
+        e->initialize();
 }
 
 void Level_1::update()
 {
-    player.update();
+    for(auto &e : entities)
+        e->update();
 }
 
 void Level_1::render(sf::RenderWindow* window)
 {
     Level::render(window);
-    player.render(window);
 
-    //render ai
-    for(int i = 0; i < ai.size(); i++)
-        ai.at(i).render(window);
+    for(auto &e : entities)
+        e->render(window);
 }
 
 void Level_1::handleInput(sf::Keyboard::Key key)
