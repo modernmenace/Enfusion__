@@ -6,10 +6,22 @@
 
 class Entity;
 
+/*
+ *  Component
+ *
+ *  DESC: Base class for all components
+ *
+ *  TODO: Add some asserts to check if component is registered
+ *
+ */
+
 class Component {
 
 public:
-    Entity *entity;
+    Component(std::string componentName);
+
+    Entity      *entity;
+    std::string componentName;
 
     virtual void initialize()                     {}
     virtual void update()                         {}
@@ -17,10 +29,6 @@ public:
 
     //TODO: Deal with destructors
     virtual ~Component()      {}
-
-private:
-
-
 
 };
 

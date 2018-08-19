@@ -8,11 +8,12 @@
  *
  */
 
-Sprite::Sprite(std::string spriteName)
+Sprite::Sprite(std::string spriteName) : Component("Sprite")
 {
-    dbg_log("Component Regsistered: " << registered)
     REGISTER_COMPONENT
     this->spriteName = spriteName;
+    for(const auto &i : ComponentMap)
+        dbg_log("Component Map: " << i.first << ", " << i.second)
 }
 
 void Sprite::initialize()

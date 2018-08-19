@@ -3,7 +3,7 @@
 
 #include "../Component.h"
 
-INTREG
+INITIALIZE_COMPONENT
 class Sprite : public Component {
 
 public:

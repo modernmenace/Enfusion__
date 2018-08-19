@@ -1,16 +1,19 @@
 #ifndef ENFUSION_COMPONENTMANAGER_H
 #define ENFUSION_COMPONENTMANAGER_H
 
-#include "Engine.h"
+#include <string>
+#include <map>
 
 /* Macros to hide gross reused code */
-#define REGISTER_COMPONENT  if (!registered) generateComponentID();
-#define INTREG              static bool registered = false;
+#define REGISTER_COMPONENT    if (!registered) { auto cID = generateComponentID(); registered = true; ComponentMap.emplace(componentName, cID); };
+#define INITIALIZE_COMPONENT  static bool registered = false;
 
 using ComponentID = std::size_t;
 
-// TODO: Need a way of reliably generating one ID per type of component
-// TODO: trying to use macros to hide nasty code right now
+/* map very inefficient please replace this */
+static std::map<std::string, ComponentID> ComponentMap;
+
+// TODO: Kind of working, test this with multiple components
 
 inline ComponentID generateComponentID()
 {
