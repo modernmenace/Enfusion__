@@ -1,7 +1,7 @@
 #include "Component.h"
 #include "../Entity/Entity.h"
 
-Component::Component(std::string componentName)
+Component::Component()
 {
     this->componentName = componentName;
 }

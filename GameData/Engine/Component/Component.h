@@ -18,7 +18,7 @@ class Entity;
 class Component {
 
 public:
-    Component(std::string componentName);
+    Component();
 
     Entity      *entity;
     std::string componentName;

@@ -13,6 +13,7 @@ Player::Player(std::string spriteName, sf::Vector2f position) : Entity(position)
     switchState(State::IDLE);
 
     addComponent<Sprite>(spriteName);
+    addComponent<PlayerFreeInput>();
 }
 
 void Player::update()

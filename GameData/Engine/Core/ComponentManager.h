@@ -5,7 +5,7 @@
 #include <map>
 
 /* Macros to hide gross reused code */
-#define REGISTER_COMPONENT    if (!registered) { auto cID = generateComponentID(); registered = true; ComponentMap.emplace(componentName, cID); };
+#define REGISTER_COMPONENT(componentName)    if (!registered) { auto cID = generateComponentID(); registered = true; ComponentMap.emplace(componentName, cID); };
 #define INITIALIZE_COMPONENT  static bool registered = false;
 
 using ComponentID = std::size_t;
