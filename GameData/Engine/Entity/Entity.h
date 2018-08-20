@@ -1,10 +1,13 @@
 #ifndef ENFUSION_GAMEOBJECT_H
 #define ENFUSION_GAMEOBJECT_H
 
-#include <memory>
 #include "../Core/Engine.h"
 #include "../Core/ComponentManager.h"
 #include "../Component/Component.h"
+
+#ifdef __WIN32__
+#include <memory>
+#endif
 
 /*
  *  Entity
