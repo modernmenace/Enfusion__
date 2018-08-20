@@ -12,8 +12,6 @@ Sprite::Sprite(std::string spriteName)
 {
     REGISTER_COMPONENT("Sprite")
     this->spriteName = spriteName;
-    for(const auto &i : ComponentMap)
-        dbg_log("Component Map: " << i.first << ", " << i.second)
 }
 
 void Sprite::initialize()

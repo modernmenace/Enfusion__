@@ -3,11 +3,12 @@
 
 #include "../Component.h"
 
-//INITIALIZE_COMPONENT
 class PlayerFreeInput : public Component {
 
 public:
     PlayerFreeInput();
+
+    void update() override;
 
 };
 

@@ -3,10 +3,10 @@
 
 #include <string>
 #include <map>
+#include <iostream>
 
 /* Macros to hide gross reused code */
-#define REGISTER_COMPONENT(componentName)    if (!registered) { auto cID = generateComponentID(); registered = true; ComponentMap.emplace(componentName, cID); };
-#define INITIALIZE_COMPONENT  static bool registered = false;
+#define REGISTER_COMPONENT(componentName)  checkComponentRegistered(componentName);
 
 using ComponentID = std::size_t;
 
@@ -19,6 +19,23 @@ inline ComponentID generateComponentID()
 {
     static ComponentID currentComponentID = 0;
     return currentComponentID++;
+}
+
+static void checkComponentRegistered(std::string componentName)
+{
+    // check if the component is in the map
+    // this is probably very inefficient
+
+    auto t = ComponentMap.find(componentName);
+    if (t == ComponentMap.end())
+    {
+        auto cID = generateComponentID();
+        ComponentMap.insert(std::pair<std::string, ComponentID>(componentName, cID));
+    }
+
+    //not actually adding?
+    for(const auto &i : ComponentMap)
+        std::cout << "Component Map: " << i.first << ", " << i.second << std::endl;
 }
 
 

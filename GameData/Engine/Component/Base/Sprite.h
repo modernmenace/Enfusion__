@@ -3,7 +3,6 @@
 
 #include "../Component.h"
 
-INITIALIZE_COMPONENT
 class Sprite : public Component {
 
 public:
