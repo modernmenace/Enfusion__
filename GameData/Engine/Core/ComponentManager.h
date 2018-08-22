@@ -21,6 +21,13 @@ inline ComponentID generateComponentID()
     return currentComponentID++;
 }
 
+inline void printMap()
+{
+    std::cout << "Length: " << ComponentMap.size() << std::endl;
+    for(const auto &i : ComponentMap)
+        std::cout << "Component Map: " << i.first << ", " << i.second << std::endl;
+}
+
 static void checkComponentRegistered(std::string componentName)
 {
     // check if the component is in the map
@@ -29,13 +36,14 @@ static void checkComponentRegistered(std::string componentName)
     auto t = ComponentMap.find(componentName);
     if (t == ComponentMap.end())
     {
+        //this working correcvylt, only adding once
+        std::cout << "Component Missing: " << componentName << std::endl;
         auto cID = generateComponentID();
-        ComponentMap.insert(std::pair<std::string, ComponentID>(componentName, cID));
+        ComponentMap.insert(std::make_pair(componentName, cID));
     }
+    else
+        std::cout << "Component Found: " << componentName << std::endl;
 
-    //not actually adding?
-    for(const auto &i : ComponentMap)
-        std::cout << "Component Map: " << i.first << ", " << i.second << std::endl;
 }
 
 
