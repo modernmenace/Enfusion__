@@ -20,7 +20,6 @@ void Player::update()
 {
     Entity::update();
     //animator.update(&sprite);
-
 }
 
 void Player::switchState(State nextState)

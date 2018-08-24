@@ -14,6 +14,8 @@
  *        and functions shared by all entities
  *
  *        TODO: Find way to store and check/get components
+ *        TODO: Component ID storing is working, now implement get/has functions
+ *        TODO: REQUIRES_COMPONENT macro??
  *
  */
 
@@ -54,6 +56,7 @@ public:
         components.emplace_back(std::move(ptr));
         comp->entity = this;
         comp->initialize();
+        componentIDs.emplace_back(comp->cId);
         return *comp;
     }
 
@@ -66,6 +69,7 @@ public:
         components.emplace_back(std::move(ptr));
         comp->entity = this;
         comp->initialize();
+        componentIDs.emplace_back(comp->cId);
         return *comp;
     }
 
@@ -97,6 +101,7 @@ public:
 
 private:
     std::vector<std::unique_ptr<Component>> components;
+    std::vector<ComponentID>                componentIDs;
 
 
 };

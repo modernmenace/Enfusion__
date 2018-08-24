@@ -11,7 +11,6 @@
 
 Game::Game() : mWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE), levelManager("Level_1")
 {
-
     run();
 }
 

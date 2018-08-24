@@ -6,7 +6,7 @@
 #include <iostream>
 
 /* Macros to hide gross reused code */
-#define REGISTER_COMPONENT(componentName)  checkComponentRegistered(componentName);
+#define REGISTER_COMPONENT(componentName)  this->cId = checkComponentRegistered(componentName);
 
 using ComponentID = std::size_t;
 
@@ -21,14 +21,7 @@ inline ComponentID generateComponentID()
     return currentComponentID++;
 }
 
-inline void printMap()
-{
-    std::cout << "Length: " << ComponentMap.size() << std::endl;
-    for(const auto &i : ComponentMap)
-        std::cout << "Component Map: " << i.first << ", " << i.second << std::endl;
-}
-
-static void checkComponentRegistered(std::string componentName)
+static ComponentID checkComponentRegistered(std::string componentName)
 {
     // check if the component is in the map
     // this is probably very inefficient
@@ -40,9 +33,13 @@ static void checkComponentRegistered(std::string componentName)
         std::cout << "Component Missing: " << componentName << std::endl;
         auto cID = generateComponentID();
         ComponentMap.insert(std::make_pair(componentName, cID));
+        return cID;
     }
     else
+    {
         std::cout << "Component Found: " << componentName << std::endl;
+        return ComponentMap.at(componentName);
+    }
 
 }
 

@@ -22,6 +22,7 @@ public:
 
     Entity      *entity;
     std::string componentName;
+    ComponentID cId;
 
     virtual void initialize()                     {}
     virtual void update()                         {}
