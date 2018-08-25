@@ -12,9 +12,9 @@
  *  USAGE: < Coming Soon >
  */
 
-Entity::Entity(sf::Vector2f position)
+Entity::Entity()
 {
-    this->position = position;
+
 }
 
 void Entity::update()

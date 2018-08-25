@@ -3,6 +3,7 @@
 
 #include "Entity.h"
 #include "../Component/Anim/Animator.h"
+#include "../Component/Base/Position.h"
 #include "../Component/Base/Sprite.h"
 #include "../Component/Motion/PlayerFreeInput.h"
 

@@ -8,8 +8,13 @@
 
 using ComponentID = std::size_t;
 
-static std::map<std::string, ComponentID> ComponentMap;
-
+/*
+ *  Generate Component ID
+ *
+ *  DESC: Stores the last generated ComponentID and
+ *        returns a new one
+ *
+ */
 
 inline ComponentID generateComponentID()
 {
@@ -17,8 +22,17 @@ inline ComponentID generateComponentID()
     return currentComponentID++;
 }
 
-/* get component ID of type */
-/* note: each instantiated template has own static vars */
+/*
+ *  Get Component ID
+ *
+ *  DESC: Returns the ComponentID of the passed
+ *        type
+ *
+ *  NOTE: Each instantiated template of type T
+ *        has unique static variables
+ *
+ */
+
 template <typename T>
 inline ComponentID getComponentID() noexcept
 {

@@ -1,6 +1,6 @@
 #include "Player.h"
 
-Player::Player(std::string spriteName, sf::Vector2f position) : Entity(position),
+Player::Player(std::string spriteName, sf::Vector2f position) :
                     animator(Animator::AnimatorType::PLAYER, sf::IntRect(0, 0, 32, 64))
 {
     // setup player animations
@@ -12,10 +12,9 @@ Player::Player(std::string spriteName, sf::Vector2f position) : Entity(position)
 
     switchState(State::IDLE);
 
+    addComponent<Position>(position);
     addComponent<Sprite>(spriteName);
     addComponent<PlayerFreeInput>();
-    auto st = this->getComponent<Sprite>().spriteName;
-    dbg_log(st)
 }
 
 void Player::update()

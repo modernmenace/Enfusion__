@@ -13,8 +13,6 @@
  *  DESC: Base class for all entities, contains templates
  *        and functions shared by all entities
  *
- *        TODO: Find way to store and check/get components
- *        TODO: Component IDs now being stored correctly!!!!
  *
  */
 
@@ -23,7 +21,7 @@ class Component;
 class Entity {
 
 public:
-    Entity(sf::Vector2f position);
+    Entity();
 
     sf::Vector2f position;
 
