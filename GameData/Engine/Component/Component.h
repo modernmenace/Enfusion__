@@ -21,7 +21,6 @@ public:
     Component();
 
     Entity      *entity;
-    std::string componentName;
     ComponentID cId;
 
     virtual void initialize()                     {}

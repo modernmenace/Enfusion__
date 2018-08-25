@@ -1,7 +1,4 @@
 #include "Component.h"
 #include "../Entity/Entity.h"
 
-Component::Component()
-{
-    this->componentName = componentName;
-}
+Component::Component() {}

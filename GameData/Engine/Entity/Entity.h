@@ -14,8 +14,7 @@
  *        and functions shared by all entities
  *
  *        TODO: Find way to store and check/get components
- *        TODO: Component ID storing is working, now implement get/has functions
- *        TODO: REQUIRES_COMPONENT macro??
+ *        TODO: Component IDs now being stored correctly!!!!
  *
  */
 
@@ -56,7 +55,7 @@ public:
         components.emplace_back(std::move(ptr));
         comp->entity = this;
         comp->initialize();
-        componentIDs.emplace_back(comp->cId);
+        componentIDSet[getComponentID<T>()] = true;
         return *comp;
     }
 
@@ -69,20 +68,21 @@ public:
         components.emplace_back(std::move(ptr));
         comp->entity = this;
         comp->initialize();
-        componentIDs.emplace_back(comp->cId);
+        componentIDSet[getComponentID<T>()] = true;
         return *comp;
     }
 
     /*
      *  Has Component
      *
-     *  DESC: TODO: Implement This
+     *  DESC: Returns whether this entity has the specified
+     *        component (using bitset)
      *
      */
     template <typename T>
     inline bool hasComponent() const
     {
-
+        return componentIDSet[getComponentID<T>()];
     }
 
     /*
@@ -101,7 +101,7 @@ public:
 
 private:
     std::vector<std::unique_ptr<Component>> components;
-    std::vector<ComponentID>                componentIDs;
+    std::bitset<MAX_COMPONENTS>             componentIDSet;
 
 
 };
