@@ -10,7 +10,6 @@
 
 Sprite::Sprite(std::string spriteName)
 {
-    //REGISTER_COMPONENT("Sprite")
     this->spriteName = spriteName;
 }
 

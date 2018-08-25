@@ -5,6 +5,7 @@
 #include <map>
 #include <iostream>
 
+
 using ComponentID = std::size_t;
 
 static std::map<std::string, ComponentID> ComponentMap;

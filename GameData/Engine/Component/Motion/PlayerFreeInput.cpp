@@ -9,7 +9,7 @@
 
 PlayerFreeInput::PlayerFreeInput()
 {
-    //REGISTER_COMPONENT("PlayerFreeInput")
+
 }
 
 void PlayerFreeInput::update()

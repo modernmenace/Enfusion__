@@ -10,10 +10,11 @@ public:
 
     void initialize()                     override;
     void render(sf::RenderWindow* window) override;
+    std::string spriteName;
 
 private:
     sf::Sprite sprite;
-    std::string spriteName;
+
 
 };
 

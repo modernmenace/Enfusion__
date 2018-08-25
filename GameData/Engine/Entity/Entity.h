@@ -88,14 +88,17 @@ public:
     /*
      *  Get Component
      *
-     *  DESC: TODO: Implement This
+     *  DESC: TODO: Need to reimplement, use static cast to convert down inheritence tree
+     *        TODO: Note: components inserted to array in order of component id (maybe?)
      *
      */
 
     template <typename T>
-    inline T& getComponent()
+    T& getComponent() const
     {
 
+        //auto &ptr(components[getComponentID<T>()]); // error is on this first line (EDIT: added &, now error is below)
+        //return *static_cast<T*>(ptr);
     }
 
 
