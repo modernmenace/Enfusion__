@@ -6,7 +6,8 @@
  *
  *  DESC: Base class for all entities, contains virtual functions
  *
- *  NOTE: This class will definitely be expanded in the future
+ *  NOTE: Switched from vector to map for components, is this
+ *        much slower?
  *
  *  USAGE: < Coming Soon >
  */
@@ -18,12 +19,12 @@ Entity::Entity(sf::Vector2f position)
 
 void Entity::update()
 {
-    for (auto& c : components)
-        c->update();
+    for(auto& c : componentMap)
+        c.second->update();
 }
 
 void Entity::render(sf::RenderWindow *window)
 {
-    for (auto& c : components)
-        c->render(window);
+    for (auto& c : componentMap)
+        c.second->render(window);
 }

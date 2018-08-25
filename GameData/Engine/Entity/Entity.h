@@ -52,7 +52,7 @@ public:
     {
         T* comp(new T());
         std::unique_ptr<Component> ptr {comp};
-        components.emplace_back(std::move(ptr));
+        componentMap.insert(std::make_pair(getComponentID<T>(), std::move(ptr)));
         comp->entity = this;
         comp->initialize();
         componentIDSet[getComponentID<T>()] = true;
@@ -65,7 +65,7 @@ public:
     {
         T* comp(new T(std::forward<tArgs>(arguments)...));
         std::unique_ptr<Component> ptr {comp};
-        components.emplace_back(std::move(ptr));
+        componentMap.insert(std::make_pair(getComponentID<T>(), std::move(ptr)));
         comp->entity = this;
         comp->initialize();
         componentIDSet[getComponentID<T>()] = true;
@@ -88,23 +88,23 @@ public:
     /*
      *  Get Component
      *
-     *  DESC: TODO: Need to reimplement, use static cast to convert down inheritence tree
-     *        TODO: Note: components inserted to array in order of component id (maybe?)
+     *  DESC: Returns a pointer to the requested component
+     *
+     *  Note: This doesn't look like much, but it was a
+     *        bitch to write
      *
      */
 
     template <typename T>
     T& getComponent() const
     {
-
-        //auto &ptr(components[getComponentID<T>()]); // error is on this first line (EDIT: added &, now error is below)
-        //return *static_cast<T*>(ptr);
+        return *static_cast<T*>(componentMap.at(getComponentID<T>()).get());
     }
 
 
 private:
-    std::vector<std::unique_ptr<Component>> components;
-    std::bitset<MAX_COMPONENTS>             componentIDSet;
+    std::map<ComponentID, std::unique_ptr<Component>> componentMap;
+    std::bitset<MAX_COMPONENTS>                       componentIDSet;
 
 
 };
