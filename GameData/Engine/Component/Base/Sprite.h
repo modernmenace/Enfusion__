@@ -12,6 +12,11 @@ public:
     void render(sf::RenderWindow* window) override;
     std::string spriteName;
 
+    inline sf::Sprite& getSprite()
+    {
+        return sprite;
+    }
+
 private:
     sf::Sprite sprite;
 

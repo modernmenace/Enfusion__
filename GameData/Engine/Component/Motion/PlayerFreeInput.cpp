@@ -7,12 +7,62 @@
  *
  */
 
-PlayerFreeInput::PlayerFreeInput()
+PlayerFreeInput::PlayerFreeInput(int speed)
 {
-
+    this->speed = speed;
 }
 
-void PlayerFreeInput::update()
+void PlayerFreeInput::initialize()
 {
+    this->sprite = entity->getComponent<Sprite>();
+}
 
+void PlayerFreeInput::handleInput(sf::Keyboard::Key key)
+{
+    if (key == sf::Keyboard::W)
+    {
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+            sprite.move(-speed, -speed);
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+            sprite.move(speed, -speed);
+        else
+            sprite.move(0, -speed);
+    }
+    else if (key == sf::Keyboard::A)
+    {
+        if (currentDirection == MovementDirection::RIGHT)
+            //FLIP_SPRITE(sprite)
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+            sprite.move(-speed, -speed);
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+            sprite.move(-speed, speed);
+        else
+            sprite.move(-speed, 0);
+
+        currentDirection = MovementDirection::LEFT;
+    }
+    else if (key == sf::Keyboard::S)
+    {
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+            sprite.move(-speed, speed);
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+            sprite.move(speed, speed);
+        else
+            sprite.move(0, speed);
+    }
+    else if (key == sf::Keyboard::D)
+    {
+        if (currentDirection == MovementDirection::LEFT)
+            //FLIP_SPRITE(sprite)
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+            sprite.move(speed, -speed);
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+            sprite.move(speed, speed);
+        else
+            sprite.move(speed, 0);
+
+        currentDirection = MovementDirection::RIGHT;
+    }
 }

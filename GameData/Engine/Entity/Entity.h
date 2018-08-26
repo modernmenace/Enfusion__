@@ -2,6 +2,7 @@
 #define ENFUSION_GAMEOBJECT_H
 
 #include <memory>
+#include <bitset>
 #include "../Core/Engine.h"
 #include "../Core/ComponentManager.h"
 #include "../Component/Component.h"
@@ -32,6 +33,7 @@ public:
     virtual void initialize() {}
     virtual void update();
     virtual void render(sf::RenderWindow *window);
+    virtual void handleInput(sf::Keyboard::Key);
 
     // TODO: Deal with destructors
     virtual ~Entity() { }
@@ -52,8 +54,8 @@ public:
         std::unique_ptr<Component> ptr {comp};
         componentMap.insert(std::make_pair(getComponentID<T>(), std::move(ptr)));
         comp->entity = this;
-        comp->initialize();
         componentIDSet[getComponentID<T>()] = true;
+        comp->initialize();
         return *comp;
     }
 
@@ -65,8 +67,8 @@ public:
         std::unique_ptr<Component> ptr {comp};
         componentMap.insert(std::make_pair(getComponentID<T>(), std::move(ptr)));
         comp->entity = this;
-        comp->initialize();
         componentIDSet[getComponentID<T>()] = true;
+        comp->initialize();
         return *comp;
     }
 

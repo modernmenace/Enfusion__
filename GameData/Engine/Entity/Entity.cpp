@@ -28,3 +28,9 @@ void Entity::render(sf::RenderWindow *window)
     for (auto& c : componentMap)
         c.second->render(window);
 }
+
+void Entity::handleInput(sf::Keyboard::Key key)
+{
+    for(auto& c : componentMap)
+        c.second->handleInput(key);
+}

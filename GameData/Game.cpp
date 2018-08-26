@@ -65,7 +65,7 @@ void Game::update()
 
 void Game::render()
 {
-    mWindow.clear(sf::Color::Cyan);
+    mWindow.clear(sf::Color::Green);
     LEVEL.render(&mWindow);
     mWindow.display();
 }
