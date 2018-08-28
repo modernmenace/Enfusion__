@@ -16,9 +16,10 @@ public:
 private:
     int speed;
 
-    std::unique_ptr<sf::Sprite> sprite;
+    //std::unique_ptr<sf::Sprite> sprite;
+    sf::Sprite *sprite;
     enum MovementDirection { LEFT, RIGHT };
-    MovementDirection currentDirection = MovementDirection ::RIGHT;
+    MovementDirection currentDirection = MovementDirection::RIGHT;
 };
 
 

@@ -3,6 +3,7 @@
 
 #include "../Core/ComponentManager.h"
 #include "../Core/Engine.h"
+#include "../Entity/Entity.h"
 
 class Entity;
 
