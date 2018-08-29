@@ -41,7 +41,4 @@
     #define dbg_err(message)
 #endif
 
-// other useful macros
-#define FLIP_SPRITE(Sprite_Name) Sprite_Name.scale(-1.f,1.f);
-
 #endif //ENFUSION_ENGINE_H

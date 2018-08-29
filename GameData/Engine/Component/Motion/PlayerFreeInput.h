@@ -5,6 +5,8 @@
 #include "../Component.h"
 #include "../Base/Sprite.h"
 
+#define FLIP_SPRITE     sprite->scale(-1.f,1.f);
+
 class PlayerFreeInput : public Component {
 
 public:

@@ -5,6 +5,9 @@
  *
  *  DESC: Allows for input-based free movement (WSAD/Numpad)
  *
+ *  TODO: SPRITE IS CURRENTLY A UNSAFE POINTER, NOT WORKING OTHERWISE
+ *  TODO: Maybe try to convert first instance to shared ptr and try again
+ *
  */
 
 PlayerFreeInput::PlayerFreeInput(int speed)
@@ -34,7 +37,7 @@ void PlayerFreeInput::handleInput(sf::Keyboard::Key key)
     else if (key == sf::Keyboard::A)
     {
         if (currentDirection == MovementDirection::RIGHT)
-            //FLIP_SPRITE(sprite)
+            FLIP_SPRITE
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
             sprite->move(-speed, -speed);
@@ -57,7 +60,7 @@ void PlayerFreeInput::handleInput(sf::Keyboard::Key key)
     else if (key == sf::Keyboard::D)
     {
         if (currentDirection == MovementDirection::LEFT)
-            //FLIP_SPRITE(sprite)
+            FLIP_SPRITE
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
             sprite->move(speed, -speed);

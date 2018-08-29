@@ -2,12 +2,10 @@
 #define ENFUSION_PLAYER_H
 
 #include "Entity.h"
-#include "../Component/Anim/Animator.h"
 #include "../Component/Base/Position.h"
 #include "../Component/Base/Sprite.h"
 #include "../Component/Motion/PlayerFreeInput.h"
 
-#define MovementDirection Animator::MovementDirection
 
 enum State
 {
@@ -28,15 +26,6 @@ private:
     void switchState(State nextState);
 
     State             currentState;
-    Animator          animator;
-
-    MovementDirection currentDirection = MovementDirection::RIGHT;
-
-    const std::map<State, Animator::Animations> animStateMap
-    {
-        { State :: IDLE, Animator::Animations :: IDLE },
-        { State :: WALK, Animator::Animations :: WALK }
-    };
 
 };
 
