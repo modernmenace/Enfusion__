@@ -96,7 +96,7 @@ public:
      */
 
     template <typename T>
-    T& getComponent() const
+    inline T& getComponent() const
     {
         return *static_cast<T*>(componentMap.at(getComponentID<T>()).get());
     }
