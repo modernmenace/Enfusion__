@@ -11,7 +11,6 @@ public:
     Position(Vector2f position);
 
     Vector2f getPosition();
-    Vector2f getPosition(sf::Sprite* sprite);
 
 
 private:

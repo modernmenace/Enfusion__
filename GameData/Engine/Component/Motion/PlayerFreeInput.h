@@ -5,8 +5,6 @@
 #include "../Component.h"
 #include "../Base/Sprite.h"
 
-#define FLIP_SPRITE     sprite->scale(-1.f,1.f);
-
 class PlayerFreeInput : public Component {
 
 public:
@@ -18,10 +16,26 @@ public:
 private:
     int speed;
 
-    //std::unique_ptr<sf::Sprite> sprite;
     sf::Sprite *sprite;
     enum MovementDirection { LEFT, RIGHT };
     MovementDirection currentDirection = MovementDirection::RIGHT;
+
+    void flipSprite()
+    {
+        sprite->scale(-1.f,1.f);
+        if (currentDirection == MovementDirection::RIGHT)
+        {
+            sprite->setPosition(sprite->getPosition().x + (sprite->getTexture()->getSize().x),
+                                sprite->getPosition().y);
+            currentDirection = MovementDirection::LEFT;
+        }
+        else
+        {
+            sprite->setPosition(sprite->getPosition().x - (sprite->getTexture()->getSize().x),
+                                sprite->getPosition().y);
+            currentDirection = MovementDirection::RIGHT;
+        }
+    }
 };
 
 
