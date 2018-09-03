@@ -67,4 +67,22 @@ void PlayerFreeInput::handleInput(sf::Keyboard::Key key)
 
         currentDirection = MovementDirection::RIGHT;
     }
+
+}
+
+void PlayerFreeInput::flipSprite()
+{
+    sprite->scale(-1.f,1.f);
+    if (currentDirection == MovementDirection::RIGHT)
+    {
+        sprite->setPosition(sprite->getPosition().x + (sprite->getTexture()->getSize().x),
+                            sprite->getPosition().y);
+        currentDirection = MovementDirection::LEFT;
+    }
+    else
+    {
+        sprite->setPosition(sprite->getPosition().x - (sprite->getTexture()->getSize().x),
+                            sprite->getPosition().y);
+        currentDirection = MovementDirection::RIGHT;
+    }
 }

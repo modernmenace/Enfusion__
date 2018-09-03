@@ -7,7 +7,11 @@ class AnimComp : public Component
 {
 
 public:
-    AnimComp();
+    void initialize() override;
+    void update()     override;
+
+private:
+    sf::Sprite* sprite;
 
 };
 
