@@ -84,8 +84,6 @@ void Game::processEvents() {
         if (event.type == sf::Event::Closed)
             mWindow.close();
 
-
-
         if (event.type == sf::Event::KeyPressed)
             LEVEL.handleInput(event.key.code);
     }

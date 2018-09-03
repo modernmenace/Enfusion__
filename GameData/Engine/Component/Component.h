@@ -19,7 +19,7 @@ class Entity;
 class Component {
 
 public:
-    Component();
+    Component() {}
 
     Entity      *entity;
     ComponentID cId;
