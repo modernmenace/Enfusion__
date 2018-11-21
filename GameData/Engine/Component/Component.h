@@ -12,7 +12,6 @@ class Entity;
  *
  *  DESC: Base class for all components
  *
- *  TODO: Add some asserts to check if component is registered
  *
  */
 
@@ -25,7 +24,7 @@ public:
     ComponentID cId;
 
     virtual void initialize()                     {}
-    virtual void update()                         {}
+    virtual void update(sf::Time tickRate)        {}
     virtual void render(sf::RenderWindow* window) {}
     virtual void handleInput(sf::Keyboard::Key)   {}
 

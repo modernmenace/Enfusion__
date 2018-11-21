@@ -17,10 +17,10 @@ Entity::Entity()
 
 }
 
-void Entity::update()
+void Entity::update(sf::Time tickRate)
 {
     for(auto& c : componentMap)
-        c.second->update();
+        c.second->update(tickRate);
 }
 
 void Entity::render(sf::RenderWindow *window)

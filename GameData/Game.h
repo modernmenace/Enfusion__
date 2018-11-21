@@ -16,7 +16,7 @@ public:
 private:
     void initialize();
     void processEvents();
-    void update();
+    void update(sf::Time tickRate);
     void render();
 
     AssetManager manager;

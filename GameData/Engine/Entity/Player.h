@@ -2,10 +2,9 @@
 #define ENFUSION_PLAYER_H
 
 #include "Entity.h"
+#include "../Component/Anim/AnimatedSprite.h"
 #include "../Component/Base/Position.h"
-#include "../Component/Base/Sprite.h"
 #include "../Component/Motion/PlayerFreeInput.h"
-#include "../Component/Anim/AnimComp.h"
 
 
 class Player : public Entity {

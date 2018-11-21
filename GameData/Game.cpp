@@ -1,5 +1,7 @@
 #include "Game.h"
 
+sf::RenderWindow* window;
+
 /*
  *  Game
  *
@@ -22,11 +24,14 @@ Game::Game() : mWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE)
  */
 
 void Game::run() {
+    sf::Clock timer;
+    sf::Time tickRate;
     initialize();
 
     while (mWindow.isOpen()) {
+        tickRate = timer.restart();
         processEvents();
-        update();
+        update(tickRate);
         render();
     }
 }
@@ -51,9 +56,9 @@ void Game::initialize()
  *
  */
 
-void Game::update()
+void Game::update(sf::Time tickRate)
 {
-    LEVEL.update();
+    LEVEL.update(tickRate);
 }
 
 /*

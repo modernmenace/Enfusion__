@@ -24,14 +24,12 @@ class Entity {
 public:
     Entity();
 
-    sf::Vector2f position;
-
     /*
      *  Virtual Functions
      */
 
     virtual void initialize() {}
-    virtual void update();
+    virtual void update(sf::Time tickRate);
     virtual void render(sf::RenderWindow *window);
     virtual void handleInput(sf::Keyboard::Key);
 

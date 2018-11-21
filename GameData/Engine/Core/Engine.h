@@ -2,6 +2,7 @@
 #define ENFUSION_ENGINE_H
 
 #include <iostream>
+#include <SFML/Graphics.hpp>
 #include "AssetManager.h"
 
 /*
