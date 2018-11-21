@@ -4,7 +4,7 @@
 #include "Entity.h"
 #include "../Component/Anim/AnimatedSprite.h"
 #include "../Component/Base/Position.h"
-#include "../Component/Motion/PlayerFreeInput.h"
+#include "../Component/Motion/AnimatedMovement.h"
 
 
 class Player : public Entity {

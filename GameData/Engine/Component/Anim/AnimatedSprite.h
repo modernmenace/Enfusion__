@@ -14,6 +14,11 @@ public:
     void render(sf::RenderWindow* window) override;
     void switchState(int row, int frame);
 
+    inline sf::Sprite& getSprite()
+    {
+        return sprite;
+    }
+
 private:
     std::string  spriteSheet;
     sf::IntRect  charRect;
