@@ -3,12 +3,25 @@
 
 #include "../../Core/Engine.h"
 #include "../Component.h"
-
+#include "../Base/Position.h"
 
 class AnimatedSprite : public Component {
 
 public:
-    AnimatedSprite(std::string spriteSheet = MISSING_TEXTURE);
+    AnimatedSprite(std::string spriteSheet, int numberRows, int numberFrames, sf::IntRect characterSheetSize);
+
+    void initialize() override;
+    void render(sf::RenderWindow* window) override;
+    void switchState(int row, int frame);
+
+private:
+    std::string  spriteSheet;
+    sf::IntRect  charRect;
+
+    int numRows;
+    int numFrames;
+
+    sf::Sprite sprite;
 
 };
 

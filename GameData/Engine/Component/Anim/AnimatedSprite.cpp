@@ -1,6 +1,47 @@
 #include "AnimatedSprite.h"
 
-AnimatedSprite::AnimatedSprite(std::string spriteSheet)
+AnimatedSprite::AnimatedSprite(std::string spriteSheet, int numberRows, int numberFrames, sf::IntRect characterSheetSize)
 {
+    this->spriteSheet = spriteSheet;
+    this->charRect    = characterSheetSize;
+    this->numRows     = numberRows;
+    this->numFrames   = numberFrames;
+}
 
+void AnimatedSprite::initialize()
+{
+    this->sprite = sf::Sprite(AssetManager::getTexture(spriteSheet), charRect);
+    this->sprite.setPosition(entity->getComponent<Position>().getPosition());
+    this->sprite.setScale(GLOBAL_SCALE_GAMEOBJECT);
+
+    switchState(0, 0);
+}
+
+void AnimatedSprite::render(sf::RenderWindow *window)
+{
+    window->draw(sprite);
+}
+
+void AnimatedSprite::switchState(int row, int frame)
+{
+    if (row != 0)
+        charRect.top  = (row + (charRect.height / numRows));
+    else
+        charRect.top = 0;
+
+    if (frame != 0)
+        charRect.left = (frame + (charRect.width / numFrames));
+    else
+        charRect.left = 0;
+
+    auto sheetHeight = charRect.height;
+    auto sheetWidth  = charRect.width;
+
+    charRect.width  = sheetWidth  / numFrames;
+    charRect.height = sheetHeight / numRows;
+
+    sprite.setTextureRect(charRect);
+
+    charRect.width = sheetWidth;
+    charRect.height = sheetHeight;
 }
