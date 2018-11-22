@@ -24,21 +24,22 @@ void AnimatedSprite::render(sf::RenderWindow *window)
 
 void AnimatedSprite::switchState(int row, int frame)
 {
-    if (row != 0)
-        charRect.top  = (row + (charRect.height / numRows));
-    else
-        charRect.top = 0;
-
-    if (frame != 0)
-        charRect.left = (frame + (charRect.width / numFrames));
-    else
-        charRect.left = 0;
-
     auto sheetHeight = charRect.height;
     auto sheetWidth  = charRect.width;
 
     charRect.width  = sheetWidth  / numFrames;
     charRect.height = sheetHeight / numRows;
+
+    if (row != 0)
+        charRect.top  = (((row-1) * charRect.height) + (sheetHeight / numRows));
+    else
+        charRect.top = 0;
+
+    if (frame != 0)
+        charRect.left = (((frame-1) * charRect.width) + (sheetWidth / numFrames));
+    else
+        charRect.left = 0;
+
 
     sprite.setTextureRect(charRect);
 

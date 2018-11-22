@@ -22,7 +22,8 @@ void AnimatedMovement::update(sf::Time tickRate)
 
     if (st.up)
     {
-        if (st.left)
+        if (st.down) { }
+        else if (st.left)
             characterSprite->move(-speed * currDT, -speed * currDT);
         else if (st.right)
             characterSprite->move(speed * currDT, -speed * currDT);
@@ -31,9 +32,6 @@ void AnimatedMovement::update(sf::Time tickRate)
     }
     else if (st.left)
     {
-        if (currentDirection == MovementDirection::RIGHT)
-            flipSprite();
-
         if (st.up)
             characterSprite->move(-speed * currDT, -speed * currDT);
         else if (st.down)
@@ -41,7 +39,6 @@ void AnimatedMovement::update(sf::Time tickRate)
         else
             characterSprite->move(-speed * currDT, 0);
 
-        currentDirection = MovementDirection::LEFT;
     }
     else if (st.down)
     {
@@ -54,8 +51,6 @@ void AnimatedMovement::update(sf::Time tickRate)
     }
     else if (st.right)
     {
-        if (currentDirection == MovementDirection::LEFT)
-            flipSprite();
 
         if (st.up)
             characterSprite->move(speed * currDT, -speed * currDT);
@@ -64,9 +59,8 @@ void AnimatedMovement::update(sf::Time tickRate)
         else
             characterSprite->move(speed * currDT, 0);
 
-        currentDirection = MovementDirection::RIGHT;
     }
-    //switchAnimState();
+    animate();
 }
 
 void AnimatedMovement::switchAnimState()
@@ -83,26 +77,28 @@ int AnimatedMovement::getRow()
         return 1;
     else if (st.right)
         return 2;
-    else if (st.down)
+    else if (st.up)
         return 3;
 }
 
-void AnimatedMovement::flipSprite()
-{
-    //TODO: Redo this function
-    /*
-    characterSprite->scale(-1.f,1.f);
-    if (currentDirection == MovementDirection::RIGHT)
+void AnimatedMovement::animate() {
+    // handle animation
+    //update based on current state
+    if (currentState == AnimState::DOWN)
     {
-        characterSprite->setPosition(characterSprite->getPosition().x + (characterSprite->getTexture()->getSize().x),
-                                     characterSprite->getPosition().y);
-        currentDirection = MovementDirection::LEFT;
+        if (st.up)
+        {
+            switchAnimState();
+            currentState = AnimState::UP;
+        }
     }
-    else
+    else if (currentState == AnimState::UP)
     {
-        characterSprite->setPosition(characterSprite->getPosition().x - (characterSprite->getTexture()->getSize().x),
-                                     characterSprite->getPosition().y);
-        currentDirection = MovementDirection::RIGHT;
+        if (st.down)
+        {
+            switchAnimState();
+            currentState = AnimState::DOWN;
+        }
     }
-     */
+
 }

@@ -12,6 +12,14 @@ struct MovementStatus
     bool right = false;
 };
 
+enum AnimState
+{
+    UP,
+    DOWN,
+    LEFT,
+    RIGHT
+};
+
 class AnimatedMovement : public Component {
 
 public:
@@ -25,12 +33,10 @@ private:
 
     sf::Sprite* characterSprite;
 
-    enum MovementDirection { LEFT, RIGHT };
-
-    MovementDirection currentDirection = MovementDirection::RIGHT;
+    AnimState currentState = AnimState::DOWN;
     MovementStatus st;
 
-    void flipSprite();
+    void animate();
     void switchAnimState();
     int getRow();
 
