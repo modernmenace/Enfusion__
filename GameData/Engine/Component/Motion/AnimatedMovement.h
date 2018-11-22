@@ -40,7 +40,10 @@ private:
     void switchAnimState(int frame = 1);
     void animate();
     int getRow();
+
     int currentFrame = 1;
+    float currAnimTime = 0.0f;
+    float animThreshhold = 0.175f;
 
     inline bool isMoving() const
     {

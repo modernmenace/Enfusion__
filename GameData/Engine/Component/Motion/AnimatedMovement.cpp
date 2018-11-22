@@ -17,6 +17,7 @@ void AnimatedMovement::initialize()
 void AnimatedMovement::update(sf::Time tickRate)
 {
     auto currDT = tickRate.asSeconds();
+    currAnimTime += currDT;
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) st.up    = true; else st.up    = false;
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) st.down  = true; else st.down  = false;
@@ -102,10 +103,24 @@ void AnimatedMovement::animate()
     if (!moving)
     {
         currentFrame = 1;
+        currAnimTime = 0.0f;
         switchAnimState();
         return;
     }
-    
+
+    if (currAnimTime >= animThreshhold)
+    {
+        //animate
+        if (currentFrame < 2)
+            currentFrame++;
+        else
+            currentFrame = 0;
+
+        switchAnimState(currentFrame);
+
+        currAnimTime = 0.0f;
+    }
+
 
 }
 
