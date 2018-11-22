@@ -71,12 +71,12 @@ void AnimatedMovement::switchAnimState()
 int AnimatedMovement::getRow()
 {
     //this needs work, only testing
-    if (st.down)
-        return 0;
-    else if (st.left)
+    if (st.left)
         return 1;
     else if (st.right)
         return 2;
+    else if (st.down)
+        return 0;
     else if (st.up)
         return 3;
 }
@@ -86,7 +86,17 @@ void AnimatedMovement::animate() {
     //update based on current state
     if (currentState == AnimState::DOWN)
     {
-        if (st.up)
+        if (st.left)
+        {
+            switchAnimState();
+            currentState = AnimState::LEFT;
+        }
+        else if (st.right)
+        {
+            switchAnimState();
+            currentState = AnimState::RIGHT;
+        }
+        else if (st.up)
         {
             switchAnimState();
             currentState = AnimState::UP;
@@ -94,11 +104,62 @@ void AnimatedMovement::animate() {
     }
     else if (currentState == AnimState::UP)
     {
-        if (st.down)
+        if (st.left)
+        {
+            switchAnimState();
+            currentState = AnimState::LEFT;
+        }
+        else if (st.right)
+        {
+            switchAnimState();
+            currentState = AnimState::RIGHT;
+        }
+        else if (st.down)
         {
             switchAnimState();
             currentState = AnimState::DOWN;
         }
     }
-
+    else if (currentState == AnimState::LEFT)
+    {
+        if (st.right)
+        {
+            switchAnimState();
+            currentState = AnimState::RIGHT;
+        }
+        if (!st.left)
+        {
+            if (st.up)
+            {
+                switchAnimState();
+                currentState = AnimState::UP;
+            }
+            else if (st.down)
+            {
+                switchAnimState();
+                currentState = AnimState::DOWN;
+            }
+        }
+    }
+    else if (currentState == AnimState::RIGHT)
+    {
+        if (st.left)
+        {
+            switchAnimState();
+            currentState = AnimState::LEFT;
+        }
+        if (!st.right)
+        {
+            if (st.up)
+            {
+                switchAnimState();
+                currentState = AnimState::UP;
+            }
+            else if (st.down)
+            {
+                switchAnimState();
+                currentState = AnimState::DOWN;
+            }
+        }
+    }
 }
