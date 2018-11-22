@@ -16,7 +16,7 @@
 // if true, debug messages are enabled
 #define DEBUG_BUILD true
 
-#define WINDOW_TITLE __TIME__
+#define WINDOW_TITLE "Enfusion++"
 
 #define WINDOW_WIDTH  1920
 #define WINDOW_HEIGHT 1080

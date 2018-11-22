@@ -33,8 +33,7 @@ public:
     virtual void render(sf::RenderWindow *window);
     virtual void handleInput(sf::Keyboard::Key);
 
-    // TODO: Deal with destructors
-    virtual ~Entity() { }
+    virtual ~Entity();
 
     /*
      *  Add Component

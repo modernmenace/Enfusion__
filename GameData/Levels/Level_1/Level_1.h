@@ -4,6 +4,7 @@
 #include "../../Engine/Entity/Player.h"
 #include "../../Engine/AI/Agent.h"
 #include "../../Engine/Lvl/Level.h"
+#include "../../Engine/Lvl/Tilemap.h"
 
 class Level_1 : public Level {
 
@@ -13,7 +14,8 @@ public:
     void handleInput(sf::Keyboard::Key key) override;
 
 private:
-    Player player;
+    Player  player;
+    Tilemap map;
 
 };
 

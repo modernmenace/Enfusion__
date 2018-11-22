@@ -17,6 +17,11 @@ Entity::Entity()
 
 }
 
+Entity::~Entity()
+{
+    //TODO: Write destructors
+}
+
 void Entity::update(sf::Time tickRate)
 {
     for(auto& c : componentMap)
