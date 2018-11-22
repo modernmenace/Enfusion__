@@ -16,13 +16,16 @@ void AnimatedMovement::initialize()
 
 void AnimatedMovement::update(sf::Time tickRate)
 {
+    auto tempSpeed = speed;
+    if (sprinting) speed *= 2;
     auto currDT = tickRate.asSeconds();
     currAnimTime += currDT;
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) st.up    = true; else st.up    = false;
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) st.down  = true; else st.down  = false;
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) st.left  = true; else st.left  = false;
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) st.right = true; else st.right = false;
+    sf::Keyboard::isKeyPressed(sf::Keyboard::W)       ? st.up    = true  : st.up    = false;
+    sf::Keyboard::isKeyPressed(sf::Keyboard::S)       ? st.down  = true  : st.down  = false;
+    sf::Keyboard::isKeyPressed(sf::Keyboard::A)       ? st.left  = true  : st.left  = false;
+    sf::Keyboard::isKeyPressed(sf::Keyboard::D)       ? st.right = true  : st.right = false;
+    sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)  ? sprinting = true : sprinting = false;
 
     if (st.up)
     {
@@ -66,6 +69,7 @@ void AnimatedMovement::update(sf::Time tickRate)
     }
     checkAnimState();
     animate();
+    speed = tempSpeed;
 }
 
 void AnimatedMovement::switchAnimState(int frame)
@@ -108,7 +112,7 @@ void AnimatedMovement::animate()
         return;
     }
 
-    if (currAnimTime >= animThreshhold)
+    if ((!sprinting && (currAnimTime >= animThreshhold)) || (sprinting && (currAnimTime >= animThreshhold / 2.0f)))
     {
         //animate
         if (currentFrame < 2)

@@ -41,9 +41,12 @@ private:
     void animate();
     int getRow();
 
-    int currentFrame = 1;
-    float currAnimTime = 0.0f;
+    // animation related
+    int currentFrame     = 1;
+    float currAnimTime   = 0.0f;
     float animThreshhold = 0.175f;
+
+    bool sprinting = false;
 
     inline bool isMoving() const
     {
