@@ -36,9 +36,16 @@ private:
     AnimState currentState = AnimState::DOWN;
     MovementStatus st;
 
+    void checkAnimState();
+    void switchAnimState(int frame = 1);
     void animate();
-    void switchAnimState();
     int getRow();
+    int currentFrame = 1;
+
+    inline bool isMoving() const
+    {
+        return (st.up || st.down || st.left || st.right);
+    }
 
 };
 
