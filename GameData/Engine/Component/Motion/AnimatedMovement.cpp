@@ -1,8 +1,9 @@
 #include "AnimatedMovement.h"
 
 //TODO: AnimState kind of phasing out status due to framing
+//TODO: When removed: weird slowdowns with getRow()
 
-AnimatedMovement::AnimatedMovement(int speed)
+AnimatedMovement::AnimatedMovement(float speed)
 {
     this->speed = speed;
 }
@@ -21,28 +22,28 @@ void AnimatedMovement::update(sf::Time tickRate)
     auto currDT = tickRate.asSeconds();
     currAnimTime += currDT;
 
-    sf::Keyboard::isKeyPressed(sf::Keyboard::W)       ? st.up    = true  : st.up    = false;
-    sf::Keyboard::isKeyPressed(sf::Keyboard::S)       ? st.down  = true  : st.down  = false;
-    sf::Keyboard::isKeyPressed(sf::Keyboard::A)       ? st.left  = true  : st.left  = false;
-    sf::Keyboard::isKeyPressed(sf::Keyboard::D)       ? st.right = true  : st.right = false;
-    sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)  ? sprinting = true : sprinting = false;
+    sf::Keyboard::isKeyPressed(sf::Keyboard::W)      ? st.up    = true  : st.up    = false;
+    sf::Keyboard::isKeyPressed(sf::Keyboard::S)      ? st.down  = true  : st.down  = false;
+    sf::Keyboard::isKeyPressed(sf::Keyboard::A)      ? st.left  = true  : st.left  = false;
+    sf::Keyboard::isKeyPressed(sf::Keyboard::D)      ? st.right = true  : st.right = false;
+    sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) ? sprinting = true : sprinting = false;
 
     if (st.up)
     {
         if (st.down) { }
         else if (st.left)
-            characterSprite->move(-speed * currDT, -speed * currDT);
+            characterSprite->move(-speed_diag * currDT, -speed_diag * currDT);
         else if (st.right)
-            characterSprite->move(speed * currDT, -speed * currDT);
+            characterSprite->move(speed_diag * currDT, -speed_diag * currDT);
         else
             characterSprite->move(0, -speed * currDT);
     }
     else if (st.left)
     {
         if (st.up)
-            characterSprite->move(-speed * currDT, -speed * currDT);
+            characterSprite->move(-speed_diag * currDT, -speed_diag * currDT);
         else if (st.down)
-            characterSprite->move(-speed * currDT, speed * currDT);
+            characterSprite->move(-speed_diag * currDT, speed_diag * currDT);
         else
             characterSprite->move(-speed * currDT, 0);
 
@@ -50,9 +51,9 @@ void AnimatedMovement::update(sf::Time tickRate)
     else if (st.down)
     {
         if(st.left)
-            characterSprite->move(-speed * currDT, speed * currDT);
+            characterSprite->move(-speed_diag * currDT, speed_diag * currDT);
         else if (st.right)
-            characterSprite->move(speed * currDT, speed * currDT);
+            characterSprite->move(speed_diag * currDT, speed_diag * currDT);
         else
             characterSprite->move(0, speed * currDT);
     }
@@ -60,9 +61,9 @@ void AnimatedMovement::update(sf::Time tickRate)
     {
 
         if (st.up)
-            characterSprite->move(speed * currDT, -speed * currDT);
+            characterSprite->move(speed_diag * currDT, -speed_diag * currDT);
         else if (st.down)
-            characterSprite->move(speed * currDT, speed * currDT);
+            characterSprite->move(speed_diag * currDT, speed_diag * currDT);
         else
             characterSprite->move(speed * currDT, 0);
 

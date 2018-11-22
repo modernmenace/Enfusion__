@@ -18,11 +18,24 @@ Level::Level(std::string levelName, std::string background)
     this->background.setTexture(&AssetManager::getTexture(background));
 }
 
-//virtual functions (overridden)
-void Level::initialize() {}
-void Level::update(sf::Time tickRate) {}
-void Level::handleInput(sf::Keyboard::Key key) {}
+void Level::initialize()
+{
+    for(auto &e : entities)
+        e->initialize();
+}
+
+void Level::update(sf::Time tickRate)
+{
+    for(auto &e : entities)
+        e->update(tickRate);
+}
+
 void Level::render(sf::RenderWindow* window)
 {
     window->draw(background);
+
+    for(auto &e : entities)
+        e->render(window);
 }
+
+void Level::handleInput(sf::Keyboard::Key key) {}

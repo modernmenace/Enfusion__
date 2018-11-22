@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "../Core/Engine.h"
+#include "../Entity/Entity.h"
 
 class Level {
 
@@ -19,6 +20,14 @@ public:
 protected:
     sf::RectangleShape background;
     std::string levelName;
+
+    std::vector<Entity*> entities;
+
+    template <typename Entity>
+    inline void addEntity(Entity* e)
+    {
+        entities.emplace_back(e);
+    }
 
 };
 

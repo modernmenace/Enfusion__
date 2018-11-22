@@ -4,6 +4,8 @@
 #include "../Component.h"
 #include "../Anim/AnimatedSprite.h"
 
+#define speed_diag speed * 0.85f
+
 struct MovementStatus
 {
     bool up    = false;
@@ -23,13 +25,13 @@ enum AnimState
 class AnimatedMovement : public Component {
 
 public:
-    AnimatedMovement(int speed = 250);
+    AnimatedMovement(float speed = 300.0f);
 
     void initialize()              override;
     void update(sf::Time tickRate) override;
 
 private:
-    int speed;
+    float speed;
 
     sf::Sprite* characterSprite;
 
