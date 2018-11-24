@@ -8,13 +8,17 @@ class Tileset {
 public:
     Tileset(std::string setName, uint tileWidth = 32, uint tileHeight = 32);
 
-    sf::Texture& tileAt(uint row, uint column);
+    sf::Sprite& tileAt(uint row, uint column);
 
 private:
-    sf::Texture* tiles;
+    sf::Texture* tileSetTex;
 
     uint tileWidth;
     uint tileHeight;
+
+    void fillTilesMap();
+
+    std::map<sf::Vector2i, sf::Sprite*> tiles;
 
 };
 
