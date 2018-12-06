@@ -33,10 +33,10 @@ void Tileset::fillTilesMap()
             sf::IntRect spriteRect(0, 0, 100, 100);
             //TODO: error is here
             sf::Sprite* sprite = new sf::Sprite(*tileSetTex, spriteRect);
-            auto pair = std::make_pair(vec, sprite);
-            //TODO: inserting the pair is where the issue occurs
-            //tiles.insert(pair);
-
+            auto pair = std::make_pair(vec, *sprite);
+            tiles.insert(pair);
+            //TODO: this compiles now, test??
+            dbg_log("Tileset Map Size: " << tiles.size())
             break;
         }
 
