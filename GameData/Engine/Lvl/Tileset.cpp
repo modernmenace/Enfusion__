@@ -47,5 +47,5 @@ void Tileset::fillTilesMap()
 
 sf::Sprite& Tileset::tileAt(uint row, uint column)
 {
-    //return pointer to sprite contained in std::map
+    return tiles.at(sf::Vector2i(row, column));
 }

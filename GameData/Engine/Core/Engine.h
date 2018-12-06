@@ -2,6 +2,7 @@
 #define ENFUSION_ENGINE_H
 
 #include <iostream>
+#include <assert.h>
 #include <SFML/Graphics.hpp>
 #include "AssetManager.h"
 
@@ -22,6 +23,8 @@
 #define WINDOW_HEIGHT 1080
 
 #define MAX_COMPONENTS 5
+
+#define uint unsigned int
 
 // resource paths
 #define RESOURCE_PATH        "Resources/"
