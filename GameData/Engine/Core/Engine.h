@@ -24,7 +24,7 @@
 
 #define MAX_COMPONENTS 5
 
-#define uint unsigned int
+typedef unsigned int uint;
 
 // resource paths
 #define RESOURCE_PATH        "Resources/"
@@ -35,6 +35,7 @@
 
 // scale data
 #define GLOBAL_SCALE_GAMEOBJECT sf::Vector2f(2.5f, 2.5f)
+#define GLOBAL_SCALE_TILE       sf::Vector2f(2.5f, 2.5f)
 
 // debug macros
 #if DEBUG_BUILD

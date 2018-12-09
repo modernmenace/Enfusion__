@@ -30,9 +30,10 @@ void Tileset::fillTilesMap()
             int index = 0;
             uint pos  = 0;
             sf::Vector2i vec(row, index);
-            sf::IntRect spriteRect(0, 0, 100, 100);
+            sf::IntRect spriteRect(0, 0, tileWidth, tileHeight);
             //TODO: error is here
             sf::Sprite* sprite = new sf::Sprite(*tileSetTex, spriteRect);
+            sprite->setScale(GLOBAL_SCALE_TILE);
             auto pair = std::make_pair(vec, *sprite);
             tiles.insert(pair);
             //TODO: this compiles now, test??

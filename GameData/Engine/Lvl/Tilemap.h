@@ -9,9 +9,11 @@ public:
     Tilemap(std::string tileSetName);
 
     void initialize();
+    void render(sf::RenderWindow* window);
 
 private:
     Tileset* t = nullptr;
+    std::string tileSetName;
 
 };
 

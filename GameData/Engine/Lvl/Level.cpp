@@ -14,8 +14,9 @@
 Level::Level(std::string levelName, std::string background)
 {
     this->levelName = levelName;
-    this->background.setSize(sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT));
-    this->background.setTexture(&AssetManager::getTexture(background));
+    //TODO: Figure out if we want to keep this background or remove it entirely
+    //this->background.setSize(sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT));
+    //this->background.setTexture(&AssetManager::getTexture(background));
 }
 
 void Level::initialize()

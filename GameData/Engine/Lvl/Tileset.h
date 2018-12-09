@@ -3,14 +3,13 @@
 
 #include "../Core/Engine.h"
 
+// This is needed for functionality with the standard map
 template <>
 struct std::less<sf::Vector2i>
 {
 bool operator()(const sf::Vector2i &vec1, const sf::Vector2i &vec2) const
 {
-    //TODO: Do some gross linear algebra here to compare magnitudes
-    //TODO: Reminder: Magnitude is distance across vector
-    return true;
+    return false;
 }
 };
 

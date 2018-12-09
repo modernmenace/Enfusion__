@@ -11,6 +11,8 @@ class Level_1 : public Level {
 public:
     Level_1();
 
+    void initialize();
+    void render(sf::RenderWindow* window);
     void handleInput(sf::Keyboard::Key key) override;
 
 private:
