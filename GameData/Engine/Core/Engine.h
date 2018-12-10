@@ -26,6 +26,8 @@
 
 typedef unsigned int uint;
 
+#define forever for(;;)
+
 // resource paths
 #define RESOURCE_PATH        "Resources/"
 #define RESOURCE_PATH_OBJECT "Objects/"

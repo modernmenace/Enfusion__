@@ -13,7 +13,7 @@ Tileset::Tileset(std::string setName, uint tileWidth, uint tileHeight)
 
 void Tileset::fillTilesMap()
 {
-    // fill std::map
+    //TODO: Finish filling tileset
 
     // get set width and height
     auto setWidth  = tileSetTex->getSize().x;
@@ -21,27 +21,19 @@ void Tileset::fillTilesMap()
 
     // use tile width and height for some math cancer
     // go row by row?
-    for(;;)
+    uint row = 0;
+    uint col = 0;
+    forever
     {
-        // first row?
-        int row = 0;
-        for(;;)
-        {
-            int index = 0;
-            uint pos  = 0;
-            sf::Vector2i vec(row, index);
-            sf::IntRect spriteRect(0, 0, tileWidth, tileHeight);
-            //TODO: error is here
-            sf::Sprite* sprite = new sf::Sprite(*tileSetTex, spriteRect);
-            sprite->setScale(GLOBAL_SCALE_TILE);
-            auto pair = std::make_pair(vec, *sprite);
-            tiles.insert(pair);
-            //TODO: this compiles now, test??
-            dbg_log("Tileset Map Size: " << tiles.size())
-            break;
-        }
-
-
+        sf::Vector2i vec(row, col);
+        sf::IntRect spriteRect(0, 0, tileWidth, tileHeight);
+        sf::Sprite* sprite = new sf::Sprite(*tileSetTex, spriteRect);
+        sprite->setScale(GLOBAL_SCALE_TILE);
+        auto pair = std::make_pair(vec, *sprite);
+        tiles.insert(pair);
+        dbg_log("Tileset Map Size: " << tiles.size())
+        //TODO: first increase col, then row
+        col++;
         break;
     }
 }
