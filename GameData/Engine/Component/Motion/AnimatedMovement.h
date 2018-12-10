@@ -4,7 +4,9 @@
 #include "../Component.h"
 #include "../Anim/AnimatedSprite.h"
 
-#define speed_diag speed * 0.85f
+#define speed_vert speed * 0.9f
+#define speed_horz speed
+#define speed_diag speed * 0.75f
 
 struct MovementStatus
 {
@@ -25,7 +27,7 @@ enum AnimState
 class AnimatedMovement : public Component {
 
 public:
-    AnimatedMovement(float speed = 300.0f);
+    AnimatedMovement(float speed = 425.0f);
 
     void initialize()              override;
     void update(sf::Time tickRate) override;
@@ -44,9 +46,9 @@ private:
     int getRow();
 
     // animation related
-    int currentFrame     = 1;
-    float currAnimTime   = 0.0f;
-    float animThreshhold = 0.175f;
+    int   currentFrame    = 1;
+    float currAnimTime    = 0.0f;
+    float animThreshhold  = 0.175f;
 
     bool sprinting = false;
 

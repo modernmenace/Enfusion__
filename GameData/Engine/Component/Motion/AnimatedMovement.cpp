@@ -36,7 +36,7 @@ void AnimatedMovement::update(sf::Time tickRate)
         else if (st.right)
             characterSprite->move(speed_diag * currDT, -speed_diag * currDT);
         else
-            characterSprite->move(0, -speed * currDT);
+            characterSprite->move(0, -speed_vert * currDT);
     }
     else if (st.left)
     {
@@ -45,7 +45,7 @@ void AnimatedMovement::update(sf::Time tickRate)
         else if (st.down)
             characterSprite->move(-speed_diag * currDT, speed_diag * currDT);
         else
-            characterSprite->move(-speed * currDT, 0);
+            characterSprite->move(-speed_horz * currDT, 0);
 
     }
     else if (st.down)
@@ -55,7 +55,7 @@ void AnimatedMovement::update(sf::Time tickRate)
         else if (st.right)
             characterSprite->move(speed_diag * currDT, speed_diag * currDT);
         else
-            characterSprite->move(0, speed * currDT);
+            characterSprite->move(0, speed_vert * currDT);
     }
     else if (st.right)
     {
@@ -65,7 +65,7 @@ void AnimatedMovement::update(sf::Time tickRate)
         else if (st.down)
             characterSprite->move(speed_diag * currDT, speed_diag * currDT);
         else
-            characterSprite->move(speed * currDT, 0);
+            characterSprite->move(speed_horz * currDT, 0);
 
     }
     checkAnimState();
