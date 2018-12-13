@@ -40,7 +40,8 @@ void AnimatedMovement::update(sf::Time tickRate)
     }
     else if (st.left)
     {
-        if (st.up)
+        if (st.right) { }
+        else if (st.up)
             characterSprite->move(-speed_diag * currDT, -speed_diag * currDT);
         else if (st.down)
             characterSprite->move(-speed_diag * currDT, speed_diag * currDT);
