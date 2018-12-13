@@ -17,7 +17,7 @@ public:
 
 private:
     Player  player;
-    Tilemap map;
+    Tilemap* map;
 
 };
 
