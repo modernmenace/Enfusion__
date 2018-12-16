@@ -3,11 +3,13 @@
 // USING SFML TUTORIAL
 // https://www.sfml-dev.org/tutorials/2.1/graphics-vertex-array.php
 
-Tilemap::Tilemap(std::string tileSetName, const int* tiles) :
+Tilemap::Tilemap(std::string tileSetName, const int* tiles, uint width, uint height) :
     tileSize(TILESHEET_TILE_WIDTH, TILESHEET_TILE_HEIGHT)
 {
     this->tileset  = AssetManager::getTexture(tileSetName);
     this->tiles    = tiles;
+    this->width    = width;
+    this->height   = height;
 }
 
 void Tilemap::draw(sf::RenderTarget& target, sf::RenderStates states) const
@@ -59,5 +61,5 @@ void Tilemap::initialize()
 void Tilemap::render(sf::RenderWindow *window)
 {
     //window->draw(t->tileAt(0, 0));
-
+    window->draw(*this);
 }

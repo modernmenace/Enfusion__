@@ -70,7 +70,7 @@ void Game::update(sf::Time tickRate)
 
 void Game::render()
 {
-    mWindow.clear(sf::Color::White);
+    mWindow.clear(sf::Color::Black);
     LEVEL.render(&mWindow);
     mWindow.display();
 }

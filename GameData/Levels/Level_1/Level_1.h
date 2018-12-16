@@ -11,12 +11,12 @@ class Level_1 : public Level {
 public:
     Level_1();
 
-    void initialize();
-    void render(sf::RenderWindow* window);
+    void initialize() override;
+    void render(sf::RenderWindow* window)   override;
     void handleInput(sf::Keyboard::Key key) override;
 
 private:
-    Player  player;
+    Player   player;
     Tilemap* map;
 
 };

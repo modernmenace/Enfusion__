@@ -18,7 +18,7 @@ Level_1::Level_1() : Level("Level_1", "Levels/Level_1_back.png"),
                     69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69
             };
 
-    map = new Tilemap("Levels/GrasslandColor2@128x128.png", level);
+    map = new Tilemap("Levels/GrasslandColor2@128x128.png", level, 12, 9);
 }
 
 void Level_1::initialize()
@@ -29,8 +29,7 @@ void Level_1::initialize()
 
 void Level_1::render(sf::RenderWindow *window)
 {
-    //map.render(window);
-    window->draw(*map);
+    map->render(window);
     Level::render(window);
 }
 
