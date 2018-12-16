@@ -5,6 +5,7 @@
 #include "../Component/Anim/AnimatedSprite.h"
 #include "../Component/Base/Position.h"
 #include "../Component/Motion/AnimatedMovement.h"
+#include "../Component/Misc/Camera.h"
 
 
 class Player : public Entity {
