@@ -6,6 +6,10 @@
 #include "../../Engine/Lvl/Level.h"
 #include "../../Engine/Lvl/Tilemap.h"
 
+#ifdef DEBUG_BUILD
+#include "../../Engine/Entity/UI/TextDisplay.h"
+#endif
+
 class Level_1 : public Level {
 
 public:

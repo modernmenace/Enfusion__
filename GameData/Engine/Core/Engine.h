@@ -26,6 +26,11 @@
 
 typedef unsigned int uint;
 
+
+// Globals
+extern sf::Font* GlobalFont;
+
+// Misc Useful Macros
 #define forever for(;;)
 
 // resource paths

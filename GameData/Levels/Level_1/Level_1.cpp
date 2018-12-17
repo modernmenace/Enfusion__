@@ -5,6 +5,12 @@ Level_1::Level_1() : Level("Level_1", "Levels/Level_1_back.png"),
 {
     addEntity(&player);
 
+    //Debug Display
+    #ifdef DEBUG_BUILD
+    TextDisplay* debugText = new TextDisplay("Test", sf::Vector2f(100, 100));
+    addEntity(debugText);
+    #endif
+
     const int level[] =
             {
                     69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69,
