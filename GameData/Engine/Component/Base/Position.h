@@ -11,6 +11,7 @@ public:
     Position(Vector2f position);
 
     Vector2f getPosition();
+    void     setPosition(Vector2f pos);
 
 
 private:

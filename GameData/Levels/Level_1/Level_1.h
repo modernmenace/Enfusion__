@@ -16,12 +16,18 @@ public:
     Level_1();
 
     void initialize() override;
+
+    void update(sf::Time tickRate)          override;
     void render(sf::RenderWindow* window)   override;
     void handleInput(sf::Keyboard::Key key) override;
 
 private:
     Player   player;
     Tilemap* map;
+
+    #ifdef DEBUG_BUILD
+    TextDisplay* playerPosDebugText = nullptr;
+    #endif
 
 };
 

@@ -17,3 +17,8 @@ void TextDisplay::render(sf::RenderWindow* window)
 {
     window->draw(text);
 }
+
+void TextDisplay::setText(std::string text)
+{
+    this->text.setString(text);
+}

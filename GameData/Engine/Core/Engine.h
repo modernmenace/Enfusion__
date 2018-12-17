@@ -28,7 +28,7 @@ typedef unsigned int uint;
 
 
 // Globals
-extern sf::Font* GlobalFont;
+extern std::unique_ptr<sf::Font> GlobalFont;
 
 // Misc Useful Macros
 #define forever for(;;)

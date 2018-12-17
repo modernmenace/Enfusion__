@@ -1,6 +1,6 @@
 #include "Game.h"
 
-sf::Font* GlobalFont;
+std::unique_ptr<sf::Font> GlobalFont;
 
 /*
  *  Game
@@ -13,7 +13,7 @@ sf::Font* GlobalFont;
 
 Game::Game() : mWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE), levelManager("Level_1")
 {
-    GlobalFont = new sf::Font();
+    GlobalFont = std::make_unique<sf::Font>();
     GlobalFont->loadFromFile("Resources/Fonts/TYPEWR.TTF");
 
     run();

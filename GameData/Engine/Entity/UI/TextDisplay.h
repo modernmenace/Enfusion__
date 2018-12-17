@@ -12,8 +12,13 @@ public:
     void initialize() override;
     void render(sf::RenderWindow* window) override;
 
+    void setText(std::string text);
+
+
 private:
     sf::Text text;
+
+    bool textChanged = false;
 
 };
 

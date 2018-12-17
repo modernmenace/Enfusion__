@@ -10,3 +10,8 @@ Vector2f Position::getPosition()
     //try using origin
     return this->position;
 }
+
+void Position::setPosition(Vector2f pos)
+{
+    this->position = pos;
+}

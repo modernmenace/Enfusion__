@@ -7,8 +7,10 @@ Level_1::Level_1() : Level("Level_1", "Levels/Level_1_back.png"),
 
     //Debug Display
     #ifdef DEBUG_BUILD
-    TextDisplay* debugText = new TextDisplay("Test", sf::Vector2f(100, 100));
+    TextDisplay* debugText          = new TextDisplay("Debug Build", sf::Vector2f(1650, 15));
+    playerPosDebugText = new TextDisplay("(100, 100)", sf::Vector2f(1650, 60));
     addEntity(debugText);
+    addEntity(playerPosDebugText);
     #endif
 
     const int level[] =
@@ -31,6 +33,16 @@ void Level_1::initialize()
 {
     Level::initialize();
     map->initialize();
+}
+
+void Level_1::update(sf::Time tickRate)
+{
+    #ifdef DEBUG_BUILD
+    auto playerPos = player.getComponent<Position>().getPosition();
+    playerPosDebugText->setText(std::string("(") + std::to_string((int)playerPos.x)
+            + std::string(", ") + std::to_string((int)playerPos.y) + std::string(")"));
+    #endif
+    Level::update(tickRate);
 }
 
 void Level_1::render(sf::RenderWindow *window)

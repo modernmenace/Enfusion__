@@ -72,6 +72,7 @@ void AnimatedMovement::update(sf::Time tickRate)
     checkAnimState();
     animate();
     speed = tempSpeed;
+    entity->getComponent<Position>().setPosition(characterSprite->getPosition());
 }
 
 void AnimatedMovement::switchAnimState(int frame)
