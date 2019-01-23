@@ -7,8 +7,8 @@ Level_1::Level_1() : Level("Level_1", "Levels/Level_1_back.png"),
 
     //Debug Display
     #ifdef DEBUG_BUILD
-    TextDisplay* debugText          = new TextDisplay("Debug Build", sf::Vector2f(1650, 15));
-    playerPosDebugText = new TextDisplay("(100, 100)", sf::Vector2f(1650, 60));
+    TextDisplay* debugText = new TextDisplay("Debug Build", sf::Vector2f(1650, 15));
+    playerPosDebugText     = new TextDisplay("(100, 100)", sf::Vector2f(1650, 60));
     addEntity(debugText);
     addEntity(playerPosDebugText);
     #endif
