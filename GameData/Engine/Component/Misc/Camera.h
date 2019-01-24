@@ -1,7 +1,6 @@
 #ifndef ENFUSION_FOLLOWCAMERA_H
 #define ENFUSION_FOLLOWCAMERA_H
 
-#include <memory>
 #include "../Component.h"
 #include "../Base/Position.h"
 
@@ -14,7 +13,7 @@ enum CameraType
 class Camera : public Component {
 
 public:
-    Camera(CameraType type = CameraType::STATIC, Entity* followEntity = nullptr);
+    Camera(CameraType type = CameraType::STATIC);
 
     void initialize()                     override;
     void update(sf::Time tickRate)        override;
@@ -23,7 +22,6 @@ public:
 
 private:
     CameraType type;
-    Entity     *followEntity = nullptr;
 
     sf::View* view;
     bool viewSet = false;
