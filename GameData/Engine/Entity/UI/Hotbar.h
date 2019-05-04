@@ -18,9 +18,12 @@ public:
     Hotbar(sf::Vector2f position);
     void initialize() override;
     void render(sf::RenderWindow* window) override;
+    void handleInput(sf::Keyboard::Key key);
 
 private:
     std::vector<Slot> slots;
+    int selectedSlot = 0;
+    sf::RectangleShape selectionRect;
 
 };
 

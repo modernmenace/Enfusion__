@@ -56,4 +56,5 @@ void Level_1::render(sf::RenderWindow *window)
 void Level_1::handleInput(sf::Keyboard::Key key)
 {
     player.handleInput(key);
+    Level::handleInput(key);
 }

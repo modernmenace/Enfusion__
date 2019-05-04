@@ -13,8 +13,14 @@ Hotbar::Hotbar(sf::Vector2f position)
 {
     addComponent<Position>(position);
     addComponent<Sprite>("UI/windowsheet.png");
+}
 
-    Vector2f slotPos(position.x + 75, position.y + 20);
+void Hotbar::initialize()
+{
+    getComponent<Sprite>().getSprite().setTextureRect(sf::IntRect(0, 48, 48, 16));
+    getComponent<Sprite>().getSprite().setScale(15, 10);
+
+    Vector2f slotPos(getComponent<Position>().getPosition().x + 75, getComponent<Position>().getPosition().y + 20);
     for(int i = 0; i < HOTBAR_SLOTS; i++)
     {
         Slot s;
@@ -25,15 +31,20 @@ Hotbar::Hotbar(sf::Vector2f position)
         slotPos.x += 96; //16 * x-scale
         slots.emplace_back(s);
     }
-}
 
-void Hotbar::initialize()
-{
-    //need specific piece of sheet, and need to scale
-    getComponent<Sprite>().getSprite().setTextureRect(sf::IntRect(0, 48, 48, 16));
-    getComponent<Sprite>().getSprite().setScale(15, 10);
+    selectionRect.setSize(sf::Vector2f(96, 96));
+    selectionRect.setOutlineColor(sf::Color::Black);
+    selectionRect.setOutlineThickness(5.0f);
+    selectionRect.setFillColor(sf::Color::Transparent);
+    selectionRect.setPosition(slots[selectedSlot].sprite.getPosition());
 
     Entity::initialize();
+}
+
+void Hotbar::handleInput(sf::Keyboard::Key key)
+{
+    // is this setup correctly? not working
+    dbg_log(key)
 }
 
 void Hotbar::render(sf::RenderWindow *window)
@@ -42,4 +53,6 @@ void Hotbar::render(sf::RenderWindow *window)
 
     for(auto &s : slots)
         window->draw(s.sprite);
+
+    window->draw(selectionRect);
 }

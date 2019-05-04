@@ -59,4 +59,8 @@ void Level::render(sf::RenderWindow* window)
     window->setView(oldView);
 }
 
-void Level::handleInput(sf::Keyboard::Key key) {}
+void Level::handleInput(sf::Keyboard::Key key)
+{
+    for(auto &e : entities)
+        e->handleInput(key);
+}
