@@ -5,7 +5,7 @@
  *
  *  DESC: Base class for all game levels, contains virtual functions
  *
- *  NOTE: This class will definitely be expanded in the future
+ *  NOTE: UI Entities are separate in that they are rendered in a static view
  *
  *  USAGE: All levels inherit from this base class
  *          EX: Level 1() : public Level("Level_1", "background.png");
@@ -44,6 +44,10 @@ void Level::render(sf::RenderWindow* window)
 
     for(auto &e : entities)
         e->render(window);
+
+    // is this inefficient?
+
+    if (uiEntities.empty()) return;
 
     auto oldView = window->getView();
 

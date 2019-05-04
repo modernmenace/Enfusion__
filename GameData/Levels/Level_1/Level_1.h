@@ -5,6 +5,7 @@
 #include "../../Engine/AI/Agent.h"
 #include "../../Engine/Lvl/Level.h"
 #include "../../Engine/Lvl/Tilemap.h"
+#include "../../Engine/Entity/UI/Hotbar.h"
 
 #ifdef DEBUG_BUILD
 #include "../../Engine/Entity/UI/TextDisplay.h"
@@ -23,6 +24,7 @@ public:
 
 private:
     Player   player;
+    Hotbar   hotbar;
     Tilemap* map;
 
     #ifdef DEBUG_BUILD

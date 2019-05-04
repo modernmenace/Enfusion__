@@ -1,14 +1,16 @@
 #include "Level_1.h"
 
 Level_1::Level_1() : Level("Level_1", "Levels/Level_1_back.png"),
-                     player("Objects/mount1.png", sf::Vector2f(600, 300))
+                     player("Objects/mount1.png", sf::Vector2f(600, 300)),
+                     hotbar(sf::Vector2f(-300, 350))
 {
     addEntity(&player);
+    addUIEntity(&hotbar);
 
     //Debug Display
     #ifdef DEBUG_BUILD
-    TextDisplay* debugText = new TextDisplay("Debug Build", sf::Vector2f(700, -525));
-    playerPosDebugText     = new TextDisplay("(100, 100)", sf::Vector2f(700, -485));
+    TextDisplay* debugText = new TextDisplay("Debug Build", sf::Vector2f(675, -525));
+    playerPosDebugText     = new TextDisplay("(100, 100)", sf::Vector2f(675, -485));
     addUIEntity(debugText);
     addUIEntity(playerPosDebugText);
     #endif
