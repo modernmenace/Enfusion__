@@ -19,7 +19,6 @@ public:
     void update(sf::Time tickRate)        override;
     void render(sf::RenderWindow *window) override;
 
-
 private:
     CameraType type;
 

@@ -7,7 +7,9 @@ Camera::Camera(CameraType type) : centerVec(0, 0), sizeVec(1920, 1080)
 
 void Camera::initialize()
 {
-    assert(entity->hasComponent<Position>());
+    if (type == CameraType::FOLLOW)
+        assert(entity->hasComponent<Position>());
+
     view = new sf::View(centerVec, sizeVec);
 }
 
@@ -21,13 +23,8 @@ void Camera::render(sf::RenderWindow *window)
 {
     if (viewSet) return;
 
-    if (type == CameraType::FOLLOW)
-    {
-        window->setView(*view);
-    }
-    else if (type == CameraType::STATIC)
-    {
-        window->setView(*view);
+    window->setView(*view);
+
+    if (type == CameraType::STATIC)
         viewSet = true;
-    }
 }

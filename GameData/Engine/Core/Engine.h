@@ -53,4 +53,14 @@ extern std::unique_ptr<sf::Font> GlobalFont;
     #define dbg_err(message)
 #endif
 
+// Hint to NVIDIA/AMD to use high-performance GPU (Windows)
+#ifdef WIN32
+#include <windows.h>
+extern "C"
+{
+    __declspec(dllexport) DWORD NvOptimusEnablement = 0x00000001;
+    __declspec(dllexport) int AmdPowerXpressRequestHighPerformance = 1;
+}
+#endif
+
 #endif //ENFUSION_ENGINE_H

@@ -13,7 +13,7 @@ public:
     virtual void initialize();
     virtual void update(sf::Time tickRate);
     virtual void render(sf::RenderWindow* window);
-    virtual void handleInput(sf::Keyboard::Key key); //called on key press
+    virtual void handleInput(sf::Keyboard::Key key);
 
     static std::string getLevelName();
 
@@ -22,12 +22,21 @@ protected:
     std::string levelName;
 
     std::vector<Entity*> entities;
+    std::vector<Entity*> uiEntities;
 
     template <typename Entity>
     inline void addEntity(Entity* e)
     {
         entities.emplace_back(e);
     }
+
+    template <typename Entity>
+    inline void addUIEntity(Entity* e)
+    {
+        uiEntities.emplace_back(e);
+    }
+
+    sf::View defaultView;
 
 };
 
