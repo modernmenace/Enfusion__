@@ -45,10 +45,14 @@ void Level::render(sf::RenderWindow* window)
     for(auto &e : entities)
         e->render(window);
 
-    //window->setView(defaultView);
+    auto oldView = window->getView();
 
-    //for(auto &e : uiEntities)
-    //    e->render(window);
+    window->setView(defaultView);
+
+    for(auto &e : uiEntities)
+        e->render(window);
+
+    window->setView(oldView);
 }
 
 void Level::handleInput(sf::Keyboard::Key key) {}
