@@ -32,7 +32,7 @@ void Hotbar::initialize()
         slots.emplace_back(s);
     }
 
-    selectionRect.setSize(sf::Vector2f(96, 96));
+    selectionRect.setSize(sf::Vector2f(96, 96)); //16 * x-scale
     selectionRect.setOutlineColor(sf::Color::Black);
     selectionRect.setOutlineThickness(5.0f);
     selectionRect.setFillColor(sf::Color::Transparent);
@@ -44,7 +44,20 @@ void Hotbar::initialize()
 void Hotbar::handleInput(sf::Keyboard::Key key)
 {
     // is this setup correctly? not working
-    dbg_log(key)
+    // key: 27 = 1, 28 = 2, etc
+    uint selection = key - 27;
+    if (selection < HOTBAR_SLOTS)
+    {
+        selectedSlot = selection;
+        selectionRect.setPosition(slots[selectedSlot].sprite.getPosition());
+        return;
+    }
+    dbg_log(selection)
+    if (selection == 44)
+        selectedSlot != 0 ? selectedSlot-- : selectedSlot = HOTBAR_SLOTS - 1;
+    else if (selection == 45)
+        selectedSlot != HOTBAR_SLOTS - 1 ? selectedSlot++ : selectedSlot = 0;
+    selectionRect.setPosition(slots[selectedSlot].sprite.getPosition());
 }
 
 void Hotbar::render(sf::RenderWindow *window)
