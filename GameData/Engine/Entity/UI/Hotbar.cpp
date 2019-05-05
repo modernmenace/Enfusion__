@@ -43,8 +43,6 @@ void Hotbar::initialize()
 
 void Hotbar::handleInput(sf::Keyboard::Key key)
 {
-    // is this setup correctly? not working
-    // key: 27 = 1, 28 = 2, etc
     uint selection = key - 27;
     if (selection < HOTBAR_SLOTS)
     {
@@ -52,7 +50,6 @@ void Hotbar::handleInput(sf::Keyboard::Key key)
         selectionRect.setPosition(slots[selectedSlot].sprite.getPosition());
         return;
     }
-    dbg_log(selection)
     if (selection == 44)
         selectedSlot != 0 ? selectedSlot-- : selectedSlot = HOTBAR_SLOTS - 1;
     else if (selection == 45)

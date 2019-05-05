@@ -2,6 +2,7 @@
 #define ENFUSION___INVENTORY_H
 
 #include "../Component.h"
+#include "../../Misc/Item.h"
 
 /*
  *  Inventory Component
