@@ -18,7 +18,7 @@ public:
     Hotbar(sf::Vector2f position);
     void initialize() override;
     void render(sf::RenderWindow* window) override;
-    void handleInput(sf::Keyboard::Key key);
+    void handleInput(sf::Keyboard::Key key) override;
 
 private:
     std::vector<Slot> slots;

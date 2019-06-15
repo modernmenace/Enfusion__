@@ -6,6 +6,7 @@
 #include "../Component/Base/Position.h"
 #include "../Component/Motion/AnimatedMovement.h"
 #include "../Component/Misc/Camera.h"
+#include "../Component/Misc/Inventory.h"
 
 
 class Player : public Entity {

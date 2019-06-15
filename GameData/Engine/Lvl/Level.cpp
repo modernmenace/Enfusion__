@@ -63,4 +63,7 @@ void Level::handleInput(sf::Keyboard::Key key)
 {
     for(auto &e : entities)
         e->handleInput(key);
+
+    for(auto &e : uiEntities)
+        e->handleInput(key);
 }

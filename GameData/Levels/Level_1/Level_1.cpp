@@ -2,10 +2,12 @@
 
 Level_1::Level_1() : Level("Level_1", "Levels/Level_1_back.png"),
                      player("Objects/mount1.png", sf::Vector2f(600, 300)),
-                     hotbar(sf::Vector2f(-300, 350))
+                     hotbar(sf::Vector2f(-300, 350)),
+                     inventory(&player)
 {
     addEntity(&player);
     addUIEntity(&hotbar);
+    addUIEntity(&inventory);
 
     //Debug Display
     #ifdef DEBUG_BUILD
@@ -17,15 +19,15 @@ Level_1::Level_1() : Level("Level_1", "Levels/Level_1_back.png"),
 
     const int level[] =
             {
+                    69, 69, 70, 69, 69, 69, 69, 69, 69, 69, 69, 69,
+                    69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 70, 69,
                     69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69,
+                    69, 69, 69, 70, 69, 69, 69, 69, 69, 69, 69, 69,
                     69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69,
+                    69, 69, 69, 69, 69, 69, 70, 69, 69, 69, 69, 69,
                     69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69,
-                    69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69,
-                    69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69,
-                    69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69,
-                    69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69,
-                    69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69,
-                    69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69
+                    69, 69, 69, 69, 70, 69, 69, 69, 69, 69, 69, 69,
+                    70, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69
             };
 
     map = new Tilemap("Levels/GrasslandColor2@128x128.png", level, 12, 9);
@@ -51,11 +53,4 @@ void Level_1::render(sf::RenderWindow *window)
 {
     map->render(window);
     Level::render(window);
-}
-
-void Level_1::handleInput(sf::Keyboard::Key key)
-{
-    player.handleInput(key);
-    hotbar.handleInput(key);
-    Level::handleInput(key);
 }

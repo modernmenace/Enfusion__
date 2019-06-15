@@ -6,6 +6,7 @@
 #include "../../Engine/Lvl/Level.h"
 #include "../../Engine/Lvl/Tilemap.h"
 #include "../../Engine/Entity/UI/Hotbar.h"
+#include "../../Engine/Entity/UI/InventoryMenu.h"
 
 #ifdef DEBUG_BUILD
 #include "../../Engine/Entity/UI/TextDisplay.h"
@@ -20,12 +21,12 @@ public:
 
     void update(sf::Time tickRate)          override;
     void render(sf::RenderWindow* window)   override;
-    void handleInput(sf::Keyboard::Key key) override;
 
 private:
     Player   player;
     Hotbar   hotbar;
     Tilemap* map;
+    InventoryMenu inventory;
 
     #ifdef DEBUG_BUILD
     TextDisplay* playerPosDebugText = nullptr;
