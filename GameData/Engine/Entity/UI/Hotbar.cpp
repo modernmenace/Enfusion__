@@ -6,17 +6,20 @@
  *  NOTE: This could use the ECS much more efficiently,
  *        but it serves its purpose for now
  *
+ *  TODO: Add current item text above hotbar?
  *
  */
 
-Hotbar::Hotbar(sf::Vector2f position)
+Hotbar::Hotbar(Entity* entity, sf::Vector2f position)
 {
+    this->i_entity = entity;
     addComponent<Position>(position);
     addComponent<Sprite>("UI/windowsheet.png");
 }
 
 void Hotbar::initialize()
 {
+    assert(i_entity->hasComponent<Inventory>());
     getComponent<Sprite>().getSprite().setTextureRect(sf::IntRect(0, 48, 48, 16));
     getComponent<Sprite>().getSprite().setScale(15, 10);
 

@@ -4,6 +4,8 @@
 #include "../Component.h"
 #include "../../Misc/Item.h"
 
+#define INVENTORY_SIZE 24
+
 /*
  *  Inventory Component
  *

@@ -4,6 +4,7 @@
 #include "../Entity.h"
 #include "../../Component/Base/Sprite.h"
 #include "../../Component/Base/Position.h"
+#include "../../Component/Misc/Inventory.h"
 
 #define HOTBAR_SLOTS 6
 
@@ -15,7 +16,7 @@ struct Slot
 class Hotbar : public Entity {
 
 public:
-    Hotbar(sf::Vector2f position);
+    Hotbar(Entity* entity, sf::Vector2f position);
     void initialize() override;
     void render(sf::RenderWindow* window) override;
     void handleInput(sf::Keyboard::Key key) override;
@@ -24,6 +25,8 @@ private:
     std::vector<Slot> slots;
     int selectedSlot = 0;
     sf::RectangleShape selectionRect;
+
+    Entity* i_entity = nullptr;
 
 };
 
