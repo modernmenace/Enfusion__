@@ -22,7 +22,7 @@
 #define WINDOW_WIDTH  1920
 #define WINDOW_HEIGHT 1080
 
-#define MAX_COMPONENTS 5
+#define MAX_COMPONENTS 6
 
 typedef unsigned int uint;
 
@@ -54,6 +54,7 @@ extern std::unique_ptr<sf::Font> GlobalFont;
 #endif
 
 // Hint to NVIDIA/AMD to use high-performance GPU (Windows)
+/*
 #ifdef WIN32
 #include <windows.h>
 extern "C"
@@ -62,5 +63,6 @@ extern "C"
     __declspec(dllexport) int AmdPowerXpressRequestHighPerformance = 1;
 }
 #endif
+ */
 
 #endif //ENFUSION_ENGINE_H
