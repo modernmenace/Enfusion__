@@ -7,9 +7,16 @@ Tilemap::Tilemap(std::string tileSetName, const int* tiles, uint width, uint hei
     tileSize(TILESHEET_TILE_WIDTH, TILESHEET_TILE_HEIGHT)
 {
     this->tileset  = AssetManager::getTexture(tileSetName);
-    this->tiles    = tiles;
     this->width    = width;
     this->height   = height;
+
+    //setup tiles, doing this awful way due to
+
+    for(int i = 0; i < width * height; i++)
+    {
+        dbg_log(" one " << tiles[i])
+        this->tiles.push_back(tiles[i]);
+    }
 }
 
 void Tilemap::draw(sf::RenderTarget& target, sf::RenderStates states) const
@@ -29,8 +36,6 @@ void Tilemap::initialize()
     vertices.setPrimitiveType(sf::Quads);
     vertices.resize(width * height * 4);
 
-    dbg_log("Initial Info: tiles[] size: ");
-
     // populate the vertex array, with one quad per tile
     for (unsigned int i = 0; i < width; ++i)
         for (unsigned int j = 0; j < height; ++j)
@@ -41,9 +46,7 @@ void Tilemap::initialize()
             // find its position in the tileset texture
             int tu = tileNumber % (tileset.getSize().x / tileSize.x);
             int tv = tileNumber / (tileset.getSize().y / tileSize.y);
-            //tv is very screwed up
-            //on mac, all are 5, 4
-            dbg_log( "Tile: " << tileNumber << ", TU: " << tu << ", TV: " << tv);
+
             // get a pointer to the current tile's quad
             sf::Vertex* quad = &vertices[(i + j * width) * 4];
 

@@ -2,6 +2,7 @@
 #define ENFUSION_TILEMAP_H
 
 #include "../Core/Engine.h"
+#include <vector>
 
 #define TILESHEET_TILE_WIDTH  128
 #define TILESHEET_TILE_HEIGHT 128
@@ -10,6 +11,8 @@ class Tilemap : public sf::Drawable, public sf::Transformable {
 
 public:
     Tilemap(std::string tileSetName, const int* tiles, uint width, uint height);
+
+    Tilemap(const sf::VertexArray &tiles);
 
     void initialize();
     void render(sf::RenderWindow* window);
@@ -22,7 +25,7 @@ private:
     uint width;
     uint height;
 
-    const int* tiles;
+    std::vector<int> tiles;
 
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
