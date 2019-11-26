@@ -29,6 +29,8 @@ void Tilemap::initialize()
     vertices.setPrimitiveType(sf::Quads);
     vertices.resize(width * height * 4);
 
+    dbg_log("Initial Info: tiles[] size: ");
+
     // populate the vertex array, with one quad per tile
     for (unsigned int i = 0; i < width; ++i)
         for (unsigned int j = 0; j < height; ++j)
@@ -40,7 +42,8 @@ void Tilemap::initialize()
             int tu = tileNumber % (tileset.getSize().x / tileSize.x);
             int tv = tileNumber / (tileset.getSize().y / tileSize.y);
             //tv is very screwed up
-            dbg_log("TU: " << tu << ", TV: " << tv);
+            //on mac, all are 5, 4
+            dbg_log( "Tile: " << tileNumber << ", TU: " << tu << ", TV: " << tv);
             // get a pointer to the current tile's quad
             sf::Vertex* quad = &vertices[(i + j * width) * 4];
 
