@@ -25,8 +25,7 @@ void Tilemap::draw(sf::RenderTarget& target, sf::RenderStates states) const
 }
 
 void Tilemap::initialize()
-{
-    //t = new Tileset(tileSetName);
+{;
     vertices.setPrimitiveType(sf::Quads);
     vertices.resize(width * height * 4);
 
@@ -39,8 +38,9 @@ void Tilemap::initialize()
 
             // find its position in the tileset texture
             int tu = tileNumber % (tileset.getSize().x / tileSize.x);
-            int tv = tileNumber / (tileset.getSize().x / tileSize.x);
-
+            int tv = tileNumber / (tileset.getSize().y / tileSize.y);
+            //tv is very screwed up
+            dbg_log("TU: " << tu << ", TV: " << tv);
             // get a pointer to the current tile's quad
             sf::Vertex* quad = &vertices[(i + j * width) * 4];
 
@@ -60,6 +60,5 @@ void Tilemap::initialize()
 
 void Tilemap::render(sf::RenderWindow *window)
 {
-    //window->draw(t->tileAt(0, 0));
     window->draw(*this);
 }
