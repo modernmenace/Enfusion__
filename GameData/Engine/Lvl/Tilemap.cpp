@@ -13,10 +13,7 @@ Tilemap::Tilemap(std::string tileSetName, const int* tiles, uint width, uint hei
     //setup tiles, doing this awful way due to
 
     for(int i = 0; i < width * height; i++)
-    {
-        dbg_log(" one " << tiles[i])
         this->tiles.push_back(tiles[i]);
-    }
 }
 
 void Tilemap::draw(sf::RenderTarget& target, sf::RenderStates states) const
