@@ -14,13 +14,6 @@
  *
  */
 
-//TODO: convert this to class
-struct Slot
-{
-    Item* item = nullptr;
-    sf::Sprite sprite;
-};
-
 class Inventory : public Component {
 
 public:

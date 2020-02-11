@@ -6,6 +6,7 @@
 #include "../../Component/Base/Position.h"
 #include "../../Component/Misc/Inventory.h"
 #include "TextDisplay.h"
+#include "Slot.h"
 
 #define HOTBAR_SLOTS 6
 
@@ -18,7 +19,7 @@ public:
     void handleInput(sf::Keyboard::Key key) override;
 
 private:
-    std::vector<Slot>  slots;
+    std::vector<Slot*>  slots;
     sf::RectangleShape selectionRect;
     uint8_t            selectedSlot = 0;
 
