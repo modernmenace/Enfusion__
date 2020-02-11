@@ -11,9 +11,11 @@ public:
     void initialize() override;
     void handleInput(sf::Keyboard::Key key) override;
     void toggleMenu();
+    inline bool active() { return menuActive; };
 
 private:
     Entity* i_entity = nullptr;
+    bool menuActive  = false;
 
 };
 

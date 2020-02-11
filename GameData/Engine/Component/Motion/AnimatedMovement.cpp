@@ -1,4 +1,5 @@
 #include "AnimatedMovement.h"
+#include "../../../Levels/Level_1/Level_1.h"
 
 //TODO: AnimState kind of phasing out status due to framing
 //TODO: When removed: weird slowdowns with getRow()
@@ -17,6 +18,8 @@ void AnimatedMovement::initialize()
 
 void AnimatedMovement::update(sf::Time tickRate)
 {
+    if (LEVEL_PAUSED) return;
+    
     auto tempSpeed = speed;
     if (sprinting) speed *= 2;
     auto currDT = tickRate.asSeconds();

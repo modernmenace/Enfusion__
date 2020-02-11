@@ -24,8 +24,6 @@
 
 #define MAX_COMPONENTS 6
 
-typedef unsigned int uint;
-
 
 // Globals
 extern std::unique_ptr<sf::Font> GlobalFont;

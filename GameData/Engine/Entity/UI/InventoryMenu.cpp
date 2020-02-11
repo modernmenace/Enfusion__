@@ -15,6 +15,11 @@ void InventoryMenu::toggleMenu()
 {
     //TODO: Global controls file
     //this works, toggled with TAB key
+    menuActive = !menuActive;
+
+
+
+
 }
 
 void InventoryMenu::handleInput(sf::Keyboard::Key key)

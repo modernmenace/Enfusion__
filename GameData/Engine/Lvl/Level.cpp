@@ -1,5 +1,7 @@
 #include "Level.h"
 
+bool LEVEL_PAUSED = false;
+
 /*
  *  Level
  *

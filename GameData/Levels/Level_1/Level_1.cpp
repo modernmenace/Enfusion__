@@ -46,6 +46,11 @@ void Level_1::update(sf::Time tickRate)
     playerPosDebugText->setText(std::string("(") + std::to_string((int)playerPos.x)
             + std::string(", ") + std::to_string((int)playerPos.y) + std::string(")"));
     #endif
+
+    //check for pause
+    if (inventory.active()) LEVEL_PAUSED = true;
+    else                    LEVEL_PAUSED = false;
+
     Level::update(tickRate);
 }
 

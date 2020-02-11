@@ -5,6 +5,8 @@
 #include "../Core/Engine.h"
 #include "../Entity/Entity.h"
 
+extern bool LEVEL_PAUSED;
+
 class Level {
 
 public:
