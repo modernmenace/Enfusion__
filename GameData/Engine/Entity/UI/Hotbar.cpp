@@ -50,7 +50,7 @@ void Hotbar::initialize()
 
 void Hotbar::handleInput(sf::Keyboard::Key key)
 {
-    uint selection = key - 27;
+    uint8_t selection = key - 27;
     if (selection < HOTBAR_SLOTS)
     {
         selectedSlot = selection;

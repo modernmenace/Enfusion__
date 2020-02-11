@@ -9,11 +9,6 @@
 
 #define HOTBAR_SLOTS 6
 
-struct Slot
-{
-    sf::Sprite sprite;
-};
-
 class Hotbar : public Entity {
 
 public:
