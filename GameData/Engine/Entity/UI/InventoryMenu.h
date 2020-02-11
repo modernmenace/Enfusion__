@@ -2,6 +2,8 @@
 #define ENFUSION___INVENTORYMENU_H
 
 #include "../Entity.h"
+#include "../../Component/Base/Sprite.h"
+#include "../../Component/Base/Position.h"
 #include "../../Component/Misc/Inventory.h"
 
 class InventoryMenu : public Entity {

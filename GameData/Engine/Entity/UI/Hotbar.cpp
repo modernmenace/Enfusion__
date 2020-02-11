@@ -6,7 +6,7 @@
  *  NOTE: This could use the ECS much more efficiently,
  *        but it serves its purpose for now
  *
- *  TODO: Add current item text above hotbar?
+ *  TODO: Update Current Item Text
  *
  */
 
@@ -41,6 +41,10 @@ void Hotbar::initialize()
     selectionRect.setFillColor(sf::Color::Transparent);
     selectionRect.setPosition(slots[selectedSlot].sprite.getPosition());
 
+    itemText = new TextDisplay("Current Item: None",
+            sf::Vector2f(-225, 320), 20);
+    itemText->initialize();
+
     Entity::initialize();
 }
 
@@ -68,4 +72,5 @@ void Hotbar::render(sf::RenderWindow *window)
         window->draw(s.sprite);
 
     window->draw(selectionRect);
+    itemText->render(window);
 }

@@ -3,20 +3,32 @@
 InventoryMenu::InventoryMenu(Entity *entity)
 {
     i_entity = entity;
+    addComponent<Position>(sf::Vector2f(300, -450));
+    addComponent<Sprite>("UI/windowsheet.png");
 }
 
 void InventoryMenu::initialize()
 {
-    // ensure there is an inventory to use
     assert(i_entity->hasComponent<Inventory>());
+
+    getComponent<Sprite>().getSprite().setTextureRect(sf::IntRect(0, 0, 48, 48));
+    getComponent<Sprite>().getSprite().setScale(12, 15);
+    getComponent<Sprite>().visible = false;
 }
 
 void InventoryMenu::toggleMenu()
 {
     //TODO: Global controls file
-    //this works, toggled with TAB key
     menuActive = !menuActive;
 
+    if (menuActive)
+    {
+        getComponent<Sprite>().visible = true;
+    }
+    else
+    {
+        getComponent<Sprite>().visible = false;
+    }
 
 
 

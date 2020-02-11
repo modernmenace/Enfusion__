@@ -24,5 +24,6 @@ void Sprite::initialize()
 
 void Sprite::render(sf::RenderWindow *window)
 {
-    window->draw(sprite);
+    if (visible)
+        window->draw(sprite);
 }

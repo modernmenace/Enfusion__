@@ -5,6 +5,7 @@
 #include "../../Component/Base/Sprite.h"
 #include "../../Component/Base/Position.h"
 #include "../../Component/Misc/Inventory.h"
+#include "TextDisplay.h"
 
 #define HOTBAR_SLOTS 6
 
@@ -22,12 +23,13 @@ public:
     void handleInput(sf::Keyboard::Key key) override;
 
 private:
-    std::vector<Slot> slots;
-    int selectedSlot = 0;
+    std::vector<Slot>  slots;
     sf::RectangleShape selectionRect;
+    uint8_t            selectedSlot = 0;
 
-    Entity* i_entity = nullptr;
 
+    Entity* i_entity      = nullptr;
+    TextDisplay* itemText = nullptr;
 };
 
 

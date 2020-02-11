@@ -11,6 +11,7 @@ public:
     void initialize()                     override;
     void render(sf::RenderWindow* window) override;
     std::string spriteName;
+    bool visible = true;
 
     inline sf::Sprite& getSprite()
     {

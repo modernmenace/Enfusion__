@@ -19,7 +19,7 @@ void AnimatedMovement::initialize()
 void AnimatedMovement::update(sf::Time tickRate)
 {
     if (LEVEL_PAUSED) return;
-    
+
     auto tempSpeed = speed;
     if (sprinting) speed *= 2;
     auto currDT = tickRate.asSeconds();
