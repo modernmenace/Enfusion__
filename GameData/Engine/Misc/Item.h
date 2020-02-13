@@ -4,9 +4,10 @@
 #include "../Core/Engine.h"
 #include <SFML/Graphics/Sprite.hpp>
 
+//TODO: Item Manager?
+
 class ItemEffect;
 
-// TODO: Was trying to avoid it, but this may turn into a class
 struct Item
 {
     uint16_t    id;
