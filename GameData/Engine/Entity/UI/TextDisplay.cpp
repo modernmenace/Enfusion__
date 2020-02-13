@@ -1,6 +1,6 @@
 #include "TextDisplay.h"
 
-TextDisplay::TextDisplay(std::string text, sf::Vector2f position, uint size)
+TextDisplay::TextDisplay(std::string text, sf::Vector2f position, uint16_t size)
 {
     this->text.setString(text);
     this->text.setCharacterSize(size);

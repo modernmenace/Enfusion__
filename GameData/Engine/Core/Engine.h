@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <assert.h>
+#include <memory>
 #include <SFML/Graphics.hpp>
 #include "AssetManager.h"
 

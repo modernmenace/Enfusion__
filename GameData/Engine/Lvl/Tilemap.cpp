@@ -3,7 +3,7 @@
 // USING SFML TUTORIAL
 // https://www.sfml-dev.org/tutorials/2.1/graphics-vertex-array.php
 
-Tilemap::Tilemap(std::string tileSetName, const int* tiles, uint width, uint height) :
+Tilemap::Tilemap(std::string tileSetName, const int* tiles, uint16_t width, uint16_t height) :
     tileSize(TILESHEET_TILE_WIDTH, TILESHEET_TILE_HEIGHT)
 {
     this->tileset  = AssetManager::getTexture(tileSetName);
