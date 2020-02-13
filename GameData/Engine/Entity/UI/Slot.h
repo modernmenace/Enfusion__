@@ -2,6 +2,7 @@
 #define ENFUSION___SLOT_H
 
 #include "../../Misc/Item.h"
+#include "../../Component/Base/Sprite.h"
 #include "../../Component/Base/Position.h"
 
 class Slot : public Entity {

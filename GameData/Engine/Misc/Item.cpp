@@ -1,15 +1,20 @@
 #include "Item.h"
 
 /*
- *  Item Base Class
+ *   Item
  *
+ *   Description: All item related functionality goes here
  *
  */
 
-Item::Item(std::string name, std::string description, std::string sprite, uint16_t value)
+ItemEffect::ItemEffect(Item *it)
 {
-    i_name = name;
-    i_desc = description;
-    i_value = value;
-    addComponent<Sprite>(sprite);
+    this->item = it;
+}
+
+void ItemEffect::onUse() { /* overridden */ }
+
+void IE_HealPlayer5::onUse()
+{
+    dbg_log("healing player 5")
 }

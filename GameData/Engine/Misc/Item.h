@@ -1,30 +1,37 @@
 #ifndef ENFUSION___ITEM_H
 #define ENFUSION___ITEM_H
 
-#include "../Entity/Entity.h"
-#include "../Component/Base/Sprite.h"
+#include "../Core/Engine.h"
+#include <SFML/Graphics/Sprite.hpp>
 
-class Item : public Entity {
+class ItemEffect;
 
-public:
-    Item(std::string name)
-        { Item(name, "", MISSING_TEXTURE, 0); }
-    Item(std::string name, std::string sprite)
-        { Item(name, "", sprite, 0); }
-    Item(std::string name, std::string sprite, uint16_t value)
-        { Item(name, "", sprite, value); }
-    Item(std::string name, std::string description, std::string sprite, uint16_t value);
-
-    inline std::string name()        { return i_name;  }
-    inline std::string description() { return i_desc;  }
-    inline uint16_t    value()       { return i_value; }
-
-private:
-    std::string i_name;
-    std::string i_desc;
-    uint16_t    i_value;
-
+// TODO: Was trying to avoid it, but this may turn into a class
+struct Item
+{
+    uint16_t     id;
+    std::string  name;
+    std::string  description;
+    sf::Sprite   icon;
+    ItemEffect*  effect = nullptr;
+    uint16_t     count;
 };
 
+
+class ItemEffect
+{
+public:
+    ItemEffect(Item* it);
+    virtual void onUse();
+
+private:
+    Item* item = nullptr;
+};
+
+class IE_HealPlayer5 : public ItemEffect
+{
+public:
+    void onUse() override;
+};
 
 #endif //ENFUSION___ITEM_H
