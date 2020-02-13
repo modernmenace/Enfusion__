@@ -9,12 +9,12 @@ class ItemEffect;
 // TODO: Was trying to avoid it, but this may turn into a class
 struct Item
 {
-    uint16_t     id;
-    std::string  name;
-    std::string  description;
-    sf::Sprite   icon;
-    ItemEffect*  effect = nullptr;
-    uint16_t     count;
+    uint16_t    id;
+    string_t    name;
+    string_t    description;
+    sf::Sprite  icon;
+    ItemEffect* effect = nullptr;
+    uint16_t    count;
 };
 
 

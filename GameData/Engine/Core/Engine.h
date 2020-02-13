@@ -31,6 +31,7 @@ extern std::unique_ptr<sf::Font> GlobalFont;
 
 // Misc Useful Macros
 #define forever for(;;)
+typedef std::string string_t;
 
 // resource paths
 #define RESOURCE_PATH        "Resources/"
@@ -51,17 +52,5 @@ extern std::unique_ptr<sf::Font> GlobalFont;
     #define dbg_log(message)
     #define dbg_err(message)
 #endif
-
-// Hint to NVIDIA/AMD to use high-performance GPU (Windows)
-/*
-#ifdef WIN32
-#include <windows.h>
-extern "C"
-{
-    __declspec(dllexport) DWORD NvOptimusEnablement = 0x00000001;
-    __declspec(dllexport) int AmdPowerXpressRequestHighPerformance = 1;
-}
-#endif
- */
 
 #endif //ENFUSION_ENGINE_H
