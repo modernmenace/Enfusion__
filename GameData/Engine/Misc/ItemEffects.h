@@ -1,0 +1,8 @@
+#ifndef ENFUSION___ITEMEFFECTS_H
+#define ENFUSION___ITEMEFFECTS_H
+
+#include "Item.h"
+
+IE_CREATE(IE_HealPlayer5)
+
+#endif //ENFUSION___ITEMEFFECTS_H

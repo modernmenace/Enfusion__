@@ -13,8 +13,3 @@ ItemEffect::ItemEffect(Item *it)
 }
 
 void ItemEffect::onUse() { /* overridden */ }
-
-void IE_HealPlayer5::onUse()
-{
-    dbg_log("healing player 5")
-}

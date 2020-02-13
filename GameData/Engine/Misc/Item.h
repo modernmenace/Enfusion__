@@ -17,7 +17,6 @@ struct Item
     uint16_t    count;
 };
 
-
 class ItemEffect
 {
 public:
@@ -28,10 +27,14 @@ private:
     Item* item = nullptr;
 };
 
-class IE_HealPlayer5 : public ItemEffect
-{
-public:
-    void onUse() override;
-};
+#define IE_CREATE(effName)        \
+class effName : public ItemEffect \
+{                                 \
+public:                           \
+    void onUse() override;        \
+};                                \
+
+#define IE_ONUSE(effName, body)   \
+void effName::onUse() body        \
 
 #endif //ENFUSION___ITEM_H
