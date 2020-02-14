@@ -10,12 +10,11 @@ class ItemRegistry {
 public:
     ItemRegistry();
     Item* getItem(const uint16_t id);
-    void createItem(Item i);
+    static void createItem(Item i); //TODO: Change this to something friendlier
 
 private:
     static ItemRegistry* sInstance;
     std::map<uint16_t, Item> items;
-
 };
 
 
