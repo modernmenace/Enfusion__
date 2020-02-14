@@ -7,6 +7,7 @@
  *
  */
 
+//TODO: Deal with ids
 //TODO: Make item creation macros
 
 Item::Item(string_t name, string_t description, string_t icon, ItemEffect *effect)
