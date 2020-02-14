@@ -8,6 +8,7 @@
 void generateItemRegistry()
 {
     //Item 1 : tomato
+    /*
     Item tomato;
     tomato.name = "tomato";
     tomato.description = "A tasty fruit. Or is it a vegetable? A tasty vegetable.";
@@ -15,6 +16,7 @@ void generateItemRegistry()
     tomato.id = 1;
     tomato.effect = IE_HealPlayer5;
     ItemRegistry::createItem(tomato);
+     */
 }
 
 #endif //ENFUSION___ITEMS_H

@@ -4,18 +4,25 @@
 #include "../Core/Engine.h"
 #include <SFML/Graphics/Sprite.hpp>
 
-//TODO: Item Manager?
-
 class ItemEffect;
 
-struct Item
+class Item
 {
-    uint16_t    id;
-    string_t    name;
-    string_t    description;
-    sf::Sprite  icon;
-    ItemEffect* effect = nullptr;
-    uint16_t    count;
+public:
+    Item(string_t name, string_t description, string_t icon, ItemEffect* effect = nullptr);
+    inline uint16_t id()          { return i_id; };
+    inline string_t name()        { return i_name; };
+    inline string_t description() { return i_desc; };
+    inline sf::Texture& icon()    { return AssetManager::getTexture(i_icon); };
+
+    void activate();
+
+private:
+    uint16_t    i_id;
+    string_t    i_name;
+    string_t    i_desc;
+    string_t    i_icon;
+    ItemEffect* i_effect = nullptr;
 };
 
 class ItemEffect
