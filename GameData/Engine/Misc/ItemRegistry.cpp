@@ -12,7 +12,6 @@ void ItemRegistry::createItem(Item* i)
 {
     auto &itemMap = sInstance->items;
     itemMap.insert(std::make_pair(i->id(), i));
-    dbg_log("creating item " << i->id() << ", " << i->name())
 }
 
 Item* ItemRegistry::getItem(const uint16_t id)
