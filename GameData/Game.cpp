@@ -16,6 +16,7 @@ Game::Game() : mWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE)
     GlobalFont = std::make_unique<sf::Font>();
     GlobalFont->loadFromFile("Resources/Fonts/TYPEWR.TTF");
 
+    generateItemRegistry();
     run();
 }
 

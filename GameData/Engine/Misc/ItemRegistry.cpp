@@ -8,9 +8,11 @@ ItemRegistry::ItemRegistry()
     sInstance = this;
 }
 
-void ItemRegistry::createItem(Item i)
+void ItemRegistry::createItem(Item* i)
 {
-    //TODO: create this
+    auto &itemMap = sInstance->items;
+    itemMap.insert(std::make_pair(i->id(), i));
+    dbg_log("creating item " << i->id() << ", " << i->name())
 }
 
 Item* ItemRegistry::getItem(const uint16_t id)
@@ -18,7 +20,7 @@ Item* ItemRegistry::getItem(const uint16_t id)
     auto pairFound = items.find(id);
 
     if (pairFound != items.end())
-        return &pairFound->second;
+        return pairFound->second;
     else
         return nullptr;
 }

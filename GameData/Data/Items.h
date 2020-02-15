@@ -5,18 +5,16 @@
 #include "ItemEffects.h"
 #include "../Engine/Misc/ItemRegistry.h"
 
-void generateItemRegistry()
+CREATE_ITEM(1, IT_1, "tomato", "A tasty fruit. Or is it a vegetable? A tasty vegetable.",
+            "Objects/Consumables/tomato.png",
+            {
+                dbg_log("Used a tomato!")
+            });
+
+
+static void generateItemRegistry()
 {
-    //Item 1 : tomato
-    /*
-    Item tomato;
-    tomato.name = "tomato";
-    tomato.description = "A tasty fruit. Or is it a vegetable? A tasty vegetable.";
-    tomato.icon = sf::Sprite(AssetManager::getTexture("Objects/Consumables/tomato.png"));
-    tomato.id = 1;
-    tomato.effect = IE_HealPlayer5;
-    ItemRegistry::createItem(tomato);
-     */
+    REGISTRY_ADD(IT_1)
 }
 
 #endif //ENFUSION___ITEMS_H

@@ -3,10 +3,10 @@
 
 #include "../Engine/Misc/Item.h"
 
-IE_CREATE(IE_HealPlayer5)
-IE_ONUSE(IE_HealPlayer5, {
-    dbg_log("test")
-})
+//IE_CREATE(IE_HealPlayer5)
+//IE_ONUSE(IE_HealPlayer5, {
+    //dbg_log("test")
+//})
 
 
 

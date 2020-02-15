@@ -9,40 +9,31 @@ class ItemEffect;
 class Item
 {
 public:
-    Item(string_t name, string_t description, string_t icon, ItemEffect* effect = nullptr);
+    Item(uint16_t id, string_t name, string_t description, string_t icon);
     inline uint16_t id()          { return i_id; };
     inline string_t name()        { return i_name; };
     inline string_t description() { return i_desc; };
     inline sf::Texture& icon()    { return AssetManager::getTexture(i_icon); };
 
-    void activate();
+    virtual void activate();
 
 private:
     uint16_t    i_id;
     string_t    i_name;
     string_t    i_desc;
     string_t    i_icon;
-    ItemEffect* i_effect = nullptr;
 };
 
-class ItemEffect
-{
-public:
-    ItemEffect(Item* it);
-    virtual void onUse();
+#define REGISTRY_ADD(itemClass)            \
+ItemRegistry::createItem(new itemClass()); \
 
-private:
-    Item* item = nullptr;
-};
+#define CREATE_ITEM(id, className, name, description, icon, effect)   \
+class className : public Item                              \
+{                                                          \
+public :                                                   \
+    className()  : Item(id, name, description, icon) {}    \
+    void activate() override effect;                       \
+};                                                         \
 
-#define IE_CREATE(effName)        \
-class effName : public ItemEffect \
-{                                 \
-public:                           \
-    void onUse() override;        \
-};                                \
-
-#define IE_ONUSE(effName, body)   \
-void effName::onUse() body        \
 
 #endif //ENFUSION___ITEM_H
