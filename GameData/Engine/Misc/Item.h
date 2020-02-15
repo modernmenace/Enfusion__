@@ -4,8 +4,6 @@
 #include "../Core/Engine.h"
 #include <SFML/Graphics/Sprite.hpp>
 
-class ItemEffect;
-
 class Item
 {
 public:
