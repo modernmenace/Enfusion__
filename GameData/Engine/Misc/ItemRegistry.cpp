@@ -6,6 +6,7 @@ ItemRegistry::ItemRegistry()
 {
     assert(sInstance == nullptr);
     sInstance = this;
+    dbg_log("generating registry")
 }
 
 void ItemRegistry::createItem(Item* i)
@@ -14,13 +15,17 @@ void ItemRegistry::createItem(Item* i)
     itemMap.insert(std::make_pair(i->id(), i));
 }
 
-Item* ItemRegistry::getItem(const uint16_t id)
+Item* ItemRegistry::getItem(uint16_t id)
 {
     auto &itemMap = sInstance->items;
-    auto pairFound = itemMap.find(id);
+    // below line causes crashing
+    // print also does, itemMap not created yet?
 
-    if (pairFound != itemMap.end())
-        return pairFound->second;
-    else
+    //dbg_log(itemMap.size())
+    //auto pairFound = itemMap.find(id);
+
+    //if (pairFound != itemMap.end())
+        //return pairFound->second;
+    //else
         return nullptr;
 }

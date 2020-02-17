@@ -9,8 +9,8 @@ class ItemRegistry {
 
 public:
     ItemRegistry();
-    static Item* getItem(const uint16_t id);
-    static void createItem(Item* i); //TODO: Change this to something friendlier
+    static Item* getItem(uint16_t id);
+    static void createItem(Item* i);
 
 private:
     static ItemRegistry* sInstance;

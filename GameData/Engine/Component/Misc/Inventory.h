@@ -19,6 +19,7 @@ class Inventory : public Component {
 
 public:
     Inventory();
+    void initialize() override;
     void add(Item* item);
 
 private:

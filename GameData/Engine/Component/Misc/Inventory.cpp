@@ -3,13 +3,18 @@
 
 Inventory::Inventory()
 {
-    dbg_log("got here")
-    // this line below breaks things
-    //this->add(ItemRegistry::getItem(ITEM_ID_TOMATO));
+
+}
+
+void Inventory::initialize()
+{
+    dbg_log("got here (generating registry statement should be printed before this)")
+    this->add(ItemRegistry::getItem(ITEM_ID_TOMATO));
 }
 
 void Inventory::add(Item* item)
 {
+    if (item == nullptr) return;
     if (inv_count >= INVENTORY_SIZE)
     {
         dbg_err("Inventory Overflow")
