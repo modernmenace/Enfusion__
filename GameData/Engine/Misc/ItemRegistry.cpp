@@ -16,9 +16,10 @@ void ItemRegistry::createItem(Item* i)
 
 Item* ItemRegistry::getItem(const uint16_t id)
 {
-    auto pairFound = items.find(id);
+    auto &itemMap = sInstance->items;
+    auto pairFound = itemMap.find(id);
 
-    if (pairFound != items.end())
+    if (pairFound != itemMap.end())
         return pairFound->second;
     else
         return nullptr;

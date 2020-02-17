@@ -9,7 +9,7 @@ class ItemRegistry {
 
 public:
     ItemRegistry();
-    Item* getItem(const uint16_t id);
+    static Item* getItem(const uint16_t id);
     static void createItem(Item* i); //TODO: Change this to something friendlier
 
 private:

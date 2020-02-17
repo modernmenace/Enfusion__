@@ -7,9 +7,6 @@
  *
  */
 
-//TODO: Deal with ids
-//TODO: Make item creation macros
-
 Item::Item(uint16_t id, string_t name, string_t description, string_t icon)
 {
     this->i_id     = id;

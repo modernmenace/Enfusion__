@@ -3,6 +3,7 @@
 
 #include "../Component.h"
 #include "../../Misc/Item.h"
+#include <map>
 
 #define INVENTORY_SIZE 24
 
@@ -18,6 +19,11 @@ class Inventory : public Component {
 
 public:
     Inventory();
+    void add(Item* item);
+
+private:
+    std::map<uint8_t, Item*> inv_items;
+    uint8_t                  inv_count = 0;
 
 };
 
