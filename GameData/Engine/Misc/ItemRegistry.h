@@ -13,6 +13,8 @@ public:
     static void createItem(Item* i);
 
 private:
+    void initialize();
+
     static ItemRegistry* sInstance;
     std::map<uint16_t, Item*> items;
 };
