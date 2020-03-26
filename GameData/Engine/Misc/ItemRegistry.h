@@ -5,6 +5,8 @@
 #include "Item.h"
 #include <map>
 
+//TODO: Research and find better method of creating a singleton class
+
 class ItemRegistry {
 
 public:
