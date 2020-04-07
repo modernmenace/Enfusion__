@@ -8,14 +8,15 @@
 class LevelManager {
 
 public:
-    LevelManager(std::string initialLevel);
-
+    static LevelManager* Instance();
+    void setLevel(std::string level);
     Level& getCurrentLevel();
 
 private:
-    Level* currentLevel;
+    LevelManager() {};
 
-    static LevelManager* sInstance;
+    Level* currentLevel;
+    static LevelManager* m_Instance;
 
 };
 

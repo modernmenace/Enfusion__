@@ -6,7 +6,7 @@
 #include "Engine/Lvl/LevelManager.h"
 #include "Data/Items.h"
 
-#define LEVEL levelManager.getCurrentLevel()
+#define LEVEL LevelManager::Instance()->getCurrentLevel()
 
 class Game {
 
@@ -19,9 +19,6 @@ private:
     void processEvents();
     void update(sf::Time tickRate);
     void render();
-
-    AssetManager manager;
-    LevelManager levelManager;
 
     sf::RenderWindow mWindow;
 

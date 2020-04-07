@@ -11,7 +11,7 @@ AnimatedSprite::AnimatedSprite(std::string spriteSheet, int numberRows, int numb
 void AnimatedSprite::initialize()
 {
     assert(entity->hasComponent<Position>());
-    this->sprite = sf::Sprite(AssetManager::getTexture(spriteSheet), charRect);
+    this->sprite = sf::Sprite(AssetManager::Instance()->getTexture(spriteSheet), charRect);
     this->sprite.setPosition(entity->getComponent<Position>().getPosition());
     this->sprite.setScale(GLOBAL_SCALE_GAMEOBJECT);
 

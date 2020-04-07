@@ -11,33 +11,30 @@
  *
  */
 
-LevelManager* LevelManager::sInstance = nullptr;
+LevelManager* LevelManager::m_Instance = nullptr;
 
-/*
- *  Constructor
- *
- *  DESC: Takes the initial level's name as an argument and loads it
- *
- *  NOTE: This is currently harcoded with the level names, this NEEDS
- *        to be changed to make the engine more modular
- *
- */
-
-LevelManager::LevelManager(std::string initialLevel)
+LevelManager* LevelManager::Instance()
 {
-    assert(sInstance == nullptr);
-    sInstance = this;
+    if (m_Instance == nullptr)
+        m_Instance = new LevelManager();
 
+    return m_Instance;
+}
+
+void LevelManager::setLevel(std::string level)
+{
     //maybe eventually move to some kind of map here
     //hardcoded for now, need good method of checking level names dynamically
-    if (initialLevel == "Level_1")
+    assert(m_Instance != nullptr);
+
+    if (level == "Level_1")
     {
         dbg_log("LevelManager: Level_1 loaded.");
         this->currentLevel = new Level_1();
     }
     else
     {
-        dbg_err("INVALID LEVEL '" + initialLevel + "'");
+        dbg_err("INVALID LEVEL '" + level + "'");
     }
 }
 
@@ -50,5 +47,6 @@ LevelManager::LevelManager(std::string initialLevel)
 
 Level& LevelManager::getCurrentLevel()
 {
+    assert(m_Instance != nullptr);
     return *this->currentLevel;
 }

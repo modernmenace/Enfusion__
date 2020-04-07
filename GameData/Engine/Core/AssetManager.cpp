@@ -11,12 +11,14 @@
  *
  */
 
-AssetManager* AssetManager::sInstance = nullptr;
+AssetManager* AssetManager::m_Instance = nullptr;
 
-AssetManager::AssetManager()
+AssetManager* AssetManager::Instance()
 {
-    assert(sInstance == nullptr);
-    sInstance = this;
+    if (m_Instance == nullptr)
+        m_Instance = new AssetManager();
+
+    return m_Instance;
 }
 
 /*
@@ -32,7 +34,8 @@ AssetManager::AssetManager()
 
 sf::Texture &AssetManager::getTexture(std::string const &fileName)
 {
-    auto &texMap = sInstance->m_Textures;
+    assert(m_Instance != nullptr);
+    auto &texMap = m_Instance->m_Textures;
 
     auto pairFound = texMap.find(fileName);
 

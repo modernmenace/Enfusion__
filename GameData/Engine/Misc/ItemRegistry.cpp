@@ -18,7 +18,6 @@ ItemRegistry::ItemRegistry()
 
 void ItemRegistry::createItem(Item* i)
 {
-    assert(m_Instance != nullptr);
     //auto &itemMap = sInstance->items;
     //itemMap.insert(std::make_pair(i->id(), i));
 }

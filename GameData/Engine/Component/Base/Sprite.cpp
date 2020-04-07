@@ -17,7 +17,7 @@ Sprite::Sprite(std::string spriteName)
 void Sprite::initialize()
 {
     assert(entity->hasComponent<Position>());
-    this->sprite = sf::Sprite(AssetManager::getTexture(spriteName));
+    this->sprite = sf::Sprite(AssetManager::Instance()->getTexture(spriteName));
     this->sprite.setPosition(entity->getComponent<Position>().getPosition());
     this->sprite.setScale(GLOBAL_SCALE_GAMEOBJECT);
 }
