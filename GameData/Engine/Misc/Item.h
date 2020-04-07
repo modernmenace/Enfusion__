@@ -23,7 +23,7 @@ private:
 };
 
 #define REGISTRY_ADD(itemClass)            \
-ItemRegistry::createItem(new itemClass()); \
+ItemRegistry::Instance()->createItem(new itemClass()); \
 
 #define CREATE_ITEM(id, className, name, description, icon, effect)   \
 class className : public Item                              \

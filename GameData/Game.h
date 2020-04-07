@@ -4,7 +4,6 @@
 #include <SFML/Graphics.hpp>
 #include "Engine/Core/Engine.h"
 #include "Engine/Lvl/LevelManager.h"
-#include "Engine/Misc/ItemRegistry.h"
 #include "Data/Items.h"
 
 #define LEVEL levelManager.getCurrentLevel()
@@ -23,7 +22,6 @@ private:
 
     AssetManager manager;
     LevelManager levelManager;
-    ItemRegistry itemRegistry;
 
     sf::RenderWindow mWindow;
 

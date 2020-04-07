@@ -9,7 +9,7 @@ Inventory::Inventory()
 void Inventory::initialize()
 {
     dbg_log("got here (generating registry statement should be printed before this)")
-    this->add(ItemRegistry::getItem(ITEM_ID_TOMATO));
+    this->add(ItemRegistry::Instance()->getItem(ITEM_ID_TOMATO));
 }
 
 void Inventory::add(Item* item)

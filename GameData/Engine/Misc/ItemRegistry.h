@@ -5,20 +5,19 @@
 #include "Item.h"
 #include <map>
 
-//TODO: Research and find better method of creating a singleton class
 
 class ItemRegistry {
 
 public:
-    ItemRegistry();
-    static Item* getItem(uint16_t id);
-    static void createItem(Item* i);
+    static ItemRegistry* Instance();
+    void createItem(Item* i);
+    Item* getItem(uint16_t id);
 
 private:
-    void initialize();
+    ItemRegistry();
 
-    static ItemRegistry* sInstance;
-    std::map<uint16_t, Item*> items;
+    static ItemRegistry* m_Instance;
+    std::map<uint16_t, Item> itemMap;
 };
 
 
