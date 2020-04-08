@@ -25,7 +25,7 @@ void LevelManager::setLevel(std::string level)
 {
     //maybe eventually move to some kind of map here
     //hardcoded for now, need good method of checking level names dynamically
-    assert(m_Instance != nullptr);
+    assert(m_Instance);
 
     if (level == "Level_1")
     {
@@ -47,6 +47,6 @@ void LevelManager::setLevel(std::string level)
 
 Level& LevelManager::getCurrentLevel()
 {
-    assert(m_Instance != nullptr);
+    assert(m_Instance);
     return *this->currentLevel;
 }

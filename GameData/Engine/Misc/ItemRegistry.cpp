@@ -24,7 +24,7 @@ void ItemRegistry::createItem(Item* i)
 
 Item* ItemRegistry::getItem(uint16_t id)
 {
-    assert(m_Instance != nullptr);
+    assert(m_Instance);
     //auto &itemMap = sInstance->items;
     // below line causes crashing
     // print also does, itemMap not created yet?

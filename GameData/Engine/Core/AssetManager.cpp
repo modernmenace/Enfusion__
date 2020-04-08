@@ -34,7 +34,7 @@ AssetManager* AssetManager::Instance()
 
 sf::Texture &AssetManager::getTexture(std::string const &fileName)
 {
-    assert(m_Instance != nullptr);
+    assert(m_Instance);
     auto &texMap = m_Instance->m_Textures;
 
     auto pairFound = texMap.find(fileName);
