@@ -10,30 +10,24 @@ ItemRegistry* ItemRegistry::Instance()
     return m_Instance;
 }
 
-ItemRegistry::ItemRegistry()
-{
-    // do I need anything here with the new format?
-}
-
-
 void ItemRegistry::createItem(Item* i)
 {
-    //auto &itemMap = sInstance->items;
-    //itemMap.insert(std::make_pair(i->id(), i));
+    assert(i);
+    assert(m_Instance);
+    auto &itemMap = m_Instance->items;
+    itemMap.insert(std::make_pair(i->id(), *i));
 }
 
 Item* ItemRegistry::getItem(uint16_t id)
 {
     assert(m_Instance);
-    //auto &itemMap = sInstance->items;
-    // below line causes crashing
-    // print also does, itemMap not created yet?
+    auto &itemMap = m_Instance->items;
 
-    //dbg_log(itemMap.size())
-    //auto pairFound = itemMap.find(id);
+    dbg_log(itemMap.size())
+    auto pairFound = itemMap.find(id);
 
-    //if (pairFound != itemMap.end())
-        //return pairFound->second;
-    //else
+    if (pairFound != itemMap.end())
+        return &pairFound->second;
+    else
         return nullptr;
 }

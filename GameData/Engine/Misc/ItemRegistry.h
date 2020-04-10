@@ -14,10 +14,10 @@ public:
     Item* getItem(uint16_t id);
 
 private:
-    ItemRegistry();
+    ItemRegistry() {};
 
     static ItemRegistry* m_Instance;
-    std::map<uint16_t, Item> itemMap;
+    std::map<uint16_t, Item> items;
 };
 
 

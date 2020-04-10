@@ -24,7 +24,7 @@ public:
 
 private:
     std::map<uint8_t, Item*> inv_items;
-    uint8_t                  inv_count = 0;
+    uint16_t                  inv_count = 0;
 
 };
 

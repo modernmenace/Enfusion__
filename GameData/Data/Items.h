@@ -16,6 +16,7 @@ CREATE_ITEM(ITEM_ID_TOMATO, IT_1, "tomato",
 
 static void generateItemRegistry()
 {
+    dbg_log("generating registry")
     REGISTRY_ADD(IT_1)
 }
 

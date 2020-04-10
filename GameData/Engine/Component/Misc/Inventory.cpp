@@ -8,13 +8,27 @@ Inventory::Inventory()
 
 void Inventory::initialize()
 {
-    dbg_log("got here (generating registry statement should be printed before this)")
     this->add(ItemRegistry::Instance()->getItem(ITEM_ID_TOMATO));
+
+    dbg_log("Begin Display Inventory Items");
+    dbg_log("Inv Size: " << inv_items.size() << ", " << inv_count);
+    // below causes crashing, probably item is not permanently allocated
+    /*
+    for(int i = 0; i < inv_items.size(); i++)
+    {
+        dbg_log(inv_items[i]->name());
+    }
+     */
 }
 
 void Inventory::add(Item* item)
 {
-    if (item == nullptr) return;
+    dbg_log("Adding item");
+    if (item == nullptr)
+    {
+        dbg_err("item is null");
+        return;
+    }
     if (inv_count >= INVENTORY_SIZE)
     {
         dbg_err("Inventory Overflow")
