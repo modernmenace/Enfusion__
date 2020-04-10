@@ -24,7 +24,7 @@ public:
 
 private:
     std::map<uint8_t, Item*>   inv_items;
-    std::map<uint8_t, uint8_t> inv_amounts; //TODO: use this for stacking
+    std::map<uint8_t, uint8_t> inv_amounts;
 
 };
 
