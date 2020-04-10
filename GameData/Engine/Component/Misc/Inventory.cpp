@@ -6,24 +6,37 @@
 void Inventory::initialize()
 {
     this->add(ItemRegistry::Instance()->getItem(ITEM_ID_TOMATO));
-}
 
-void Inventory::add(Item* item)
-{
-    if (item == nullptr) return;
-
-    if (inv_items.size() >= INVENTORY_SIZE)
+    for(uint8_t i = 0; i < INVENTORY_SIZE; i++)
     {
-        dbg_err("Inventory Overflow")
-        return;
+        inv_items[i]   = nullptr;
+        inv_amounts[i] = 0;
     }
 
+}
+
+uint8_t Inventory::nextEmptySlot()
+{
+    //iterate array and return next empty slot
+    for(uint8_t i; i < INVENTORY_SIZE; i++)
+        if (inv_amounts[i] == 0)
+            return i;
+
+    return INVENTORY_FULL;
+}
+
+bool Inventory::add(Item* item)
+{
+    if (item == nullptr) return false;
+
     //check if value exists
+    //this does not allow for more than two stacks, replace itemExists
+    //with for loops for each one found?
     int16_t itemExists = -1;
-    for(auto it = inv_items.begin(); it != inv_items.end(); it++)
+    for(uint8_t i; i < INVENTORY_SIZE; i++)
     {
         //this does not allow for more than two stacks
-        if (it->second->id() == item->id())
+        if (inv_items[i]->id() == item->id())
         {
             itemExists = true;
             break;
@@ -33,20 +46,27 @@ void Inventory::add(Item* item)
     if (itemExists < 0)
     {
         //item not found
-        inv_items.insert(std::make_pair(inv_items.size(), item));
-        inv_amounts.insert(std::make_pair(inv_items.size(), 1));
+        uint8_t slot = nextEmptySlot();
+        if (slot == INVENTORY_FULL) return false;
+
+        inv_items[slot]   = item;
+        inv_amounts[slot] = 1;
     }
     else
     {
         //item exists in inventory
-        if (inv_amounts.at(itemExists) < inv_items.at(itemExists)->stackSize())
-            inv_amounts.at(itemExists)++;
+        if (inv_amounts[itemExists] < inv_items[itemExists]->stackSize())
+            inv_amounts[itemExists]++;
 
         else
         {
             //create new stack
-            inv_items.insert(std::make_pair(inv_items.size(), item));
-            inv_amounts.insert(std::make_pair(inv_items.size(), 0));
+            uint8_t slot = nextEmptySlot();
+            if (slot == INVENTORY_FULL) return false;
+
+            inv_items[slot]   = item;
+            inv_amounts[slot] = 1;
         }
     }
+    return true;
 }

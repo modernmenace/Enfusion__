@@ -6,6 +6,7 @@
 #include <map>
 
 #define INVENTORY_SIZE 24
+#define INVENTORY_FULL 255
 
 /*
  *  Inventory Component
@@ -20,11 +21,13 @@ class Inventory : public Component {
 public:
     Inventory() {};
     void initialize() override;
-    void add(Item* item);
+    bool add(Item* item);
 
 private:
-    std::map<uint8_t, Item*>   inv_items;
-    std::map<uint8_t, uint8_t> inv_amounts;
+    Item*   inv_items  [INVENTORY_SIZE];
+    uint8_t inv_amounts[INVENTORY_SIZE];
+
+    uint8_t nextEmptySlot();
 
 };
 
