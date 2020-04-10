@@ -11,13 +11,14 @@ CREATE_ITEM(ITEM_ID_TOMATO, IT_1, "tomato",
             "Objects/Consumables/tomato.png",
             {
                 dbg_log("Used a tomato!")
-            });
+            }, 16);
 
 
 static void generateItemRegistry()
 {
-    dbg_log("generating registry")
     REGISTRY_ADD(IT_1)
+
+    dbg_log("Item Registry Generation Finished")
 }
 
 #endif //ENFUSION___ITEMS_H

@@ -7,10 +7,11 @@
 class Item
 {
 public:
-    Item(uint16_t id, string_t name, string_t description, string_t icon);
-    inline uint16_t id()          { return i_id; };
+    Item(uint16_t id, string_t name, string_t description, string_t icon, uint16_t stackSize);
+    inline uint16_t id()          { return i_id;   };
     inline string_t name()        { return i_name; };
     inline string_t description() { return i_desc; };
+    inline uint16_t stackSize()   { return i_max;  }
     inline sf::Texture& icon()    { return AssetManager::Instance()->getTexture(i_icon); };
 
     virtual void activate();
@@ -20,16 +21,17 @@ private:
     string_t    i_name;
     string_t    i_desc;
     string_t    i_icon;
+    uint16_t    i_max;
 };
 
 #define REGISTRY_ADD(itemClass)            \
 ItemRegistry::Instance()->createItem(new itemClass()); \
 
-#define CREATE_ITEM(id, className, name, description, icon, effect)   \
+#define CREATE_ITEM(id, className, name, description, icon, effect, stackSize)   \
 class className : public Item                              \
 {                                                          \
 public :                                                   \
-    className()  : Item(id, name, description, icon) {}    \
+    className()  : Item(id, name, description, icon, stackSize) {}    \
     void activate() override effect;                       \
 };                                                         \
 

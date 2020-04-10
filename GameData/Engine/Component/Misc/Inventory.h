@@ -18,13 +18,13 @@
 class Inventory : public Component {
 
 public:
-    Inventory();
+    Inventory() {};
     void initialize() override;
     void add(Item* item);
 
 private:
-    std::map<uint8_t, Item*> inv_items;
-    uint16_t                  inv_count = 0;
+    std::map<uint8_t, Item*>   inv_items;
+    std::map<uint8_t, uint8_t> inv_amounts; //TODO: use this for stacking
 
 };
 

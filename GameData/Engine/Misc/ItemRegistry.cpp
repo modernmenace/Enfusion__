@@ -14,6 +14,7 @@ void ItemRegistry::createItem(Item* i)
 {
     assert(i);
     assert(m_Instance);
+    dbg_log("Item Registry: Creating item '" << i->name() << "'");
     auto &itemMap = m_Instance->items;
     itemMap.insert(std::make_pair(i->id(), *i));
 }
@@ -23,7 +24,6 @@ Item* ItemRegistry::getItem(uint16_t id)
     assert(m_Instance);
     auto &itemMap = m_Instance->items;
 
-    dbg_log(itemMap.size())
     auto pairFound = itemMap.find(id);
 
     if (pairFound != itemMap.end())
