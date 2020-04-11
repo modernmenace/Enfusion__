@@ -51,7 +51,8 @@ void Hotbar::updateSlots()
     //update items
     for(int i = 0; i < HOTBAR_SLOTS; i++)
     {
-        //TODO: why is the texture not showing up, assigned correctly?
+        //TODO: to fix timing, make sure slots are set up in inevntory
+        //TODO: menu before it is opened
         slots.at(i)->setItem(i_menu->slots.at(i)->item());
         if (slots.at(i)->item() != nullptr)
         {
@@ -82,7 +83,7 @@ void Hotbar::render(sf::RenderWindow *window)
     Entity::render(window);
 
     for(auto &s : slots)
-        window->draw(s->getComponent<Sprite>().getSprite());
+        s->render(window);
 
     window->draw(selectionRect);
     itemText->render(window);
