@@ -12,13 +12,13 @@ public:
     void render(sf::RenderWindow *window) override;
     void setItem(Item* item);
     inline void setVisible(bool v) { s_visible = v; };
-    inline Item* item() { return s_item; }
+    inline bool visible() { return s_visible; }
+    inline Item* item()   { return s_item; }
 
 private:
     Item*      s_item;
     sf::Sprite s_sprite;
     bool       s_visible = true;
-
 };
 
 

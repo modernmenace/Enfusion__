@@ -16,12 +16,11 @@ public:
     void render(sf::RenderWindow* window)   override;
     void toggleMenu();
     inline bool active() { return menuActive; };
+    std::vector<Slot*>  slots;
 
 private:
     Entity* i_entity = nullptr;
     bool menuActive  = false;
-
-    std::vector<Slot*>  slots;
 
 };
 

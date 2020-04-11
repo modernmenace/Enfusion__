@@ -2,8 +2,8 @@
 
 Level_1::Level_1() : Level("Level_1", "Levels/Level_1_back.png"),
                      player("Objects/mount1.png", sf::Vector2f(600, 300)),
-                     hotbar(&player, sf::Vector2f(-300, 350)),
-                     inventory(&player)
+                     inventory(&player),
+                     hotbar(&player, sf::Vector2f(-300, 350), &inventory)
 {
     addEntity(&player);
     addUIEntity(&hotbar);
@@ -37,6 +37,8 @@ void Level_1::initialize()
 {
     Level::initialize();
     map->initialize();
+
+    hotbar.updateSlots();
 }
 
 void Level_1::update(sf::Time tickRate)
@@ -48,7 +50,11 @@ void Level_1::update(sf::Time tickRate)
     #endif
 
     //check for pause
-    if (inventory.active()) LEVEL_PAUSED = true;
+    if (inventory.active())
+    {
+        LEVEL_PAUSED = true;
+        hotbar.updateSlots();
+    }
     else                    LEVEL_PAUSED = false;
 
     Level::update(tickRate);

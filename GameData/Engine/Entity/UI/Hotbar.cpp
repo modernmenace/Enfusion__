@@ -10,9 +10,10 @@
  *
  */
 
-Hotbar::Hotbar(Entity* entity, sf::Vector2f position)
+Hotbar::Hotbar(Entity* entity, sf::Vector2f position, InventoryMenu* menu)
 {
     this->i_entity = entity;
+    this->i_menu   = menu;
     addComponent<Position>(position);
     addComponent<Sprite>("UI/windowsheet.png");
 }
@@ -43,6 +44,21 @@ void Hotbar::initialize()
     itemText->initialize();
 
     Entity::initialize();
+}
+
+void Hotbar::updateSlots()
+{
+    //update items
+    for(int i = 0; i < HOTBAR_SLOTS; i++)
+    {
+        //TODO: why is the texture not showing up, assigned correctly?
+        slots.at(i)->setItem(i_menu->slots.at(i)->item());
+        if (slots.at(i)->item() != nullptr)
+        {
+            dbg_log(i << " " << slots.at(i)->item()->name());
+        }
+    }
+
 }
 
 void Hotbar::handleInput(sf::Keyboard::Key key)
