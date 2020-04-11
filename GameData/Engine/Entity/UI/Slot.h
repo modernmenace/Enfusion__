@@ -9,11 +9,15 @@ class Slot : public Entity {
 
 public:
     Slot(sf::Vector2f position, Item* item = nullptr);
+    void render(sf::RenderWindow *window) override;
+    void setItem(Item* item);
+    inline void setVisible(bool v) { s_visible = v; };
     inline Item* item() { return s_item; }
-    inline void setItem(Item* item) { s_item = item; }
 
 private:
-    Item* s_item;
+    Item*      s_item;
+    sf::Sprite s_sprite;
+    bool       s_visible = true;
 
 };
 

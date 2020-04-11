@@ -21,17 +21,13 @@ void InventoryMenu::initialize()
     for(int j = 0; j < 3; j++) {
         for (int i = 0; i < 5; i++) {
             Slot *s = new Slot(slotPos);
-            s->getComponent<Sprite>().visible = false;
+            s->setVisible(false);
             slots.emplace_back(s);
             slotPos.x += 96;
         }
         slotPos.x = getComponent<Position>().getPosition().x + 45;
         slotPos.y += 96;
     }
-
-    //initialize inventory data
-    slots.at(0)->setItem(i_entity->getComponent<Inventory>().item(0));
-    dbg_log(slots.at(0)->item()->name());
 }
 
 void InventoryMenu::toggleMenu()
@@ -41,15 +37,18 @@ void InventoryMenu::toggleMenu()
 
     if (menuActive)
     {
+        for(int s = 0; s < slots.size(); s++)
+            slots.at(s)->setItem(i_entity->getComponent<Inventory>().item(s));
+
         getComponent<Sprite>().visible = true;
         for(auto &s : slots)
-            s->getComponent<Sprite>().visible = true;
+            s->setVisible(true);
     }
     else
     {
         getComponent<Sprite>().visible = false;
         for(auto &s : slots)
-            s->getComponent<Sprite>().visible = false;
+            s->setVisible(false);
     }
 
 
