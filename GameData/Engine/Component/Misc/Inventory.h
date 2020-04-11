@@ -19,15 +19,17 @@
 class Inventory : public Component {
 
 public:
-    Inventory() {};
+    Inventory();
     void initialize() override;
     bool add(Item* item);
 
-private:
-    Item*   inv_items  [INVENTORY_SIZE];
-    uint8_t inv_amounts[INVENTORY_SIZE];
+    inline Item* item(uint8_t id) { return inv_items[id]; }
 
-    uint8_t nextEmptySlot();
+//private:
+    Item*   inv_items  [INVENTORY_SIZE];
+    int     inv_amounts[INVENTORY_SIZE];
+
+    int nextEmptySlot();
 
 };
 

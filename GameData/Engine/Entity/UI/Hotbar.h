@@ -18,6 +18,8 @@ public:
     void render(sf::RenderWindow* window) override;
     void handleInput(sf::Keyboard::Key key) override;
 
+    void updateSlots();
+
 private:
     std::vector<Slot*>  slots;
     sf::RectangleShape selectionRect;

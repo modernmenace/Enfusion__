@@ -28,6 +28,10 @@ void InventoryMenu::initialize()
         slotPos.x = getComponent<Position>().getPosition().x + 45;
         slotPos.y += 96;
     }
+
+    //initialize inventory data
+    slots.at(0)->setItem(i_entity->getComponent<Inventory>().item(0));
+    dbg_log(slots.at(0)->item()->name());
 }
 
 void InventoryMenu::toggleMenu()

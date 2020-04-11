@@ -10,6 +10,7 @@ class Slot : public Entity {
 public:
     Slot(sf::Vector2f position, Item* item = nullptr);
     inline Item* item() { return s_item; }
+    inline void setItem(Item* item) { s_item = item; }
 
 private:
     Item* s_item;

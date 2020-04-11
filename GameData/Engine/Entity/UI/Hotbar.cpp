@@ -26,6 +26,8 @@ void Hotbar::initialize()
     Vector2f slotPos(getComponent<Position>().getPosition().x + 75, getComponent<Position>().getPosition().y + 20);
     for(int i = 0; i < HOTBAR_SLOTS; i++)
     {
+        //below causes crashing
+        //slots.emplace_back(new Slot(slotPos, getComponent<Inventory>().item(i)));
         slots.emplace_back(new Slot(slotPos));
         slotPos.x += 96; //16 * x-scale
     }
