@@ -48,18 +48,13 @@ void Hotbar::initialize()
 
 void Hotbar::updateSlots()
 {
-    //update items
     for(int i = 0; i < HOTBAR_SLOTS; i++)
-    {
-        //TODO: to fix timing, make sure slots are set up in inevntory
-        //TODO: menu before it is opened
         slots.at(i)->setItem(i_menu->slots.at(i)->item());
-        if (slots.at(i)->item() != nullptr)
-        {
-            dbg_log(i << " " << slots.at(i)->item()->name());
-        }
-    }
 
+    if (slots.at(selectedSlot)->item() != nullptr)
+        itemText->setText("Current Item: " + slots.at(selectedSlot)->item()->name());
+    else
+        itemText->setText("Current Item: None");
 }
 
 void Hotbar::handleInput(sf::Keyboard::Key key)
@@ -76,6 +71,7 @@ void Hotbar::handleInput(sf::Keyboard::Key key)
     else if (selection == 45)
         selectedSlot != HOTBAR_SLOTS - 1 ? selectedSlot++ : selectedSlot = 0;
     selectionRect.setPosition(slots[selectedSlot]->getComponent<Sprite>().getSprite().getPosition());
+    updateSlots();
 }
 
 void Hotbar::render(sf::RenderWindow *window)

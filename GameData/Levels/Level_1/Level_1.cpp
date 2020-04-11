@@ -50,11 +50,7 @@ void Level_1::update(sf::Time tickRate)
     #endif
 
     //check for pause
-    if (inventory.active())
-    {
-        LEVEL_PAUSED = true;
-        hotbar.updateSlots();
-    }
+    if (inventory.active()) LEVEL_PAUSED = true;
     else                    LEVEL_PAUSED = false;
 
     Level::update(tickRate);

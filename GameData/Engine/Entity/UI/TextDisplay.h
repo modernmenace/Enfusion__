@@ -7,12 +7,12 @@
 class TextDisplay : public Entity {
 
 public:
-    TextDisplay(std::string text, sf::Vector2f position, uint16_t size = 42);
+    TextDisplay(string_t text, sf::Vector2f position, uint16_t size = 42);
 
     void initialize() override;
     void render(sf::RenderWindow* window) override;
 
-    void setText(std::string text);
+    void setText(string_t text);
 
 
 private:

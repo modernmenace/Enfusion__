@@ -6,7 +6,7 @@
 
 #define ITEM_ID_TOMATO 1
 
-CREATE_ITEM(ITEM_ID_TOMATO, IT_1, "tomato",
+CREATE_ITEM(ITEM_ID_TOMATO, IT_1, "Tomato",
             "A tasty fruit. Or is it a vegetable? A tasty vegetable.",
             "Objects/Consumables/tomato.png",
             {
