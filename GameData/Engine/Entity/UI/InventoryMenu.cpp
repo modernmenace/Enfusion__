@@ -64,19 +64,30 @@ void InventoryMenu::update(sf::Time tickRate)
     sf::Vector2f m_w_pos = WINDOW->mapPixelToCoords(sf::Mouse::getPosition(*WINDOW));
     sf::Sprite& s = getComponent<Sprite>().getSprite();
     m_w_pos.x -= (s.getTextureRect().width * s.getScale().x);
+    m_w_pos.x -= 25;  // using magic number
+    m_w_pos.y -= 300; // doing it again
 
     //first check if it is within menus bounds
     if (s.getGlobalBounds().contains(m_w_pos.x, m_w_pos.y))
     {
-        //check individual slot
-        dbg_log(m_w_pos.x << ", " << m_w_pos.y);
-        
+        for(int s = 0; s < slots.size(); s++)
+        {
+            if (slots[s]->item() != nullptr)
+            {
+                if (slots[s]->getComponent<Sprite>().getSprite().getGlobalBounds().contains(m_w_pos.x, m_w_pos.y))
+                {
+                    //currently hovering over slot[s], show tooltip
+                }
+            }
+        }
     }
 }
 
 void InventoryMenu::handleInput(sf::Keyboard::Key key)
 {
     if (key == 60) toggleMenu();
+
+    //check for left click, check if over item
 }
 
 void InventoryMenu::render(sf::RenderWindow *window)
