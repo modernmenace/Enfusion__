@@ -20,8 +20,6 @@ private:
     void update(sf::Time tickRate);
     void render();
 
-    sf::RenderWindow mWindow;
-
 };
 
 #endif

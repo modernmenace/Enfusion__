@@ -6,7 +6,6 @@
  *  NOTE: This could use the ECS much more efficiently,
  *        but it serves its purpose for now
  *
- *  TODO: Update Current Item Text
  *
  */
 
@@ -64,13 +63,13 @@ void Hotbar::handleInput(sf::Keyboard::Key key)
     {
         selectedSlot = selection;
         selectionRect.setPosition(slots[selectedSlot]->getComponent<Sprite>().getSprite().getPosition());
-        return;
     }
     if (selection == 44)
         selectedSlot != 0 ? selectedSlot-- : selectedSlot = HOTBAR_SLOTS - 1;
     else if (selection == 45)
         selectedSlot != HOTBAR_SLOTS - 1 ? selectedSlot++ : selectedSlot = 0;
     selectionRect.setPosition(slots[selectedSlot]->getComponent<Sprite>().getSprite().getPosition());
+
     updateSlots();
 }
 

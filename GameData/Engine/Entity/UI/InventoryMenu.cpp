@@ -55,6 +55,25 @@ void InventoryMenu::toggleMenu()
 
 }
 
+void InventoryMenu::update(sf::Time tickRate)
+{
+    Entity::update(tickRate);
+    if (!menuActive) return;
+
+    //faster way?
+    sf::Vector2f m_w_pos = WINDOW->mapPixelToCoords(sf::Mouse::getPosition(*WINDOW));
+    sf::Sprite& s = getComponent<Sprite>().getSprite();
+    m_w_pos.x -= (s.getTextureRect().width * s.getScale().x);
+
+    //first check if it is within menus bounds
+    if (s.getGlobalBounds().contains(m_w_pos.x, m_w_pos.y))
+    {
+        //check individual slot
+        dbg_log(m_w_pos.x << ", " << m_w_pos.y);
+        
+    }
+}
+
 void InventoryMenu::handleInput(sf::Keyboard::Key key)
 {
     if (key == 60) toggleMenu();

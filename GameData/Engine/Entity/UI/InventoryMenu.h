@@ -13,6 +13,7 @@ public:
     InventoryMenu(Entity* entity);
     void initialize() override;
     void handleInput(sf::Keyboard::Key key) override;
+    void update(sf::Time tickRate)          override;
     void render(sf::RenderWindow* window)   override;
     void toggleMenu();
     inline bool active() { return menuActive; };
@@ -21,7 +22,6 @@ public:
 private:
     Entity* i_entity = nullptr;
     bool menuActive  = false;
-
 };
 
 

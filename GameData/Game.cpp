@@ -1,5 +1,6 @@
 #include "Game.h"
 
+sf::RenderWindow*         WINDOW;
 std::unique_ptr<sf::Font> GlobalFont;
 
 /*
@@ -11,8 +12,9 @@ std::unique_ptr<sf::Font> GlobalFont;
  *
  */
 
-Game::Game() : mWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE)
+Game::Game()
 {
+    WINDOW = new sf::RenderWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE);
     GlobalFont = std::make_unique<sf::Font>();
     GlobalFont->loadFromFile("Resources/Fonts/TYPEWR.TTF");
     generateItemRegistry();
@@ -32,7 +34,7 @@ void Game::run() {
     sf::Time tickRate;
     initialize();
 
-    while (mWindow.isOpen()) {
+    while (WINDOW->isOpen()) {
         tickRate = timer.restart();
         processEvents();
         update(tickRate);
@@ -74,9 +76,9 @@ void Game::update(sf::Time tickRate)
 
 void Game::render()
 {
-    mWindow.clear(sf::Color::Black);
-    LEVEL.render(&mWindow);
-    mWindow.display();
+    WINDOW->clear(sf::Color::Black);
+    LEVEL.render(WINDOW);
+    WINDOW->display();
 }
 
 /*
@@ -88,10 +90,10 @@ void Game::render()
 
 void Game::processEvents() {
     sf::Event event;
-    while (mWindow.pollEvent(event))
+    while (WINDOW->pollEvent(event))
     {
         if (event.type == sf::Event::Closed)
-            mWindow.close();
+            WINDOW->close();
 
         if (event.type == sf::Event::KeyPressed)
             LEVEL.handleInput(event.key.code);
