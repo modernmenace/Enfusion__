@@ -86,8 +86,26 @@ void InventoryMenu::update(sf::Time tickRate)
 void InventoryMenu::handleInput(sf::Keyboard::Key key)
 {
     if (key == 60) toggleMenu();
+}
 
-    //check for left click, check if over item
+void InventoryMenu::handleInput(sf::Mouse::Button button)
+{
+    //check for left click
+    if(button == sf::Mouse::Left)
+    {
+        sf::Vector2f m_w_pos = WINDOW->mapPixelToCoords(sf::Mouse::getPosition(*WINDOW));
+        sf::Sprite& s = getComponent<Sprite>().getSprite();
+        m_w_pos.x -= (s.getTextureRect().width * s.getScale().x);
+        m_w_pos.x -= 25;  // using magic number
+        m_w_pos.y -= 300; // doing it again
+        for(int s = 0; s < slots.size(); s++)
+            if (slots[s]->item() != nullptr)
+                if (slots[s]->getComponent<Sprite>().getSprite().getGlobalBounds().contains(m_w_pos.x, m_w_pos.y))
+                {
+                    dbg_log("Using item '" << slots[s]->item()->name() << "'");
+                    slots[s]->item()->activate();
+                }
+    }
 }
 
 void InventoryMenu::render(sf::RenderWindow *window)

@@ -18,5 +18,5 @@ Item::Item(uint16_t id, string_t name, string_t description, string_t icon, uint
 
 void Item::activate()
 {
-    //TODO: Implement this
+    dbg_log("Item '" << i_name << "' used default activation function");
 }

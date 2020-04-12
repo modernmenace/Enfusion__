@@ -97,6 +97,9 @@ void Game::processEvents() {
 
         if (event.type == sf::Event::KeyPressed)
             LEVEL.handleInput(event.key.code);
+
+        if (event.type == sf::Event::MouseButtonPressed)
+            LEVEL.handleInput(event.mouseButton.button);
     }
 }
 

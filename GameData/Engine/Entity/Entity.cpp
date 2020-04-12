@@ -39,3 +39,9 @@ void Entity::handleInput(sf::Keyboard::Key key)
     for(auto& c : componentMap)
         c.second->handleInput(key);
 }
+
+void Entity::handleInput(sf::Mouse::Button button)
+{
+    for(auto& c : componentMap)
+        c.second->handleInput(button);
+}

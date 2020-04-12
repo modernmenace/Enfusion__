@@ -69,3 +69,12 @@ void Level::handleInput(sf::Keyboard::Key key)
     for(auto &e : uiEntities)
         e->handleInput(key);
 }
+
+void Level::handleInput(sf::Mouse::Button button)
+{
+    for(auto &e : entities)
+        e->handleInput(button);
+
+    for(auto &e : uiEntities)
+        e->handleInput(button);
+}

@@ -2,6 +2,7 @@
 #define ENFUSION_LEVEL_H
 
 #include <SFML/Graphics.hpp>
+
 #include "../Core/Engine.h"
 #include "../Entity/Entity.h"
 
@@ -16,6 +17,7 @@ public:
     virtual void update(sf::Time tickRate);
     virtual void render(sf::RenderWindow* window);
     virtual void handleInput(sf::Keyboard::Key key);
+    virtual void handleInput(sf::Mouse::Button button);
 
     static std::string getLevelName();
 

@@ -11,7 +11,7 @@ public:
     inline uint16_t id()          { return i_id;   };
     inline string_t name()        { return i_name; };
     inline string_t description() { return i_desc; };
-    inline uint16_t stackSize()   { return i_max;  }
+    inline uint16_t stackSize()   { return i_max;  };
     inline sf::Texture& icon()    { return AssetManager::Instance()->getTexture(i_icon); };
 
     virtual void activate();

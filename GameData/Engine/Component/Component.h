@@ -23,10 +23,11 @@ public:
     Entity      *entity;
     ComponentID cId;
 
-    virtual void initialize()                     {}
-    virtual void update(sf::Time tickRate)        {}
-    virtual void render(sf::RenderWindow* window) {}
-    virtual void handleInput(sf::Keyboard::Key)   {}
+    virtual void initialize()                          {}
+    virtual void update(sf::Time tickRate)             {}
+    virtual void render(sf::RenderWindow* window)      {}
+    virtual void handleInput(sf::Keyboard::Key)        {}
+    virtual void handleInput(sf::Mouse::Button button) {}
 
     //TODO: Deal with destructors
     virtual ~Component()      {}
