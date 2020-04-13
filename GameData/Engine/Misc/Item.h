@@ -31,7 +31,7 @@ ItemRegistry::Instance()->createItem(new itemClass()); \
 class className : public Item                              \
 {                                                          \
 public :                                                   \
-    className()  : Item(id, name, description, icon, stackSize) {}    \
+    className()  : Item(id, name, description, icon, stackSize) {};   \
     void activate() override effect;                       \
 };                                                         \
 

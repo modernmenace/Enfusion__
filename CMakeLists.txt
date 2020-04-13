@@ -3,7 +3,9 @@ project(Enfusion__)
 
 set(CMAKE_CXX_STANDARD 14)
 
-set(SFML_DIR "${CMAKE_CURRENT_LIST_DIR}/SFML-2.5.1/lib/cmake/SFML")
+if (WIN32)
+    set(SFML_DIR "${CMAKE_CURRENT_LIST_DIR}/SFML-2.5.1/lib/cmake/SFML")
+endif (WIN32)
 
 find_package(SFML 2.5.1 COMPONENTS graphics audio window system REQUIRED)
 
