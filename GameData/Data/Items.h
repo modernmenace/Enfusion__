@@ -4,7 +4,6 @@
 #include "../Engine/Misc/Item.h"
 #include "../Engine/Misc/ItemRegistry.h"
 
-
 CREATE_ITEM(ITEM_TOMATO, "Tomato",
             "A tasty fruit. Or is it a vegetable? A tasty vegetable.",
             "Objects/Consumables/tomato.png",

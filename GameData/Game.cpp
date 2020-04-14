@@ -2,6 +2,8 @@
 
 sf::RenderWindow*         WINDOW;
 std::unique_ptr<sf::Font> GlobalFont;
+ItemRegistry* ItemRegistry::m_Instance = nullptr;
+
 
 /*
  *  Game

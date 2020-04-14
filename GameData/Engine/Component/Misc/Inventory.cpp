@@ -12,7 +12,7 @@ Inventory::Inventory()
         inv_items[i]   = nullptr;
         inv_amounts[i] = 0;
     }
-};
+}
 
 void Inventory::initialize()
 {
