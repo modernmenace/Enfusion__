@@ -21,11 +21,59 @@ class Inventory : public Component {
 public:
     Inventory();
     void initialize() override;
-    bool add(Item* item);
+
+    template<class It>
+    bool add(It* item)
+    {
+        if (item == nullptr) return false;
+
+        //check if value exists
+        //TODO | this does not allow for more than two stacks,
+        //TODO | replace itemExists with for loops for each one found?
+        int16_t itemExists = -1;
+        for(uint8_t i = 0; i < INVENTORY_SIZE; i++)
+        {
+            //this does not allow for more than two stacks
+            if (inv_items[i] != nullptr)
+            {
+                if (inv_items[i]->id() == item->id())
+                {
+                    itemExists = true;
+                    break;
+                }
+            }
+        }
+
+        if (itemExists < 0)
+        {
+            //item not found
+            int slot = nextEmptySlot();
+            if (slot == INVENTORY_FULL) return false;
+            inv_items[slot]   = item;
+            inv_amounts[slot] = 1;
+        }
+        else
+        {
+            //item exists in inventory
+            if (inv_amounts[itemExists] < inv_items[itemExists]->stackSize())
+                inv_amounts[itemExists]++;
+
+            else
+            {
+                //create new stack
+                uint8_t slot = nextEmptySlot();
+                if (slot == INVENTORY_FULL) return false;
+
+                inv_items[slot]   = item;
+                inv_amounts[slot] = 1;
+            }
+        }
+        return true;
+    }
 
     inline Item* item(uint8_t id) { return inv_items[id]; }
 
-//private:
+private:
     Item*   inv_items  [INVENTORY_SIZE];
     int     inv_amounts[INVENTORY_SIZE];
 

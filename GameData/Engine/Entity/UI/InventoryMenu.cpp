@@ -10,6 +10,7 @@ InventoryMenu::InventoryMenu(Entity *entity)
 void InventoryMenu::initialize()
 {
     assert(i_entity->hasComponent<Inventory>());
+    Entity::initialize();
 
     getComponent<Sprite>().getSprite().setTextureRect(sf::IntRect(0, 0, 48, 48));
     getComponent<Sprite>().getSprite().setScale(12, 15);
