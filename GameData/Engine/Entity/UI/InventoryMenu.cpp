@@ -29,11 +29,13 @@ void InventoryMenu::initialize()
         slotPos.x = getComponent<Position>().getPosition().x + 45;
         slotPos.y += 96;
     }
+
+    for(int s = 0; s < slots.size(); s++)
+        slots.at(s)->setItem(i_entity->getComponent<Inventory>().item(s));
 }
 
 void InventoryMenu::toggleMenu()
 {
-    //TODO: Global controls file
     menuActive = !menuActive;
 
     if (menuActive)
