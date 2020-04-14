@@ -1,7 +1,8 @@
 #include "Inventory.h"
 #include "../../../Data/Items.h"
 
-//TODO: Test this and stacks etc.
+//TODO | Test this and stacks etc.
+//TODO | Anticiplating errors with templates
 
 Inventory::Inventory()
 {
@@ -14,11 +15,9 @@ Inventory::Inventory()
 
 void Inventory::initialize()
 {
-    //adding item not item1
-    //this->add(new IT_1());
-    //turn below into template to fix this?
-    // but how do i get class type?
-    this->add(ItemRegistry::Instance()->getItem<IT_1>(ITEM_ID_TOMATO));
+    this->add(ItemRegistry::Instance()->getItem<ITEM_TOMATO>());
+    // Second Item Causes Crash
+    //this->add(ItemRegistry::Instance()->getItem<ITEM_TEST>());
 }
 
 int Inventory::nextEmptySlot()

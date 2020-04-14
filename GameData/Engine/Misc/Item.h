@@ -7,7 +7,7 @@
 class Item
 {
 public:
-    Item(uint16_t id, string_t name, string_t description, string_t icon, uint16_t stackSize);
+    Item(string_t name, string_t description, string_t icon, uint16_t stackSize);
     inline uint16_t id()          { return i_id;   };
     inline string_t name()        { return i_name; };
     inline string_t description() { return i_desc; };
@@ -27,11 +27,11 @@ private:
 #define REGISTRY_ADD(itemClass)            \
 ItemRegistry::Instance()->createItem(new itemClass()); \
 
-#define CREATE_ITEM(id, className, name, description, icon, effect, stackSize)   \
+#define CREATE_ITEM(className, name, description, icon, effect, stackSize)   \
 class className : public Item                              \
 {                                                          \
 public :                                                   \
-    className()  : Item(id, name, description, icon, stackSize) {};   \
+    className()  : Item(name, description, icon, stackSize) {};   \
     void activate() override effect;                       \
 };                                                         \
 

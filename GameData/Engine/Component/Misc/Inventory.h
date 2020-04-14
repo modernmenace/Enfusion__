@@ -18,6 +18,12 @@
 
 class Inventory : public Component {
 
+private:
+    Item*   inv_items  [INVENTORY_SIZE];
+    int     inv_amounts[INVENTORY_SIZE];
+
+    int nextEmptySlot();
+
 public:
     Inventory();
     void initialize() override;
@@ -72,12 +78,6 @@ public:
     }
 
     inline Item* item(uint8_t id) { return inv_items[id]; }
-
-private:
-    Item*   inv_items  [INVENTORY_SIZE];
-    int     inv_amounts[INVENTORY_SIZE];
-
-    int nextEmptySlot();
 
 };
 

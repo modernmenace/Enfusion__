@@ -5,8 +5,6 @@
 #include "Item.h"
 #include <map>
 
-//TODO: Convert this entire thing to use templates
-
 class ItemRegistry {
 
 public:
@@ -14,17 +12,17 @@ public:
     void createItem(Item* i);
 
     template <typename It>
-    Item* getItem(uint16_t id)
+    Item* getItem()
     {
         assert(m_Instance);
-        auto &itemMap = m_Instance->items;
 
-        auto pairFound = itemMap.find(id);
-
-        if (pairFound != itemMap.end())
-            return static_cast<It*>(pairFound->second);
-        else
-            return nullptr;
+        for(Item* i : items)
+        {
+            auto ptr2 = i;
+            if (dynamic_cast<It*>(ptr2))
+                return ptr2;
+        }
+        return nullptr;
     }
 
 private:
@@ -33,7 +31,7 @@ private:
     static ItemRegistry* m_Instance;
 
 
-    std::map<uint16_t, Item*> items;
+    std::vector<Item*> items;
 };
 
 
