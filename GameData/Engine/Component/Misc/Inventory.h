@@ -77,8 +77,25 @@ public:
         return true;
     }
 
-    inline Item* item(uint8_t id) { return inv_items[id]; }
+    //returns amount of item in inventory
+    template <class It>
+    int contains()
+    {
+        int amt = 0;
+        for(int i = 0; i < INVENTORY_SIZE; i++)
+        {
+            auto ptr2 = inv_items[i];
+            if (dynamic_cast<It*>(ptr2)) amt += inv_amounts[i];
+        }
 
+        return amt;
+    }
+
+    //TODO: Remove Function
+    template <class It>
+    bool remove(uint16_t amount) { return true; }
+
+    inline Item* item(uint8_t id) { return inv_items[id]; }
 };
 
 

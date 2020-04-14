@@ -1,7 +1,8 @@
 #include "Inventory.h"
 #include "../../../Data/Items.h"
 
-//TODO | Test this and stacks etc.
+//TODO | Test this
+//TODO | Cases: Multple of same item, multipe stacks, etc.
 //TODO | Anticiplating errors with templates
 
 Inventory::Inventory()
@@ -16,8 +17,11 @@ Inventory::Inventory()
 void Inventory::initialize()
 {
     this->add(ItemRegistry::Instance()->getItem<ITEM_TOMATO>());
-    // Second Item Causes Crash
     this->add(ItemRegistry::Instance()->getItem<ITEM_TEST>());
+    this->add(ItemRegistry::Instance()->getItem<ITEM_TEST>());
+
+    //testing below function
+    dbg_log(contains<ITEM_TEST>());
 }
 
 int Inventory::nextEmptySlot()

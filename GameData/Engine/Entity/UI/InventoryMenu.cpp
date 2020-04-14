@@ -1,5 +1,8 @@
 #include "InventoryMenu.h"
 
+//TODO | Clicking on items is very bad and seemingly random
+//TODO | Click position changes based on player position
+
 InventoryMenu::InventoryMenu(Entity *entity)
 {
     i_entity = entity;

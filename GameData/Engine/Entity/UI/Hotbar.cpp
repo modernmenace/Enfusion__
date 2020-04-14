@@ -58,6 +58,8 @@ void Hotbar::updateSlots()
 
 void Hotbar::handleInput(sf::Keyboard::Key key)
 {
+    if (i_menu->active()) return;
+
     uint8_t selection = key - 27;
     if (selection < HOTBAR_SLOTS)
     {
