@@ -17,7 +17,7 @@ void Inventory::initialize()
 {
     this->add(ItemRegistry::Instance()->getItem<ITEM_TOMATO>());
     // Second Item Causes Crash
-    //this->add(ItemRegistry::Instance()->getItem<ITEM_TEST>());
+    this->add(ItemRegistry::Instance()->getItem<ITEM_TEST>());
 }
 
 int Inventory::nextEmptySlot()
