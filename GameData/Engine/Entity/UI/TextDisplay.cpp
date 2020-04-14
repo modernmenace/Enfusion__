@@ -13,12 +13,13 @@ void TextDisplay::initialize()
     text.setPosition(getComponent<Position>().getPosition());
 }
 
+void TextDisplay::setPosition(sf::Vector2f p)
+{
+    getComponent<Position>().setPosition(p);
+    text.setPosition(getComponent<Position>().getPosition());
+}
+
 void TextDisplay::render(sf::RenderWindow* window)
 {
     window->draw(text);
-}
-
-void TextDisplay::setText(string_t text)
-{
-    this->text.setString(text);
 }

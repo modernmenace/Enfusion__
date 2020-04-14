@@ -4,6 +4,10 @@
 #include "../../Misc/Item.h"
 #include "../../Component/Base/Sprite.h"
 #include "../../Component/Base/Position.h"
+#include "TextDisplay.h"
+
+//TODO: Store amount info in slot itself
+//TODO: Only show amount text when > 1
 
 class Slot : public Entity {
 
@@ -19,6 +23,8 @@ private:
     Item*      s_item;
     sf::Sprite s_sprite;
     bool       s_visible = true;
+
+    TextDisplay s_text;
 };
 
 

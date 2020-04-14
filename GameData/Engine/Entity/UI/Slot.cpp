@@ -1,6 +1,6 @@
 #include "Slot.h"
 
-Slot::Slot(sf::Vector2f position, Item *item) : s_sprite()
+Slot::Slot(sf::Vector2f position, Item *item) : s_sprite(), s_text("", sf::Vector2f(0, 0), 25)
 {
     s_item = item;
 
@@ -8,6 +8,9 @@ Slot::Slot(sf::Vector2f position, Item *item) : s_sprite()
     addComponent<Sprite>("UI/windowsheet.png");
     getComponent<Sprite>().getSprite().setTextureRect(sf::IntRect(64, 32, 16, 16));
     getComponent<Sprite>().getSprite().setScale(6, 6);
+    s_text.initialize();
+    s_text.setText("1");
+    s_text.setPosition(getComponent<Position>().getPosition());
 }
 
 void Slot::setItem(Item *item)
@@ -28,5 +31,6 @@ void Slot::render(sf::RenderWindow *window)
         Entity::render(window);
         if (item() != nullptr)
             window->draw(s_sprite);
+        s_text.render(window);
     }
 }

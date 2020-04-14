@@ -16,14 +16,6 @@ public:
         return m_Instance;
     }
 
-    void createItem(Item* i)
-    {
-        assert(i);
-        assert(m_Instance);
-        dbg_log("Item Registry: Creating item '" << i->name() << "'");
-        m_Instance->items.push_back(i);
-    }
-
     template <typename It>
     Item* getItem()
     {
@@ -37,6 +29,8 @@ public:
         }
         return nullptr;
     }
+
+    inline void createItem(Item* i) { m_Instance->items.push_back(i); }
 
 private:
     ItemRegistry() {};

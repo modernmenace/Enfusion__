@@ -11,9 +11,8 @@ public:
 
     void initialize() override;
     void render(sf::RenderWindow* window) override;
-
-    void setText(string_t text);
-
+    void setPosition(sf::Vector2f p);
+    inline void setText(string_t t) { text.setString(t); }
 
 private:
     sf::Text text;

@@ -20,7 +20,7 @@ void InventoryMenu::initialize()
     getComponent<Sprite>().visible = false;
 
     //initialize slots
-    Vector2f slotPos(getComponent<Position>().getPosition().x + 45,
+    sf::Vector2f slotPos(getComponent<Position>().getPosition().x + 45,
                      getComponent<Position>().getPosition().y + 350);
     for(int j = 0; j < 3; j++) {
         for (int i = 0; i < 5; i++) {

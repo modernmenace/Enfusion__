@@ -23,7 +23,7 @@ void Hotbar::initialize()
     getComponent<Sprite>().getSprite().setTextureRect(sf::IntRect(0, 48, 48, 16));
     getComponent<Sprite>().getSprite().setScale(15, 10);
 
-    Vector2f slotPos(getComponent<Position>().getPosition().x + 75, getComponent<Position>().getPosition().y + 20);
+    sf::Vector2f slotPos(getComponent<Position>().getPosition().x + 75, getComponent<Position>().getPosition().y + 20);
     for(int i = 0; i < HOTBAR_SLOTS; i++)
     {
         //below causes crashing

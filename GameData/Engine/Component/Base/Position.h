@@ -3,19 +3,16 @@
 
 #include "../Component.h"
 
-using sf::Vector2f;
-
 class Position : public Component {
 
 public:
-    Position(Vector2f position);
+    Position(sf::Vector2f position) { this->position = position; }
 
-    Vector2f getPosition();
-    void     setPosition(Vector2f pos);
-
+    inline sf::Vector2f getPosition()             { return this->position; }
+    inline void     setPosition(sf::Vector2f pos) { this->position = pos;  }
 
 private:
-    Vector2f position;
+    sf::Vector2f position;
 
 };
 
