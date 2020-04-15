@@ -111,8 +111,17 @@ void InventoryMenu::handleInput(sf::Mouse::Button button)
             if (slots[s]->item() != nullptr)
                 if (slots[s]->getComponent<Sprite>().getSprite().getGlobalBounds().contains(m_w_pos.x, m_w_pos.y))
                 {
+                    //TODO: flags arent working
                     dbg_log("Using item '" << slots[s]->item()->name() << "'");
-                    slots[s]->item()->activate();
+                    auto flag = slots[s]->item()->activate();
+                    dbg_log(flag);
+                    if (flag == IF_REMOVE)
+                    {
+                        dbg_log("removing");
+                        i_entity->getComponent<Inventory>().remove(slots[s]->item(), 1);
+                    }
+                    else if (flag == IF_NONE)
+                        dbg_log("test");
                 }
     }
 }

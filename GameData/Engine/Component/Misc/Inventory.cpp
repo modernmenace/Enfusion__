@@ -24,6 +24,11 @@ void Inventory::initialize()
     dbg_log(contains<ITEM_TEST>());
 }
 
+bool Inventory::remove(Item* item, uint16_t amount)
+{
+    return true;
+}
+
 int Inventory::nextEmptySlot()
 {
     //iterate array and return next empty slot

@@ -92,8 +92,7 @@ public:
     }
 
     //TODO: Remove Function
-    template <class It>
-    bool remove(uint16_t amount) { return true; }
+    bool remove(Item* item, uint16_t amount);
 
     inline Item* item(uint8_t id) { return inv_items[id];   }
     inline int amount(uint8_t id) { return inv_amounts[id]; }
