@@ -1,9 +1,10 @@
 #include "Slot.h"
 
-Slot::Slot(sf::Vector2f position, Item *item) : s_sprite(), s_text("", sf::Vector2f(0, 0), 25)
+Slot::Slot(sf::Vector2f position, Inventory* inv, Item *item) : s_sprite(), s_text("", sf::Vector2f(0, 0), 25)
 {
-    s_item     = item;
-    s_amount   = 0;
+    s_inv     = inv;
+    s_item    = item;
+    s_amount  = 0;
 
     addComponent<Position>(position);
     addComponent<Sprite>("UI/windowsheet.png");

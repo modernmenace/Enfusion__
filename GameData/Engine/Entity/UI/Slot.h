@@ -5,11 +5,12 @@
 #include "../../Component/Base/Sprite.h"
 #include "../../Component/Base/Position.h"
 #include "TextDisplay.h"
+#include "../../Component/Misc/Inventory.h"
 
 class Slot : public Entity {
 
 public:
-    Slot(sf::Vector2f position, Item* item = nullptr);
+    Slot(sf::Vector2f position, Inventory* inv, Item* item = nullptr);
     void render(sf::RenderWindow *window) override;
     void setItem(Item* item);
     void setCount(int c);
@@ -19,12 +20,12 @@ public:
     inline void setVisible(bool v) { s_visible = v; };
 
 private:
-    Item*      s_item;
-    sf::Sprite s_sprite;
-    bool       s_visible = true;
-    int        s_amount;
-
+    Item*       s_item;
+    Inventory*  s_inv = nullptr;
     TextDisplay s_text;
+    sf::Sprite  s_sprite;
+    bool        s_visible = true;
+    int         s_amount;
 };
 
 

@@ -24,7 +24,7 @@ void InventoryMenu::initialize()
                      getComponent<Position>().getPosition().y + 350);
     for(int j = 0; j < 3; j++) {
         for (int i = 0; i < 5; i++) {
-            Slot *s = new Slot(slotPos);
+            Slot *s = new Slot(slotPos, &i_entity->getComponent<Inventory>());
             s->setVisible(false);
             slots.emplace_back(s);
             slotPos.x += 96;
@@ -111,17 +111,8 @@ void InventoryMenu::handleInput(sf::Mouse::Button button)
             if (slots[s]->item() != nullptr)
                 if (slots[s]->getComponent<Sprite>().getSprite().getGlobalBounds().contains(m_w_pos.x, m_w_pos.y))
                 {
-                    //TODO: flags arent working
                     dbg_log("Using item '" << slots[s]->item()->name() << "'");
-                    auto flag = slots[s]->item()->activate();
-                    dbg_log(flag);
-                    if (flag == IF_REMOVE)
-                    {
-                        dbg_log("removing");
-                        i_entity->getComponent<Inventory>().remove(slots[s]->item(), 1);
-                    }
-                    else if (flag == IF_NONE)
-                        dbg_log("test");
+                    slots[s]->item()->activate();
                 }
     }
 }
