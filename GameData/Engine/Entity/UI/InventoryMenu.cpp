@@ -46,6 +46,9 @@ void InventoryMenu::toggleMenu()
         for(int s = 0; s < slots.size(); s++)
             slots.at(s)->setItem(i_entity->getComponent<Inventory>().item(s));
 
+        for(int s = 0; s < slots.size(); s++)
+            slots.at(s)->setCount(i_entity->getComponent<Inventory>().amount(s));
+
         getComponent<Sprite>().visible = true;
         for(auto &s : slots)
             s->setVisible(true);

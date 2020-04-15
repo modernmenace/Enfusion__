@@ -95,7 +95,8 @@ public:
     template <class It>
     bool remove(uint16_t amount) { return true; }
 
-    inline Item* item(uint8_t id) { return inv_items[id]; }
+    inline Item* item(uint8_t id) { return inv_items[id];   }
+    inline int amount(uint8_t id) { return inv_amounts[id]; }
 };
 
 

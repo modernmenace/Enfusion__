@@ -2,8 +2,8 @@
 #include "../../../Data/Items.h"
 
 //TODO | Test this
-//TODO | Cases: Multple of same item, multipe stacks, etc.
-//TODO | Anticiplating errors with templates
+//TODO | Cases: Multiple of same item, multiple stacks, etc.
+//TODO | Anticipating errors with templates
 
 Inventory::Inventory()
 {

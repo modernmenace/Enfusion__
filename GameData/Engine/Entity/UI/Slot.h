@@ -6,23 +6,28 @@
 #include "../../Component/Base/Position.h"
 #include "TextDisplay.h"
 
-//TODO: Store amount info in slot itself
+//TODO: Only way for this to work is to store amounts in
+//TODO: Inventory menu
 //TODO: Only show amount text when > 1
 
 class Slot : public Entity {
 
 public:
-    Slot(sf::Vector2f position, Item* item = nullptr);
+    Slot(sf::Vector2f position, Item* item = nullptr, bool hideText = false);
     void render(sf::RenderWindow *window) override;
     void setItem(Item* item);
-    inline void setVisible(bool v) { s_visible = v; };
+    void setCount(int c);
     inline bool visible() { return s_visible; }
+    inline int  count()   { return s_amount; }
     inline Item* item()   { return s_item; }
+    inline void setVisible(bool v) { s_visible = v; };
 
 private:
     Item*      s_item;
     sf::Sprite s_sprite;
     bool       s_visible = true;
+    int        s_amount;
+    bool       s_hideText;
 
     TextDisplay s_text;
 };
