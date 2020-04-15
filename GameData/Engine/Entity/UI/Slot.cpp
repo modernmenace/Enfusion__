@@ -11,7 +11,9 @@ Slot::Slot(sf::Vector2f position, Item *item) : s_sprite(), s_text("", sf::Vecto
     getComponent<Sprite>().getSprite().setScale(6, 6);
     s_text.initialize();
     s_text.setText("");
-    s_text.setPosition(getComponent<Position>().getPosition());
+    auto s_x = getComponent<Position>().getPosition().x + (69);
+    auto s_y = getComponent<Position>().getPosition().y + (62);
+    s_text.setPosition(sf::Vector2f(s_x, s_y));
 }
 
 void Slot::setItem(Item *item)
