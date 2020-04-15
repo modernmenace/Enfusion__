@@ -91,7 +91,6 @@ public:
         return amt;
     }
 
-    //TODO: Remove Function
     bool remove(Item* item, uint16_t amount);
 
     inline Item* item(uint8_t id) { return inv_items[id];   }

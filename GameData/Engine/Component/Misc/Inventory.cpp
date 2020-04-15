@@ -24,8 +24,10 @@ void Inventory::initialize()
     dbg_log(contains<ITEM_TEST>());
 }
 
+//TODO: Implement this
 bool Inventory::remove(Item* item, uint16_t amount)
 {
+    dbg_log("Inventory.cpp: remove() called!")
     return true;
 }
 
