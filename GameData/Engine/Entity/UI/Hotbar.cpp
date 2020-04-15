@@ -26,7 +26,7 @@ void Hotbar::initialize()
     sf::Vector2f slotPos(getComponent<Position>().getPosition().x + 75, getComponent<Position>().getPosition().y + 20);
     for(int i = 0; i < HOTBAR_SLOTS; i++)
     {
-        slots.emplace_back(new Slot(slotPos, nullptr, true));
+        slots.emplace_back(new Slot(slotPos));
         slotPos.x += 96; //16 * x-scale
     }
 
@@ -47,6 +47,9 @@ void Hotbar::updateSlots()
 {
     for(int i = 0; i < HOTBAR_SLOTS; i++)
         slots.at(i)->setItem(i_menu->slots.at(i)->item());
+
+    for(int i = 0; i < HOTBAR_SLOTS; i++)
+        slots.at(i)->setCount(i_entity->getComponent<Inventory>().amount(i));
 
     if (slots.at(selectedSlot)->item() != nullptr)
         itemText->setText("Current Item: " + slots.at(selectedSlot)->item()->name());

@@ -6,14 +6,12 @@
 #include "../../Component/Base/Position.h"
 #include "TextDisplay.h"
 
-//TODO: Only way for this to work is to store amounts in
-//TODO: Inventory menu
-//TODO: Only show amount text when > 1
+//TODO: Move amount text to bottom right
 
 class Slot : public Entity {
 
 public:
-    Slot(sf::Vector2f position, Item* item = nullptr, bool hideText = false);
+    Slot(sf::Vector2f position, Item* item = nullptr);
     void render(sf::RenderWindow *window) override;
     void setItem(Item* item);
     void setCount(int c);
@@ -27,7 +25,6 @@ private:
     sf::Sprite s_sprite;
     bool       s_visible = true;
     int        s_amount;
-    bool       s_hideText;
 
     TextDisplay s_text;
 };
