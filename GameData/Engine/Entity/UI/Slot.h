@@ -6,8 +6,6 @@
 #include "../../Component/Base/Position.h"
 #include "TextDisplay.h"
 
-//TODO: Move amount text to bottom right
-
 class Slot : public Entity {
 
 public:
