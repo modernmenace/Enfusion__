@@ -30,48 +30,43 @@ public:
     Inventory();
     void initialize() override;
 
+    //TODO: Add multiple items
     template<class It>
-    bool add(It* item)
+    bool add(It* item, uint16_t amount = 1)
     {
         if (item == nullptr) return false;
 
-        std::vector<int> existingStacks;
-        for(uint8_t i = 0; i < INVENTORY_SIZE; i++)
-            if (inv_items[i] != nullptr)
-                if (inv_items[i]->id() == item->id())
-                    existingStacks.push_back(i);
+        for(uint16_t i = 0; i < amount; i++) {
+            std::vector<int> existingStacks;
+            for (uint8_t i = 0; i < INVENTORY_SIZE; i++)
+                if (inv_items[i] != nullptr)
+                    if (inv_items[i]->id() == item->id())
+                        existingStacks.push_back(i);
 
-        if (existingStacks.size() == 0)
-        {
-            //item not found
-            int slot = nextEmptySlot();
-            if (slot == INVENTORY_FULL) return false;
-            inv_items[slot]   = item;
-            inv_amounts[slot] = 1;
-        }
-        else
-        {
-            int currentStack = 0;
-            for(;;)
-            {
-                if (inv_amounts[existingStacks[currentStack]]
-                    < inv_items[existingStacks[currentStack]]->stackSize())
-                {
-                    inv_amounts[existingStacks[currentStack]]++;
-                    break;
-                }
-                else
-                {
-                    if (currentStack == existingStacks.size() - 1)
-                    {
-                        uint8_t slot = nextEmptySlot();
-                        if (slot == INVENTORY_FULL) return false;
-
-                        inv_items[slot]   = item;
-                        inv_amounts[slot] = 1;
+            if (existingStacks.size() == 0) {
+                //item not found
+                int slot = nextEmptySlot();
+                if (slot == INVENTORY_FULL) return false;
+                inv_items[slot] = item;
+                inv_amounts[slot] = 1;
+            } else {
+                int currentStack = 0;
+                for (;;) {
+                    if (inv_amounts[existingStacks[currentStack]]
+                        < inv_items[existingStacks[currentStack]]->stackSize()) {
+                        inv_amounts[existingStacks[currentStack]]++;
                         break;
+                    } else {
+                        if (currentStack == existingStacks.size() - 1) {
+                            uint8_t slot = nextEmptySlot();
+                            if (slot == INVENTORY_FULL) return false;
+
+                            inv_items[slot] = item;
+                            inv_amounts[slot] = 1;
+                            break;
+                        }
+                        currentStack++;
                     }
-                    currentStack++;
                 }
             }
         }

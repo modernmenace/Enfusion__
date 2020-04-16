@@ -106,11 +106,6 @@ void InventoryMenu::update(sf::Time tickRate)
 void InventoryMenu::handleInput(sf::Keyboard::Key key)
 {
     if (key == 60) toggleMenu();
-
-    //TODO: Remove this after testing
-    //17 = r
-    if (key == 17)
-        i_entity->getComponent<Inventory>().add(ItemRegistry::Instance()->getItem<ITEM_TEST>());
 }
 
 void InventoryMenu::handleInput(sf::Mouse::Button button)

@@ -1,10 +1,6 @@
 #include "Inventory.h"
 #include "../../../Data/Items.h"
 
-//TODO | Test this
-//TODO | Cases: Multiple of same item, multiple stacks, etc.
-//TODO | Anticipating errors with templates
-
 Inventory::Inventory()
 {
     for(uint8_t i = 0; i < INVENTORY_SIZE; i++)
@@ -17,8 +13,7 @@ Inventory::Inventory()
 void Inventory::initialize()
 {
     this->add(ItemRegistry::Instance()->getItem<ITEM_TOMATO>());
-    this->add(ItemRegistry::Instance()->getItem<ITEM_TEST>());
-    this->add(ItemRegistry::Instance()->getItem<ITEM_TEST>());
+    this->add(ItemRegistry::Instance()->getItem<ITEM_TEST>(), 16);
 }
 
 void Inventory::remove(Item* item, uint16_t amount)

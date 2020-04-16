@@ -8,10 +8,6 @@
 #include "Slot.h"
 #include "Tooltip.h"
 
-//TODO: Remove this after testing
-#include "../../Misc/ItemRegistry.h"
-#include "../../../Data/Items.h"
-
 class InventoryMenu : public Entity {
 
 public:
