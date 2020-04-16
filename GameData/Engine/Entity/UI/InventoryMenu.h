@@ -6,6 +6,7 @@
 #include "../../Component/Base/Position.h"
 #include "../../Component/Misc/Inventory.h"
 #include "Slot.h"
+#include "Tooltip.h"
 
 class InventoryMenu : public Entity {
 
@@ -24,6 +25,8 @@ public:
 private:
     Entity* i_entity = nullptr;
     bool menuActive  = false;
+
+    Tooltip i_tooltip;
 
 };
 

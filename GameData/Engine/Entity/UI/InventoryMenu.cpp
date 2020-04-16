@@ -1,6 +1,6 @@
 #include "InventoryMenu.h"
 
-InventoryMenu::InventoryMenu(Entity *entity)
+InventoryMenu::InventoryMenu(Entity *entity) : i_tooltip()
 {
     i_entity = entity;
     addComponent<Position>(sf::Vector2f(300, -450));
@@ -11,6 +11,7 @@ void InventoryMenu::initialize()
 {
     assert(i_entity->hasComponent<Inventory>());
     Entity::initialize();
+    i_tooltip.initialize();
 
     getComponent<Sprite>().getSprite().setTextureRect(sf::IntRect(0, 0, 48, 48));
     getComponent<Sprite>().getSprite().setScale(12, 15);
@@ -64,6 +65,7 @@ void InventoryMenu::toggleMenu()
         getComponent<Sprite>().visible = false;
         for(auto &s : slots)
             s->setVisible(false);
+        i_tooltip.hide();
     }
 }
 
@@ -75,8 +77,8 @@ void InventoryMenu::update(sf::Time tickRate)
     sf::Sprite& s = getComponent<Sprite>().getSprite();
 
     sf::Vector2f m_w_pos = getMousePosition();
+    i_tooltip.hide();
 
-    //first check if it is within menus bounds
     if (s.getGlobalBounds().contains(m_w_pos.x, m_w_pos.y))
     {
         for(int s = 0; s < slots.size(); s++)
@@ -85,7 +87,9 @@ void InventoryMenu::update(sf::Time tickRate)
             {
                 if (slots[s]->getComponent<Sprite>().getSprite().getGlobalBounds().contains(m_w_pos.x, m_w_pos.y))
                 {
-                    //currently hovering over slot[s], show tooltip
+                    auto t_pos = slots[s]->getComponent<Position>().getPosition();
+                    t_pos.x += 96;
+                    i_tooltip.show(slots[s]->item(), t_pos);
                 }
             }
         }
@@ -122,4 +126,6 @@ void InventoryMenu::render(sf::RenderWindow *window)
 
     for(auto &s : slots)
         s->render(window);
+
+    i_tooltip.render(window);
 }
