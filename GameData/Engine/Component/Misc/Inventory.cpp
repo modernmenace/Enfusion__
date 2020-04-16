@@ -19,9 +19,6 @@ void Inventory::initialize()
     this->add(ItemRegistry::Instance()->getItem<ITEM_TOMATO>());
     this->add(ItemRegistry::Instance()->getItem<ITEM_TEST>());
     this->add(ItemRegistry::Instance()->getItem<ITEM_TEST>());
-
-    //testing below function
-    dbg_log(contains<ITEM_TEST>());
 }
 
 void Inventory::remove(Item* item, uint16_t amount)
