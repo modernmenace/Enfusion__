@@ -104,9 +104,6 @@ private:
     std::map<ComponentID, std::unique_ptr<Component>> componentMap;
     std::bitset<MAX_COMPONENTS>                       componentIDSet;
 
-protected:
-    sf::Vector2f getMousePosition();
-
 };
 
 

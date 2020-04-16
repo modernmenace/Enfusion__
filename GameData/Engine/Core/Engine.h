@@ -55,4 +55,14 @@ typedef std::string string_t;
     #define dbg_err(message)
 #endif
 
+//useful static functions
+static sf::Vector2f getMousePosition()
+{
+    auto oldView = WINDOW->getView();
+    WINDOW->setView(*uiView);
+    sf::Vector2f m_w_pos = WINDOW->mapPixelToCoords(sf::Mouse::getPosition(*WINDOW));
+    WINDOW->setView(oldView);
+    return m_w_pos;
+}
+
 #endif //ENFUSION_ENGINE_H

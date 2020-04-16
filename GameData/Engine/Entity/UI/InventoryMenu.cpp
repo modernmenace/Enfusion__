@@ -1,12 +1,10 @@
 #include "InventoryMenu.h"
 
-InventoryMenu::InventoryMenu(Entity *entity) : testText("O", sf::Vector2f(0, 0), 25)
+InventoryMenu::InventoryMenu(Entity *entity)
 {
     i_entity = entity;
     addComponent<Position>(sf::Vector2f(300, -450));
     addComponent<Sprite>("UI/windowsheet.png");
-
-    testText.initialize();
 }
 
 void InventoryMenu::initialize()
@@ -77,7 +75,6 @@ void InventoryMenu::update(sf::Time tickRate)
     sf::Sprite& s = getComponent<Sprite>().getSprite();
 
     sf::Vector2f m_w_pos = getMousePosition();
-    testText.setPosition(sf::Vector2f(m_w_pos.x, m_w_pos.y));
 
     //first check if it is within menus bounds
     if (s.getGlobalBounds().contains(m_w_pos.x, m_w_pos.y))
@@ -125,6 +122,4 @@ void InventoryMenu::render(sf::RenderWindow *window)
 
     for(auto &s : slots)
         s->render(window);
-
-    testText.render(window);
 }
