@@ -12,6 +12,7 @@ class Level {
 
 public:
     Level(std::string levelName, std::string background);
+    virtual ~Level();
 
     virtual void initialize();
     virtual void update(sf::Time tickRate);

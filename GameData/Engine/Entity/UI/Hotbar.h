@@ -15,6 +15,7 @@ class Hotbar : public Entity {
 
 public:
     Hotbar(Entity* entity, sf::Vector2f position, InventoryMenu* menu);
+    ~Hotbar()         override;
     void initialize() override;
     void render(sf::RenderWindow* window)   override;
     void handleInput(sf::Keyboard::Key)     override;
@@ -25,12 +26,12 @@ public:
 private:
     std::vector<Slot*>  slots;
     sf::RectangleShape selectionRect;
-    InventoryMenu*     i_menu;
     uint8_t            selectedSlot = 0;
 
 
-    Entity* i_entity      = nullptr;
-    TextDisplay* itemText = nullptr;
+    Entity*        i_entity = nullptr;
+    InventoryMenu* i_menu   = nullptr;
+    TextDisplay*   h_text   = nullptr;
 };
 
 

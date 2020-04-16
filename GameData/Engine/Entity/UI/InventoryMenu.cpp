@@ -7,6 +7,15 @@ InventoryMenu::InventoryMenu(Entity *entity) : i_tooltip()
     addComponent<Sprite>("UI/windowsheet.png");
 }
 
+InventoryMenu::~InventoryMenu()
+{
+    for(std::vector<Slot*>::iterator i = slots.begin(),
+            e = slots.end(); i != e; ++i)
+        delete (*i);
+
+    Entity::~Entity();
+}
+
 void InventoryMenu::initialize()
 {
     assert(i_entity->hasComponent<Inventory>());

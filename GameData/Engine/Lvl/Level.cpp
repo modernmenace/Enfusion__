@@ -23,6 +23,17 @@ Level::Level(std::string levelName, std::string background)
     //this->background.setTexture(&AssetManager::getTexture(background));
 }
 
+Level::~Level()
+{
+    for(std::vector<Entity*>::iterator i = entities.begin(),
+            e = entities.end(); i != e; ++i)
+        delete (*i);
+
+    for(std::vector<Entity*>::iterator i = uiEntities.begin(),
+                e = entities.end(); i != e; ++i)
+        delete (*i);
+}
+
 void Level::initialize()
 {
     for(auto &e : entities)

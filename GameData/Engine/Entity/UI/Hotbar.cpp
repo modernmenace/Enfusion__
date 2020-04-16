@@ -17,6 +17,12 @@ Hotbar::Hotbar(Entity* entity, sf::Vector2f position, InventoryMenu* menu)
     addComponent<Sprite>("UI/windowsheet.png");
 }
 
+Hotbar::~Hotbar()
+{
+    delete h_text;
+    Entity::~Entity();
+}
+
 void Hotbar::initialize()
 {
     assert(i_entity->hasComponent<Inventory>());
@@ -36,9 +42,9 @@ void Hotbar::initialize()
     selectionRect.setFillColor(sf::Color::Transparent);
     selectionRect.setPosition(slots[selectedSlot]->getComponent<Sprite>().getSprite().getPosition());
 
-    itemText = new TextDisplay("Current Item: None",
+    h_text = new TextDisplay("Current Item: None",
             sf::Vector2f(-225, 320), 20);
-    itemText->initialize();
+    h_text->initialize();
 
     Entity::initialize();
 }
@@ -52,9 +58,9 @@ void Hotbar::updateSlots()
         slots.at(i)->setCount(i_entity->getComponent<Inventory>().amount(i));
 
     if (slots.at(selectedSlot)->item() != nullptr)
-        itemText->setText("Current Item: " + slots.at(selectedSlot)->item()->name());
+        h_text->setText("Current Item: " + slots.at(selectedSlot)->item()->name());
     else
-        itemText->setText("Current Item: None");
+        h_text->setText("Current Item: None");
 }
 
 void Hotbar::handleInput(sf::Keyboard::Key key)
@@ -86,8 +92,6 @@ void Hotbar::handleInput(sf::Keyboard::Key key)
 
 void Hotbar::handleInput(sf::Mouse::Button button)
 {
-    //if (!i_menu->active()) return;
-
     if (button == sf::Mouse::Left)
         updateSlots();
 }
@@ -100,5 +104,5 @@ void Hotbar::render(sf::RenderWindow *window)
         s->render(window);
 
     window->draw(selectionRect);
-    itemText->render(window);
+    h_text->render(window);
 }

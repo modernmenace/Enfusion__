@@ -9,7 +9,6 @@ Tooltip::Tooltip() : t_iName("", sf::Vector2f(0, 0), 20),
 
 void Tooltip::initialize()
 {
-    dbg_log("init");
     getComponent<Sprite>().getSprite().setTextureRect(sf::IntRect(0, 0, 48, 48));
     getComponent<Sprite>().getSprite().setScale(4, 4);
 

@@ -29,7 +29,6 @@ public:
     virtual void handleInput(sf::Keyboard::Key)        {}
     virtual void handleInput(sf::Mouse::Button button) {}
 
-    //TODO: Deal with destructors
     virtual ~Component()      {}
 
 };
