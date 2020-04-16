@@ -14,6 +14,7 @@ public:
     void render(sf::RenderWindow *window) override;
     void setItem(Item* item);
     void setCount(int c);
+    void activateItem();
     inline bool visible() { return s_visible; }
     inline int  count()   { return s_amount; }
     inline Item* item()   { return s_item; }

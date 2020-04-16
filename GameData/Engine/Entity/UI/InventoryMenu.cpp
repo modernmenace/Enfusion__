@@ -112,7 +112,7 @@ void InventoryMenu::handleInput(sf::Mouse::Button button)
                 if (slots[s]->getComponent<Sprite>().getSprite().getGlobalBounds().contains(m_w_pos.x, m_w_pos.y))
                 {
                     dbg_log("Using item '" << slots[s]->item()->name() << "'");
-                    slots[s]->item()->activate();
+                    slots[s]->activateItem();
                 }
     }
 }

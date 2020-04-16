@@ -28,6 +28,17 @@ void Slot::setItem(Item *item)
     }
 }
 
+void Slot::activateItem()
+{
+    if (!s_item || s_inv) return;
+
+    s_item->activate();
+
+    //TODO: below not getting called
+    if(s_item->type() == Item_Consumable)
+        s_inv->remove(s_item, 1);
+}
+
 void Slot::setCount(int c)
 {
     s_amount = c;

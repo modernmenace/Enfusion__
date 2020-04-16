@@ -9,13 +9,13 @@ CREATE_ITEM(ITEM_TOMATO, "Tomato",
             "Objects/Consumables/tomato.png",
             {
                 dbg_log("Used a tomato!");
-            }, 16);
+            }, Item_Consumable, 16);
 
 CREATE_ITEM(ITEM_TEST, "Test Item", "Test Description",
             "Objects/Consumables/testitem.png",
             {
                     dbg_log("This Is A Test Item!");
-                    }, 16);
+                    }, Item_Consumable, 16);
 
 
 static void generateItemRegistry()
