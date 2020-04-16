@@ -28,6 +28,7 @@
 
 // Globals
 extern sf::RenderWindow*         WINDOW;
+extern sf::View*                 uiView;
 extern std::unique_ptr<sf::Font> GlobalFont;
 
 // Misc Useful Macros

@@ -6,10 +6,10 @@
 class Position : public Component {
 
 public:
-    Position(sf::Vector2f position) { this->position = position; }
+    Position(sf::Vector2f position)               { this->position = position; }
 
     inline sf::Vector2f getPosition()             { return this->position; }
-    inline void     setPosition(sf::Vector2f pos) { this->position = pos;  }
+    inline void setPosition(sf::Vector2f pos)     { this->position = pos;  }
 
 private:
     sf::Vector2f position;

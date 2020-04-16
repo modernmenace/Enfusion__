@@ -22,6 +22,16 @@ Entity::~Entity()
     //TODO: Write destructors
 }
 
+sf::Vector2f Entity::getMousePosition()
+{
+    //if (!uiView) return sf::Vector2f(0, 0);
+    auto oldView = WINDOW->getView();
+    WINDOW->setView(*uiView);
+    sf::Vector2f m_w_pos = WINDOW->mapPixelToCoords(sf::Mouse::getPosition(*WINDOW));
+    WINDOW->setView(oldView);
+    return m_w_pos;
+}
+
 void Entity::update(sf::Time tickRate)
 {
     for(auto& c : componentMap)

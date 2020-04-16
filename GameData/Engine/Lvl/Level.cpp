@@ -17,6 +17,7 @@ Level::Level(std::string levelName, std::string background)
     : defaultView(sf::Vector2f(0, 0), sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT))
 {
     this->levelName = levelName;
+    uiView = &defaultView;
     //TODO: Figure out if we want to keep this background or remove it entirely
     //this->background.setSize(sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT));
     //this->background.setTexture(&AssetManager::getTexture(background));

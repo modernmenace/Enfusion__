@@ -74,11 +74,9 @@ void InventoryMenu::update(sf::Time tickRate)
     Entity::update(tickRate);
     if (!menuActive) return;
 
-    sf::Vector2i m_w_pos = sf::Mouse::getPosition();
     sf::Sprite& s = getComponent<Sprite>().getSprite();
-    //TODO: figure out where these magic numebrs come from, changes with window size
-    m_w_pos.x -= 970;
-    m_w_pos.y -= 580;
+
+    sf::Vector2f m_w_pos = getMousePosition();
     testText.setPosition(sf::Vector2f(m_w_pos.x, m_w_pos.y));
 
     //first check if it is within menus bounds
@@ -106,12 +104,12 @@ void InventoryMenu::handleInput(sf::Mouse::Button button)
 {
     if(button == sf::Mouse::Left)
     {
-        sf::Vector2i m_w_pos = sf::Mouse::getPosition();
+        sf::Vector2f m_w_pos = getMousePosition();
         sf::Sprite& s = getComponent<Sprite>().getSprite();
 
         for(int s = 0; s < slots.size(); s++)
             if (slots[s]->item() != nullptr)
-                if (slots[s]->getComponent<Sprite>().getSprite().getGlobalBounds().contains(m_w_pos.x-970, m_w_pos.y-580))
+                if (slots[s]->getComponent<Sprite>().getSprite().getGlobalBounds().contains(m_w_pos))
                 {
                     i_entity->getComponent<Inventory>().activated(s);
                     slots[s]->activateItem();
