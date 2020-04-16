@@ -1,14 +1,12 @@
 #include "InventoryMenu.h"
 
-//TODO | Clicking on items is very bad and seemingly random
-//TODO | Maybe Issue is that it isnt using UI view?
-//TODO | Click position changes based on player position
-
-InventoryMenu::InventoryMenu(Entity *entity)
+InventoryMenu::InventoryMenu(Entity *entity) : testText("O", sf::Vector2f(0, 0), 25)
 {
     i_entity = entity;
     addComponent<Position>(sf::Vector2f(300, -450));
     addComponent<Sprite>("UI/windowsheet.png");
+
+    testText.initialize();
 }
 
 void InventoryMenu::initialize()
@@ -69,9 +67,6 @@ void InventoryMenu::toggleMenu()
         for(auto &s : slots)
             s->setVisible(false);
     }
-
-
-
 }
 
 void InventoryMenu::update(sf::Time tickRate)
@@ -79,12 +74,12 @@ void InventoryMenu::update(sf::Time tickRate)
     Entity::update(tickRate);
     if (!menuActive) return;
 
-    //faster way?
-    sf::Vector2f m_w_pos = WINDOW->mapPixelToCoords(sf::Mouse::getPosition(*WINDOW));
+    sf::Vector2i m_w_pos = sf::Mouse::getPosition();
     sf::Sprite& s = getComponent<Sprite>().getSprite();
-    m_w_pos.x -= (s.getTextureRect().width * s.getScale().x);
-    m_w_pos.x -= 25;  // using magic number
-    m_w_pos.y -= 300; // doing it again
+    //TODO: figure out where these magic numebrs come from, changes with window size
+    m_w_pos.x -= 970;
+    m_w_pos.y -= 580;
+    testText.setPosition(sf::Vector2f(m_w_pos.x, m_w_pos.y));
 
     //first check if it is within menus bounds
     if (s.getGlobalBounds().contains(m_w_pos.x, m_w_pos.y))
@@ -109,17 +104,14 @@ void InventoryMenu::handleInput(sf::Keyboard::Key key)
 
 void InventoryMenu::handleInput(sf::Mouse::Button button)
 {
-    //check for left click
     if(button == sf::Mouse::Left)
     {
-        sf::Vector2f m_w_pos = WINDOW->mapPixelToCoords(sf::Mouse::getPosition(*WINDOW));
+        sf::Vector2i m_w_pos = sf::Mouse::getPosition();
         sf::Sprite& s = getComponent<Sprite>().getSprite();
-        m_w_pos.x -= (s.getTextureRect().width * s.getScale().x);
-        m_w_pos.x -= 25;  // using magic number
-        m_w_pos.y -= 300; // doing it again
+
         for(int s = 0; s < slots.size(); s++)
             if (slots[s]->item() != nullptr)
-                if (slots[s]->getComponent<Sprite>().getSprite().getGlobalBounds().contains(m_w_pos.x, m_w_pos.y))
+                if (slots[s]->getComponent<Sprite>().getSprite().getGlobalBounds().contains(m_w_pos.x-970, m_w_pos.y-580))
                 {
                     i_entity->getComponent<Inventory>().activated(s);
                     slots[s]->activateItem();
@@ -135,4 +127,6 @@ void InventoryMenu::render(sf::RenderWindow *window)
 
     for(auto &s : slots)
         s->render(window);
+
+    testText.render(window);
 }

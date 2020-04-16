@@ -24,6 +24,9 @@ public:
 private:
     Entity* i_entity = nullptr;
     bool menuActive  = false;
+
+    //TODO: Using this to test mouse position
+    TextDisplay testText;
 };
 
 
