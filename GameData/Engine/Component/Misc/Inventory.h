@@ -35,24 +35,13 @@ public:
     {
         if (item == nullptr) return false;
 
-        //check if value exists
-        //TODO | this does not allow for more than two stacks,
-        //TODO | replace itemExists with for loops for each one found?
-        int16_t itemExists = -1;
+        std::vector<int> existingStacks;
         for(uint8_t i = 0; i < INVENTORY_SIZE; i++)
-        {
-            //this does not allow for more than two stacks
             if (inv_items[i] != nullptr)
-            {
                 if (inv_items[i]->id() == item->id())
-                {
-                    itemExists = true;
-                    break;
-                }
-            }
-        }
+                    existingStacks.push_back(i);
 
-        if (itemExists < 0)
+        if (existingStacks.size() == 0)
         {
             //item not found
             int slot = nextEmptySlot();
@@ -62,18 +51,28 @@ public:
         }
         else
         {
-            //item exists in inventory
-            if (inv_amounts[itemExists] < inv_items[itemExists]->stackSize())
-                inv_amounts[itemExists]++;
-
-            else
+            int currentStack = 0;
+            for(;;)
             {
-                //create new stack
-                uint8_t slot = nextEmptySlot();
-                if (slot == INVENTORY_FULL) return false;
+                if (inv_amounts[existingStacks[currentStack]]
+                    < inv_items[existingStacks[currentStack]]->stackSize())
+                {
+                    inv_amounts[existingStacks[currentStack]]++;
+                    break;
+                }
+                else
+                {
+                    if (currentStack == existingStacks.size() - 1)
+                    {
+                        uint8_t slot = nextEmptySlot();
+                        if (slot == INVENTORY_FULL) return false;
 
-                inv_items[slot]   = item;
-                inv_amounts[slot] = 1;
+                        inv_items[slot]   = item;
+                        inv_amounts[slot] = 1;
+                        break;
+                    }
+                    currentStack++;
+                }
             }
         }
         return true;

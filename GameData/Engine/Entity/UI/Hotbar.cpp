@@ -19,8 +19,11 @@ Hotbar::Hotbar(Entity* entity, sf::Vector2f position, InventoryMenu* menu)
 
 Hotbar::~Hotbar()
 {
+    for(std::vector<Slot*>::iterator i = slots.begin(),
+                e = slots.end(); i != e; ++i)
+        delete (*i);
+
     delete h_text;
-    Entity::~Entity();
 }
 
 void Hotbar::initialize()

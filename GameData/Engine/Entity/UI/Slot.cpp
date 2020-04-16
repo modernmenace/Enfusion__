@@ -12,7 +12,7 @@ Slot::Slot(sf::Vector2f position, Inventory* inv, Item *item) : s_sprite(), s_te
     getComponent<Sprite>().getSprite().setScale(6, 6);
     s_text.initialize();
     s_text.setText("");
-    auto s_x = getComponent<Position>().getPosition().x + (69);
+    auto s_x = getComponent<Position>().getPosition().x + 10; //69
     auto s_y = getComponent<Position>().getPosition().y + (62);
     s_text.setPosition(sf::Vector2f(s_x, s_y));
 }
@@ -34,7 +34,6 @@ void Slot::activateItem()
 
     s_item->activate();
 
-    //TODO: below not getting called
     if(s_item->type() == Item_Consumable)
         s_inv->remove(s_item, 1);
 }
