@@ -22,6 +22,8 @@ private:
     Item*   inv_items  [INVENTORY_SIZE];
     int     inv_amounts[INVENTORY_SIZE];
 
+    int     lastItemActivated;
+
     int nextEmptySlot();
 
 public:
@@ -91,10 +93,11 @@ public:
         return amt;
     }
 
-    bool remove(Item* item, uint16_t amount);
+    void remove(Item* item, uint16_t amount);
 
     inline Item* item(uint8_t id) { return inv_items[id];   }
     inline int amount(uint8_t id) { return inv_amounts[id]; }
+    inline void activated(int id) { lastItemActivated = id; }
 };
 
 

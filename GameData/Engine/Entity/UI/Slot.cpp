@@ -30,7 +30,7 @@ void Slot::setItem(Item *item)
 
 void Slot::activateItem()
 {
-    if (!s_item || s_inv) return;
+    if (!s_item || !s_inv) return;
 
     s_item->activate();
 

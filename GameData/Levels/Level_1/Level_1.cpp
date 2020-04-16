@@ -6,8 +6,8 @@ Level_1::Level_1() : Level("Level_1", "Levels/Level_1_back.png"),
                      hotbar(&player, sf::Vector2f(-300, 350), &inventory)
 {
     addEntity(&player);
-    addUIEntity(&hotbar);
     addUIEntity(&inventory);
+    addUIEntity(&hotbar);
 
     //Debug Display
     #ifdef DEBUG_BUILD

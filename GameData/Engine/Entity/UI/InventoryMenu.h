@@ -17,6 +17,7 @@ public:
     void update(sf::Time tickRate)          override;
     void render(sf::RenderWindow* window)   override;
     void toggleMenu();
+    void updateSlots();
     inline bool active() { return menuActive; };
     std::vector<Slot*>  slots;
 

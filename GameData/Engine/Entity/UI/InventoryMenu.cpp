@@ -37,6 +37,15 @@ void InventoryMenu::initialize()
         slots.at(s)->setItem(i_entity->getComponent<Inventory>().item(s));
 }
 
+void InventoryMenu::updateSlots()
+{
+    for(int s = 0; s < slots.size(); s++)
+        slots.at(s)->setItem(i_entity->getComponent<Inventory>().item(s));
+
+    for(int s = 0; s < slots.size(); s++)
+        slots.at(s)->setCount(i_entity->getComponent<Inventory>().amount(s));
+}
+
 void InventoryMenu::toggleMenu()
 {
     menuActive = !menuActive;
@@ -111,8 +120,10 @@ void InventoryMenu::handleInput(sf::Mouse::Button button)
             if (slots[s]->item() != nullptr)
                 if (slots[s]->getComponent<Sprite>().getSprite().getGlobalBounds().contains(m_w_pos.x, m_w_pos.y))
                 {
-                    dbg_log("Using item '" << slots[s]->item()->name() << "'");
+                    i_entity->getComponent<Inventory>().activated(s);
                     slots[s]->activateItem();
+                    slots.at(s)->setItem(i_entity->getComponent<Inventory>().item(s));
+                    slots.at(s)->setCount(i_entity->getComponent<Inventory>().amount(s));
                 }
     }
 }

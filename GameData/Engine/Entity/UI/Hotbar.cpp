@@ -64,6 +64,14 @@ void Hotbar::handleInput(sf::Keyboard::Key key)
     uint8_t selection = key - 27;
     if (selection < HOTBAR_SLOTS)
     {
+        if (selectedSlot == selection)
+        {
+            i_entity->getComponent<Inventory>().activated(selection);
+            slots[selection]->activateItem();
+            i_menu->updateSlots();
+            updateSlots();
+            return;
+        }
         selectedSlot = selection;
         selectionRect.setPosition(slots[selectedSlot]->getComponent<Sprite>().getSprite().getPosition());
     }
@@ -74,6 +82,14 @@ void Hotbar::handleInput(sf::Keyboard::Key key)
     selectionRect.setPosition(slots[selectedSlot]->getComponent<Sprite>().getSprite().getPosition());
 
     updateSlots();
+}
+
+void Hotbar::handleInput(sf::Mouse::Button button)
+{
+    //if (!i_menu->active()) return;
+
+    if (button == sf::Mouse::Left)
+        updateSlots();
 }
 
 void Hotbar::render(sf::RenderWindow *window)

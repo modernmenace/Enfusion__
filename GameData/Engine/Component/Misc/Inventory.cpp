@@ -24,11 +24,14 @@ void Inventory::initialize()
     dbg_log(contains<ITEM_TEST>());
 }
 
-//TODO: Implement this
-bool Inventory::remove(Item* item, uint16_t amount)
+void Inventory::remove(Item* item, uint16_t amount)
 {
-    dbg_log("Inventory.cpp: remove() called!")
-    return true;
+    if (lastItemActivated >= 0)
+    {
+        inv_amounts[lastItemActivated] -=1;
+        if (inv_amounts[lastItemActivated] == 0)
+            inv_items[lastItemActivated] = nullptr;
+    }
 }
 
 int Inventory::nextEmptySlot()

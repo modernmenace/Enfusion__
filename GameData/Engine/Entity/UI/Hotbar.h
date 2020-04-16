@@ -16,8 +16,9 @@ class Hotbar : public Entity {
 public:
     Hotbar(Entity* entity, sf::Vector2f position, InventoryMenu* menu);
     void initialize() override;
-    void render(sf::RenderWindow* window) override;
-    void handleInput(sf::Keyboard::Key key) override;
+    void render(sf::RenderWindow* window)   override;
+    void handleInput(sf::Keyboard::Key)     override;
+    void handleInput(sf::Mouse::Button)     override;
 
     void updateSlots();
 
