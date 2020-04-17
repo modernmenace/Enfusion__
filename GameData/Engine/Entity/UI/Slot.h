@@ -20,6 +20,8 @@ public:
     inline Item* item()   { return s_item; }
     inline void setVisible(bool v) { s_visible = v; };
 
+    inline sf::Sprite* itemSprite() { return &s_sprite; };
+
 private:
     Item*       s_item;
     Inventory*  s_inv = nullptr;
