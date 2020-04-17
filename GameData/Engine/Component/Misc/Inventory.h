@@ -86,6 +86,7 @@ public:
     }
 
     void remove(Item* item, uint16_t amount);
+    void remove(uint16_t index);
 
     inline Item* item(uint8_t id) { return inv_items[id];   }
     inline int amount(uint8_t id) { return inv_amounts[id]; }

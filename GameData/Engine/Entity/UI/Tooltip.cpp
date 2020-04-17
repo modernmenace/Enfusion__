@@ -38,7 +38,7 @@ void Tooltip::show(Item* item, sf::Vector2f position)
     pos.x += 15;
     pos.y += 10;
     t_iName.setPosition(pos);
-    pos.y += 25;
+    pos.y += 30;
     t_iDesc.setPosition(pos);
 
     t_visible = true;

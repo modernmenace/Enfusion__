@@ -27,11 +27,11 @@ private:
     Entity* i_entity = nullptr;
     bool menuActive  = false;
 
-    bool      i_mouseDown    = false;
-    bool      i_drag         = false;
-    sf::Sprite* i_dragSprite = nullptr;
-    sf::Clock i_mouseClock;
-    Tooltip i_tooltip;
+    bool        i_mouseDown    = false;
+    bool        i_drag         = false;
+    int         i_dragIndex;
+    sf::Clock   i_mouseClock;
+    Tooltip     i_tooltip;
 
 };
 

@@ -34,6 +34,11 @@ void Inventory::remove(Item* item, uint16_t amount)
     }
 }
 
+void Inventory::remove(uint16_t index)
+{
+    //TODO: this
+}
+
 int Inventory::nextEmptySlot()
 {
     //iterate array and return next empty slot

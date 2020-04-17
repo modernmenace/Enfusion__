@@ -136,7 +136,7 @@ void InventoryMenu::update(sf::Time tickRate)
         if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
         {
             if (i_drag)
-                i_dragSprite->setPosition(getMousePosition());
+                slots[i_dragIndex]->itemSprite()->setPosition(getMousePosition());
 
             if(i_mouseClock.getElapsedTime().asSeconds() > 0.3 && !i_drag)
             {
@@ -156,7 +156,7 @@ void InventoryMenu::update(sf::Time tickRate)
                 {
                     i_tooltip.hide();
                     i_drag = true;
-                    i_dragSprite = slots[toDrag]->itemSprite();
+                    i_dragIndex = toDrag;
                 }
                 else
                 {
@@ -175,7 +175,13 @@ void InventoryMenu::update(sf::Time tickRate)
                 dbg_log("Done dragging")
                 auto m_w_pos = getMousePosition();
 
+                sf::Sprite &i_m_s = getComponent<Sprite>().getSprite();
+                if (!i_m_s.getGlobalBounds().contains(m_w_pos.x, m_w_pos.y))
+                {
+                    getComponent<Inventory>().remove(i_dragIndex);
 
+                    //TODO: finish this (variables etc)
+                }
             }
 
             i_mouseDown = false;
@@ -274,6 +280,6 @@ void InventoryMenu::render(sf::RenderWindow *window)
 
     i_tooltip.render(window);
 
-    if (i_dragSprite)
-        window->draw(*i_dragSprite);
+    if (i_drag)
+        window->draw(*slots[i_dragIndex]->itemSprite());
 }
