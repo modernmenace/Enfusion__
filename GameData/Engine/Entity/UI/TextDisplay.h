@@ -7,15 +7,18 @@
 class TextDisplay : public Entity {
 
 public:
-    TextDisplay(string_t text, sf::Vector2f position, uint16_t size = 42);
+    TextDisplay(string_t text, sf::Vector2f position,
+                uint16_t size = 42,
+                sf::RectangleShape bounds = sf::RectangleShape(sf::Vector2f(0, 0)));
 
     void initialize() override;
     void render(sf::RenderWindow* window) override;
     void setPosition(sf::Vector2f p);
-    inline void setText(string_t t) { text.setString(t); }
+    void setText(string_t t);
 
 private:
-    sf::Text text;
+    sf::Text           t_text;
+    sf::RectangleShape t_bounds;
 
     bool textChanged = false;
 

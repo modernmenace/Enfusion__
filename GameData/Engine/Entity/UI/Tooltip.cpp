@@ -10,7 +10,7 @@
  */
 
 Tooltip::Tooltip() : t_iName("", sf::Vector2f(0, 0), 20),
-                     t_iDesc("", sf::Vector2f(0, 0), 20)
+                     t_iDesc("", sf::Vector2f(0, 0), 15, sf::RectangleShape(sf::Vector2f(48, 48)))
 {
     addComponent<Position>(sf::Vector2f(0, -0));
     addComponent<Sprite>("UI/windowsheet.png");
@@ -38,7 +38,7 @@ void Tooltip::show(Item* item, sf::Vector2f position)
     pos.x += 15;
     pos.y += 10;
     t_iName.setPosition(pos);
-    pos.y += 20;
+    pos.y += 25;
     t_iDesc.setPosition(pos);
 
     t_visible = true;

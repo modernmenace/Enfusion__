@@ -1,6 +1,14 @@
 #include "Inventory.h"
 #include "../../../Data/Items.h"
 
+/*
+ *  Inventory
+ *  DESC: Handles item storage
+ *
+ *  REQUIRES: NONE
+ *
+ */
+
 Inventory::Inventory()
 {
     for(uint8_t i = 0; i < INVENTORY_SIZE; i++)

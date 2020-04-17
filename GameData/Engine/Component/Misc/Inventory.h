@@ -23,14 +23,12 @@ private:
     int     inv_amounts[INVENTORY_SIZE];
 
     int     lastItemActivated;
-
-    int nextEmptySlot();
+    int     nextEmptySlot();
 
 public:
     Inventory();
     void initialize() override;
 
-    //TODO: Add multiple items
     template<class It>
     bool add(It* item, uint16_t amount = 1)
     {

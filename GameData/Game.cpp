@@ -19,7 +19,7 @@ Game::Game()
 {
     WINDOW = new sf::RenderWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE);
     GlobalFont = std::make_unique<sf::Font>();
-    GlobalFont->loadFromFile("Resources/Fonts/TYPEWR.TTF");
+    GlobalFont->loadFromFile("Resources/Fonts/NotoMono-Regular.TTF");
     generateItemRegistry();
     LevelManager::Instance()->setLevel("Level_1");
     run();
