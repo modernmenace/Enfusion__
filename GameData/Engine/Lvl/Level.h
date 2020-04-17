@@ -6,12 +6,16 @@
 #include "../Core/Engine.h"
 #include "../Entity/Entity.h"
 
-extern bool LEVEL_PAUSED;
+enum GameState
+{
+    RUNNING,
+    PAUSE
+};
 
 class Level {
 
 public:
-    Level(std::string levelName, std::string background);
+    Level(string_t levelName, string_t background);
     virtual ~Level();
 
     virtual void initialize();
@@ -20,11 +24,12 @@ public:
     virtual void handleInput(sf::Keyboard::Key key);
     virtual void handleInput(sf::Mouse::Button button);
 
-    static std::string getLevelName();
+    inline void setState(GameState g) { l_state = g; }
+    inline GameState state()          { return l_state; }
 
 protected:
     sf::RectangleShape background;
-    std::string levelName;
+    string_t levelName;
 
     std::vector<Entity*> entities;
     std::vector<Entity*> uiEntities;
@@ -42,6 +47,7 @@ protected:
     }
 
     sf::View defaultView;
+    GameState l_state = GameState::RUNNING;
 
 };
 

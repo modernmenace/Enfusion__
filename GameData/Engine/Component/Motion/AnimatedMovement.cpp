@@ -1,5 +1,5 @@
 #include "AnimatedMovement.h"
-#include "../../../Levels/Level_1/Level_1.h"
+#include "../../Lvl/LevelManager.h"
 
 //TODO: AnimState kind of phasing out status due to framing
 //TODO: When removed: weird slowdowns with getRow()
@@ -18,7 +18,8 @@ void AnimatedMovement::initialize()
 
 void AnimatedMovement::update(sf::Time tickRate)
 {
-    if (LEVEL_PAUSED) return;
+    if (LevelManager::Instance()->getCurrentLevel().state() == GameState::PAUSE)
+        return;
 
     auto tempSpeed = speed;
     if (sprinting) speed *= 2;

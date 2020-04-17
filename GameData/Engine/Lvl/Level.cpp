@@ -13,14 +13,11 @@ bool LEVEL_PAUSED = false;
  *          EX: Level 1() : public Level("Level_1", "background.png");
  */
 
-Level::Level(std::string levelName, std::string background)
+Level::Level(string_t levelName, string_t background)
     : defaultView(sf::Vector2f(0, 0), sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT))
 {
     this->levelName = levelName;
     uiView = &defaultView;
-    //TODO: Figure out if we want to keep this background or remove it entirely
-    //this->background.setSize(sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT));
-    //this->background.setTexture(&AssetManager::getTexture(background));
 }
 
 Level::~Level()
@@ -45,8 +42,9 @@ void Level::initialize()
 
 void Level::update(sf::Time tickRate)
 {
-    for(auto &e : entities)
-        e->update(tickRate);
+    if (l_state == GameState::RUNNING)
+        for(auto &e : entities)
+            e->update(tickRate);
 
     for (auto &e : uiEntities)
         e->update(tickRate);
@@ -58,8 +56,6 @@ void Level::render(sf::RenderWindow* window)
 
     for(auto &e : entities)
         e->render(window);
-
-    // is this inefficient?
 
     if (uiEntities.empty()) return;
 
@@ -75,8 +71,9 @@ void Level::render(sf::RenderWindow* window)
 
 void Level::handleInput(sf::Keyboard::Key key)
 {
-    for(auto &e : entities)
-        e->handleInput(key);
+    if (l_state == GameState::RUNNING)
+        for(auto &e : entities)
+            e->handleInput(key);
 
     for(auto &e : uiEntities)
         e->handleInput(key);
@@ -84,8 +81,9 @@ void Level::handleInput(sf::Keyboard::Key key)
 
 void Level::handleInput(sf::Mouse::Button button)
 {
-    for(auto &e : entities)
-        e->handleInput(button);
+    if (l_state == GameState::RUNNING)
+        for(auto &e : entities)
+            e->handleInput(button);
 
     for(auto &e : uiEntities)
         e->handleInput(button);

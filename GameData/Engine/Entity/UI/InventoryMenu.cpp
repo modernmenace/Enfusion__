@@ -1,4 +1,5 @@
 #include "InventoryMenu.h"
+#include "../../Lvl/LevelManager.h"
 
 InventoryMenu::InventoryMenu(Entity *entity) : i_tooltip()
 {
@@ -57,6 +58,7 @@ void InventoryMenu::toggleMenu()
 
     if (menuActive)
     {
+        LevelManager::Instance()->getCurrentLevel().setState(GameState::PAUSE);
         for(int s = 0; s < slots.size(); s++)
             slots.at(s)->setItem(i_entity->getComponent<Inventory>().item(s));
 
@@ -69,6 +71,7 @@ void InventoryMenu::toggleMenu()
     }
     else
     {
+        LevelManager::Instance()->getCurrentLevel().setState(GameState::RUNNING);
         getComponent<Sprite>().visible = false;
         for(auto &s : slots)
             s->setVisible(false);
