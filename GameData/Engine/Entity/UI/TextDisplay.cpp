@@ -7,6 +7,9 @@ TextDisplay::TextDisplay(string_t text, sf::Vector2f position, uint16_t size, sf
     t_text.setString(text);
     t_text.setCharacterSize(size);
     t_text.setLetterSpacing(0.8);
+    t_text.setOutlineThickness(1);
+    t_text.setOutlineColor(sf::Color::Black);
+    t_text.setFillColor(sf::Color::White);
     addComponent<Position>(position);
 }
 
