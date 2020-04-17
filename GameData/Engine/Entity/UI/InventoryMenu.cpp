@@ -295,6 +295,7 @@ void InventoryMenu::render(sf::RenderWindow *window)
     {
         window->draw(*slots[i_dragIndex]->itemSprite());
         //TODO: below isnt working
+        //TODO: using position componenet of menu, not sprite
         slots[i_dragIndex]->itemText()->setPosition(sf::Vector2f(getComponent<Position>().getPosition().x + 10,
                                                                     getComponent<Position>().getPosition().y + (62)));
     }
