@@ -24,6 +24,16 @@ void Inventory::initialize()
     this->add(ItemRegistry::Instance()->getItem<ITEM_TEST>(), 16);
 }
 
+void Inventory::swapItem(uint16_t i1, uint16_t i2)
+{
+    auto i1_i = inv_items[i1];
+    auto i1_a = inv_amounts[i1];
+    inv_items[i1]   = inv_items[i2];
+    inv_amounts[i1] = inv_amounts[i2];
+    inv_items[i2]   = i1_i;
+    inv_amounts[i2] = i1_a;
+}
+
 void Inventory::remove(Item* item, uint16_t amount)
 {
     if (lastItemActivated >= 0)

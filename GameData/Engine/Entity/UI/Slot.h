@@ -21,6 +21,7 @@ public:
     inline void setVisible(bool v) { s_visible = v; };
 
     inline sf::Sprite* itemSprite() { return &s_sprite; };
+    inline TextDisplay* itemText()  { return &s_text; }
 
 private:
     Item*       s_item;

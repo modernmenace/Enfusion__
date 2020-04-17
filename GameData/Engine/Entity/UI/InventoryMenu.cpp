@@ -169,7 +169,6 @@ void InventoryMenu::update(sf::Time tickRate)
         {
             if (i_drag)
             {
-                //TODO: Done dragging
                 auto m_w_pos = getMousePosition();
 
                 sf::Sprite &i_m_s = getComponent<Sprite>().getSprite();
@@ -180,22 +179,19 @@ void InventoryMenu::update(sf::Time tickRate)
                 }
                 else
                 {
-                    //TODO: Check for new slot
-                    dbg_log("else")
                     for(int s = 0; s < slots.size(); s++)
-                        if (slots[s]->item() != nullptr)
-                            if (slots[s]->getComponent<Sprite>().getSprite().getGlobalBounds().contains(m_w_pos))
-                            {
-                                //slots[s] is the new slot
-                                //this only works when its the original slot
-                                dbg_log(s)
-                            }
+                    {
+                        if (slots[s]->getComponent<Sprite>().getSprite().getGlobalBounds().contains(m_w_pos))
+                        {
+                            i_entity->getComponent<Inventory>().swapItem(i_dragIndex, s);
+                            updateSlots();
+                        }
+                    }
                 }
             }
 
-            i_mouseDown = false;
-            i_drag      = false;
-
+            if (!i_drag)
+            {
             sf::Vector2f m_w_pos = getMousePosition();
             sf::Sprite& s = getComponent<Sprite>().getSprite();
 
@@ -208,6 +204,12 @@ void InventoryMenu::update(sf::Time tickRate)
                         slots.at(s)->setItem(i_entity->getComponent<Inventory>().item(s));
                         slots.at(s)->setCount(i_entity->getComponent<Inventory>().amount(s));
                     }
+
+            }
+
+            i_mouseDown = false;
+            i_drag      = false;
+            i_dragIndex = 0;
         }
     }
 
@@ -290,5 +292,10 @@ void InventoryMenu::render(sf::RenderWindow *window)
     i_tooltip.render(window);
 
     if (i_drag)
+    {
         window->draw(*slots[i_dragIndex]->itemSprite());
+        //TODO: below isnt working
+        slots[i_dragIndex]->itemText()->setPosition(sf::Vector2f(getComponent<Position>().getPosition().x + 10,
+                                                                    getComponent<Position>().getPosition().y + (62)));
+    }
 }
