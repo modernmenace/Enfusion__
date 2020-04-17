@@ -170,7 +170,11 @@ void InventoryMenu::update(sf::Time tickRate)
             if (i_drag)
             {
                 //TODO: Done dragging
+                //TODO: Check if outside menu (discard)
+                //TODO: Check for new slot
                 dbg_log("Done dragging")
+                auto m_w_pos = getMousePosition();
+
 
             }
 
