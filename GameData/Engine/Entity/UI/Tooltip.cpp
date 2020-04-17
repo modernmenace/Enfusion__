@@ -1,5 +1,14 @@
 #include "Tooltip.h"
 
+/*
+ *  Tooltip
+ *
+ *  DESC: Item tooltip UI
+ *
+ *  REQUIRES: NONE
+ *
+ */
+
 Tooltip::Tooltip() : t_iName("", sf::Vector2f(0, 0), 20),
                      t_iDesc("", sf::Vector2f(0, 0), 20)
 {

@@ -1,6 +1,15 @@
 #include "InventoryMenu.h"
 #include "../../Lvl/LevelManager.h"
 
+/*
+ *  InventoryMenu
+ *
+ *  DESC: Visual management of inventory
+ *
+ *  REQUIRES: Parent Entity has Inventory Component
+ *
+ */
+
 InventoryMenu::InventoryMenu(Entity *entity) : i_tooltip()
 {
     i_entity = entity;
@@ -14,6 +23,16 @@ InventoryMenu::~InventoryMenu()
             e = slots.end(); i != e; ++i)
         delete (*i);
 }
+
+/*
+ *  Initialize
+ *  DESC: Initializes menu, sets up slots
+ *
+ *  IN:  NONE
+ *
+ *  OUT: NONE
+ *
+ */
 
 void InventoryMenu::initialize()
 {
@@ -43,6 +62,17 @@ void InventoryMenu::initialize()
         slots.at(s)->setItem(i_entity->getComponent<Inventory>().item(s));
 }
 
+/*
+ *  UpdateSlots
+ *  DESC: Updates the slots with the most recent contents
+ *        of the inventory
+ *
+ *  IN:  NONE
+ *
+ *  OUT: NONE
+ *
+ */
+
 void InventoryMenu::updateSlots()
 {
     for(int s = 0; s < slots.size(); s++)
@@ -52,6 +82,16 @@ void InventoryMenu::updateSlots()
         slots.at(s)->setCount(i_entity->getComponent<Inventory>().amount(s));
 }
 
+/*
+ *  ToggleMenu
+ *  DESC: Shows/Hides the menu
+ *
+ *  IN:  NONE
+ *
+ *  OUT: NONE
+ *
+ */
+
 void InventoryMenu::toggleMenu()
 {
     menuActive = !menuActive;
@@ -59,11 +99,7 @@ void InventoryMenu::toggleMenu()
     if (menuActive)
     {
         LevelManager::Instance()->getCurrentLevel().setState(GameState::PAUSE);
-        for(int s = 0; s < slots.size(); s++)
-            slots.at(s)->setItem(i_entity->getComponent<Inventory>().item(s));
-
-        for(int s = 0; s < slots.size(); s++)
-            slots.at(s)->setCount(i_entity->getComponent<Inventory>().amount(s));
+        updateSlots();
 
         getComponent<Sprite>().visible = true;
         for(auto &s : slots)
@@ -78,6 +114,17 @@ void InventoryMenu::toggleMenu()
         i_tooltip.hide();
     }
 }
+
+/*
+ *  Update
+ *  DESC: If menu active, checks if tooltip should be
+ *        displayed
+ *
+ *  IN:  tickRate: current tick rate
+ *
+ *  OUT: NONE
+ *
+ */
 
 void InventoryMenu::update(sf::Time tickRate)
 {
@@ -106,10 +153,30 @@ void InventoryMenu::update(sf::Time tickRate)
     }
 }
 
+/*
+ *  HandleInput
+ *  DESC: Checks for toggle key
+ *
+ *  IN:  key: key pressed
+ *
+ *  OUT: NONE
+ *
+ */
+
 void InventoryMenu::handleInput(sf::Keyboard::Key key)
 {
     if (key == 60) toggleMenu();
 }
+
+/*
+ *  HandleInput
+ *  DESC: Checks if slot has been clicked
+ *
+ *  IN:  button: Mouse button pressed
+ *
+ *  OUT: NONE
+ *
+ */
 
 void InventoryMenu::handleInput(sf::Mouse::Button button)
 {
@@ -129,6 +196,16 @@ void InventoryMenu::handleInput(sf::Mouse::Button button)
                 }
     }
 }
+
+/*
+ *  Render
+ *  DESC: Renders menu/slots/tooltip
+ *
+ *  IN:  window: render window
+ *
+ *  OUT: NONE
+ *
+ */
 
 void InventoryMenu::render(sf::RenderWindow *window)
 {
