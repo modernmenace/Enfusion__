@@ -170,17 +170,17 @@ void InventoryMenu::update(sf::Time tickRate)
             if (i_drag)
             {
                 //TODO: Done dragging
-                //TODO: Check if outside menu (discard)
-                //TODO: Check for new slot
-                dbg_log("Done dragging")
                 auto m_w_pos = getMousePosition();
 
                 sf::Sprite &i_m_s = getComponent<Sprite>().getSprite();
                 if (!i_m_s.getGlobalBounds().contains(m_w_pos.x, m_w_pos.y))
                 {
-                    getComponent<Inventory>().remove(i_dragIndex);
-
-                    //TODO: finish this (variables etc)
+                    i_entity->getComponent<Inventory>().remove(i_dragIndex);
+                    updateSlots();
+                }
+                else
+                {
+                    //TODO: Check for new slot
                 }
             }
 

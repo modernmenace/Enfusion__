@@ -36,7 +36,8 @@ void Inventory::remove(Item* item, uint16_t amount)
 
 void Inventory::remove(uint16_t index)
 {
-    //TODO: this
+    inv_items[index]   = nullptr;
+    inv_amounts[index] = 0;
 }
 
 int Inventory::nextEmptySlot()
