@@ -181,6 +181,15 @@ void InventoryMenu::update(sf::Time tickRate)
                 else
                 {
                     //TODO: Check for new slot
+                    dbg_log("else")
+                    for(int s = 0; s < slots.size(); s++)
+                        if (slots[s]->item() != nullptr)
+                            if (slots[s]->getComponent<Sprite>().getSprite().getGlobalBounds().contains(m_w_pos))
+                            {
+                                //slots[s] is the new slot
+                                //this only works when its the original slot
+                                dbg_log(s)
+                            }
                 }
             }
 
