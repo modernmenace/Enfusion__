@@ -10,6 +10,8 @@
  *
  */
 
+//TODO: Visual issues when dragged to same slot as initial index
+
 InventoryMenu::InventoryMenu(Entity *entity) : i_tooltip()
 {
     i_entity = entity;
@@ -289,14 +291,13 @@ void InventoryMenu::render(sf::RenderWindow *window)
     for(auto &s : slots)
         s->render(window);
 
-    i_tooltip.render(window);
-
     if (i_drag)
     {
         window->draw(*slots[i_dragIndex]->itemSprite());
-        //TODO: below isnt working
-        //TODO: using position componenet of menu, not sprite
-        slots[i_dragIndex]->itemText()->setPosition(sf::Vector2f(getComponent<Position>().getPosition().x + 10,
-                                                                    getComponent<Position>().getPosition().y + (62)));
+        slots[i_dragIndex]->itemText()->setPosition(sf::Vector2f(slots[i_dragIndex]->itemSprite()->getPosition().x + 10,
+                                                                 slots[i_dragIndex]->itemSprite()->getPosition().y + 62));
+        slots[i_dragIndex]->itemText()->render(window);
     }
+
+    i_tooltip.render(window);
 }
