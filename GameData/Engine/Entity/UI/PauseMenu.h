@@ -10,7 +10,6 @@ class PauseMenu : public Entity {
 public:
     PauseMenu();
     void initialize() override;
-    void handleInput(sf::Keyboard::Key key) override;
     void handleInput(sf::Mouse::Button)     override;
     void render(sf::RenderWindow* window)   override;
 

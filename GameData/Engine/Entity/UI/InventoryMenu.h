@@ -16,7 +16,6 @@ public:
     InventoryMenu(Entity* entity);
     ~InventoryMenu()  override;
     void initialize() override;
-    void handleInput(sf::Keyboard::Key key) override;
     void handleInput(sf::Mouse::Button)     override;
     void update(sf::Time tickRate)          override;
     void render(sf::RenderWindow* window)   override;

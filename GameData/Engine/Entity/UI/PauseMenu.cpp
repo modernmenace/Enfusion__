@@ -19,17 +19,9 @@ void PauseMenu::handleInput(sf::Mouse::Button button)
     Entity::handleInput(button);
 }
 
-void PauseMenu::handleInput(sf::Keyboard::Key key)
-{
-    if (key == 36) toggleMenu();
-    Entity::handleInput(key);
-}
-
 void PauseMenu::toggleMenu()
 {
     p_active = !p_active;
-
-
 }
 
 void PauseMenu::render(sf::RenderWindow *window)

@@ -56,6 +56,7 @@ void Level::render(sf::RenderWindow* window)
     for(auto &e : entities)
         e->render(window);
 
+
     auto oldView = window->getView();
 
     window->setView(defaultView);

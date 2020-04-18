@@ -1,5 +1,4 @@
 #include "InventoryMenu.h"
-#include "../../Lvl/LevelManager.h"
 
 /*
  *  InventoryMenu
@@ -100,7 +99,6 @@ void InventoryMenu::toggleMenu()
 
     if (menuActive)
     {
-        LevelManager::Instance()->getCurrentLevel().setState(GameState::PAUSE);
         updateSlots();
 
         getComponent<Sprite>().visible = true;
@@ -109,7 +107,6 @@ void InventoryMenu::toggleMenu()
     }
     else
     {
-        LevelManager::Instance()->getCurrentLevel().setState(GameState::RUNNING);
         getComponent<Sprite>().visible = false;
         for(auto &s : slots)
             s->setVisible(false);
@@ -232,21 +229,6 @@ void InventoryMenu::update(sf::Time tickRate)
             }
         }
     }
-}
-
-/*
- *  HandleInput
- *  DESC: Checks for toggle key
- *
- *  IN:  key: key pressed
- *
- *  OUT: NONE
- *
- */
-
-void InventoryMenu::handleInput(sf::Keyboard::Key key)
-{
-    if (key == 60) toggleMenu();
 }
 
 /*
