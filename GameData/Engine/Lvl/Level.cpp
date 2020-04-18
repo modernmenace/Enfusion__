@@ -17,7 +17,6 @@ Level::Level(string_t levelName, string_t background)
     : defaultView(sf::Vector2f(0, 0), sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT))
 {
     this->levelName = levelName;
-    uiView = &defaultView;
 }
 
 Level::~Level()

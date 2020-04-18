@@ -28,7 +28,6 @@
 
 // Globals
 extern sf::RenderWindow*         WINDOW;
-extern sf::View*                 uiView;
 extern sf::Font*                 GlobalFont;
 extern sf::Vector2f              MousePosition;
 
