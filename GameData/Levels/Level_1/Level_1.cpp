@@ -2,12 +2,14 @@
 
 Level_1::Level_1() : Level("Level_1", "Levels/Level_1_back.png"),
                      player("Objects/mount1.png", sf::Vector2f(600, 300)),
-                     inventory(&player),
-                     hotbar(&player, sf::Vector2f(-300, 350), &inventory)
+                     i_menu(&player),
+                     p_menu(),
+                     hotbar(&player, sf::Vector2f(-300, 350), &i_menu)
 {
     addEntity(&player);
-    addUIEntity(&inventory);
+    addUIEntity(&i_menu);
     addUIEntity(&hotbar);
+    addUIEntity(&p_menu);
 
     //Debug Display
     #ifdef DEBUG_BUILD

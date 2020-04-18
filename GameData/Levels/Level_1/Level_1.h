@@ -10,6 +10,8 @@
 
 #ifdef DEBUG_BUILD
 #include "../../Engine/Entity/UI/TextDisplay.h"
+#include "../../Engine/Entity/UI/PauseMenu.h"
+
 #endif
 
 class Level_1 : public Level {
@@ -26,7 +28,8 @@ private:
     Player   player;
     Hotbar   hotbar;
     Tilemap* map;
-    InventoryMenu inventory;
+    InventoryMenu i_menu;
+    PauseMenu     p_menu;
 
     #ifdef DEBUG_BUILD
     TextDisplay* playerPosDebugText = nullptr;
