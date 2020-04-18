@@ -29,7 +29,8 @@
 // Globals
 extern sf::RenderWindow*         WINDOW;
 extern sf::View*                 uiView;
-extern std::unique_ptr<sf::Font> GlobalFont;
+extern sf::Font*                 GlobalFont;
+extern sf::Vector2f              MousePosition;
 
 // Misc Useful Macros
 #define forever for(;;)
@@ -54,15 +55,5 @@ typedef std::string string_t;
     #define dbg_log(message)
     #define dbg_err(message)
 #endif
-
-//useful static functions
-static sf::Vector2f getMousePosition()
-{
-    auto oldView = WINDOW->getView();
-    WINDOW->setView(*uiView);
-    sf::Vector2f m_w_pos = WINDOW->mapPixelToCoords(sf::Mouse::getPosition(*WINDOW));
-    WINDOW->setView(oldView);
-    return m_w_pos;
-}
 
 #endif //ENFUSION_ENGINE_H

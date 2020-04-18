@@ -1,7 +1,8 @@
 #include "Game.h"
 
-sf::RenderWindow*         WINDOW;
-std::unique_ptr<sf::Font> GlobalFont;
+sf::RenderWindow* WINDOW;
+sf::Font*         GlobalFont;
+sf::Vector2f      MousePosition;
 ItemRegistry* ItemRegistry::m_Instance = nullptr;
 sf::View* uiView = nullptr;
 
@@ -17,8 +18,9 @@ sf::View* uiView = nullptr;
 
 Game::Game()
 {
-    WINDOW = new sf::RenderWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE);
-    GlobalFont = std::make_unique<sf::Font>();
+    WINDOW     = new sf::RenderWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT),
+                                                          WINDOW_TITLE);
+    GlobalFont = new sf::Font();
     GlobalFont->loadFromFile("Resources/Fonts/NotoMono-Regular.TTF");
     generateItemRegistry();
     LevelManager::Instance()->setLevel("Level_1");

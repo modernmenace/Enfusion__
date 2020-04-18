@@ -57,11 +57,11 @@ void Level::render(sf::RenderWindow* window)
     for(auto &e : entities)
         e->render(window);
 
-    if (uiEntities.empty()) return;
-
     auto oldView = window->getView();
 
     window->setView(defaultView);
+
+    MousePosition = window->mapPixelToCoords(sf::Mouse::getPosition(*window));
 
     for(auto &e : uiEntities)
         e->render(window);

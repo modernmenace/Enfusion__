@@ -138,17 +138,16 @@ void InventoryMenu::update(sf::Time tickRate)
         if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
         {
             if (i_drag)
-                slots[i_dragIndex]->itemSprite()->setPosition(getMousePosition());
+                slots[i_dragIndex]->itemSprite()->setPosition(MousePosition);
 
             if(i_mouseClock.getElapsedTime().asSeconds() > DRAG_THRESHOLD_S && !i_drag)
             {
                 int toDrag = -1;
-                sf::Vector2f m_w_pos = getMousePosition();
                 sf::Sprite& s = getComponent<Sprite>().getSprite();
 
                 for(int s = 0; s < slots.size(); s++)
                     if (slots[s]->item() != nullptr)
-                        if (slots[s]->getComponent<Sprite>().getSprite().getGlobalBounds().contains(m_w_pos))
+                        if (slots[s]->getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition))
                         {
                             toDrag = s;
                             break;
@@ -171,10 +170,8 @@ void InventoryMenu::update(sf::Time tickRate)
         {
             if (i_drag)
             {
-                auto m_w_pos = getMousePosition();
-
                 sf::Sprite &i_m_s = getComponent<Sprite>().getSprite();
-                if (!i_m_s.getGlobalBounds().contains(m_w_pos.x, m_w_pos.y))
+                if (!i_m_s.getGlobalBounds().contains(MousePosition.x, MousePosition.y))
                 {
                     i_entity->getComponent<Inventory>().remove(i_dragIndex);
                     updateSlots();
@@ -183,7 +180,7 @@ void InventoryMenu::update(sf::Time tickRate)
                 {
                     for(int s = 0; s < slots.size(); s++)
                     {
-                        if (slots[s]->getComponent<Sprite>().getSprite().getGlobalBounds().contains(m_w_pos))
+                        if (slots[s]->getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition))
                         {
                             i_entity->getComponent<Inventory>().swapItem(i_dragIndex, s);
                             updateSlots();
@@ -194,12 +191,11 @@ void InventoryMenu::update(sf::Time tickRate)
 
             if (!i_drag)
             {
-            sf::Vector2f m_w_pos = getMousePosition();
             sf::Sprite& s = getComponent<Sprite>().getSprite();
 
             for(int s = 0; s < slots.size(); s++)
                 if (slots[s]->item() != nullptr)
-                    if (slots[s]->getComponent<Sprite>().getSprite().getGlobalBounds().contains(m_w_pos))
+                    if (slots[s]->getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition))
                     {
                         i_entity->getComponent<Inventory>().activated(s);
                         slots[s]->activateItem();
@@ -218,16 +214,15 @@ void InventoryMenu::update(sf::Time tickRate)
     if (!i_drag) {
         sf::Sprite &s = getComponent<Sprite>().getSprite();
 
-        sf::Vector2f m_w_pos = getMousePosition();
         i_tooltip.hide();
 
-        if (s.getGlobalBounds().contains(m_w_pos.x, m_w_pos.y))
+        if (s.getGlobalBounds().contains(MousePosition))
         {
             for (int s = 0; s < slots.size(); s++)
             {
                 if (slots[s]->item() != nullptr)
                 {
-                    if (slots[s]->getComponent<Sprite>().getSprite().getGlobalBounds().contains(m_w_pos.x, m_w_pos.y))
+                    if (slots[s]->getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition.x, MousePosition.y))
                     {
                         auto t_pos = slots[s]->getComponent<Position>().getPosition();
                         t_pos.x += 96;
