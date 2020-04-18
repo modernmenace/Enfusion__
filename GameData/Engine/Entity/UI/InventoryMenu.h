@@ -8,6 +8,8 @@
 #include "Slot.h"
 #include "Tooltip.h"
 
+#define DRAG_THRESHOLD_S 0.1
+
 class InventoryMenu : public Entity {
 
 public:

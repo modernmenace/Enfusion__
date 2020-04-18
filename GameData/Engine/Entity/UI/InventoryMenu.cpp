@@ -140,7 +140,7 @@ void InventoryMenu::update(sf::Time tickRate)
             if (i_drag)
                 slots[i_dragIndex]->itemSprite()->setPosition(getMousePosition());
 
-            if(i_mouseClock.getElapsedTime().asSeconds() > 0.3 && !i_drag)
+            if(i_mouseClock.getElapsedTime().asSeconds() > DRAG_THRESHOLD_S && !i_drag)
             {
                 int toDrag = -1;
                 sf::Vector2f m_w_pos = getMousePosition();
