@@ -10,8 +10,6 @@
  *
  */
 
-//TODO: Visual issues when dragged to same slot as initial index
-
 InventoryMenu::InventoryMenu(Entity *entity) : i_tooltip()
 {
     i_entity = entity;
@@ -78,10 +76,12 @@ void InventoryMenu::initialize()
 void InventoryMenu::updateSlots()
 {
     for(int s = 0; s < slots.size(); s++)
-        slots.at(s)->setItem(i_entity->getComponent<Inventory>().item(s));
-
-    for(int s = 0; s < slots.size(); s++)
-        slots.at(s)->setCount(i_entity->getComponent<Inventory>().amount(s));
+    {
+        slots[s]->setItem(i_entity->getComponent<Inventory>().item(s));
+        slots[s]->setCount(i_entity->getComponent<Inventory>().amount(s));
+        slots[s]->itemText()->setPosition(sf::Vector2f(slots[s]->itemSprite()->getPosition().x + 10,
+                                                          slots[s]->itemSprite()->getPosition().y + 62));
+    }
 }
 
 /*
