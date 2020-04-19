@@ -6,16 +6,17 @@
 #include "../../Component/Base/Sprite.h"
 #include "TextDisplay.h"
 
+//TODO: Formula for text position (centered)
+
 class Button : public Entity {
 
 public:
-    Button(string_t text, sf::Vector2f position) : b_text(text, position)
+    Button(string_t text, sf::Vector2f position) : b_text(text, sf::Vector2f(position.x+50, position.y+5))
     {
         addComponent<Position>(sf::Vector2f(position));
         addComponent<Sprite>("UI/windowsheet.png");
         getComponent<Sprite>().getSprite().setTextureRect(sf::IntRect(0, 48, 48, 16));
         getComponent<Sprite>().getSprite().setScale(5, 5);
-
     }
     void initialize() override
     {

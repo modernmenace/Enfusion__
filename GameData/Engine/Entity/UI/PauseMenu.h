@@ -21,6 +21,8 @@ public:
 private:
     bool   p_active = false;
     Button p_b_resume;
+    Button p_b_settings;
+    Button p_b_exit;
 };
 
 
