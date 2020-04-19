@@ -1,4 +1,5 @@
 #include "Hotbar.h"
+#include "../../Lvl/LevelManager.h"
 
 /*
  *  Hotbar
@@ -68,7 +69,8 @@ void Hotbar::updateSlots()
 
 void Hotbar::handleInput(sf::Keyboard::Key key)
 {
-    if (i_menu->active()) return;
+    if (LevelManager::Instance()->getCurrentLevel().state() == GameState::PAUSE)
+        return;
 
     uint8_t selection = key - 27;
     if (selection < HOTBAR_SLOTS)
