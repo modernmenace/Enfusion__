@@ -5,6 +5,7 @@
 #include "../../Component/Base/Position.h"
 #include "../../Component/Base/Sprite.h"
 #include "Button.h"
+#include "SettingsMenu.h"
 
 class PauseMenu : public Entity {
 
@@ -12,6 +13,7 @@ public:
     PauseMenu();
     void initialize() override;
     void handleInput(sf::Mouse::Button)     override;
+    void handleInput(sf::Keyboard::Key)     override;
     void render(sf::RenderWindow* window)   override;
 
     void toggleMenu();
@@ -23,6 +25,9 @@ private:
     Button p_b_resume;
     Button p_b_settings;
     Button p_b_exit;
+
+    SettingsMenu s_menu;
+
 };
 
 
