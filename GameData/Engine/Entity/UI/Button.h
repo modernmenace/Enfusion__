@@ -22,6 +22,8 @@ public:
     {
         b_text.initialize();
         Entity::initialize();
+
+        //TODO: Center Text
     }
 
     void render(sf::RenderWindow* window) override

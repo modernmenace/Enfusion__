@@ -1,4 +1,5 @@
 #include "PauseMenu.h"
+#include "../../Lvl/LevelManager.h"
 
 PauseMenu::PauseMenu() : p_b_resume("Resume", sf::Vector2f(-50, -275)),
                          p_b_settings("Settings", sf::Vector2f(-50, -175)),
@@ -22,6 +23,20 @@ void PauseMenu::handleInput(sf::Mouse::Button button)
 {
     if (!p_active) return;
     Entity::handleInput(button);
+
+    if (p_b_resume.getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition))
+    {
+        p_active = false;
+        LevelManager::Instance()->getCurrentLevel().setState(GameState::RUNNING);
+    }
+    else if (p_b_settings.getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition))
+    {
+        //TODO: Implement Settings
+    }
+    else if (p_b_exit.getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition))
+    {
+        exit(0);
+    }
 }
 
 void PauseMenu::toggleMenu()
