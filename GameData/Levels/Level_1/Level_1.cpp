@@ -65,6 +65,7 @@ void Level_1::handleInput(sf::Keyboard::Key key)
         else
             l_state = GameState::RUNNING;
     }
+    Level::handleInput(key);
 }
 
 void Level_1::render(sf::RenderWindow *window)

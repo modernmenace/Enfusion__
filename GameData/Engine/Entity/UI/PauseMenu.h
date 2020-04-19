@@ -4,6 +4,7 @@
 #include "../Entity.h"
 #include "../../Component/Base/Position.h"
 #include "../../Component/Base/Sprite.h"
+#include "Button.h"
 
 class PauseMenu : public Entity {
 
@@ -18,7 +19,8 @@ public:
     inline bool active() { return p_active; }
 
 private:
-    bool p_active = false;
+    bool   p_active = false;
+    Button p_b_resume;
 };
 
 
