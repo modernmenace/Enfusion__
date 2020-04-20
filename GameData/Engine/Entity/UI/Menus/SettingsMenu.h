@@ -6,6 +6,7 @@
 #include "../../../Component/Base/Sprite.h"
 #include "../../../Core/Settings.h"
 #include "../Elements/Button.h"
+#include "../Elements/TickBox.h"
 
 class SettingsMenu : Entity {
 
@@ -28,6 +29,7 @@ private:
 
     TextDisplay s_resolutionText;
     TextDisplay s_fullscreenText;
+    TickBox     s_fsrnTickBox;
 
 };
 

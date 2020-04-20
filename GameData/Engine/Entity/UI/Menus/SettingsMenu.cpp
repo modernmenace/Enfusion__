@@ -1,14 +1,14 @@
 #include "SettingsMenu.h"
 
 //TODO: Resolution Drop Down Box Selector
-//TODO: Fullscreen Tick Box
 //TODO: Controls Menu
 
 SettingsMenu::SettingsMenu() : applyButton("Apply", sf::Vector2f(100, 150)),
                                cancelButton("Cancel", sf::Vector2f(-225, 150)),
                                controlsButton("Controls", sf::Vector2f(-75, -75)),
                                s_resolutionText("Resolution", sf::Vector2f(-250, -300)),
-                               s_fullscreenText("Fullscreen", sf::Vector2f(-250, -225))
+                               s_fullscreenText("Fullscreen", sf::Vector2f(-250, -210)),
+                               s_fsrnTickBox(sf::Vector2f(250, -200))
 {
     addComponent<Position>(sf::Vector2f(-300, -400));
     addComponent<Sprite>("UI/windowsheet.png");
@@ -24,6 +24,7 @@ void SettingsMenu::initialize()
     controlsButton.initialize();
     s_resolutionText.initialize();
     s_fullscreenText.initialize();
+    s_fsrnTickBox.initialize();
 }
 
 void SettingsMenu::show()
@@ -49,6 +50,10 @@ void SettingsMenu::handleInput(sf::Mouse::Button button)
     {
         hide();
     }
+    else if (s_fsrnTickBox.getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition))
+    {
+        s_fsrnTickBox.set(!s_fsrnTickBox.get());
+    }
 
 }
 
@@ -67,4 +72,5 @@ void SettingsMenu::render(sf::RenderWindow* window)
     controlsButton.render(window);
     s_fullscreenText.render(window);
     s_resolutionText.render(window);
+    s_fsrnTickBox.render(window);
 }
