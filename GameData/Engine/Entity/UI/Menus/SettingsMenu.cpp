@@ -8,8 +8,7 @@ SettingsMenu::SettingsMenu() : applyButton("Apply", sf::Vector2f(100, 150)),
                                s_resolutionText("Resolution", sf::Vector2f(-200, -290), 30),
                                s_fullscreenText("Fullscreen", sf::Vector2f(-200, -200), 30),
                                s_fsrnTickBox(sf::Vector2f(250, -200)),
-                               s_resDropBox(sf::Vector2f(0, -300)),
-                               s_resText("1920 x 1080", sf::Vector2f(70, -285), 30)
+                               s_resDropBox(sf::Vector2f(0, -300))
 {
     addComponent<Position>(sf::Vector2f(-300, -400));
     addComponent<Sprite>("UI/windowsheet.png");
@@ -27,9 +26,6 @@ void SettingsMenu::initialize()
     s_fullscreenText.initialize();
     s_fsrnTickBox.initialize();
     s_resDropBox.initialize();
-    s_resText.initialize();
-
-    s_resText.setText("test");
 }
 
 void SettingsMenu::show()
@@ -84,5 +80,4 @@ void SettingsMenu::render(sf::RenderWindow* window)
     s_resolutionText.render(window);
     s_fsrnTickBox.render(window);
     s_resDropBox.render(window);
-    s_resText.render(window);
 }
