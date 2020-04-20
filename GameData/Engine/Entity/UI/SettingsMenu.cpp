@@ -1,7 +1,10 @@
 #include "SettingsMenu.h"
 
 SettingsMenu::SettingsMenu() : applyButton("Apply", sf::Vector2f(100, 150)),
-                               cancelButton("Cancel", sf::Vector2f(-225, 150))
+                               cancelButton("Cancel", sf::Vector2f(-225, 150)),
+                               controlsButton("Controls", sf::Vector2f(-75, -75)),
+                               s_resolutionText("Resolution", sf::Vector2f(-250, -300)),
+                               s_fullscreenText("Fullscreen", sf::Vector2f(-250, -225))
 {
     addComponent<Position>(sf::Vector2f(-300, -400));
     addComponent<Sprite>("UI/windowsheet.png");
@@ -14,6 +17,9 @@ void SettingsMenu::initialize()
     getComponent<Sprite>().getSprite().setScale(15, 15);
     applyButton.initialize();
     cancelButton.initialize();
+    controlsButton.initialize();
+    s_resolutionText.initialize();
+    s_fullscreenText.initialize();
 }
 
 void SettingsMenu::show()
@@ -54,4 +60,7 @@ void SettingsMenu::render(sf::RenderWindow* window)
     Entity::render(window);
     applyButton.render(window);
     cancelButton.render(window);
+    controlsButton.render(window);
+    s_fullscreenText.render(window);
+    s_resolutionText.render(window);
 }

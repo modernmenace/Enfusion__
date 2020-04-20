@@ -24,6 +24,10 @@ private:
 
     Button applyButton;
     Button cancelButton;
+    Button controlsButton;
+
+    TextDisplay s_resolutionText;
+    TextDisplay s_fullscreenText;
 
 };
 
