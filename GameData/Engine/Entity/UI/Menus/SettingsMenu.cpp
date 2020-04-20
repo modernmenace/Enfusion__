@@ -1,6 +1,5 @@
 #include "SettingsMenu.h"
 
-//TODO: Resolution Drop Down Box Selector
 //TODO: Controls Menu
 
 SettingsMenu::SettingsMenu() : applyButton("Apply", sf::Vector2f(100, 150)),
@@ -9,7 +8,7 @@ SettingsMenu::SettingsMenu() : applyButton("Apply", sf::Vector2f(100, 150)),
                                s_resolutionText("Resolution", sf::Vector2f(-250, -300)),
                                s_fullscreenText("Fullscreen", sf::Vector2f(-250, -210)),
                                s_fsrnTickBox(sf::Vector2f(250, -200)),
-                               s_resDropBox(sf::Vector2f(100, -300))
+                               s_resDropBox(sf::Vector2f(0, -300))
 {
     addComponent<Position>(sf::Vector2f(-300, -400));
     addComponent<Sprite>("UI/windowsheet.png");
