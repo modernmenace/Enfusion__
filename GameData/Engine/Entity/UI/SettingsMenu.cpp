@@ -1,5 +1,9 @@
 #include "SettingsMenu.h"
 
+//TODO: Resolution Drop Down Box Selector
+//TODO: Fullscreen Tick Box
+//TODO: Controls Menu
+
 SettingsMenu::SettingsMenu() : applyButton("Apply", sf::Vector2f(100, 150)),
                                cancelButton("Cancel", sf::Vector2f(-225, 150)),
                                controlsButton("Controls", sf::Vector2f(-75, -75)),
