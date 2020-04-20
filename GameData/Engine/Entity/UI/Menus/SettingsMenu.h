@@ -32,6 +32,7 @@ private:
     TextDisplay s_fullscreenText;
     TickBox     s_fsrnTickBox;
     DropBox     s_resDropBox;
+    TextDisplay s_resText;
 
 };
 
