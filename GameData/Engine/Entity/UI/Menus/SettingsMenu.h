@@ -7,6 +7,7 @@
 #include "../../../Core/Settings.h"
 #include "../Elements/Button.h"
 #include "../Elements/TickBox.h"
+#include "../Elements/DropBox.h"
 
 class SettingsMenu : Entity {
 
@@ -30,6 +31,7 @@ private:
     TextDisplay s_resolutionText;
     TextDisplay s_fullscreenText;
     TickBox     s_fsrnTickBox;
+    DropBox     s_resDropBox;
 
 };
 

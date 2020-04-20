@@ -8,7 +8,8 @@ SettingsMenu::SettingsMenu() : applyButton("Apply", sf::Vector2f(100, 150)),
                                controlsButton("Controls", sf::Vector2f(-75, -75)),
                                s_resolutionText("Resolution", sf::Vector2f(-250, -300)),
                                s_fullscreenText("Fullscreen", sf::Vector2f(-250, -210)),
-                               s_fsrnTickBox(sf::Vector2f(250, -200))
+                               s_fsrnTickBox(sf::Vector2f(250, -200)),
+                               s_resDropBox(sf::Vector2f(100, -300))
 {
     addComponent<Position>(sf::Vector2f(-300, -400));
     addComponent<Sprite>("UI/windowsheet.png");
@@ -25,6 +26,7 @@ void SettingsMenu::initialize()
     s_resolutionText.initialize();
     s_fullscreenText.initialize();
     s_fsrnTickBox.initialize();
+    s_resDropBox.initialize();
 }
 
 void SettingsMenu::show()
@@ -50,6 +52,11 @@ void SettingsMenu::handleInput(sf::Mouse::Button button)
     {
         hide();
     }
+    else if (controlsButton.getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition))
+    {
+        //TODO: Implement this
+        //TODO: game crashes after this is executed when clicked
+    }
     else if (s_fsrnTickBox.getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition))
     {
         s_fsrnTickBox.set(!s_fsrnTickBox.get());
@@ -73,4 +80,5 @@ void SettingsMenu::render(sf::RenderWindow* window)
     s_fullscreenText.render(window);
     s_resolutionText.render(window);
     s_fsrnTickBox.render(window);
+    s_resDropBox.render(window);
 }
