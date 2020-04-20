@@ -26,7 +26,7 @@ void PauseMenu::handleInput(sf::Mouse::Button button)
     if (!p_active) return;
     Entity::handleInput(button);
     s_menu.handleInput(button);
-
+    if (s_menu.active()) return;
     if (p_b_resume.getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition))
     {
         p_active = false;

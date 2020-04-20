@@ -54,7 +54,6 @@ void SettingsMenu::handleInput(sf::Mouse::Button button)
     else if (controlsButton.getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition))
     {
         //TODO: Implement this
-        //TODO: game crashes after this is executed when clicked
     }
     else if (s_fsrnTickBox.getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition))
     {

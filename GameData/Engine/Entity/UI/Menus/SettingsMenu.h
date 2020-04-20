@@ -20,6 +20,7 @@ public:
 
     void show();
     void hide();
+    inline bool active() { return s_active; }
 
 private:
     bool s_active = false;
