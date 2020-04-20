@@ -1,8 +1,9 @@
 #include "SettingsMenu.h"
 
-SettingsMenu::SettingsMenu()
+SettingsMenu::SettingsMenu() : applyButton("Apply", sf::Vector2f(100, 150)),
+                               cancelButton("Cancel", sf::Vector2f(-225, 150))
 {
-    addComponent<Position>(sf::Vector2f(0, 0));
+    addComponent<Position>(sf::Vector2f(-300, -400));
     addComponent<Sprite>("UI/windowsheet.png");
 }
 
@@ -10,13 +11,14 @@ void SettingsMenu::initialize()
 {
     Entity::initialize();
     getComponent<Sprite>().getSprite().setTextureRect(sf::IntRect(0, 0, 48, 48));
-    getComponent<Sprite>().getSprite().setScale(12, 15);
+    getComponent<Sprite>().getSprite().setScale(15, 15);
+    applyButton.initialize();
+    cancelButton.initialize();
 }
 
 void SettingsMenu::show()
 {
     s_active = true;
-    dbg_log("Show called")
 }
 
 void SettingsMenu::hide()
@@ -40,4 +42,6 @@ void SettingsMenu::render(sf::RenderWindow* window)
 {
     if (!s_active) return;
     Entity::render(window);
+    applyButton.render(window);
+    cancelButton.render(window);
 }

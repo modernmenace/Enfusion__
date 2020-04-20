@@ -5,6 +5,7 @@
 #include "../../Component/Base/Position.h"
 #include "../../Component/Base/Sprite.h"
 #include "../../../Engine/Core/Settings.h"
+#include "Button.h"
 
 class SettingsMenu : Entity {
 
@@ -20,6 +21,9 @@ public:
 
 private:
     bool s_active = false;
+
+    Button applyButton;
+    Button cancelButton;
 
 };
 
