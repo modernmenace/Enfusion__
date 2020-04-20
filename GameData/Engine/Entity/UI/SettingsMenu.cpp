@@ -30,6 +30,16 @@ void SettingsMenu::handleInput(sf::Mouse::Button button)
 {
     if (!s_active) return;
     Entity::handleInput(button);
+
+    if (applyButton.getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition))
+    {
+        hide();
+    }
+    else if (cancelButton.getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition))
+    {
+        hide();
+    }
+
 }
 
 void SettingsMenu::handleInput(sf::Keyboard::Key key)
