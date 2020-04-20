@@ -1,11 +1,11 @@
 #ifndef ENFUSION___SLOT_H
 #define ENFUSION___SLOT_H
 
-#include "../../Misc/Item.h"
-#include "../../Component/Base/Sprite.h"
-#include "../../Component/Base/Position.h"
+#include "../../../Misc/Item.h"
+#include "../../../Component/Base/Sprite.h"
+#include "../../../Component/Base/Position.h"
 #include "TextDisplay.h"
-#include "../../Component/Misc/Inventory.h"
+#include "../../../Component/Misc/Inventory.h"
 
 class Slot : public Entity {
 

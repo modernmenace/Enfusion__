@@ -1,12 +1,12 @@
 #ifndef ENFUSION___HOTBAR_H
 #define ENFUSION___HOTBAR_H
 
-#include "../Entity.h"
-#include "../../Component/Base/Sprite.h"
-#include "../../Component/Base/Position.h"
-#include "../../Component/Misc/Inventory.h"
-#include "TextDisplay.h"
-#include "Slot.h"
+#include "../../Entity.h"
+#include "../../../Component/Base/Sprite.h"
+#include "../../../Component/Base/Position.h"
+#include "../../../Component/Misc/Inventory.h"
+#include "../Elements/TextDisplay.h"
+#include "../Elements/Slot.h"
 #include "InventoryMenu.h"
 
 #define HOTBAR_SLOTS 6

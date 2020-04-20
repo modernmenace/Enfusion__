@@ -1,8 +1,8 @@
 #ifndef ENFUSION_TEXTDISPLAY_H
 #define ENFUSION_TEXTDISPLAY_H
 
-#include "../Entity.h"
-#include "../../Component/Base/Position.h"
+#include "../../Entity.h"
+#include "../../../Component/Base/Position.h"
 
 class TextDisplay : public Entity {
 

@@ -5,12 +5,12 @@
 #include "../../Engine/AI/Agent.h"
 #include "../../Engine/Lvl/Level.h"
 #include "../../Engine/Lvl/Tilemap.h"
-#include "../../Engine/Entity/UI/Hotbar.h"
-#include "../../Engine/Entity/UI/InventoryMenu.h"
+#include "../../Engine/Entity/UI/Menus/Hotbar.h"
+#include "../../Engine/Entity/UI/Menus/InventoryMenu.h"
 
 #ifdef DEBUG_BUILD
-#include "../../Engine/Entity/UI/TextDisplay.h"
-#include "../../Engine/Entity/UI/PauseMenu.h"
+#include "../../Engine/Entity/UI/Elements/TextDisplay.h"
+#include "../../Engine/Entity/UI/Menus/PauseMenu.h"
 
 #endif
 

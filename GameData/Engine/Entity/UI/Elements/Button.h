@@ -1,9 +1,9 @@
 #ifndef ENFUSION___BUTTON_H
 #define ENFUSION___BUTTON_H
 
-#include "../Entity.h"
-#include "../../Component/Base/Position.h"
-#include "../../Component/Base/Sprite.h"
+#include "../../Entity.h"
+#include "../../../Component/Base/Position.h"
+#include "../../../Component/Base/Sprite.h"
 #include "TextDisplay.h"
 
 class Button : public Entity {

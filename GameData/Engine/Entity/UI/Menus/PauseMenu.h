@@ -1,10 +1,10 @@
 #ifndef ENFUSION___PAUSEMENU_H
 #define ENFUSION___PAUSEMENU_H
 
-#include "../Entity.h"
-#include "../../Component/Base/Position.h"
-#include "../../Component/Base/Sprite.h"
-#include "Button.h"
+#include "../../Entity.h"
+#include "../../../Component/Base/Position.h"
+#include "../../../Component/Base/Sprite.h"
+#include "../Elements/Button.h"
 #include "SettingsMenu.h"
 
 class PauseMenu : public Entity {

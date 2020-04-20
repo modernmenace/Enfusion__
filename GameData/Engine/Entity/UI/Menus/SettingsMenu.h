@@ -1,11 +1,11 @@
 #ifndef ENFUSION___SETTINGSMENU_H
 #define ENFUSION___SETTINGSMENU_H
 
-#include "../Entity.h"
-#include "../../Component/Base/Position.h"
-#include "../../Component/Base/Sprite.h"
-#include "../../../Engine/Core/Settings.h"
-#include "Button.h"
+#include "../../Entity.h"
+#include "../../../Component/Base/Position.h"
+#include "../../../Component/Base/Sprite.h"
+#include "../../../Core/Settings.h"
+#include "../Elements/Button.h"
 
 class SettingsMenu : Entity {
 
