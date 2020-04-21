@@ -4,10 +4,10 @@
 
 SettingsMenu::SettingsMenu() : applyButton("Apply", sf::Vector2f(100, 150)),
                                cancelButton("Cancel", sf::Vector2f(-225, 150)),
-                               controlsButton("Controls", sf::Vector2f(-75, -75)),
+                               controlsButton("Controls", sf::Vector2f(-65, -25)),
                                s_resolutionText("Resolution", sf::Vector2f(-200, -290), 30),
-                               s_fullscreenText("Fullscreen", sf::Vector2f(-200, -200), 30),
-                               s_fsrnTickBox(sf::Vector2f(250, -200)),
+                               s_fullscreenText("Fullscreen", sf::Vector2f(-200, -185), 30),
+                               s_fsrnTickBox(sf::Vector2f(125, -200)),
                                s_resDropBox(sf::Vector2f(0, -300))
 {
     addComponent<Position>(sf::Vector2f(-300, -400));
