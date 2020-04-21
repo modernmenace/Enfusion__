@@ -11,18 +11,18 @@ public:
     TickBox(sf::Vector2f position)
     {
         addComponent<Position>(position);
-        addComponent<Sprite>("UI/tickbox.png");
-        getComponent<Sprite>().getSprite().setTextureRect(sf::IntRect(0, 0, 24, 24));
-        getComponent<Sprite>().getSprite().setScale(2, 2);
+        addComponent<Sprite>("UI/ui.png");
+        getComponent<Sprite>().getSprite().setTextureRect(sf::IntRect(49, 0, 18, 16));
+        getComponent<Sprite>().getSprite().setScale(5, 5);
     }
 
     void set(bool status)
     {
         t_status = status;
         if (t_status)
-            getComponent<Sprite>().getSprite().setTextureRect(sf::IntRect(24, 0, 24, 24));
+            getComponent<Sprite>().getSprite().setTextureRect(sf::IntRect(67, 0, 18, 16));
         else
-            getComponent<Sprite>().getSprite().setTextureRect(sf::IntRect(0, 0, 24, 24));
+            getComponent<Sprite>().getSprite().setTextureRect(sf::IntRect(49, 0, 18, 16));
     }
     inline bool get()            { return t_status;   }
 

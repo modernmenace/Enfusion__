@@ -12,7 +12,8 @@ public:
     DropBox(sf::Vector2f position) : d_text("", sf::Vector2f(0, 0), 30)
     {
         addComponent<Position>(position);
-        addComponent<Sprite>("UI/dropbox.png");
+        addComponent<Sprite>("UI/ui.png");
+        getComponent<Sprite>().getSprite().setTextureRect(sf::IntRect(0, 16, 90, 16));
         getComponent<Sprite>().getSprite().setScale(4, 4);
     }
 
@@ -22,7 +23,7 @@ public:
         d_text.initialize();
         d_text.setText(std::to_string(WINDOW->getSize().x) + "x" + std::to_string(WINDOW->getSize().y));
         d_text.setPosition(sf::Vector2f(getComponent<Position>().getPosition().x + ((getComponent<Sprite>().getSprite().getGlobalBounds().width / 2)-25) - (d_text.text().getGlobalBounds().width / 2),
-                                        getComponent<Position>().getPosition().y+15));
+                                        getComponent<Position>().getPosition().y+12));
     }
 
     void render(sf::RenderWindow* window) override

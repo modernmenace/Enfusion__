@@ -12,8 +12,8 @@ public:
     Button(string_t text, sf::Vector2f position) : b_text(text, sf::Vector2f(0, 0), 30)
     {
         addComponent<Position>(sf::Vector2f(position));
-        addComponent<Sprite>("UI/windowsheet.png");
-        getComponent<Sprite>().getSprite().setTextureRect(sf::IntRect(0, 48, 48, 16));
+        addComponent<Sprite>("UI/ui.png");
+        getComponent<Sprite>().getSprite().setTextureRect(sf::IntRect(0, 0, 49, 16));
         getComponent<Sprite>().getSprite().setScale(5, 5);
     }
     void initialize() override
@@ -22,7 +22,7 @@ public:
         Entity::initialize();
 
         b_text.setPosition(sf::Vector2f(getComponent<Position>().getPosition().x + (getComponent<Sprite>().getSprite().getGlobalBounds().width / 2) - (b_text.text().getGlobalBounds().width / 2),
-                           getComponent<Position>().getPosition().y+15));
+                           getComponent<Position>().getPosition().y+20));
     }
 
     void render(sf::RenderWindow* window) override
