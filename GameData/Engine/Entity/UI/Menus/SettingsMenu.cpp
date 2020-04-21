@@ -1,14 +1,13 @@
 #include "SettingsMenu.h"
 
-//TODO: Controls Menu
-
 SettingsMenu::SettingsMenu() : applyButton("Apply", sf::Vector2f(100, 150)),
                                cancelButton("Cancel", sf::Vector2f(-225, 150)),
                                controlsButton("Controls", sf::Vector2f(-65, -25)),
                                s_resolutionText("Resolution", sf::Vector2f(-200, -290), 30),
                                s_fullscreenText("Fullscreen", sf::Vector2f(-200, -185), 30),
                                s_fsrnTickBox(sf::Vector2f(125, -200)),
-                               s_resDropBox(sf::Vector2f(0, -300))
+                               s_resDropBox(sf::Vector2f(0, -300)),
+                               c_menu(sf::Vector2f(-300, -400))
 {
     addComponent<Position>(sf::Vector2f(-300, -400));
     addComponent<Sprite>("UI/windowsheet.png");
@@ -26,6 +25,7 @@ void SettingsMenu::initialize()
     s_fullscreenText.initialize();
     s_fsrnTickBox.initialize();
     s_resDropBox.initialize();
+    c_menu.initialize();
 }
 
 void SettingsMenu::show()
@@ -53,7 +53,7 @@ void SettingsMenu::handleInput(sf::Mouse::Button button)
     }
     else if (controlsButton.getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition))
     {
-        //TODO: Implement this
+        c_menu.show();
     }
     else if (s_fsrnTickBox.getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition))
     {
@@ -70,6 +70,11 @@ void SettingsMenu::handleInput(sf::Keyboard::Key key)
 
 void SettingsMenu::render(sf::RenderWindow* window)
 {
+    if (c_menu.active())
+    {
+        c_menu.render(window);
+        return;
+    }
     if (!s_active) return;
     Entity::render(window);
     applyButton.render(window);
