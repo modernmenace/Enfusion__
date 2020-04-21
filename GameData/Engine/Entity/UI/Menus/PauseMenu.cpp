@@ -7,7 +7,7 @@ PauseMenu::PauseMenu() : p_b_resume("Resume", sf::Vector2f(-50, -275)),
                          s_menu()
 {
     addComponent<Position>(sf::Vector2f(-125, -350));
-    addComponent<Sprite>("UI/windowsheet.png");
+    addComponent<Sprite>("UI/ui.png");
 }
 
 void PauseMenu::initialize()

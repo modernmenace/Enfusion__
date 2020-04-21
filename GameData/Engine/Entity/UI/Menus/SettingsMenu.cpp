@@ -10,7 +10,7 @@ SettingsMenu::SettingsMenu() : applyButton("Apply", sf::Vector2f(100, 150)),
                                c_menu(sf::Vector2f(-300, -400))
 {
     addComponent<Position>(sf::Vector2f(-300, -400));
-    addComponent<Sprite>("UI/windowsheet.png");
+    addComponent<Sprite>("UI/ui.png");
 }
 
 void SettingsMenu::initialize()
@@ -46,7 +46,7 @@ void SettingsMenu::handleInput(sf::Mouse::Button button)
         c_menu.handleInput(button);
         return;
     }
-    
+
     Entity::handleInput(button);
 
     if (applyButton.getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition))
@@ -70,8 +70,9 @@ void SettingsMenu::handleInput(sf::Mouse::Button button)
 
 void SettingsMenu::handleInput(sf::Keyboard::Key key)
 {
-    if (!s_active) return;
-    hide();
+    if (!s_active)       return;
+    if (c_menu.active()) c_menu.handleInput(key);
+    if (key == 36)       hide();
 }
 
 void SettingsMenu::render(sf::RenderWindow* window)

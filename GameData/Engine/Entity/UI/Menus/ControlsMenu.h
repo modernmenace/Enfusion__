@@ -11,6 +11,7 @@ class ControlsMenu : Entity {
 public:
     ControlsMenu(sf::Vector2f position);
     void initialize() override;
+    void handleInput(sf::Keyboard::Key) override;
     void handleInput(sf::Mouse::Button) override;
     void render(sf::RenderWindow*)      override;
 

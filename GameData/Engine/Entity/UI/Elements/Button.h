@@ -13,7 +13,7 @@ public:
     {
         addComponent<Position>(sf::Vector2f(position));
         addComponent<Sprite>("UI/ui.png");
-        getComponent<Sprite>().getSprite().setTextureRect(sf::IntRect(0, 0, 49, 16));
+        getComponent<Sprite>().getSprite().setTextureRect(sf::IntRect(0, 48, 49, 16));
         getComponent<Sprite>().getSprite().setScale(5, 5);
     }
     void initialize() override

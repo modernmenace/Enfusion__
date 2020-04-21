@@ -4,7 +4,7 @@ ControlsMenu::ControlsMenu(sf::Vector2f position) : applyButton("Apply", sf::Vec
                                                     cancelButton("Cancel", sf::Vector2f(-225, 150))
 {
     addComponent<Position>(position);
-    addComponent<Sprite>("UI/windowsheet.png");
+    addComponent<Sprite>("UI/ui.png");
 }
 
 void ControlsMenu::initialize()
@@ -14,6 +14,16 @@ void ControlsMenu::initialize()
     getComponent<Sprite>().getSprite().setScale(15, 15);
     applyButton.initialize();
     cancelButton.initialize();
+}
+
+void ControlsMenu::handleInput(sf::Keyboard::Key key)
+{
+    if (!c_active) return;
+    if (key == 36)
+    {
+        dbg_log("hiding")
+        hide();
+    }
 }
 
 void ControlsMenu::handleInput(sf::Mouse::Button button)

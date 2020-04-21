@@ -15,7 +15,7 @@ Hotbar::Hotbar(Entity* entity, sf::Vector2f position, InventoryMenu* menu)
     this->i_entity = entity;
     this->i_menu   = menu;
     addComponent<Position>(position);
-    addComponent<Sprite>("UI/windowsheet.png");
+    addComponent<Sprite>("UI/ui.png");
 }
 
 Hotbar::~Hotbar()
@@ -30,10 +30,10 @@ Hotbar::~Hotbar()
 void Hotbar::initialize()
 {
     assert(i_entity->hasComponent<Inventory>());
-    getComponent<Sprite>().getSprite().setTextureRect(sf::IntRect(0, 48, 48, 16));
+    getComponent<Sprite>().getSprite().setTextureRect(sf::IntRect(0, 48, 49, 16));
     getComponent<Sprite>().getSprite().setScale(15, 10);
 
-    sf::Vector2f slotPos(getComponent<Position>().getPosition().x + 75, getComponent<Position>().getPosition().y + 20);
+    sf::Vector2f slotPos(getComponent<Position>().getPosition().x + 75, getComponent<Position>().getPosition().y + 33);
     for(int i = 0; i < HOTBAR_SLOTS; i++)
     {
         slots.emplace_back(new Slot(slotPos, &i_entity->getComponent<Inventory>()));

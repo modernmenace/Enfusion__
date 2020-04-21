@@ -13,7 +13,7 @@ public:
     {
         addComponent<Position>(position);
         addComponent<Sprite>("UI/ui.png");
-        getComponent<Sprite>().getSprite().setTextureRect(sf::IntRect(0, 16, 90, 16));
+        getComponent<Sprite>().getSprite().setTextureRect(sf::IntRect(0, 64, 90, 16));
         getComponent<Sprite>().getSprite().setScale(4, 4);
     }
 
