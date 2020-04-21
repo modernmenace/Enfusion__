@@ -4,6 +4,7 @@
 #include "../../Entity.h"
 #include "../../../Component/Base/Position.h"
 #include "../../../Component/Base/Sprite.h"
+#include "../Elements/Button.h"
 
 class ControlsMenu : Entity {
 
@@ -20,6 +21,9 @@ public:
 
 private:
     bool c_active = false;
+
+    Button applyButton;
+    Button cancelButton;
 
 };
 
