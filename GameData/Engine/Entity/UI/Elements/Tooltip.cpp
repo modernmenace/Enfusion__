@@ -13,7 +13,7 @@ Tooltip::Tooltip() : t_iName("", sf::Vector2f(0, 0), 20),
                      t_iDesc("", sf::Vector2f(0, 0), 15, sf::RectangleShape(sf::Vector2f(48, 48)))
 {
     addComponent<Position>(sf::Vector2f(0, -0));
-    addComponent<Sprite>("UI/windowsheet.png");
+    addComponent<Sprite>("UI/ui.png");
 }
 
 void Tooltip::initialize()
