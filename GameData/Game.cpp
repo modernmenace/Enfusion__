@@ -24,6 +24,7 @@ Game::Game()
     GlobalFont->loadFromFile("Resources/Fonts/NotoMono-Regular.TTF");
     generateItemRegistry();
     LevelManager::Instance()->setLevel("Level_1");
+    Settings::Instance();
     run();
 }
 

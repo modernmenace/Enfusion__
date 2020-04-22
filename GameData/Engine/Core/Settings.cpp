@@ -10,6 +10,24 @@ Settings* Settings::Instance()
     return m_Instance;
 }
 
+Settings::Settings()
+{
+    //load settings file here (documents?)
+    dbg_log("Settings Initializing")
+    //get directory different for platforms
+
+#ifdef __WIN32
+    //find directory windows
+    int bytes = GetModuleFileName(NULL, pBuf, len);
+#endif
+#ifdef __APPLE__
+    //find directory mac
+
+#endif
+
+
+}
+
 uint16_t Settings::control(uint16_t control)
 {
     //TODO: implement this

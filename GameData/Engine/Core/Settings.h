@@ -10,6 +10,7 @@
 class Settings {
 
 public:
+    Settings();
     static Settings* Instance();
     static uint16_t control(uint16_t);
 
