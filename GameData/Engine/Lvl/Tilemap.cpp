@@ -1,7 +1,9 @@
 #include "Tilemap.h"
 
-// USING SFML TUTORIAL
-// https://www.sfml-dev.org/tutorials/2.1/graphics-vertex-array.php
+//TODO: Develop Biome System for generation
+//TODO: Once Done, spawn items like trees on
+//TODO: Top absed on biome
+
 
 Tilemap::Tilemap(std::string tileSetName, const int* tiles, uint16_t width, uint16_t height) :
     tileSize(TILESHEET_TILE_WIDTH, TILESHEET_TILE_HEIGHT)
@@ -9,8 +11,6 @@ Tilemap::Tilemap(std::string tileSetName, const int* tiles, uint16_t width, uint
     this->tileset  = AssetManager::Instance()->getTexture(tileSetName);
     this->width    = width;
     this->height   = height;
-
-    //setup tiles, doing this awful way due to
 
     for(int i = 0; i < width * height; i++)
         this->tiles.push_back(tiles[i]);
