@@ -9,3 +9,8 @@ Settings* Settings::Instance()
 
     return m_Instance;
 }
+
+uint16_t Settings::control(uint16_t control)
+{
+    //TODO: implement this
+}
