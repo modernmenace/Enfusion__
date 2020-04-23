@@ -5,13 +5,14 @@
 //TODO: Top absed on biome
 
 
-Tilemap::Tilemap(std::string tileSetName, const int* tiles, uint16_t width, uint16_t height) :
+Tilemap::Tilemap(std::string tileSetName, std::vector<int> tiles, uint16_t width, uint16_t height) :
     tileSize(TILESHEET_TILE_WIDTH, TILESHEET_TILE_HEIGHT)
 {
     this->tileset  = AssetManager::Instance()->getTexture(tileSetName);
     this->width    = width;
     this->height   = height;
 
+    //TODO: this may be able to be removed after conversion
     for(int i = 0; i < width * height; i++)
         this->tiles.push_back(tiles[i]);
 }

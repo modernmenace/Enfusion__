@@ -1,4 +1,5 @@
 #include "Level_1.h"
+#include "../../GameData/Engine/Lvl/MapGenerator.h"
 
 Level_1::Level_1() : Level("Level_1", "Levels/Level_1_back.png"),
                      player("Objects/mount1.png", sf::Vector2f(600, 300)),
@@ -19,18 +20,7 @@ Level_1::Level_1() : Level("Level_1", "Levels/Level_1_back.png"),
     addUIEntity(playerPosDebugText);
     #endif
 
-    const int level[] =
-            {
-                    69, 69, 70, 69, 69, 69, 69, 69, 69, 69, 69, 69,
-                    69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 70, 69,
-                    69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69,
-                    69, 69, 69, 70, 69, 69, 69, 69, 69, 69, 69, 69,
-                    69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69,
-                    69, 69, 69, 69, 69, 69, 70, 69, 69, 69, 69, 69,
-                    69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69,
-                    69, 69, 69, 69, 70, 69, 69, 69, 69, 69, 69, 69,
-                    70, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69
-            };
+    auto level = MapGenerator::Instance()->generateMap(12, 9);
 
     map = new Tilemap("Levels/GrasslandColor2@128x128.png", level, 12, 9);
 }
