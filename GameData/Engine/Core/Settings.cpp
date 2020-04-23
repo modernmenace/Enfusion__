@@ -18,7 +18,7 @@ Settings::Settings()
 
 #ifdef __WIN32
     //find directory windows
-    int bytes = GetModuleFileName(NULL, pBuf, len);
+    //int bytes = GetModuleFileName(NULL, pBuf, len);
 #endif
 #ifdef __APPLE__
     //find directory mac
