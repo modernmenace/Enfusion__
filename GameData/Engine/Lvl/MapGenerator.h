@@ -6,15 +6,16 @@
 class MapGenerator {
 
 public:
-    MapGenerator();
     static MapGenerator* Instance();
     std::vector<int> generateMap(uint16_t sizeX, uint16_t sizeY);
-
+    inline sf::Vector2i size() { return m_size; }
 
 
 private:
     static MapGenerator* m_Instance;
     std::vector<int> lvl;
+
+    sf::Vector2i m_size;
 
 
 };

@@ -22,7 +22,7 @@ Level_1::Level_1() : Level("Level_1", "Levels/Level_1_back.png"),
 
     auto level = MapGenerator::Instance()->generateMap(12, 9);
 
-    map = new Tilemap("Levels/GrasslandColor2@128x128.png", level, 12, 9);
+    map = new Tilemap("Levels/GrasslandColor2@128x128.png", level, MapGenerator::Instance()->size());
 }
 
 void Level_1::initialize()

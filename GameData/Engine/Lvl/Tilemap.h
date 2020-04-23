@@ -10,7 +10,7 @@
 class Tilemap : public sf::Drawable, public sf::Transformable {
 
 public:
-    Tilemap(std::string tileSetName, std::vector<int> tiles, uint16_t width, uint16_t height);
+    Tilemap(std::string tileSetName, std::vector<int> tiles, sf::Vector2i size);
 
     Tilemap(const sf::VertexArray &tiles);
 

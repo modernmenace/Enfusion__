@@ -1,16 +1,12 @@
 #include "Tilemap.h"
 
-//TODO: Develop Biome System for generation
-//TODO: Once Done, spawn items like trees on
-//TODO: Top absed on biome
 
-
-Tilemap::Tilemap(std::string tileSetName, std::vector<int> tiles, uint16_t width, uint16_t height) :
+Tilemap::Tilemap(std::string tileSetName, std::vector<int> tiles, sf::Vector2i size) :
     tileSize(TILESHEET_TILE_WIDTH, TILESHEET_TILE_HEIGHT)
 {
     this->tileset  = AssetManager::Instance()->getTexture(tileSetName);
-    this->width    = width;
-    this->height   = height;
+    this->width    = size.x;
+    this->height   = size.y;
 
     //TODO: this may be able to be removed after conversion
     for(int i = 0; i < width * height; i++)
