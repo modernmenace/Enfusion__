@@ -13,7 +13,6 @@ struct Tile
 class MapGenerator {
 
 public:
-    ~MapGenerator();
     static MapGenerator* Instance();
     std::vector<int> generateMap(uint16_t sizeX, uint16_t sizeY);
 
