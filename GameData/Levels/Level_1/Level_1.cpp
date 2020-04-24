@@ -20,7 +20,7 @@ Level_1::Level_1() : Level("Level_1", "Levels/Level_1_back.png"),
     addUIEntity(playerPosDebugText);
     #endif
 
-    auto level = MapGenerator::Instance()->generateMap(12, 9);
+    auto level = MapGenerator::Instance()->generateMap(20, 20);
 
     map = new Tilemap("Levels/GrasslandColor2@128x128.png", level, MapGenerator::Instance()->size());
 }
