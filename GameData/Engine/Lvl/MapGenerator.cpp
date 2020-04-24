@@ -24,14 +24,19 @@ std::vector<int> MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY)
     m_tilemap.clear();
     m_size.x = sizeX;
     m_size.y = sizeY;
-    for (int i = 0; i < (sizeX * sizeY); i++)
+
+    //set initial empty array
+    for(uint32_t i = 0; i < (sizeX * sizeY); i++)
     {
         Tile t;
-        t.tilesetID = 69;
-        t.biome     = LEVEL_BIOME_ID_WOODLAND;
+        t.tilesetID = 0;
+        t.biome     = 0;
         m_lvl.push_back(t);
-        m_tilemap.push_back(t.tilesetID);
     }
+
+    //biome stuff, have biomes edit array
+
+    for (uint32_t i = 0; i < (sizeX * sizeY); i++) m_tilemap.push_back(m_lvl[i].tilesetID);
 
 
     return tilemap();

@@ -4,11 +4,7 @@
 #include "../Core/Engine.h"
 #include "BiomeManager.h"
 
-struct Tile
-{
-    uint16_t biome;
-    uint16_t tilesetID;
-};
+//TODO: tilemap to array so that other functions can access it?
 
 class MapGenerator {
 
@@ -18,6 +14,7 @@ public:
 
     inline sf::Vector2i size()        { return m_size; }
     inline std::vector<int> tilemap() { return m_tilemap; }
+    inline std::vector<Tile>* map()   { return &m_lvl; }
 
 private:
     static MapGenerator* m_Instance;

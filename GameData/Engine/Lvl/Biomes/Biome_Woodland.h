@@ -6,6 +6,15 @@
 class Biome_Woodland : public Biome
 {
 
+public:
+    void generate(sf::RectangleShape area) override
+    {
+        //TODO: Generate Woodland Biome
+        dbg_log("Generating Woodland Biome")
+
+
+    }
+
 };
 
 
