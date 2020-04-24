@@ -8,9 +8,7 @@ Tilemap::Tilemap(std::string tileSetName, std::vector<int> tiles, sf::Vector2i s
     this->width    = size.x;
     this->height   = size.y;
 
-    //TODO: this may be able to be removed after conversion
-    for(int i = 0; i < width * height; i++)
-        this->tiles.push_back(tiles[i]);
+    this->tiles = tiles;
 }
 
 void Tilemap::draw(sf::RenderTarget& target, sf::RenderStates states) const
