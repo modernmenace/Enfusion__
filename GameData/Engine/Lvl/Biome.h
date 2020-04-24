@@ -18,7 +18,7 @@ class Biome
 {
 
 public:
-    virtual void generate(sf::RectangleShape area, std::vector<Tile>* map) {};
+    virtual void generate(sf::Vector2i position, sf::Vector2i area, std::vector<Tile>* map) {};
 
 };
 

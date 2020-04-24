@@ -16,7 +16,7 @@ public:
     BiomeManager();
     ~BiomeManager();
     static BiomeManager* Instance();
-
+    inline Biome* biome(uint16_t id) { return biomes[id]; }
 
 private:
     static BiomeManager* m_Instance;
