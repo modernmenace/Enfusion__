@@ -3,8 +3,10 @@
 
 #include "Biome.h"
 
-#define LEVEL_AMOUNT_BIOMES     1
+#define LEVEL_AMOUNT_BIOMES     2
+
 #define LEVEL_BIOME_ID_WOODLAND 0
+#define LEVEL_BIOME_ID_DESERT   1
 
 
 class BiomeManager

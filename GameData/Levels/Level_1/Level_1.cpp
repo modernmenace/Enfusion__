@@ -1,5 +1,7 @@
 #include "Level_1.h"
-#include "../../GameData/Engine/Lvl/MapGenerator.h"
+//Below for windows?
+//#include "../../GameData/Engine/Lvl/MapGenerator.h"
+#include "../../../GameData/Engine/Lvl/MapGenerator.h"
 
 Level_1::Level_1() : Level("Level_1", "Levels/Level_1_back.png"),
                      player("Objects/mount1.png", sf::Vector2f(600, 300)),

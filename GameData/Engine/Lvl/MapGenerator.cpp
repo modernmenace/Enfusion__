@@ -35,6 +35,8 @@ std::vector<int> MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY)
     }
 
     //biome stuff, have biomes edit array
+    //TODO how to split this array into biomes?
+    //TODO use LEVEL_BIOME_SIZE define values
 
     for (uint32_t i = 0; i < (sizeX * sizeY); i++) m_tilemap.push_back(m_lvl[i].tilesetID);
 

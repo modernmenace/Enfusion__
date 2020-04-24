@@ -7,10 +7,12 @@ class Biome_Woodland : public Biome
 {
 
 public:
-    void generate(sf::RectangleShape area) override
+    void generate(sf::RectangleShape area, std::vector<Tile>* map) override
     {
         //TODO: Generate Woodland Biome
         dbg_log("Generating Woodland Biome")
+
+        //ground texture
 
 
     }
