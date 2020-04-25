@@ -1,5 +1,6 @@
 #include "BiomeManager.h"
 #include "Biomes/Biome_Woodland.h"
+#include "Biomes/Biome_Desert.h"
 
 BiomeManager* BiomeManager::m_Instance = nullptr;
 
@@ -16,6 +17,7 @@ BiomeManager* BiomeManager::Instance()
 BiomeManager::BiomeManager()
 {
     biomes[LEVEL_BIOME_ID_WOODLAND] = new Biome_Woodland();
+    biomes[LEVEL_BIOME_ID_DESERT]   = new Biome_Desert();
 }
 
 BiomeManager::~BiomeManager()

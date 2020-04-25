@@ -3,7 +3,8 @@
 //#include "../../GameData/Engine/Lvl/MapGenerator.h"
 #include "../../../GameData/Engine/Lvl/MapGenerator.h"
 
-//TODO: Very Slow with Lareg Map, Implement Culling
+//TODO: Very Slow with Large Map, Implement Culling
+//TODO: Maybe break levels into chunks?
 
 Level_1::Level_1() : Level("Level_1", "Levels/Level_1_back.png"),
                      player("Objects/mount1.png", sf::Vector2f(600, 300)),

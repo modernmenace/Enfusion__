@@ -9,8 +9,6 @@ class Biome_Woodland : public Biome
 public:
     void generate(sf::Vector2i position, sf::Vector2i area, std::vector<Tile>* map, sf::Vector2i mapArea) override
     {
-        //TODO: Generate Woodland Biome
-        //TODO: Determine locations in tilemap
         dbg_log("Generating Woodland Biome")
 
         //generate ground tile
@@ -30,9 +28,6 @@ public:
             nPos.x = position.x;
             nPos.y++;
         }
-
-        //map->at(0).tilesetID = 69;
-
     }
 
 };

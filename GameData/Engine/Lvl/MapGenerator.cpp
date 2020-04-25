@@ -35,16 +35,22 @@ std::vector<int> MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY)
     }
 
     //TODO: Split entire map into biomes
-
-    for(uint32_t i = 0; i < 1; i++)
+    //TODO: Loop left to right first and check for blanks?
+    sf::Vector2i pos(0, 0);
+    for(uint32_t i = 0; i >=0; i++)
     {
         uint16_t biomeSize = rand()%(LEVEL_BIOME_SIZE_MAX-LEVEL_BIOME_SIZE_MIN + 1) + LEVEL_BIOME_SIZE_MIN;;
         dbg_log(biomeSize)
-        auto* biome = BiomeManager::Instance()->biome(LEVEL_BIOME_ID_WOODLAND);
+        auto* biome = BiomeManager::Instance()->biome(rand()%(LEVEL_AMOUNT_BIOMES)+1);
         auto size = sf::Vector2i(biomeSize, biomeSize);
-        biome->generate(sf::Vector2i(0, 0), size, map(), sf::Vector2i(sizeX, sizeY));
+        biome->generate(pos, size, map(), sf::Vector2i(sizeX, sizeY));
 
-        i += biomeSize;
+
+        if ((pos.x + size.x) > (sizeX))
+            break;
+        pos.x += size.x;
+        //pos.y += size.y;
+        //i += biomeSize;
     }
 
     for (uint32_t i = 0; i < (sizeX * sizeY); i++)

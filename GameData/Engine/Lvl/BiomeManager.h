@@ -20,11 +20,11 @@ public:
     BiomeManager();
     ~BiomeManager();
     static BiomeManager* Instance();
-    inline Biome* biome(uint16_t id) { return biomes[id]; }
+    inline Biome* biome(uint16_t id) { assert(id != LEVEL_BIOME_ID_NONE); return biomes[id]; }
 
 private:
     static BiomeManager* m_Instance;
-    Biome* biomes[LEVEL_AMOUNT_BIOMES];
+    Biome* biomes[LEVEL_AMOUNT_BIOMES+1];
 
 };
 
