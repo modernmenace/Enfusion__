@@ -30,7 +30,7 @@ std::vector<int> MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY)
     {
         Tile t;
         t.tilesetID = 0;
-        t.biome     = 0;
+        t.biome     = LEVEL_BIOME_ID_NONE;
         m_lvl.push_back(t);
     }
 
@@ -40,16 +40,21 @@ std::vector<int> MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY)
 
     for(uint32_t i = 0; i < (sizeX * sizeY); i++)
     {
-        auto biomeSize = LEVEL_BIOME_SIZE_MIN/2;
+        auto biomeSize = 4;
 
         auto* biome = BiomeManager::Instance()->biome(LEVEL_BIOME_ID_WOODLAND);
         auto size = sf::Vector2i(biomeSize, biomeSize);
-        biome->generate(sf::Vector2i(0, 0), size, map());
+        biome->generate(sf::Vector2i(0, 0), size, map(), sf::Vector2i(sizeX, sizeY));
 
         i += biomeSize;
     }
 
-    for (uint32_t i = 0; i < (sizeX * sizeY); i++) m_tilemap.push_back(m_lvl[i].tilesetID);
+    for (uint32_t i = 0; i < (sizeX * sizeY); i++)
+    {
+        //TODO: Add below line once biomes are implemented
+        //assert(m_lvl[i].biome != LEVEL_BIOME_ID_NONE);
+        m_tilemap.push_back(m_lvl[i].tilesetID);
+    }
 
 
     return tilemap();
