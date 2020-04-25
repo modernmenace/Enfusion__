@@ -3,6 +3,8 @@
 //#include "../../GameData/Engine/Lvl/MapGenerator.h"
 #include "../../../GameData/Engine/Lvl/MapGenerator.h"
 
+//TODO: Very Slow with Lareg Map, Implement Culling
+
 Level_1::Level_1() : Level("Level_1", "Levels/Level_1_back.png"),
                      player("Objects/mount1.png", sf::Vector2f(600, 300)),
                      i_menu(&player),
@@ -22,7 +24,7 @@ Level_1::Level_1() : Level("Level_1", "Levels/Level_1_back.png"),
     addUIEntity(playerPosDebugText);
     #endif
 
-    auto level = MapGenerator::Instance()->generateMap(20, 20);
+    auto level = MapGenerator::Instance()->generateMap(100, 100);
 
     map = new Tilemap("Levels/GrasslandColor2@128x128.png", level, MapGenerator::Instance()->size());
 }

@@ -4,10 +4,6 @@
 #include "../Core/Engine.h"
 #include <SFML/Graphics/RectangleShape.hpp>
 
-//TODO: Play with these values
-#define LEVEL_BIOME_SIZE_MIN 100
-#define LEVEL_BIOME_SIZE_MAX 200
-
 struct Tile
 {
     uint16_t biome;

@@ -34,14 +34,12 @@ std::vector<int> MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY)
         m_lvl.push_back(t);
     }
 
-    //biome stuff, have biomes edit array
-    //TODO how to split this array into biomes?
-    //TODO use LEVEL_BIOME_SIZE define values
+    //TODO: Split entire map into biomes
 
-    for(uint32_t i = 0; i < (sizeX * sizeY); i++)
+    for(uint32_t i = 0; i < 1; i++)
     {
-        auto biomeSize = 4;
-
+        uint16_t biomeSize = rand()%(LEVEL_BIOME_SIZE_MAX-LEVEL_BIOME_SIZE_MIN + 1) + LEVEL_BIOME_SIZE_MIN;;
+        dbg_log(biomeSize)
         auto* biome = BiomeManager::Instance()->biome(LEVEL_BIOME_ID_WOODLAND);
         auto size = sf::Vector2i(biomeSize, biomeSize);
         biome->generate(sf::Vector2i(0, 0), size, map(), sf::Vector2i(sizeX, sizeY));

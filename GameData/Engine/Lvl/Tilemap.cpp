@@ -32,7 +32,6 @@ void Tilemap::initialize()
     for (unsigned int i = 0; i < width; ++i)
         for (unsigned int j = 0; j < height; ++j)
         {
-            dbg_log(i << ", " << j)
             // get the current tile number
             int tileNumber = tiles[i + j * width];
 
