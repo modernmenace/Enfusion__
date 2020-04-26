@@ -62,6 +62,12 @@ std::vector<int> MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY)
             pos.x += size.x;
     }
 
+    //TODO: loop - Fill in empty sections
+
+
+
+    //TODO: loop - smooth transitions between terrains
+
     //set up texture tilemap
     for (uint32_t i = 0; i < (sizeX * sizeY); i++)
     {

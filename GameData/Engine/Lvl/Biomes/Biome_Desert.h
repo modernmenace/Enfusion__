@@ -14,19 +14,24 @@ public:
         auto nPos = position;
         for(uint16_t j = 0; j < area.y; j++)
         {
-            //row loop
             for(uint16_t i = 0; i < area.x; i++)
             {
                 if ((nPos.y+nPos.x) < (nPos.y + mapArea.x))
                 {
                     Tile* t = &map->at((nPos.y * mapArea.x)+nPos.x);
                     t->tilesetID = 5;
+                    t->biome = LEVEL_BIOME_ID_DESERT;
                     nPos.x++;
                 }
             }
             nPos.x = position.x;
             nPos.y++;
         }
+    }
+
+    void createTransitionTile(sf::Vector2i position, uint16_t fromBiome) override
+    {
+        //TODO: Implement This
     }
 
 };
