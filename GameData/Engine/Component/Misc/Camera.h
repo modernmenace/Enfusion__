@@ -14,6 +14,7 @@ class Camera : public Component {
 
 public:
     Camera(CameraType type = CameraType::STATIC);
+    ~Camera();
 
     void initialize()                     override;
     void update(sf::Time tickRate)        override;

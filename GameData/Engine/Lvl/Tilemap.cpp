@@ -18,7 +18,6 @@ void Tilemap::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
     // apply the tileset texture
     states.texture = &tileset;
-
     // draw the vertex array
     target.draw(vertices, states);
 }
