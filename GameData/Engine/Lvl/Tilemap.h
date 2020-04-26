@@ -4,13 +4,10 @@
 #include "../Core/Engine.h"
 #include <vector>
 
-#define TILESHEET_TILE_WIDTH  128
-#define TILESHEET_TILE_HEIGHT 128
-
 class Tilemap : public sf::Drawable, public sf::Transformable {
 
 public:
-    Tilemap(std::string tileSetName, std::vector<int> tiles, sf::Vector2i size);
+    Tilemap(std::string tileSetName, std::vector<int> tiles, sf::Vector2i size, uint16_t tileSize);
 
     Tilemap(const sf::VertexArray &tiles);
 
@@ -20,10 +17,10 @@ public:
 private:
     sf::Texture     tileset;
     sf::VertexArray vertices;
-    sf::Vector2u    tileSize;
 
     uint16_t width;
     uint16_t height;
+    uint16_t tileSize;
 
     std::vector<int> tiles;
 

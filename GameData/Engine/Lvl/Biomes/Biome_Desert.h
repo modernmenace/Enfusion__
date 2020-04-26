@@ -20,7 +20,7 @@ public:
                 if ((nPos.y+nPos.x) < (nPos.y + mapArea.x))
                 {
                     Tile* t = &map->at((nPos.y * mapArea.x)+nPos.x);
-                    t->tilesetID = 70;
+                    t->tilesetID = 5;
                     nPos.x++;
                 }
             }
