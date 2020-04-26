@@ -9,9 +9,6 @@
 #define LEVEL_BIOME_ID_WOODLAND 1
 #define LEVEL_BIOME_ID_DESERT   2
 
-#define LEVEL_BIOME_SIZE_MIN 20
-#define LEVEL_BIOME_SIZE_MAX 40
-
 
 class BiomeManager
 {

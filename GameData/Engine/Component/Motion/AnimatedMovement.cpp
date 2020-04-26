@@ -22,7 +22,11 @@ void AnimatedMovement::update(sf::Time tickRate)
         return;
 
     auto tempSpeed = speed;
+    #ifdef DEBUG_BUILD
+    if (sprinting) speed *= 15;
+    #else
     if (sprinting) speed *= 2;
+    #endif
     auto currDT = tickRate.asSeconds();
     currAnimTime += currDT;
 

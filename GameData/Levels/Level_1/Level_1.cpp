@@ -1,10 +1,8 @@
 #include "Level_1.h"
-//Below for windows?
-//#include "../../GameData/Engine/Lvl/MapGenerator.h"
 #include "../../../GameData/Engine/Lvl/MapGenerator.h"
 
-//TODO: Very Slow with Large Map, Implement Culling
-//TODO: Maybe break levels into chunks?
+//TODO: Break level into chunks
+//TODO: Minimap
 
 Level_1::Level_1() : Level("Level_1", "Levels/Level_1_back.png"),
                      player("Objects/mount1.png", sf::Vector2f(600, 300)),
@@ -25,7 +23,7 @@ Level_1::Level_1() : Level("Level_1", "Levels/Level_1_back.png"),
     addUIEntity(playerPosDebugText);
     #endif
 
-    auto level = MapGenerator::Instance()->generateMap(100, 100);
+    auto level = MapGenerator::Instance()->generateMap(500, 500);
 
     map = new Tilemap("Levels/mapgen.png", level, MapGenerator::Instance()->size(), 48);
 }
