@@ -4,8 +4,6 @@
 #include "../Core/Engine.h"
 #include "BiomeManager.h"
 
-//TODO: tilemap to array so that other functions can access it?
-
 class MapGenerator {
 
 public:
