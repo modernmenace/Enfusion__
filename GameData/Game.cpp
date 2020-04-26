@@ -90,8 +90,8 @@ void Game::render(sf::RenderWindow* window)
     {
         if (flag_close)
         {
-            renderThread->terminate();
             window->close();
+            renderThread->terminate();
         }
         window->clear(sf::Color::Black);
         LEVEL.render(window);
@@ -110,11 +110,7 @@ void Game::processEvents(sf::RenderWindow* window) {
     sf::Event event;
     while (window->pollEvent(event))
     {
-        if (event.type == sf::Event::Closed)
-        {
-            //TODO: still crashing, throw a flag?
-            flag_close = true;
-        }
+        if (event.type == sf::Event::Closed) flag_close = true;
 
         if (event.type == sf::Event::KeyPressed)
             LEVEL.handleInput(event.key.code);
