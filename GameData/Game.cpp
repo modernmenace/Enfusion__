@@ -84,8 +84,7 @@ void Game::update(sf::Time tickRate)
 
 void Game::render(sf::RenderWindow* window)
 {
-    //TODO; multithreaded approach causes crash
-    dbg_log(window)
+    window->setFramerateLimit(60);
     window->setActive(true);
     while (window->isOpen())
     {
