@@ -12,13 +12,13 @@ class Game {
 
 public:
     Game();
-    void run();
+    void run(sf::RenderWindow* window);
 
 private:
     void initialize();
-    void processEvents();
+    void processEvents(sf::RenderWindow* window);
     void update(sf::Time tickRate);
-    void render();
+    void render(sf::RenderWindow* window);
 
 };
 

@@ -1,6 +1,6 @@
 #include "Game.h"
+#include <functional>
 
-sf::RenderWindow* WINDOW;
 sf::Font*         GlobalFont;
 sf::Vector2f      MousePosition;
 ItemRegistry* ItemRegistry::m_Instance = nullptr;
@@ -18,18 +18,18 @@ sf::View* uiView = nullptr;
 
 Game::Game()
 {
-    WINDOW     = new sf::RenderWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT),
+    sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT),
                                                           WINDOW_TITLE);
     srand(time(nullptr));
-    WINDOW->setActive(false);
-    static sf::Thread renderThread(&Game::render, this);
+    window.setActive(false);
+    static sf::Thread renderThread(std::bind(&Game::render, this, &window));
     renderThread.launch();
     GlobalFont = new sf::Font();
     GlobalFont->loadFromFile("Resources/Fonts/NotoMono-Regular.TTF");
     generateItemRegistry();
     LevelManager::Instance()->setLevel("Level_1");
     Settings::Instance();
-    run();
+    run(&window);
 }
 
 /*
@@ -39,16 +39,15 @@ Game::Game()
  *
  */
 
-void Game::run() {
+void Game::run(sf::RenderWindow* window) {
     sf::Clock timer;
     sf::Time tickRate;
     initialize();
 
-    while (WINDOW->isOpen()) {
+    while (window->isOpen()) {
         tickRate = timer.restart();
-        processEvents();
+        processEvents(window);
         update(tickRate);
-        //render();
     }
 }
 
@@ -84,15 +83,16 @@ void Game::update(sf::Time tickRate)
  *
  */
 
-void Game::render()
+void Game::render(sf::RenderWindow* window)
 {
     //TODO; multithreaded approach causes crash
-    WINDOW->setActive(true);
-    while (WINDOW->isOpen())
+    dbg_log(window)
+    window->setActive(true);
+    while (window->isOpen())
     {
-        WINDOW->clear(sf::Color::Black);
-        LEVEL.render(WINDOW);
-        WINDOW->display();
+        window->clear(sf::Color::Black);
+        LEVEL.render(window);
+        window->display();
     }
 }
 
@@ -103,12 +103,12 @@ void Game::render()
  *
  */
 
-void Game::processEvents() {
+void Game::processEvents(sf::RenderWindow* window) {
     sf::Event event;
-    while (WINDOW->pollEvent(event))
+    while (window->pollEvent(event))
     {
         if (event.type == sf::Event::Closed)
-            WINDOW->close();
+            window->close();
 
         if (event.type == sf::Event::KeyPressed)
             LEVEL.handleInput(event.key.code);
