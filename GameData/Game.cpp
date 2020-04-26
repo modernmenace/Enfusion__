@@ -21,6 +21,9 @@ Game::Game()
     WINDOW     = new sf::RenderWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT),
                                                           WINDOW_TITLE);
     srand(time(nullptr));
+    WINDOW->setActive(false);
+    static sf::Thread renderThread(&Game::render, this);
+    renderThread.launch();
     GlobalFont = new sf::Font();
     GlobalFont->loadFromFile("Resources/Fonts/NotoMono-Regular.TTF");
     generateItemRegistry();
@@ -45,7 +48,7 @@ void Game::run() {
         tickRate = timer.restart();
         processEvents();
         update(tickRate);
-        render();
+        //render();
     }
 }
 
@@ -83,9 +86,14 @@ void Game::update(sf::Time tickRate)
 
 void Game::render()
 {
-    WINDOW->clear(sf::Color::Black);
-    LEVEL.render(WINDOW);
-    WINDOW->display();
+    //TODO; multithreaded approach causes crash
+    WINDOW->setActive(true);
+    while (WINDOW->isOpen())
+    {
+        WINDOW->clear(sf::Color::Black);
+        LEVEL.render(WINDOW);
+        WINDOW->display();
+    }
 }
 
 /*
