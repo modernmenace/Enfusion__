@@ -23,13 +23,12 @@ Game::Game()
     srand(time(nullptr));
     window.setActive(false);
     static sf::Thread renderThread(std::bind(&Game::render, this, &window));
-    renderThread.launch();
     GlobalFont = new sf::Font();
     GlobalFont->loadFromFile("Resources/Fonts/NotoMono-Regular.TTF");
     generateItemRegistry();
     LevelManager::Instance()->setLevel("Level_1");
     Settings::Instance();
-    run(&window);
+    run(&window, &renderThread);
 }
 
 /*
@@ -39,11 +38,11 @@ Game::Game()
  *
  */
 
-void Game::run(sf::RenderWindow* window) {
+void Game::run(sf::RenderWindow* window, sf::Thread* renderThread) {
     sf::Clock timer;
     sf::Time tickRate;
     initialize();
-
+    renderThread->launch();
     while (window->isOpen()) {
         tickRate = timer.restart();
         processEvents(window);

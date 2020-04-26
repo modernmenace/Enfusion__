@@ -12,7 +12,7 @@ class Game {
 
 public:
     Game();
-    void run(sf::RenderWindow* window);
+    void run(sf::RenderWindow* window, sf::Thread* renderThread);
 
 private:
     void initialize();
