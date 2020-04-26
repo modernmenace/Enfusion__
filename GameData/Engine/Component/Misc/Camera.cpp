@@ -24,7 +24,7 @@ void Camera::update(sf::Time tickRate)
 {
     auto pos = entity->getComponent<Position>().getPosition();
     if (type == CameraType::FOLLOW)
-            view->setCenter(floor(pos.x), floor(pos.y));
+            view->setCenter(floor(pos.x), floor(pos.y)+75);
 }
 
 void Camera::render(sf::RenderWindow *window)
