@@ -20,6 +20,7 @@ Game::Game()
 {
     WINDOW     = new sf::RenderWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT),
                                                           WINDOW_TITLE);
+    srand(time(nullptr));
     GlobalFont = new sf::Font();
     GlobalFont->loadFromFile("Resources/Fonts/NotoMono-Regular.TTF");
     generateItemRegistry();

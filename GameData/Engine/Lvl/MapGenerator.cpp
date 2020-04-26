@@ -41,10 +41,7 @@ std::vector<int> MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY)
     {
         uint16_t biomeSize = rand()%(LEVEL_BIOME_SIZE_MAX-LEVEL_BIOME_SIZE_MIN + 1) + LEVEL_BIOME_SIZE_MIN;;
         dbg_log(biomeSize)
-        //TODO: Figure out how to correctly seed rand
-        //TODO: Or find new royalty free library
-        //TODO: using time method, all biomes are same each run
-        srand(time(0));
+        
         auto* biome = BiomeManager::Instance()->biome(rand()%(LEVEL_AMOUNT_BIOMES)+1);
         auto size = sf::Vector2i(biomeSize, biomeSize);
         biome->generate(pos, size, map(), sf::Vector2i(sizeX, sizeY));
