@@ -211,10 +211,9 @@ void InventoryMenu::update(sf::Time tickRate)
     if (!i_drag) {
         sf::Sprite &s = getComponent<Sprite>().getSprite();
 
-        i_tooltip.hide();
-
         if (s.getGlobalBounds().contains(MousePosition))
         {
+            bool f = false;
             for (int s = 0; s < slots.size(); s++)
             {
                 if (slots[s]->item() != nullptr)
@@ -224,10 +223,14 @@ void InventoryMenu::update(sf::Time tickRate)
                         auto t_pos = slots[s]->getComponent<Position>().getPosition();
                         t_pos.x += 96;
                         i_tooltip.show(slots[s]->item(), t_pos);
+                        f = true;
                     }
                 }
             }
+            if (!f) i_tooltip.hide();
         }
+        else i_tooltip.hide();
+
     }
 }
 

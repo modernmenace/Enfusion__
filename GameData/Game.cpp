@@ -22,7 +22,7 @@ Game::Game()
                                                           WINDOW_TITLE);
     srand(time(nullptr));
     window.setActive(false);
-    static sf::Thread renderThread(std::bind(&Game::render, this, &window));
+    sf::Thread renderThread(std::bind(&Game::render, this, &window));
     GlobalFont = new sf::Font();
     GlobalFont->loadFromFile("Resources/Fonts/NotoMono-Regular.TTF");
     generateItemRegistry();
