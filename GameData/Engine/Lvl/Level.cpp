@@ -48,7 +48,8 @@ void Level::update(sf::Time tickRate)
     for (auto &e : uiEntities)
         e->update(tickRate);
 }
-
+//todo: render not shut down in time causing bad memory access
+//how can i shut down the render thread?
 void Level::render(sf::RenderWindow* window)
 {
     window->draw(background);

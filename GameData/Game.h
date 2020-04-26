@@ -20,6 +20,9 @@ private:
     void update(sf::Time tickRate);
     void render(sf::RenderWindow* window);
 
+    sf::Thread* renderThread = nullptr;
+    bool flag_close = false;
+
 };
 
 #endif

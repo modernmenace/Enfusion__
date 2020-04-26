@@ -22,13 +22,13 @@ Game::Game()
                                                           WINDOW_TITLE);
     srand(time(nullptr));
     window.setActive(false);
-    sf::Thread renderThread(std::bind(&Game::render, this, &window));
+    renderThread = new sf::Thread(std::bind(&Game::render, this, &window));
     GlobalFont = new sf::Font();
     GlobalFont->loadFromFile("Resources/Fonts/NotoMono-Regular.TTF");
     generateItemRegistry();
     LevelManager::Instance()->setLevel("Level_1");
     Settings::Instance();
-    run(&window, &renderThread);
+    run(&window, renderThread);
 }
 
 /*
@@ -84,10 +84,15 @@ void Game::update(sf::Time tickRate)
 
 void Game::render(sf::RenderWindow* window)
 {
-    window->setFramerateLimit(60);
+    window->setVerticalSyncEnabled(true);
     window->setActive(true);
     while (window->isOpen())
     {
+        if (flag_close)
+        {
+            renderThread->terminate();
+            window->close();
+        }
         window->clear(sf::Color::Black);
         LEVEL.render(window);
         window->display();
@@ -106,7 +111,10 @@ void Game::processEvents(sf::RenderWindow* window) {
     while (window->pollEvent(event))
     {
         if (event.type == sf::Event::Closed)
-            window->close();
+        {
+            //TODO: still crashing, throw a flag?
+            flag_close = true;
+        }
 
         if (event.type == sf::Event::KeyPressed)
             LEVEL.handleInput(event.key.code);
