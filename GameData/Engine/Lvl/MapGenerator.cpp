@@ -63,6 +63,15 @@ std::vector<int> MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY)
     }
 
     //TODO: loop - Fill in empty sections
+    lastRun = false;
+    pos.x = 0; pos.y = 0;
+    for(uint32_t i = 0; i < (sizeX * sizeY); i++)
+    {
+        if (m_lvl[i].biome == LEVEL_BIOME_ID_NONE)
+        {
+            //do magic code stuff here
+        }
+    }
 
 
 
