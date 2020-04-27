@@ -1,5 +1,4 @@
 #include "Minimap.h"
-#include "../../../Lvl/LevelManager.h"
 
 Minimap::Minimap(Entity* centerEntity, Level* level) : m_view()
 {
