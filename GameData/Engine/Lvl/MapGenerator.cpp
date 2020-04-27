@@ -37,7 +37,6 @@ std::vector<int> MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY)
     {
         if (lastRun) break;
         uint16_t biomeSize = rand()%(LEVEL_BIOME_SIZE_MAX-LEVEL_BIOME_SIZE_MIN + 1) + LEVEL_BIOME_SIZE_MIN;;
-        dbg_log(biomeSize)
 
         auto* biome = BiomeManager::Instance()->biome(rand()%(LEVEL_AMOUNT_BIOMES)+1);
         auto size = sf::Vector2i(biomeSize, biomeSize);
@@ -67,10 +66,14 @@ std::vector<int> MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY)
     pos.x = 0; pos.y = 0;
     for(uint32_t i = 0; i < (sizeX * sizeY); i++)
     {
+        if (pos.x++ == sizeX)
+        {
+            pos.y++;
+            pos.x = 0;
+        }
         if (m_lvl[i].biome == LEVEL_BIOME_ID_NONE)
         {
-            //do magic code stuff here
-            //determine connecting biomes and call transition tile function?
+            BiomeManager::Instance()->biome(m_lvl[i-1].biome)->createTransitionTile(&m_lvl[i], m_lvl[i-1].biome);
         }
     }
 

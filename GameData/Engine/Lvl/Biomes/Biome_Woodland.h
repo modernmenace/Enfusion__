@@ -9,8 +9,6 @@ class Biome_Woodland : public Biome
 public:
     void generate(sf::Vector2i position, sf::Vector2i area, std::vector<Tile>* map, sf::Vector2i mapArea) override
     {
-        dbg_log("Generating Woodland Biome")
-
         //generate ground tile
         auto nPos = position;
         for(uint16_t j = 0; j < area.y; j++)
@@ -30,9 +28,11 @@ public:
         }
     }
 
-    void createTransitionTile(sf::Vector2i position, uint16_t fromBiome) override
+    void createTransitionTile(Tile* tile, uint16_t fromBiome) override
     {
-        //TODO: Implement This
+        //TODO: implement fromBiome
+        tile->tilesetID = 1;
+        tile->biome = LEVEL_BIOME_ID_WOODLAND;
     }
 
 };
