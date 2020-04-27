@@ -2,18 +2,19 @@
 #include "../../../GameData/Engine/Lvl/MapGenerator.h"
 
 //TODO: Break level into chunks
-//TODO: Minimap
 
 Level_1::Level_1() : Level("Level_1", "Levels/Level_1_back.png"),
                      player("Objects/mount1.png", sf::Vector2f(600, 300)),
                      i_menu(&player),
                      p_menu(),
-                     hotbar(&player, sf::Vector2f(-300, 350), &i_menu)
+                     hotbar(&player, sf::Vector2f(-300, 350), &i_menu),
+                     minimap()
 {
     addEntity(&player);
     addUIEntity(&i_menu);
     addUIEntity(&hotbar);
     addUIEntity(&p_menu);
+    addUIEntity(&minimap);
 
     //Debug Display
     #ifdef DEBUG_BUILD
@@ -32,7 +33,6 @@ void Level_1::initialize()
 {
     Level::initialize();
     map->initialize();
-
     hotbar.updateSlots();
 }
 

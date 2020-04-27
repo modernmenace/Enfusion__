@@ -11,6 +11,7 @@
 #ifdef DEBUG_BUILD
 #include "../../Engine/Entity/UI/Elements/TextDisplay.h"
 #include "../../Engine/Entity/UI/Menus/PauseMenu.h"
+#include "../../Engine/Entity/UI/Elements/Minimap.h"
 
 #endif
 
@@ -32,6 +33,7 @@ private:
     Tilemap* map;
     InventoryMenu i_menu;
     PauseMenu     p_menu;
+    Minimap       minimap;
 
     #ifdef DEBUG_BUILD
     TextDisplay* playerPosDebugText = nullptr;
