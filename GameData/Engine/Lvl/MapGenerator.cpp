@@ -70,6 +70,7 @@ std::vector<int> MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY)
         if (m_lvl[i].biome == LEVEL_BIOME_ID_NONE)
         {
             //do magic code stuff here
+            //determine connecting biomes and call transition tile function?
         }
     }
 
