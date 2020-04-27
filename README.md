@@ -1,6 +1,3 @@
 # Enfusion__
 SFML-based Engine
-
-Notes:
- - Possible Art Style?
-   https://www.gamedevmarket.net/asset/medieval-fantasy-characters/
+https://trello.com/b/EeKFcEfj/dev
