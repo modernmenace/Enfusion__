@@ -36,8 +36,6 @@ typedef std::string string_t;
 
 // resource paths
 #define RESOURCE_PATH        "Resources/"
-#define RESOURCE_PATH_OBJECT "Objects/"
-#define RESOURCE_PATH_AI     "AI/"
 
 #define MISSING_TEXTURE      "MissingTexture.png"
 

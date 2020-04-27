@@ -11,7 +11,8 @@ class Minimap : public Entity {
 
 public:
     Minimap(Entity* centerEntity, Level* level);
-    void initialize() override;
+    void initialize()     override;
+    void update(sf::Time) override;
     void render(sf::RenderWindow*);
 
     inline void setTilemap(Tilemap* t) { m_tilemap = t; }
@@ -21,6 +22,8 @@ private:
     Entity*  m_center  = nullptr;
     Level*   m_level   = nullptr;
     Tilemap* m_tilemap = nullptr;
+
+    Entity m_center_marker;
 };
 
 

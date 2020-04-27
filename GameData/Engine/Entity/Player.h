@@ -12,7 +12,7 @@
 class Player : public Entity {
 
 public:
-    Player(std::string spriteName, sf::Vector2f position);
+    Player(string_t spriteName, sf::Vector2f position);
 
 };
 
