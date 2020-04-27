@@ -1,3 +1,4 @@
+#include <cmath>
 #include "Minimap.h"
 
 Minimap::Minimap(Entity* centerEntity, Level* level) : m_view()
@@ -7,7 +8,7 @@ Minimap::Minimap(Entity* centerEntity, Level* level) : m_view()
     getComponent<Sprite>().getSprite().setTextureRect(sf::IntRect(0, 0, 48, 48));
     getComponent<Sprite>().getSprite().setScale(6, 6);
 
-    m_view.setViewport(sf::FloatRect(0, 0, 0.5, 0.5));
+    m_view.setViewport(sf::FloatRect(0.852, 0.033, 0.125, 0.22));
     m_view.setCenter(centerEntity->getComponent<Position>().getPosition());
 
     m_center  = centerEntity;
@@ -31,7 +32,9 @@ void Minimap::render(sf::RenderWindow* window)
     if (m_tilemap)
     {
         //TODO: work on getting this right
-        //window->draw(*m_tilemap);
+        m_view.setCenter(floor(m_center->getComponent<Position>().getPosition().x),
+                         floor(m_center->getComponent<Position>().getPosition().y));
+        window->draw(*m_tilemap);
     }
 
     window->setView(oldView);
