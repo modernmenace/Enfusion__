@@ -11,15 +11,15 @@ Level_1::Level_1() : Level("Level_1", "Levels/Level_1_back.png"),
                      minimap()
 {
     addEntity(&player);
+    addUIEntity(&minimap);
     addUIEntity(&i_menu);
     addUIEntity(&hotbar);
     addUIEntity(&p_menu);
-    addUIEntity(&minimap);
 
     //Debug Display
     #ifdef DEBUG_BUILD
-    TextDisplay* debugText = new TextDisplay("Debug Build", sf::Vector2f(730, -545), 30);
-    playerPosDebugText     = new TextDisplay("(100, 100)", sf::Vector2f(730, -520), 30);
+    TextDisplay* debugText = new TextDisplay("Debug Build", sf::Vector2f(-950, -545), 30);
+    playerPosDebugText     = new TextDisplay("(100, 100)", sf::Vector2f(-950, -510), 30);
     addUIEntity(debugText);
     addUIEntity(playerPosDebugText);
     #endif

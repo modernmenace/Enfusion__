@@ -14,7 +14,7 @@ public:
 
 
 private:
-
+    sf::View m_view;
 
 };
 
