@@ -12,6 +12,8 @@ Minimap::Minimap(Entity* centerEntity, Level* level) : m_view(), m_center_marker
 
     m_view.setViewport(sf::FloatRect(0.852, 0.033, 0.125, 0.22));
     m_view.setCenter(centerEntity->getComponent<Position>().getPosition());
+
+    //m_view.zoom(35);
     m_view.zoom(5);
 
     m_center  = centerEntity;
