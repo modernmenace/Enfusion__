@@ -61,8 +61,9 @@ std::vector<int> MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY)
             pos.x += size.x;
     }
 
-    //TODO: loop - Fill in empty sections
-    lastRun = false;
+    // Fill in empty sections
+    // Temporary solution: set all tile biomes to that of last tile
+    // causes weird biome strips in some areas
     pos.x = 0; pos.y = 0;
     for(uint32_t i = 0; i < (sizeX * sizeY); i++)
     {
@@ -84,8 +85,7 @@ std::vector<int> MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY)
     //set up texture tilemap
     for (uint32_t i = 0; i < (sizeX * sizeY); i++)
     {
-        //TODO: Add below line once biomes are implemented
-        //assert(m_lvl[i].biome != LEVEL_BIOME_ID_NONE);
+        assert(m_lvl[i].biome != LEVEL_BIOME_ID_NONE);
         m_tilemap.push_back(m_lvl[i].tilesetID);
     }
 
