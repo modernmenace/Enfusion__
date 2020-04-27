@@ -1,4 +1,5 @@
 #include "Minimap.h"
+#include "../../../Lvl/LevelManager.h"
 
 Minimap::Minimap(Entity* centerEntity, Level* level) : m_view()
 {
@@ -9,9 +10,9 @@ Minimap::Minimap(Entity* centerEntity, Level* level) : m_view()
 
     m_view.setViewport(sf::FloatRect(0, 0, 0.5, 0.5));
     m_view.setCenter(centerEntity->getComponent<Position>().getPosition());
-    
-    m_center = centerEntity;
-    m_level  = level;
+
+    m_center  = centerEntity;
+    m_level   = level;
 }
 
 void Minimap::initialize()
@@ -24,10 +25,15 @@ void Minimap::render(sf::RenderWindow* window)
     Entity::render(window);
     auto oldView = window->getView();
     window->setView(m_view);
-
     //draw minimap here
     //draw tiles
     //then draw current levels entities
+
+    if (m_tilemap)
+    {
+        //TODO: work on getting this right
+        //window->draw(*m_tilemap);
+    }
 
     window->setView(oldView);
 

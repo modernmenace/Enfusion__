@@ -5,6 +5,7 @@
 #include "../../../Component/Base/Position.h"
 #include "../../../Component/Base/Sprite.h"
 #include "../../../Lvl/Level.h"
+#include "../../../Lvl/Tilemap.h"
 
 class Minimap : public Entity {
 
@@ -13,12 +14,13 @@ public:
     void initialize() override;
     void render(sf::RenderWindow*);
 
+    inline void setTilemap(Tilemap* t) { m_tilemap = t; }
 
 private:
     sf::View m_view;
-    Entity*  m_center = nullptr;
-    Level*   m_level  = nullptr;
-
+    Entity*  m_center  = nullptr;
+    Level*   m_level   = nullptr;
+    Tilemap* m_tilemap = nullptr;
 };
 
 
