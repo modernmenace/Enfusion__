@@ -8,19 +8,17 @@
 class AnimatedSprite : public Component {
 
 public:
-    AnimatedSprite(std::string spriteSheet, int numberRows, int numberFrames, sf::IntRect characterSheetSize);
+    AnimatedSprite(string_t spriteSheet, int numberRows, int numberFrames, sf::IntRect characterSheetSize);
 
     void initialize() override;
     void render(sf::RenderWindow* window) override;
     void switchState(int row, int frame);
 
-    inline sf::Sprite& getSprite()
-    {
-        return sprite;
-    }
+    inline void setPosition(sf::Vector2f p) { sprite.setPosition(p); }
+    inline sf::Sprite& getSprite()          { return sprite; }
 
 private:
-    std::string  spriteSheet;
+    string_t     s_sheet;
     sf::IntRect  charRect;
 
     int numRows;

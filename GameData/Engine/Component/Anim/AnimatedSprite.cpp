@@ -1,8 +1,8 @@
 #include "AnimatedSprite.h"
 
-AnimatedSprite::AnimatedSprite(std::string spriteSheet, int numberRows, int numberFrames, sf::IntRect characterSheetSize)
+AnimatedSprite::AnimatedSprite(string_t spriteSheet, int numberRows, int numberFrames, sf::IntRect characterSheetSize)
 {
-    this->spriteSheet = spriteSheet;
+    this->s_sheet     = spriteSheet;
     this->charRect    = characterSheetSize;
     this->numRows     = numberRows;
     this->numFrames   = numberFrames;
@@ -11,7 +11,7 @@ AnimatedSprite::AnimatedSprite(std::string spriteSheet, int numberRows, int numb
 void AnimatedSprite::initialize()
 {
     assert(entity->hasComponent<Position>());
-    this->sprite = sf::Sprite(AssetManager::Instance()->getTexture(spriteSheet), charRect);
+    this->sprite = sf::Sprite(AssetManager::Instance()->getTexture(s_sheet), charRect);
     this->sprite.setPosition(entity->getComponent<Position>().getPosition());
     this->sprite.setScale(GLOBAL_SCALE_GAMEOBJECT);
 

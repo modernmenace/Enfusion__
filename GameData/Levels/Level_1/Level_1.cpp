@@ -35,6 +35,10 @@ void Level_1::initialize()
     Level::initialize();
     map->initialize();
     hotbar.updateSlots();
+
+    //random player start position
+    //TODO: This
+    player.getComponent<Position>().setPosition(sf::Vector2f(1000, 1000));
 }
 
 void Level_1::update(sf::Time tickRate)
