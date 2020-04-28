@@ -36,9 +36,9 @@ void Level_1::initialize()
     map->initialize();
     hotbar.updateSlots();
 
-    //random player start position
-    //TODO: This
-    player.getComponent<Position>().setPosition(sf::Vector2f(1000, 1000));
+    auto p_posX = (rand()%(MapGenerator::Instance()->size().x * map[0].getTileSize())-1) + 1;
+    auto p_posY = (rand()%(MapGenerator::Instance()->size().y * map[0].getTileSize())-1) + 1;
+    player.getComponent<Position>().setPosition(sf::Vector2f(p_posX, p_posY));
 }
 
 void Level_1::update(sf::Time tickRate)

@@ -14,6 +14,8 @@ public:
     void initialize();
     void render(sf::RenderWindow* window);
 
+    inline uint16_t getTileSize() { return tileSize; };
+
 private:
     sf::Texture     tileset;
     sf::VertexArray vertices;
