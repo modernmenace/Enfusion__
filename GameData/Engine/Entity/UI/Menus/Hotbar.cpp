@@ -1,5 +1,8 @@
 #include "Hotbar.h"
 #include "../../../Lvl/LevelManager.h"
+#include "../../../Component/Base/Sprite.h"
+#include "../../../Component/Base/Position.h"
+#include "../../../Component/Misc/Inventory.h"
 
 /*
  *  Hotbar

@@ -1,5 +1,6 @@
 #include <cmath>
 #include "Camera.h"
+#include "../Base/Position.h"
 
 Camera::Camera(CameraType type) : centerVec(0, 0), sizeVec(1920, 1080)
 {

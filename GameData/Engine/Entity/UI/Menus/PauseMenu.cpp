@@ -1,5 +1,7 @@
 #include "PauseMenu.h"
 #include "../../../Lvl/LevelManager.h"
+#include "../../../Component/Base/Position.h"
+#include "../../../Component/Base/Sprite.h"
 
 PauseMenu::PauseMenu() : p_b_resume("Resume", sf::Vector2f(-50, -275)),
                          p_b_settings("Settings", sf::Vector2f(-50, -175)),

@@ -2,9 +2,6 @@
 #define ENFUSION___INVENTORYMENU_H
 
 #include "../../Entity.h"
-#include "../../../Component/Base/Sprite.h"
-#include "../../../Component/Base/Position.h"
-#include "../../../Component/Misc/Inventory.h"
 #include "../Elements/Slot.h"
 #include "../Elements/Tooltip.h"
 

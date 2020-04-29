@@ -1,4 +1,5 @@
 #include "AnimatedSprite.h"
+#include "../Base/Position.h"
 
 AnimatedSprite::AnimatedSprite(string_t spriteSheet, int numberRows, int numberFrames, sf::IntRect characterSheetSize)
 {

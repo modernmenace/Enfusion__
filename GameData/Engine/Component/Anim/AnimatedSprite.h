@@ -1,9 +1,7 @@
 #ifndef ENFUSION_ANIMATEDSPRITE_H
 #define ENFUSION_ANIMATEDSPRITE_H
 
-#include "../../Core/Engine.h"
 #include "../Component.h"
-#include "../Base/Position.h"
 
 class AnimatedSprite : public Component {
 

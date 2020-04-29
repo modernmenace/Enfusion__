@@ -3,7 +3,6 @@
 
 #include "../Component.h"
 #include "../../Misc/Item.h"
-#include <map>
 
 #define INVENTORY_SIZE 24
 #define INVENTORY_FULL 255

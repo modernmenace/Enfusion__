@@ -1,4 +1,7 @@
 #include "InventoryMenu.h"
+#include "../../../Component/Base/Sprite.h"
+#include "../../../Component/Base/Position.h"
+#include "../../../Component/Misc/Inventory.h"
 
 /*
  *  InventoryMenu

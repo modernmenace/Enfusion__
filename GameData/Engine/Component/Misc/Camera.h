@@ -2,7 +2,6 @@
 #define ENFUSION_FOLLOWCAMERA_H
 
 #include "../Component.h"
-#include "../Base/Position.h"
 
 enum CameraType
 {

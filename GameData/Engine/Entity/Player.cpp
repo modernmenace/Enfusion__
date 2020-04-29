@@ -1,4 +1,9 @@
 #include "Player.h"
+#include "../Component/Anim/AnimatedSprite.h"
+#include "../Component/Base/Position.h"
+#include "../Component/Motion/AnimatedMovement.h"
+#include "../Component/Misc/Camera.h"
+#include "../Component/Misc/Inventory.h"
 
 Player::Player(string_t spriteName, sf::Vector2f position)
 {
