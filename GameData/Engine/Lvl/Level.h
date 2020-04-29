@@ -31,7 +31,7 @@ public:
     {
         entities.insert(entities.begin(), e);
     }
-    
+
     inline void addUIEntity(Entity* e)
     {
         uiEntities.emplace_back(e);
