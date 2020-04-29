@@ -27,13 +27,11 @@ public:
     inline void setState(GameState g) { l_state = g; }
     inline GameState state()          { return l_state; }
 
-    template <typename Entity>
     inline void addEntity(Entity* e)
     {
-        entities.emplace_back(e);
+        entities.insert(entities.begin(), e);
     }
-
-    template <typename Entity>
+    
     inline void addUIEntity(Entity* e)
     {
         uiEntities.emplace_back(e);
