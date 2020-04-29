@@ -7,6 +7,7 @@ class Sprite : public Component {
 
 public:
     Sprite(string_t spriteName = MISSING_TEXTURE);
+    Sprite(sf::Texture&);
 
     void initialize()                     override;
     void render(sf::RenderWindow* window) override;
@@ -16,10 +17,9 @@ public:
     inline sf::Sprite& getSprite(){ return sprite; }
 
 private:
-    sf::Sprite sprite;
-    string_t   s_name;
-
-
+    sf::Sprite   sprite;
+    string_t     s_name;
+    sf::Texture* s_tex = nullptr;
 };
 
 

@@ -14,9 +14,21 @@ Sprite::Sprite(string_t spriteName)
     s_name = spriteName;
 }
 
+Sprite::Sprite(sf::Texture& texture)
+{
+    s_tex = &texture;
+}
+
 void Sprite::initialize()
 {
     assert(entity->hasComponent<Position>());
+    if (s_name.empty())
+    {
+        this->sprite = sf::Sprite(*s_tex);
+        this->sprite.setPosition(entity->getComponent<Position>().getPosition());
+        this->sprite.setScale(GLOBAL_SCALE_GAMEOBJECT);
+        return;
+    }
     this->sprite = sf::Sprite(AssetManager::Instance()->getTexture(s_name));
     this->sprite.setPosition(entity->getComponent<Position>().getPosition());
     this->sprite.setScale(GLOBAL_SCALE_GAMEOBJECT);

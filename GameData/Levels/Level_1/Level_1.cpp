@@ -15,6 +15,7 @@ Level_1::Level_1() : Level("Level_1", "Levels/Level_1_back.png"),
     addUIEntity(&i_menu);
     addUIEntity(&hotbar);
     addUIEntity(&p_menu);
+    l_player = &player;
 
     //Debug Display
     #ifdef DEBUG_BUILD

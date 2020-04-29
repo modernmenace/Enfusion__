@@ -12,8 +12,7 @@ public:
 private:
     void create();
 
-    Item* p_item = nullptr;
-
+    Item*  p_item = nullptr;
 };
 
 

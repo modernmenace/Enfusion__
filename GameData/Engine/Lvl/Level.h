@@ -39,6 +39,8 @@ public:
         uiEntities.emplace_back(e);
     }
 
+    inline Entity* player() { return l_player; }
+
 protected:
     sf::RectangleShape background;
     string_t levelName;
@@ -47,7 +49,8 @@ protected:
     std::vector<Entity*> uiEntities;
 
     sf::View defaultView;
-    GameState l_state = GameState::RUNNING;
+    GameState l_state  = GameState::RUNNING;
+    Entity*   l_player = nullptr;
 
 };
 
