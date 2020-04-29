@@ -8,5 +8,6 @@ ItemPickup::ItemPickup(Item *item)
 
 void ItemPickup::create()
 {
-    //drop item
+    dbg_log("creating item pickup")
+    
 }

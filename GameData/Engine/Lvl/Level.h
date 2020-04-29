@@ -27,13 +27,6 @@ public:
     inline void setState(GameState g) { l_state = g; }
     inline GameState state()          { return l_state; }
 
-protected:
-    sf::RectangleShape background;
-    string_t levelName;
-
-    std::vector<Entity*> entities;
-    std::vector<Entity*> uiEntities;
-
     template <typename Entity>
     inline void addEntity(Entity* e)
     {
@@ -45,6 +38,13 @@ protected:
     {
         uiEntities.emplace_back(e);
     }
+
+protected:
+    sf::RectangleShape background;
+    string_t levelName;
+
+    std::vector<Entity*> entities;
+    std::vector<Entity*> uiEntities;
 
     sf::View defaultView;
     GameState l_state = GameState::RUNNING;

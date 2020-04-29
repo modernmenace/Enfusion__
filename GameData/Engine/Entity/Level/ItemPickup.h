@@ -4,7 +4,7 @@
 #include "../Entity.h"
 #include "../../Misc/Item.h"
 
-class ItemPickup : Entity {
+class ItemPickup : public Entity {
 
 public:
     ItemPickup(Item* item);
