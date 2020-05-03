@@ -78,9 +78,32 @@ std::vector<int> MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY)
         }
     }
 
+    //smooth transitions between terrains a bit
+    pos.x = 0; pos.y = 0;
+    for(uint32_t i = 0; i < (sizeX * sizeY); i++)
+    {
+        if (i == 0) continue;
 
+        //check last X biome
+        if (m_lvl[i-1].biome != m_lvl[i].biome)
+        {
+            //random value of two biomes
+            uint8_t r = rand() % 2;
+            if (r == 1)
+                BiomeManager::Instance()->biome(m_lvl[i-1].biome)->createTransitionTile(&m_lvl[i], m_lvl[i-1].biome);
+        }
 
-    //TODO: loop - smooth transitions between terrains
+        //TODO: check above y biome
+        if ((int)i-sizeX >= 0)
+        {
+            if (m_lvl[i-sizeX].biome != m_lvl[i].biome)
+            {
+                uint8_t r = rand() % 2;
+                if (r == 1)
+                    BiomeManager::Instance()->biome(m_lvl[i-sizeX].biome)->createTransitionTile(&m_lvl[i], m_lvl[i-1].biome);
+            }
+        }
+    }
 
     //set up texture tilemap
     for (uint32_t i = 0; i < (sizeX * sizeY); i++)
