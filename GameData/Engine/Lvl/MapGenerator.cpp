@@ -2,6 +2,9 @@
 
 MapGenerator* MapGenerator::m_Instance = nullptr;
 
+
+//TODO: Eventually use simplex noise for map generation to smooth transitions
+
 MapGenerator* MapGenerator::Instance()
 {
     if (m_Instance == nullptr)
