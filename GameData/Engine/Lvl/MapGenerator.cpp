@@ -96,7 +96,6 @@ std::vector<int> MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY)
                 BiomeManager::Instance()->biome(m_lvl[i-1].biome)->createTransitionTile(&m_lvl[i], m_lvl[i-1].biome);
         }
 
-        //TODO: check above y biome
         if ((int)i-sizeX >= 0)
         {
             if (m_lvl[i-sizeX].biome != m_lvl[i].biome)
