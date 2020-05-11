@@ -37,6 +37,8 @@ public:
         uiEntities.emplace_back(e);
     }
 
+    void removeEntity(Entity* e);
+
     inline Entity* player() { return l_player; }
 
 protected:

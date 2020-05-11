@@ -88,3 +88,12 @@ void Level::handleInput(sf::Mouse::Button button)
     for(auto &e : uiEntities)
         e->handleInput(button);
 }
+
+void Level::removeEntity(Entity *e)
+{
+    for(uint16_t i = 0; i < entities.size(); i++)
+    {
+        if (entities[i] == e)
+            entities.erase(entities.begin() + i);
+    }
+}

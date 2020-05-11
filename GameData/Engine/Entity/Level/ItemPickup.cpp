@@ -1,10 +1,9 @@
 #include "ItemPickup.h"
-#include <functional>
 #include "../../Lvl/LevelManager.h"
 #include "../../Component/Anim/AnimatedSprite.h"
 #include "../../Component/Base/Collider.h"
 
-//TODO: These are dynamically allocated, ensure they are properly deleted
+//TODO: Stacks on items
 
 ItemPickup::ItemPickup(Item *item)
 {
@@ -14,7 +13,6 @@ ItemPickup::ItemPickup(Item *item)
 
 void ItemPickup::create()
 {
-    dbg_log("creating item pickup")
     auto p_pos = LevelManager::Instance()->getCurrentLevel().player()->getComponent<Position>().getPosition();
     p_pos.x += LevelManager::Instance()->getCurrentLevel().player()->getComponent<AnimatedSprite>().bounds().width / 2;
     p_pos.y += LevelManager::Instance()->getCurrentLevel().player()->getComponent<AnimatedSprite>().bounds().height / 2;
@@ -26,13 +24,16 @@ void ItemPickup::create()
 void ItemPickup::handleInput(sf::Keyboard::Key key)
 {
     Entity::handleInput(key);
-
     if (key == 4)
+    {
         if (getComponent<Collider>().checkForCollision(LevelManager::Instance()->getCurrentLevel().player()))
-            pickup( d);
+            pickup();
+    }
 }
 
 void ItemPickup::pickup()
 {
-    dbg_log("Picking up item")
+    LevelManager::Instance()->getCurrentLevel().player()->getComponent<Inventory>().add(p_item);
+    LevelManager::Instance()->getCurrentLevel().removeEntity(this);
+    delete this;
 }
