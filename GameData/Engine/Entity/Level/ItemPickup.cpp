@@ -1,4 +1,5 @@
 #include "ItemPickup.h"
+#include <functional>
 #include "../../Lvl/LevelManager.h"
 #include "../../Component/Anim/AnimatedSprite.h"
 #include "../../Component/Base/Collider.h"
@@ -19,15 +20,19 @@ void ItemPickup::create()
     p_pos.y += LevelManager::Instance()->getCurrentLevel().player()->getComponent<AnimatedSprite>().bounds().height / 2;
     addComponent<Position>(p_pos);
     addComponent<Sprite>(p_item->icon());
-    addComponent<Collider>(sf::FloatRect(p_pos.x, p_pos.y, 10, 10), &ItemPickup::collision);
+    addComponent<Collider>(sf::FloatRect(p_pos.x, p_pos.y, 10, 10));
 }
 
-void ItemPickup::update(sf::Time tickRate)
+void ItemPickup::handleInput(sf::Keyboard::Key key)
 {
-    getComponent<Collider>().checkForCollision(LevelManager::Instance()->getCurrentLevel().player());
+    Entity::handleInput(key);
+
+    if (key == 4)
+        if (getComponent<Collider>().checkForCollision(LevelManager::Instance()->getCurrentLevel().player()))
+            pickup( d);
 }
 
-void ItemPickup::collision(Entity* other)
+void ItemPickup::pickup()
 {
-    dbg_log("Collision Called!")
+    dbg_log("Picking up item")
 }

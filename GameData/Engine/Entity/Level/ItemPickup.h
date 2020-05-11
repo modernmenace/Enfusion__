@@ -8,13 +8,13 @@ class ItemPickup : public Entity {
 
 public:
     ItemPickup(Item* item);
-    void update(sf::Time) override;
+    void handleInput(sf::Keyboard::Key) override;
 
 private:
     void create();
-    static void collision(Entity*);
+    void pickup();
 
-    Item*  p_item = nullptr;
+    Item*  p_item  = nullptr;
 };
 
 

@@ -6,13 +6,11 @@
 class Collider : public Component {
 
 public:
-    Collider(sf::FloatRect, void (*collision)(Entity*));
-    inline void checkForCollision(Entity* other) { if ( other->bounds().intersects(c_box)) onCollision(other); };
+    Collider(sf::FloatRect r) { c_box = r; };
+    inline bool checkForCollision(Entity* e) { return e->bounds().intersects(c_box); };
 
 private:
     sf::FloatRect c_box;
-    inline void onCollision(Entity* other) { c_collision(other); }
-    void (*c_collision)(Entity*);
 };
 
 
