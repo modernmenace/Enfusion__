@@ -7,14 +7,15 @@
 class ItemPickup : public Entity {
 
 public:
-    ItemPickup(Item* item);
+    ItemPickup(Item* item, uint8_t count = 1);
     void handleInput(sf::Keyboard::Key) override;
 
 private:
     void create();
     void pickup();
 
-    Item*  p_item  = nullptr;
+    Item*   p_item  = nullptr;
+    uint8_t p_count;
 };
 
 

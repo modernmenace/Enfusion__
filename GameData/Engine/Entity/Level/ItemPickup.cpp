@@ -3,11 +3,10 @@
 #include "../../Component/Anim/AnimatedSprite.h"
 #include "../../Component/Base/Collider.h"
 
-//TODO: Stacks on items
-
-ItemPickup::ItemPickup(Item *item)
+ItemPickup::ItemPickup(Item *item, uint8_t count)
 {
     p_item = item;
+    p_count = count;
     create();
 }
 
@@ -33,7 +32,7 @@ void ItemPickup::handleInput(sf::Keyboard::Key key)
 
 void ItemPickup::pickup()
 {
-    LevelManager::Instance()->getCurrentLevel().player()->getComponent<Inventory>().add(p_item);
+    LevelManager::Instance()->getCurrentLevel().player()->getComponent<Inventory>().add(p_item, p_count);
     LevelManager::Instance()->getCurrentLevel().removeEntity(this);
     delete this;
 }

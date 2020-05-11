@@ -48,8 +48,7 @@ void Inventory::remove(Item* item, uint16_t amount)
 
 void Inventory::remove(uint16_t index)
 {
-    //TODO: right now will only drop 1 no matter how many are dropped
-    LevelManager::Instance()->getCurrentLevel().addEntity(new ItemPickup(inv_items[index]));
+    LevelManager::Instance()->getCurrentLevel().addEntity(new ItemPickup(inv_items[index], inv_amounts[index]));
     inv_items[index]   = nullptr;
     inv_amounts[index] = 0;
 }
