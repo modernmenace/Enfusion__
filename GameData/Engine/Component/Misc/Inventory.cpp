@@ -34,6 +34,7 @@ void Inventory::swapItem(uint16_t i1, uint16_t i2)
     inv_amounts[i1] = inv_amounts[i2];
     inv_items[i2]   = i1_i;
     inv_amounts[i2] = i1_a;
+    changeFlag = true;
 }
 
 void Inventory::remove(Item* item, uint16_t amount)
@@ -43,6 +44,7 @@ void Inventory::remove(Item* item, uint16_t amount)
         inv_amounts[lastItemActivated] -=1;
         if (inv_amounts[lastItemActivated] == 0)
             inv_items[lastItemActivated] = nullptr;
+        changeFlag = true;
     }
 }
 
@@ -51,6 +53,7 @@ void Inventory::remove(uint16_t index)
     LevelManager::Instance()->getCurrentLevel().addEntity(new ItemPickup(inv_items[index], inv_amounts[index]));
     inv_items[index]   = nullptr;
     inv_amounts[index] = 0;
+    changeFlag = true;
 }
 
 int Inventory::nextEmptySlot()
@@ -61,4 +64,14 @@ int Inventory::nextEmptySlot()
             return i;
 
     return INVENTORY_FULL;
+}
+
+bool Inventory::changePending()
+{
+    if (changeFlag)
+    {
+        changeFlag = false;
+        return true;
+    }
+    return false;
 }

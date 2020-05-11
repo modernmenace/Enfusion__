@@ -133,6 +133,9 @@ void InventoryMenu::update(sf::Time tickRate)
     Entity::update(tickRate);
     if (!menuActive) return;
 
+    if (i_entity->getComponent<Inventory>().changePending())
+        updateSlots();
+
     if (i_mouseDown)
     {
         if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))

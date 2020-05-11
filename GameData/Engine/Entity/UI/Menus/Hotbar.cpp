@@ -59,7 +59,7 @@ void Hotbar::initialize()
 void Hotbar::updateSlots()
 {
     for(int i = 0; i < HOTBAR_SLOTS; i++)
-        slots.at(i)->setItem(i_menu->slots.at(i)->item());
+        slots.at(i)->setItem(i_entity->getComponent<Inventory>().item(i));
 
     for(int i = 0; i < HOTBAR_SLOTS; i++)
         slots.at(i)->setCount(i_entity->getComponent<Inventory>().amount(i));

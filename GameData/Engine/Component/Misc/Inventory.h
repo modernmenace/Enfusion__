@@ -23,6 +23,7 @@ private:
 
     int     lastItemActivated;
     int     nextEmptySlot();
+    bool    changeFlag = false;
 
 public:
     Inventory();
@@ -67,6 +68,7 @@ public:
                 }
             }
         }
+        changeFlag = true;
         return true;
     }
 
@@ -87,6 +89,7 @@ public:
     void remove(Item* item, uint16_t amount);
     void remove(uint16_t index);
     void swapItem(uint16_t i1, uint16_t i2);
+    bool changePending();
 
     inline Item* item(uint8_t id) { return inv_items[id];   }
     inline int amount(uint8_t id) { return inv_amounts[id]; }
