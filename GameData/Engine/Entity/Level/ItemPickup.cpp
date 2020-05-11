@@ -1,6 +1,7 @@
 #include "ItemPickup.h"
 #include "../../Lvl/LevelManager.h"
 #include "../../Component/Anim/AnimatedSprite.h"
+#include "../../Component/Base/Collider.h"
 
 //TODO: These are dynamically allocated, ensure they are properly deleted
 
@@ -18,4 +19,15 @@ void ItemPickup::create()
     p_pos.y += LevelManager::Instance()->getCurrentLevel().player()->getComponent<AnimatedSprite>().bounds().height / 2;
     addComponent<Position>(p_pos);
     addComponent<Sprite>(p_item->icon());
+    addComponent<Collider>(sf::FloatRect(p_pos.x, p_pos.y, 10, 10), &ItemPickup::collision);
+}
+
+void ItemPickup::update(sf::Time tickRate)
+{
+    getComponent<Collider>().checkForCollision(LevelManager::Instance()->getCurrentLevel().player());
+}
+
+void ItemPickup::collision(Entity* other)
+{
+    dbg_log("Collision Called!")
 }

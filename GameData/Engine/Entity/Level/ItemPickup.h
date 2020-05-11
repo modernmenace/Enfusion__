@@ -8,9 +8,11 @@ class ItemPickup : public Entity {
 
 public:
     ItemPickup(Item* item);
+    void update(sf::Time) override;
 
 private:
     void create();
+    static void collision(Entity*);
 
     Item*  p_item = nullptr;
 };

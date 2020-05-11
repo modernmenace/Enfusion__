@@ -7,6 +7,7 @@ class Player : public Entity {
 
 public:
     Player(string_t spriteName, sf::Vector2f position);
+    sf::FloatRect bounds() override;
 
 };
 

@@ -13,3 +13,8 @@ Player::Player(string_t spriteName, sf::Vector2f position)
     addComponent<AnimatedMovement>();
     addComponent<Inventory>();
 }
+
+sf::FloatRect Player::bounds()
+{
+    return getComponent<AnimatedSprite>().getSprite().getGlobalBounds();
+}

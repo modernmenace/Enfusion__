@@ -33,6 +33,7 @@ public:
     virtual void render(sf::RenderWindow *window);
     virtual void handleInput(sf::Keyboard::Key);
     virtual void handleInput(sf::Mouse::Button button);
+    virtual sf::FloatRect bounds() { return sf::FloatRect(0, 0, 0, 0); }
 
     virtual ~Entity() {};
 
