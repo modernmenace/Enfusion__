@@ -28,7 +28,11 @@ Settings::Settings()
 
 }
 
-uint16_t Settings::control(uint16_t control)
+uint16_t Settings::control(string_t control)
 {
-    //TODO: implement this
+    auto it = controlMap.find(control);
+    if (it != controlMap.end())
+        return it->second;
+    else
+        return CONTROL_NOT_FOUND;
 }

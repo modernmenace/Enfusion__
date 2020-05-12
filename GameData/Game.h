@@ -5,6 +5,7 @@
 #include "Engine/Core/Engine.h"
 #include "Engine/Lvl/LevelManager.h"
 #include "Data/Items.h"
+#include "Data/Controls.h"
 
 #define LEVEL LevelManager::Instance()->getCurrentLevel()
 
