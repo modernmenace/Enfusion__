@@ -5,6 +5,7 @@
 #include "../../../Engine/Component/Base/Position.h"
 #include "../../../Engine/Component/Base/Sprite.h"
 #include "../Elements/Button.h"
+#include "../Elements/ScrollArea.h"
 
 class ControlsMenu : Entity {
 
@@ -25,6 +26,8 @@ private:
 
     Button applyButton;
     Button cancelButton;
+
+    ScrollArea c_Area;
 
 };
 

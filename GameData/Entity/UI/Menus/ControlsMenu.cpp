@@ -1,7 +1,8 @@
 #include "ControlsMenu.h"
 
 ControlsMenu::ControlsMenu(sf::Vector2f position) : applyButton("Apply", sf::Vector2f(100, 150)),
-                                                    cancelButton("Cancel", sf::Vector2f(-225, 150))
+                                                    cancelButton("Cancel", sf::Vector2f(-225, 150)),
+                                                    c_Area(sf::Vector2f(position.x + 50, position.y + 50), sf::Vector2f(620, 475))
 {
     addComponent<Position>(position);
     addComponent<Sprite>("UI/ui.png");
@@ -14,16 +15,14 @@ void ControlsMenu::initialize()
     getComponent<Sprite>().getSprite().setScale(15, 15);
     applyButton.initialize();
     cancelButton.initialize();
+    c_Area.initialize();
 }
 
 void ControlsMenu::handleInput(sf::Keyboard::Key key)
 {
     if (!c_active) return;
     if (key == 36)
-    {
-        dbg_log("hiding")
         hide();
-    }
 }
 
 void ControlsMenu::handleInput(sf::Mouse::Button button)
@@ -52,4 +51,5 @@ void ControlsMenu::render(sf::RenderWindow* window)
     Entity::render(window);
     applyButton.render(window);
     cancelButton.render(window);
+    c_Area.render(window);
 }
