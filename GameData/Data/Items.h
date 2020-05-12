@@ -1,8 +1,8 @@
 #ifndef ENFUSION___ITEMS_H
 #define ENFUSION___ITEMS_H
 
-#include "../Engine/Misc/Item.h"
-#include "../Engine/Misc/ItemRegistry.h"
+#include "../Engine/Item/Item.h"
+#include "../Engine/Item/ItemRegistry.h"
 
 CREATE_ITEM(ITEM_TOMATO, "Tomato",
             "A tasty fruit. Or is it a vegetable? A tasty vegetable.",

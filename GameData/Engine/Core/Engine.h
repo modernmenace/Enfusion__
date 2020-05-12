@@ -30,7 +30,7 @@
 extern sf::Font*                 GlobalFont;
 extern sf::Vector2f              MousePosition;
 
-// Misc Useful Macros
+// Item Useful Macros
 #define forever for(;;)
 typedef std::string string_t;
 
