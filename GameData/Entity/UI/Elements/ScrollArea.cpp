@@ -1,6 +1,7 @@
 #include "ScrollArea.h"
 #include "../../../Engine/Component/Base/Position.h"
 #include "../../../Engine/Component/Base/Sprite.h"
+#include "TextDisplay.h"
 
 //TODO: Scroll bar size based on element count
 
@@ -55,10 +56,19 @@ void ScrollArea::render(sf::RenderWindow* window)
         e->render(window);
 }
 
-void ScrollArea::addElement(Entity* element, sf::Vector2f position)
+void ScrollArea::addElement(Entity* element)
 {
-    element->initialize(); //TODO: is this necessary?
+    element->initialize();
+
+    auto newX = getComponent<Position>().getPosition().x + element->getComponent<Position>().getPosition().x;
+    auto newY = getComponent<Position>().getPosition().y + element->getComponent<Position>().getPosition().y;
+
+    //TODO: Fix text display to align to standards
+    if (dynamic_cast<TextDisplay*>(element) != nullptr)
+        dynamic_cast<TextDisplay*>(element)->setPosition(sf::Vector2f(newX, newY));
+    else
+        element->getComponent<Position>().setPosition(sf::Vector2f(newX, newY));
+
     s_elements.push_back(element);
-    s_elementPositions.push_back(position);
     updateScrollbar();
 }

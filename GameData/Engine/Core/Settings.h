@@ -19,12 +19,8 @@ public:
     uint16_t  control(string_t);
     Control_t controlAt(uint16_t);
 
-    inline void addControl(string_t name, uint16_t key)
-    {
-        controlMap.insert(std::make_pair(name, key));
-    }
-
-    inline uint16_t controlCount() { return controlMap.size(); };
+    inline void     addControl(string_t name, uint16_t key) { controlMap.insert(std::make_pair(name, key)); }
+    inline uint16_t controlCount()                          { return controlMap.size(); };
 
 private:
     static Settings* m_Instance;

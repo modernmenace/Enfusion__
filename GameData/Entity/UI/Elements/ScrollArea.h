@@ -11,7 +11,7 @@ public:
     void initialize()              override;
     void render(sf::RenderWindow*) override;
 
-    void addElement(Entity*, sf::Vector2f);
+    void addElement(Entity*);
 
 private:
     sf::Vector2f       s_area;

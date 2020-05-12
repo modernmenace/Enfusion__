@@ -22,7 +22,10 @@ void ControlsMenu::initialize()
     for(auto i = 0; i < Settings::Instance()->controlCount(); i++)
     {
         Control_t cntl = Settings::Instance()->controlAt(i);
-        dbg_log(cntl.name);
+
+        //TODO: fix text displays
+        c_Area.addElement(new TextDisplay(cntl.name, sf::Vector2f(0, (100*i))));
+        c_Area.addElement(new Button(std::to_string(cntl.key), sf::Vector2f(350, (100*i))));
     }
 }
 
