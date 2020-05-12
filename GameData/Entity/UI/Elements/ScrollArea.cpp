@@ -2,6 +2,8 @@
 #include "../../../Engine/Component/Base/Position.h"
 #include "../../../Engine/Component/Base/Sprite.h"
 
+//TODO: Scroll bar size based on element count
+
 ScrollArea::ScrollArea(sf::Vector2f position, sf::Vector2f area)
 {
     s_area = area;
@@ -37,6 +39,9 @@ void ScrollArea::render(sf::RenderWindow* window)
     window->draw(s_backRect);
     window->draw(s_scrollRect);
     s_scrollBar.render(window);
+
+    for(auto* e : s_elements)
+        e->render(window);
 }
 
 void ScrollArea::addElement(Entity* element, sf::Vector2f position)

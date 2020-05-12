@@ -17,6 +17,8 @@ public:
         controlMap.insert(std::make_pair(name, key));
     }
 
+    inline uint16_t controlCount() { return controlMap.size(); };
+
 private:
     static Settings* m_Instance;
 
