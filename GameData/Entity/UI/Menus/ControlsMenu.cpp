@@ -1,4 +1,5 @@
 #include "ControlsMenu.h"
+#include "../../../Engine/Core/Settings.h"
 
 ControlsMenu::ControlsMenu(sf::Vector2f position) : applyButton("Apply", sf::Vector2f(100, 150)),
                                                     cancelButton("Cancel", sf::Vector2f(-225, 150)),
@@ -16,6 +17,13 @@ void ControlsMenu::initialize()
     applyButton.initialize();
     cancelButton.initialize();
     c_Area.initialize();
+
+    //TODO: init scroll area
+    for(auto i = 0; i < Settings::Instance()->controlCount(); i++)
+    {
+        Control_t cntl = Settings::Instance()->controlAt(i);
+        dbg_log(cntl.name);
+    }
 }
 
 void ControlsMenu::handleInput(sf::Keyboard::Key key)

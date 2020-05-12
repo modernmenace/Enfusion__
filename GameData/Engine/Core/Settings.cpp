@@ -28,6 +28,29 @@ Settings::Settings()
 
 }
 
+Control_t Settings::controlAt(uint16_t index)
+{
+    Control_t r;
+    r.name = "CONTROL NOT FOUND";
+    r.key  = CONTROL_NOT_FOUND;
+
+    auto it      = controlMap.begin();
+    auto indexAt = 0;
+
+    while (it != controlMap.end())
+    {
+        if (indexAt == index)
+        {
+            r.name = it->first;
+            r.key  = it->second;
+            break;
+        }
+        it++;
+        indexAt++;
+    }
+        return r;
+}
+
 uint16_t Settings::control(string_t control)
 {
     auto it = controlMap.find(control);

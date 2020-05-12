@@ -21,6 +21,9 @@ private:
 
     std::vector<Entity*>      s_elements;
     std::vector<sf::Vector2f> s_elementPositions;
+
+    void updateScrollbar();
+    bool s_scrollbarNeeded = false;
 };
 
 

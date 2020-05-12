@@ -5,12 +5,19 @@
 
 #define CONTROL_NOT_FOUND UINT_MAX
 
+struct Control_t
+{
+    string_t name;
+    uint16_t key;
+};
+
 class Settings {
 
 public:
     Settings();
     static Settings* Instance();
-    uint16_t control(string_t);
+    uint16_t  control(string_t);
+    Control_t controlAt(uint16_t);
 
     inline void addControl(string_t name, uint16_t key)
     {

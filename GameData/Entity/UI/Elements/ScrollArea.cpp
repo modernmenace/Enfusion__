@@ -31,14 +31,25 @@ void ScrollArea::initialize()
     s_scrollBar.initialize();
     s_scrollBar.getComponent<Sprite>().getSprite().setTextureRect(sf::IntRect(93, 68, 4, 6));
     s_scrollBar.getComponent<Sprite>().getSprite().setScale(10, 10);
+    updateScrollbar();
+}
+
+void ScrollArea::updateScrollbar()
+{
+    //TODO: Implement this, update scrollbar size if needed
+    s_scrollbarNeeded = false;
 }
 
 void ScrollArea::render(sf::RenderWindow* window)
 {
     Entity::render(window);
     window->draw(s_backRect);
-    window->draw(s_scrollRect);
-    s_scrollBar.render(window);
+
+    if (s_scrollbarNeeded)
+    {
+        window->draw(s_scrollRect);
+        s_scrollBar.render(window);
+    }
 
     for(auto* e : s_elements)
         e->render(window);
@@ -49,4 +60,5 @@ void ScrollArea::addElement(Entity* element, sf::Vector2f position)
     element->initialize(); //TODO: is this necessary?
     s_elements.push_back(element);
     s_elementPositions.push_back(position);
+    updateScrollbar();
 }
