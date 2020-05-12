@@ -2,7 +2,7 @@
 #include "../../../Engine/Core/Settings.h"
 
 ControlsMenu::ControlsMenu(sf::Vector2f position) : applyButton("Apply", sf::Vector2f(100, 150)),
-                                                    cancelButton("Cancel", sf::Vector2f(-225, 150)),
+                                                    cancelButton("Back", sf::Vector2f(-225, 150)),
                                                     c_Area(sf::Vector2f(position.x + 50, position.y + 50), sf::Vector2f(620, 475))
 {
     addComponent<Position>(position);
