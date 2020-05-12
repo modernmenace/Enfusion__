@@ -5,7 +5,9 @@
 
 static void generateControls()
 {
-    CREATE_CONTROL("Interact", 4);
+    CREATE_CONTROL("INTERACT", 4)
+    CREATE_CONTROL("INVENTORY", 60)
+    CREATE_CONTROL("PAUSE", 36)
 }
 
 

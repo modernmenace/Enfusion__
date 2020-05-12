@@ -27,4 +27,7 @@ private:
 #define CREATE_CONTROL(CONTROL_NAME, CONTROL_KEY) \
 Settings::Instance()->addControl(CONTROL_NAME, CONTROL_KEY); \
 
+#define CONTROL(CONTROL_NAME) \
+Settings::Instance()->control(CONTROL_NAME) \
+
 #endif //ENFUSION___SETTINGS_H

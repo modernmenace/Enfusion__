@@ -55,8 +55,12 @@ void Level_1::update(sf::Time tickRate)
 
 void Level_1::handleInput(sf::Keyboard::Key key)
 {
-    if (key == 60 && !p_menu.active()) i_menu.toggleMenu();
-    if (key == 36 && !i_menu.active())
+    if (key == CONTROL("INVENTORY")
+        && !p_menu.active())
+            i_menu.toggleMenu();
+
+    if (key == CONTROL("PAUSE")
+        && !i_menu.active())
     {
         p_menu.toggleMenu();
         if (l_state == GameState::RUNNING)

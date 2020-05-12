@@ -23,7 +23,7 @@ void ItemPickup::create()
 void ItemPickup::handleInput(sf::Keyboard::Key key)
 {
     Entity::handleInput(key);
-    if (key == 4)
+    if (key == CONTROL("INTERACT"))
     {
         if (getComponent<Collider>().checkForCollision(LevelManager::Instance()->getCurrentLevel().player()))
             pickup();
