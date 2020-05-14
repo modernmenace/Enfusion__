@@ -49,21 +49,22 @@ bool SE_checkForScripts(void)
             continue;
 
         dirNames[i] = (char*) malloc (strlen(de->d_name)+1);
-        strncpy (dirNames[i],de->d_name, strlen(de->d_name));
+        strncpy (dirNames[i],de->d_name, strlen(de->d_name)+1);
         i++;
     }
-
-    int j = 0;
-    for(j = 0; j < dirCount; j++)
-    {
-        printf(dirNames[j]);
-        printf("\n");
-    }
-
     closedir(dr);
 
     //TODO: check each mod directory to see if mod.py is present
-
+    int j = 0;
+    for(j = 0; j < dirCount; j++)
+    {
+        getcwd(dir, sizeof(dir));
+        strncat(dir, "/Mods/", 6);
+        strncat(dir, dirNames[j], strlen(dirNames[j]));
+        printf(dir);
+        printf("\n");
+        //dr = opendir(dir);
+    }
 
     return true;
 
