@@ -2,6 +2,10 @@
 #include "ScriptEngine.h"
 #include <unistd.h>
 
+#define dbg_log(m) \
+printf(m);         \
+printf("\n");      \
+
 bool SE_init(const char* programName)
 {
     //initialize engine here
@@ -61,9 +65,20 @@ bool SE_checkForScripts(void)
         getcwd(dir, sizeof(dir));
         strncat(dir, "/Mods/", 6);
         strncat(dir, dirNames[j], strlen(dirNames[j]));
-        printf(dir);
-        printf("\n");
-        //dr = opendir(dir);
+        dr = opendir(dir);
+
+        bool validDir = false;
+        while ((de = readdir(dr)) != NULL)
+        {
+            if (strcmp(".", de->d_name) == 0 || strcmp("..", de->d_name) == 0 || strcmp(".DS_Store", de->d_name) == 0)
+                continue;
+            if (strcmp(de->d_name, "mod.py") == 0)
+                validDir = true;
+        }
+
+        //TODO: do something with validDir
+        
+        closedir(dr);
     }
 
     return true;
