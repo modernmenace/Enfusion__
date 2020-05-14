@@ -9,10 +9,19 @@
 
 #define LEVEL LevelManager::Instance()->getCurrentLevel()
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+    void SE_init(const char*);
+#ifdef __cplusplus
+}
+#endif
+
 class Game {
 
 public:
-    Game();
+    Game(int argc, char *argv[]);
     void run(sf::RenderWindow* window, sf::Thread* renderThread);
 
 private:

@@ -1,7 +1,0 @@
-#ifndef ENFUSION___SCRIPTENGINE_H
-#define ENFUSION___SCRIPTENGINE_H
-
-void SE_init(void);
-
-
-#endif //ENFUSION___SCRIPTENGINE_H

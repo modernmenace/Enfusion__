@@ -16,7 +16,7 @@ sf::View* uiView = nullptr;
  *
  */
 
-Game::Game()
+Game::Game(int argc, char *argv[])
 {
     sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT),
                                                           WINDOW_TITLE);
@@ -29,6 +29,7 @@ Game::Game()
     generateControls();
     LevelManager::Instance()->setLevel("Level_1");
     Settings::Instance();
+    SE_init(argv[0]);
     run(&window, renderThread);
 }
 
