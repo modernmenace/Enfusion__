@@ -11,7 +11,17 @@ typedef struct
     char*          directory;
 } SE_Mod;
 
+typedef struct
+{
+    SE_Mod* mods;
+    size_t  used;
+    size_t  size;
+} SE_ModList;
+
+extern SE_ModList SE_mods;
+
 bool SE_init(const char*);
 bool SE_checkForScripts(void);
+void SE_printMods(void); //for testing
 
 #endif //ENFUSION___SCRIPTENGINE_H

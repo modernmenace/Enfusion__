@@ -30,6 +30,7 @@ Game::Game(int argc, char *argv[])
     LevelManager::Instance()->setLevel("Level_1");
     Settings::Instance();
     SE_init(argv[0]);
+    SE_printMods();
     run(&window, renderThread);
 }
 

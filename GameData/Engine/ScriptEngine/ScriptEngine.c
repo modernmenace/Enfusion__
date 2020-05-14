@@ -6,6 +6,8 @@
 printf(m);         \
 printf("\n");      \
 
+SE_ModList SE_mods;
+
 bool SE_init(const char* programName)
 {
     //initialize engine here
@@ -13,7 +15,7 @@ bool SE_init(const char* programName)
 
     printf("Script Engine Initializing (Python ");
     printf(PY_VERSION);
-    printf(")");
+    printf(")\n");
 
     Py_SetProgramName(programName);
     Py_Initialize();
@@ -21,6 +23,16 @@ bool SE_init(const char* programName)
     Py_Finalize();
 
     return true;
+}
+
+void SE_printMods(void)
+{
+    int i;
+    for(i = 0; i < SE_mods.used; i++)
+    {
+        dbg_log("Print")
+        dbg_log(SE_mods.mods[i].directory)
+    }
 }
 
 bool SE_checkForScripts(void)
@@ -58,6 +70,10 @@ bool SE_checkForScripts(void)
     }
     closedir(dr);
 
+    SE_mods.mods = (SE_Mod *)malloc(10 * sizeof(SE_Mod));
+    SE_mods.used = 0;
+    SE_mods.size = 10;
+
     //TODO: check each mod directory to see if mod.py is present
     int j = 0;
     for(j = 0; j < dirCount; j++)
@@ -73,15 +89,32 @@ bool SE_checkForScripts(void)
             if (strcmp(".", de->d_name) == 0 || strcmp("..", de->d_name) == 0 || strcmp(".DS_Store", de->d_name) == 0)
                 continue;
             if (strcmp(de->d_name, "mod.py") == 0)
+            {
                 validDir = true;
+                break;
+            }
+
         }
 
         //TODO: do something with validDir
-        
+        if (validDir == true)
+        {
+            SE_Mod element;
+            element.id   = SE_mods.mods[SE_mods.used].id + 1;
+            element.name = "Placeholder";
+            element.directory = dir;
+
+            if (SE_mods.used == SE_mods.size)
+            {
+                SE_mods.size *= 2;
+                SE_mods.mods = (SE_Mod *)realloc(SE_mods.mods, SE_mods.size * sizeof(SE_Mod));
+            }
+            SE_mods.mods[SE_mods.used++] = element;
+        }
+
         closedir(dr);
     }
 
-    return true;
-
-
+    if (SE_mods.used > 0) return true;
+    else                  return false;
 }
