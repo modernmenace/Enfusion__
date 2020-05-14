@@ -1,10 +1,10 @@
-#include <Python/Python.h>
+#include "python3.8/Python.h"
 
 void SE_init(const char* programName)
 {
     //initialize engine here
-    //Py_Initialize();
-    //PyRun_SimpleString("from time import time,ctime\n"
-    //                   "print('Today is', ctime(time()))\n");
-    printf(programName);
+    printf("Script Engine Initializing (Python ");
+    printf(PY_VERSION);
+    printf(")");
+    Py_SetProgramName(programName);
 }
