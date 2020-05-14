@@ -6,17 +6,12 @@
 #include "Engine/Lvl/LevelManager.h"
 #include "Data/Items.h"
 #include "Data/Controls.h"
-
-#define LEVEL LevelManager::Instance()->getCurrentLevel()
-
-#ifdef __cplusplus
 extern "C"
 {
-#endif
-    void SE_init(const char*);
-#ifdef __cplusplus
+    #include "Engine/ScriptEngine/ScriptEngine.h"
 }
-#endif
+
+#define LEVEL LevelManager::Instance()->getCurrentLevel()
 
 class Game {
 
