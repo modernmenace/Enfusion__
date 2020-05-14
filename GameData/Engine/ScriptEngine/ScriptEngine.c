@@ -1,4 +1,9 @@
+#ifdef _WIN32
+#include "Python.h"
+#endif
+#ifdef __APPLE__
 #include "python3.8/Python.h"
+#endif
 #include "ScriptEngine.h"
 #include <unistd.h>
 
@@ -17,7 +22,8 @@ bool SE_init(const char* programName)
     printf(PY_VERSION);
     printf(")\n");
 
-    Py_SetProgramName(programName);
+    wchar_t *program = Py_DecodeLocale(programName, NULL);
+    Py_SetProgramName(program);
     Py_Initialize();
 
     Py_Finalize();

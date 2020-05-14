@@ -10,6 +10,7 @@ if (WIN32)
     set(CMAKE_EXE_LINKER_FLAGS "-static -static-libgcc")
     set(SFML_STATIC_LIBRARIES TRUE)
     set(SFML_DIR "${CMAKE_CURRENT_LIST_DIR}/SFML-2.5.1/lib/cmake/SFML")
+    include_directories("C:\\Users\\Jared\\AppData\\Local\\Programs\\Python\\Python38-32\\include")
 endif (WIN32)
 
 find_package(Python COMPONENTS Interpreter Development)
