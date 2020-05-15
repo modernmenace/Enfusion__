@@ -1,9 +1,4 @@
-#ifdef _WIN32
-#include "Python.h"
-#endif
-#ifdef __APPLE__
-#include "python3.8/Python.h"
-#endif
+#include <Python.h>
 #include "ScriptEngine.h"
 #include <unistd.h>
 
@@ -53,9 +48,7 @@ bool SE_checkForScripts(void)
     DIR *dr = opendir(dir);
 
     if (dr == NULL)
-    {
         return false; // mod directory doesnt exist
-    }
 
     uint16_t dirCount = 0;
     while ((de = readdir(dr)) != NULL)
@@ -87,11 +80,14 @@ bool SE_checkForScripts(void)
     for(j = 0; j < dirCount; j++)
     {
         getcwd(dir, sizeof(dir));
-        strncat(dir, "\\Mods\\", 6);
+        strncat(dir, "/Mods/", 6);
         strncat(dir, dirNames[j], strlen(dirNames[j]));
         dr = opendir(dir);
 
         bool validDir = false;
+        if (dr == NULL)
+            continue;
+
         while ((de = readdir(dr)) != NULL)
         {
             if (strcmp(".", de->d_name) == 0 || strcmp("..", de->d_name) == 0 || strcmp(".DS_Store", de->d_name) == 0)
@@ -124,8 +120,7 @@ bool SE_checkForScripts(void)
         }
 
         closedir(dr);
-        free(de);
-        free(dr);
+        
         for(i = 0; i < dirCount; i++)
             free(dirNames[i]);
     }
