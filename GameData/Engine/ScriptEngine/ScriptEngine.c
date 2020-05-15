@@ -80,12 +80,11 @@ bool SE_checkForScripts(void)
     SE_mods.used = 0;
     SE_mods.size = 10;
 
-    //TODO: check each mod directory to see if mod.py is present
     int j = 0;
     for(j = 0; j < dirCount; j++)
     {
         getcwd(dir, sizeof(dir));
-        strncat(dir, "/Mods/", 6);
+        strncat(dir, "\\Mods\\", 6);
         strncat(dir, dirNames[j], strlen(dirNames[j]));
         dr = opendir(dir);
 
@@ -102,13 +101,12 @@ bool SE_checkForScripts(void)
 
         }
 
-        //TODO: do something with validDir
         if (validDir == true)
         {
             SE_Mod element;
             element.id   = SE_mods.mods[SE_mods.used].id + 1;
-            element.name = "Placeholder";
-            element.directory = dir;
+            strcpy(element.name, "Placeholder");
+            strcpy(element.directory, dir);
 
             if (SE_mods.used == SE_mods.size)
             {

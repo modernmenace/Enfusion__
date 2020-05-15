@@ -7,8 +7,8 @@
 typedef struct
 {
     uint16_t       id;
-    char*          name;
-    char*          directory;
+    char           name[1024];
+    char           directory[1024];
 } SE_Mod;
 
 typedef struct
