@@ -38,9 +38,8 @@ bool SE_init(const char* programName)
 
     //TODO: Python stuff here
 
-
-
     Py_Finalize();
+    PyMem_RawFree(program);
 
     return true;
 }
