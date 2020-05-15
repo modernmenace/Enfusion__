@@ -10,6 +10,3 @@ mod_version = 1.0
 
 def initialize():
     print("Mod Initializing")
-
-def update():
-    print("Mod Updating")

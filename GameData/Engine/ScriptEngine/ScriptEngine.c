@@ -31,10 +31,9 @@ bool SE_init(const char* programName)
     Py_SetProgramName(program);
     Py_Initialize();
 
-    //TODO: Python stuff here
-    //TODO: Initialize mods?
     SE_initScripts();
 
+    //TODO: finalize later?
     Py_FinalizeEx();
     PyMem_RawFree(program);
 
