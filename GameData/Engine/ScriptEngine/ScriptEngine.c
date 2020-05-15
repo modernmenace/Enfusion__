@@ -32,8 +32,10 @@ bool SE_init(const char* programName)
     Py_Initialize();
 
     //TODO: Python stuff here
+    //TODO: Initialize mods?
+    SE_initScripts();
 
-    Py_Finalize();
+    Py_FinalizeEx();
     PyMem_RawFree(program);
 
     return true;
@@ -127,4 +129,29 @@ bool SE_checkForScripts(void)
 
     if (SE_mods.used > 0) return true;
     else                  return false;
+}
+
+void SE_initScripts(void)
+{
+    uint16_t i;
+    char mod[1024];
+    strcpy(mod, "__init__");
+    for(i = 0; i < SE_mods.used; i++)
+    {
+        //first fetch mod.py file
+        PySys_SetPath(Py_DecodeLocale(SE_mods.mods[i].directory, NULL));
+        PyObject* pyMod = PyUnicode_DecodeFSDefault(mod);
+        PyObject* pyModule = PyImport_Import(pyMod);
+        Py_DECREF(pyMod);
+
+        if (pyModule == NULL)
+        {
+            printf("Failed to load mod at '");
+            printf(SE_mods.mods[i].directory);
+            printf("'\n");
+            continue;
+        }
+
+        
+    }
 }
