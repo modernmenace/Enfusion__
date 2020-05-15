@@ -4,9 +4,7 @@
 #
 #
 
-mod_name    = "Example Mod"
-mod_author  = "Example"
-mod_version = 1.0
+mod_name = "Example Mod"
 
 def initialize():
     print("Mod Initializing")

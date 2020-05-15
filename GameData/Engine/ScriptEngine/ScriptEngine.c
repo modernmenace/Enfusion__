@@ -158,6 +158,17 @@ void SE_initScripts(void)
             Py_DECREF(res);
             Py_DECREF(init);
         }
+        
+        PyObject *v = PyObject_GetAttrString(pyModule,"mod_name");
+
+        if (v != NULL)
+        {
+            char* mod_name = PyUnicode_AsUTF8(v);
+            if (mod_name != NULL)
+                strcpy(SE_mods.mods[i].name, mod_name);
+
+            Py_DECREF(v);
+        }
 
         Py_DECREF(pyModule);
     }
