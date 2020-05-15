@@ -124,6 +124,10 @@ bool SE_checkForScripts(void)
         }
 
         closedir(dr);
+        free(de);
+        free(dr);
+        for(i = 0; i < dirCount; i++)
+            free(dirNames[i]);
     }
 
     if (SE_mods.used > 0) return true;
