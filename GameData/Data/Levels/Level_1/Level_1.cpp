@@ -25,7 +25,7 @@ Level_1::Level_1() : Level("Level_1", "Levels/Level_1_back.png"),
     addUIEntity(playerPosDebugText);
     #endif
 
-    auto level = MapGenerator::Instance()->generateMap(500, 500);
+    auto level = MapGenerator::Instance()->generateMap(250, 250);
 
     map = new Tilemap("Levels/mapgen.png", level, MapGenerator::Instance()->size(), 48);
     minimap.setTilemap(map);

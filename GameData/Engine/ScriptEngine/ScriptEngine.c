@@ -21,24 +21,28 @@ bool SE_init(const char* programName)
     printf("Script Engine Initializing (Python ");
     printf(PY_VERSION);
     printf(")\n");
+    int i;
+    for(i = 0; i < SE_mods.used; i++)
+    {
+        printf("%u", (unsigned int)SE_mods.mods[i].id);
+        printf(": ");
+        printf(SE_mods.mods[i].name);
+        printf(" (");
+        printf(SE_mods.mods[i].directory);
+        printf(")\n");
+    }
 
     wchar_t *program = Py_DecodeLocale(programName, NULL);
     Py_SetProgramName(program);
     Py_Initialize();
 
+    //TODO: Python stuff here
+
+
+
     Py_Finalize();
 
     return true;
-}
-
-void SE_printMods(void)
-{
-    int i;
-    for(i = 0; i < SE_mods.used; i++)
-    {
-        dbg_log("Print")
-        dbg_log(SE_mods.mods[i].directory)
-    }
 }
 
 bool SE_checkForScripts(void)
@@ -104,7 +108,11 @@ bool SE_checkForScripts(void)
         if (validDir == true)
         {
             SE_Mod element;
-            element.id   = SE_mods.mods[SE_mods.used].id + 1;
+            if (SE_mods.used == 0)
+                element.id = 0;
+            else
+                element.id   = SE_mods.mods[SE_mods.used].id + 1;
+
             strcpy(element.name, "Placeholder");
             strcpy(element.directory, dir);
 
