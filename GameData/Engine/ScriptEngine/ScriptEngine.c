@@ -1,6 +1,6 @@
 #include <Python.h>
 #include "ScriptEngine.h"
-#include <unistd.h>
+#include <dirent.h>
 
 #define dbg_log(m) \
 printf(m);         \
@@ -168,7 +168,7 @@ void SE_initScripts(void)
 
         if (v != NULL)
         {
-            char* mod_name = PyUnicode_AsUTF8(v);
+            const char* mod_name = PyUnicode_AsUTF8(v);
             if (mod_name != NULL)
                 strcpy(SE_mods.mods[i].name, mod_name);
 

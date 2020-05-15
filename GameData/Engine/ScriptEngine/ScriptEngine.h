@@ -2,7 +2,6 @@
 #define ENFUSION___SCRIPTENGINE_H
 
 #include <stdbool.h>
-#include <dirent.h>
 
 typedef struct
 {
