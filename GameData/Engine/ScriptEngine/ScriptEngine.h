@@ -23,5 +23,6 @@ extern SE_ModList SE_mods;
 bool SE_init(const char*);
 bool SE_checkForScripts(void);
 void SE_initScripts(void);
+void SE_listScripts(void);
 
 #endif //ENFUSION___SCRIPTENGINE_H

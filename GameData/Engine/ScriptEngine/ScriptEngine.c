@@ -16,22 +16,13 @@ bool SE_init(const char* programName)
     printf("Script Engine Initializing (Python ");
     printf(PY_VERSION);
     printf(")\n");
-    int i;
-    for(i = 0; i < SE_mods.used; i++)
-    {
-        printf("%u", (unsigned int)SE_mods.mods[i].id);
-        printf(": ");
-        printf(SE_mods.mods[i].name);
-        printf(" (");
-        printf(SE_mods.mods[i].directory);
-        printf(")\n");
-    }
 
     wchar_t *program = Py_DecodeLocale(programName, NULL);
     Py_SetProgramName(program);
     Py_Initialize();
 
     SE_initScripts();
+    SE_listScripts();
 
     //TODO: finalize later?
     Py_FinalizeEx();
@@ -130,6 +121,20 @@ bool SE_checkForScripts(void)
     else                  return false;
 }
 
+void SE_listScripts(void)
+{
+    int i;
+    for(i = 0; i < SE_mods.used; i++)
+    {
+        printf("%u", (unsigned int)SE_mods.mods[i].id);
+        printf(": ");
+        printf(SE_mods.mods[i].name);
+        printf(" (");
+        printf(SE_mods.mods[i].directory);
+        printf(")\n");
+    }
+}
+
 void SE_initScripts(void)
 {
     uint16_t i;
@@ -158,7 +163,7 @@ void SE_initScripts(void)
             Py_DECREF(res);
             Py_DECREF(init);
         }
-        
+
         PyObject *v = PyObject_GetAttrString(pyModule,"mod_name");
 
         if (v != NULL)
