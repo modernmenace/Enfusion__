@@ -25,6 +25,8 @@
 
 #define MAX_COMPONENTS 6
 
+#define FRAMERATE_LIMIT 60
+
 
 // Globals
 extern sf::Font*                 GlobalFont;
