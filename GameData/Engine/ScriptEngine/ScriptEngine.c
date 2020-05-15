@@ -135,10 +135,9 @@ void SE_initScripts(void)
 {
     uint16_t i;
     char mod[1024];
-    strcpy(mod, "__init__");
+    strcpy(mod, "mod");
     for(i = 0; i < SE_mods.used; i++)
     {
-        //first fetch mod.py file
         PySys_SetPath(Py_DecodeLocale(SE_mods.mods[i].directory, NULL));
         PyObject* pyMod = PyUnicode_DecodeFSDefault(mod);
         PyObject* pyModule = PyImport_Import(pyMod);
@@ -152,6 +151,15 @@ void SE_initScripts(void)
             continue;
         }
 
-        
+        PyObject* init = PyObject_GetAttrString(pyModule,(char*)"initialize");
+
+        if (init != NULL)
+        {
+            PyObject* res = PyObject_CallObject(init, NULL);
+            Py_DECREF(res);
+            Py_DECREF(init);
+        }
+
+        Py_DECREF(pyModule);
     }
 }
