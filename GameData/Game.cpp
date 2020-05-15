@@ -21,7 +21,8 @@ Game::Game(int argc, char *argv[])
     sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT),
                                                           WINDOW_TITLE);
     srand(time(nullptr));
-    window.setFramerateLimit(FRAMERATE_LIMIT);
+    window.setVerticalSyncEnabled(true);
+    window.setFramerateLimit(0);
     window.setActive(false);
     renderThread = new sf::Thread(std::bind(&Game::render, this, &window));
     GlobalFont = new sf::Font();
