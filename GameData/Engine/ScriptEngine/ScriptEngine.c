@@ -120,7 +120,7 @@ bool SE_checkForScripts(void)
         }
 
         closedir(dr);
-        
+
         for(i = 0; i < dirCount; i++)
             free(dirNames[i]);
     }
