@@ -1,6 +1,15 @@
 #include <Python.h>
 #include "ScriptEngine.h"
+#include "ScriptHook.h"
 #include <dirent.h>
+
+/*
+ *  ScriptEngine
+ *
+ *  DESC: Handles installed mods and python interpreter management
+ *
+ */
+
 
 #define dbg_log(m) \
 printf(m);         \
@@ -23,6 +32,7 @@ bool SE_init(const char* programName)
 
     SE_initScripts();
     SE_listScripts();
+    SE_initializeHook();
 
     //TODO: finalize later?
     Py_FinalizeEx();
