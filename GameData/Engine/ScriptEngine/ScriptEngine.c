@@ -28,11 +28,11 @@ bool SE_init(const char* programName)
 
     wchar_t *program = Py_DecodeLocale(programName, NULL);
     Py_SetProgramName(program);
+    SE_initializeHook();
     Py_Initialize();
 
     SE_initScripts();
     SE_listScripts();
-    SE_initializeHook();
 
     //TODO: finalize later?
     Py_FinalizeEx();
