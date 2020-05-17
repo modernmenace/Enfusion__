@@ -18,15 +18,26 @@ void SE_initializeHook(void)
 }
 
 static PyObject*
-enf_return107(PyObject *self, PyObject *args)
+enf_createItem(PyObject* self, PyObject* args)
+{
+    //TODO: this, source item image from mod resources
+    //TODO: use AssetManager::getModTexture
+
+}
+
+static PyObject*
+enf_return107(PyObject* self, PyObject* args)
 {
     return PyLong_FromLong(107);
 }
+
 
 static PyMethodDef
 EnfMethods[] = {
         {"return107", enf_return107, METH_VARARGS,
                 "Return the number 107."},
+        {"createItem", enf_createItem, METH_VARARGS,
+                "Creates an item"},
         {NULL, NULL, 0, NULL}
 };
 

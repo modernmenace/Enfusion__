@@ -32,7 +32,7 @@ AssetManager* AssetManager::Instance()
  *
  */
 
-sf::Texture &AssetManager::getTexture(std::string const &fileName)
+sf::Texture &AssetManager::getTexture(string_t const &fileName)
 {
     assert(m_Instance);
     auto &texMap = m_Instance->m_Textures;
@@ -49,4 +49,10 @@ sf::Texture &AssetManager::getTexture(std::string const &fileName)
         texture.loadFromFile(RESOURCE_PATH + fileName);
         return texture;
     }
+}
+
+sf::Texture& getModTexture(const char *modDirectory, const string_t &fileName)
+{
+    //TODO: this
+
 }
