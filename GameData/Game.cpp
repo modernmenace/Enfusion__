@@ -3,8 +3,8 @@
 
 sf::Font*         GlobalFont;
 sf::Vector2f      MousePosition;
-ItemRegistry* ItemRegistry::m_Instance = nullptr;
-sf::View* uiView = nullptr;
+ItemRegistry*     ItemRegistry::m_Instance = nullptr;
+sf::View*         uiView = nullptr;
 
 
 /*

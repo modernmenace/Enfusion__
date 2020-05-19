@@ -15,7 +15,9 @@ public:
     void render(sf::RenderWindow* window) override;
     void setPosition(sf::Vector2f p);
     void setText(string_t t);
-    inline sf::Text text() { return t_text; }
+
+    inline void setTextColor(sf::Color color) { t_text.setFillColor(color); };
+    inline sf::Text text()                    { return t_text; }
 
 private:
     sf::Text           t_text;

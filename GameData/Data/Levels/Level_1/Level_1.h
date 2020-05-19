@@ -11,6 +11,7 @@
 #include "../../../Entity/UI/Elements/TextDisplay.h"
 #include "../../../Entity/UI/Menus/PauseMenu.h"
 #include "../../../Entity/UI/Elements/Minimap.h"
+#include "../../../Entity/UI/Elements/QuestDisplay.h"
 
 #endif
 
@@ -33,6 +34,7 @@ private:
     InventoryMenu i_menu;
     PauseMenu     p_menu;
     Minimap       minimap;
+    QuestDisplay  q_display;
 
     #ifdef DEBUG_BUILD
     TextDisplay* playerPosDebugText = nullptr;

@@ -27,7 +27,7 @@ void TextDisplay::setText(string_t t)
         return;
     }
 
-    uint16_t charPerLine = floor(t_bounds.getSize().y / (t_text.getCharacterSize() * t_text.getScale().y) * 6); //TODO: formula
+    uint16_t charPerLine = floor(t_bounds.getSize().y / (t_text.getCharacterSize() * t_text.getScale().y) * 6);
     uint16_t i = 1;
 
     for(;;)

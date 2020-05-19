@@ -8,10 +8,12 @@ Level_1::Level_1() : Level("Level_1", "Levels/Level_1_back.png"),
                      i_menu(&player),
                      p_menu(),
                      hotbar(&player, sf::Vector2f(-300, 350), &i_menu),
-                     minimap(&player, this)
+                     minimap(&player, this),
+                     q_display()
 {
     addEntity(&player);
     addUIEntity(&minimap);
+    addUIEntity(&q_display);
     addUIEntity(&i_menu);
     addUIEntity(&hotbar);
     addUIEntity(&p_menu);
