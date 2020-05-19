@@ -15,7 +15,7 @@
 InventoryMenu::InventoryMenu(Entity *entity) : i_tooltip()
 {
     i_entity = entity;
-    addComponent<Position>(sf::Vector2f(300, -450));
+    addComponent<Position>(sf::Vector2f(-200, -450));
     addComponent<Sprite>("UI/ui.png");
 }
 

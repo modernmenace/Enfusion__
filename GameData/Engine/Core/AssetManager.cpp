@@ -51,8 +51,9 @@ sf::Texture &AssetManager::getTexture(string_t const &fileName)
     }
 }
 
-sf::Texture& getModTexture(const char *modDirectory, const string_t &fileName)
+sf::Texture& AssetManager::getModTexture(const char *modDirectory, const string_t &fileName)
 {
     //TODO: this
-
+    string_t file = modDirectory + fileName;
+    dbg_log(file)
 }
