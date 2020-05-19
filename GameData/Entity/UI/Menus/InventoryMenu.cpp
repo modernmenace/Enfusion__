@@ -17,6 +17,8 @@ InventoryMenu::InventoryMenu(Entity *entity) : i_tooltip()
     i_entity = entity;
     addComponent<Position>(sf::Vector2f(-200, -450));
     addComponent<Sprite>("UI/ui.png");
+    i_playerView.addComponent<Position>(sf::Vector2f(-150, -375));
+    i_playerView.addComponent<Sprite>("UI/ui.png");
 }
 
 InventoryMenu::~InventoryMenu()
@@ -41,6 +43,9 @@ void InventoryMenu::initialize()
     assert(i_entity->hasComponent<Inventory>());
     Entity::initialize();
     i_tooltip.initialize();
+    i_playerView.initialize();
+    i_playerView.getComponent<Sprite>().getSprite().setTextureRect(sf::IntRect(66, 32, 16, 16));
+    i_playerView.getComponent<Sprite>().getSprite().setScale(sf::Vector2f(13, 15));
 
     getComponent<Sprite>().getSprite().setTextureRect(sf::IntRect(0, 0, 48, 48));
     getComponent<Sprite>().getSprite().setScale(12, 15);
@@ -272,6 +277,7 @@ void InventoryMenu::handleInput(sf::Mouse::Button button)
 
 void InventoryMenu::render(sf::RenderWindow *window)
 {
+    if (!active()) return;
     Entity::render(window);
 
     for(auto &s : slots)
@@ -286,4 +292,5 @@ void InventoryMenu::render(sf::RenderWindow *window)
     }
 
     i_tooltip.render(window);
+    i_playerView.render(window);
 }

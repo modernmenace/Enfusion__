@@ -30,6 +30,7 @@ private:
     int         i_dragIndex;
     sf::Clock   i_mouseClock;
     Tooltip     i_tooltip;
+    Entity      i_playerView;
 
 };
 
