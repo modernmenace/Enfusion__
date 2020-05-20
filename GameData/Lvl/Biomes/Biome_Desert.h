@@ -17,7 +17,8 @@ public:
                 if ((nPos.y+nPos.x) < (nPos.y + mapArea.x))
                 {
                     Tile* t = &map->at((nPos.y * mapArea.x)+nPos.x);
-                    t->tilesetID = 353;
+                    //choose random from tileset (352-358 for now)
+                    t->tilesetID = rand()%(358-352 + 1) + 352;
                     t->biome = LEVEL_BIOME_ID_DESERT;
                     nPos.x++;
                 }
@@ -30,7 +31,8 @@ public:
     void createTransitionTile(Tile* tile, uint16_t fromBiome) override
     {
         //TODO: implement fromBiome
-        tile->tilesetID = 353;
+        //choose random from tileset (352-358 for now)
+        tile->tilesetID = rand()%(358-352 + 1) + 352;
         tile->biome = LEVEL_BIOME_ID_DESERT;
     }
 

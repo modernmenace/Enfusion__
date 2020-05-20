@@ -39,7 +39,7 @@ std::vector<int> MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY)
     for(uint32_t i = 0; i >=0; i++)
     {
         if (lastRun) break;
-        uint16_t biomeSize = rand()%(LEVEL_BIOME_SIZE_MAX-LEVEL_BIOME_SIZE_MIN + 1) + LEVEL_BIOME_SIZE_MIN;;
+        uint16_t biomeSize = rand()%(LEVEL_BIOME_SIZE_MAX-LEVEL_BIOME_SIZE_MIN + 1) + LEVEL_BIOME_SIZE_MIN;
 
         auto* biome = BiomeManager::Instance()->biome(rand()%(LEVEL_AMOUNT_BIOMES)+1);
         auto size = sf::Vector2i(biomeSize, biomeSize);
