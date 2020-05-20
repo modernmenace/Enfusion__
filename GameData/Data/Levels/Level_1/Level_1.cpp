@@ -29,7 +29,7 @@ Level_1::Level_1() : Level("Level_1", "Levels/Level_1_back.png"),
 
     auto level = MapGenerator::Instance()->generateMap(250, 250);
 
-    map = new Tilemap("Levels/mapgen.png", level, MapGenerator::Instance()->size(), 48);
+    map = new Tilemap("Levels/terrain.png", level, MapGenerator::Instance()->size(), 16);
     minimap.setTilemap(map);
 }
 

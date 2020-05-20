@@ -18,7 +18,7 @@ public:
                 if ((nPos.y+nPos.x) < (nPos.y + mapArea.x))
                 {
                     Tile* t = &map->at((nPos.y * mapArea.x)+nPos.x);
-                    t->tilesetID = 1;
+                    t->tilesetID = 42;
                     t->biome = LEVEL_BIOME_ID_WOODLAND;
                     nPos.x++;
                 }
@@ -31,7 +31,7 @@ public:
     void createTransitionTile(Tile* tile, uint16_t fromBiome) override
     {
         //TODO: implement fromBiome
-        tile->tilesetID = 1;
+        tile->tilesetID = 42;
         tile->biome = LEVEL_BIOME_ID_WOODLAND;
     }
 
