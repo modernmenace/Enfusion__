@@ -11,7 +11,6 @@ void Biome_Desert::generate(sf::Vector2i position, sf::Vector2i area, std::vecto
             if ((nPos.y+nPos.x) < (nPos.y + mapArea.x))
             {
                 Tile* t = &map->at((nPos.y * mapArea.x)+nPos.x);
-                //todo: use tiles for weight and id
                 t->tilesetID = getWeightedRandomTile();
                 t->biome = LEVEL_BIOME_ID_DESERT;
                 nPos.x++;

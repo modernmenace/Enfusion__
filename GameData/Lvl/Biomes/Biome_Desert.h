@@ -11,9 +11,7 @@ public:
 
     void createTransitionTile(Tile* tile, uint16_t fromBiome) override
     {
-        //TODO: implement fromBiome
-        //choose random from tileset (352-358 for now)
-        tile->tilesetID = rand()%(358-352 + 1) + 352;
+        tile->tilesetID = getWeightedRandomTile();
         tile->biome = LEVEL_BIOME_ID_DESERT;
     }
 
@@ -24,7 +22,7 @@ private:
         float tileWeight;
     };
 
-    const static uint16_t tileTextures = 7;
+    const static uint16_t tileTextures = 15;
     const Tile_Texture tiles[tileTextures] =
             {
                 {352,  1},
@@ -33,7 +31,15 @@ private:
                 {355,  1},
                 {356,  1},
                 {357,  1},
-                {358,  1}
+                {358,  1},
+                {361,  0.01},
+                {362,  0.01},
+                {363,  0.01},
+                {364,  0.01},
+                {365,  0.01},
+                {366,  0.01},
+                {367,  0.01},
+                {368,  0.01}
             };
 
     uint16_t getWeightedRandomTile();
