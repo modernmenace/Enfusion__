@@ -3,6 +3,7 @@
 
 #include "../Biome.h"
 
+
 class Biome_Desert : public Biome
 {
 public:
@@ -16,6 +17,26 @@ public:
         tile->biome = LEVEL_BIOME_ID_DESERT;
     }
 
+private:
+    struct Tile_Texture
+    {
+        uint16_t tilesetID;
+        float tileWeight;
+    };
+
+    const static uint16_t tileTextures = 7;
+    const Tile_Texture tiles[tileTextures] =
+            {
+                {352,  1},
+                {353,  1},
+                {354,  1},
+                {355,  1},
+                {356,  1},
+                {357,  1},
+                {358,  1}
+            };
+
+    uint16_t getWeightedRandomTile();
 };
 
 
