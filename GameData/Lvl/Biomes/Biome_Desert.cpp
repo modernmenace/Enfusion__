@@ -25,13 +25,6 @@ void Biome_Desert::generate(sf::Vector2i position, sf::Vector2i area, std::vecto
     // 2) determine weighted object to place
     // 3) determine random location
 
-    /*
-    dbg_log("Biome Size (Desert): " << area.x << ", " << area.y)
-    sf::IntRect loc(10, 10, 10, 10);
-    sf::Sprite* spr;
-    spr->setTexture(AssetManager::Instance()->getTexture("Levels/desert.png"));
-    spr->setTextureRect()
-     */
 }
 
 void Biome_Desert::initialize()

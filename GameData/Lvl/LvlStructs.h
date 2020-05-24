@@ -16,11 +16,4 @@ struct TileTexture
     float    weight;
 };
 
-struct StaticMapObject
-{
-    sf::Sprite  obj;
-    sf::IntRect location;
-    bool        blocked = false;
-};
-
 #endif //ENFUSION___LVLSTRUCTS_H

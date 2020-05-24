@@ -3,6 +3,7 @@
 
 #include "../Engine/Core/Engine.h"
 #include "LvlStructs.h"
+#include "Biomes/Objects/StaticMapObject.h"
 #include <SFML/Graphics/RectangleShape.hpp>
 
 #define LEVEL_BIOME_ID_NONE     0
