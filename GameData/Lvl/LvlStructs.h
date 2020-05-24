@@ -1,7 +1,7 @@
 #ifndef ENFUSION___LVLSTRUCTS_H
 #define ENFUSION___LVLSTRUCTS_H
 
-#include <stdint.h>
+#include "../Engine/Core/Engine.h"
 #include <vector>
 
 struct Tile
@@ -18,9 +18,9 @@ struct TileTexture
 
 struct StaticMapObject
 {
-    uint8_t width;
-    uint8_t height;
-    std::vector<uint16_t> tiles;
+    sf::Sprite  obj;
+    sf::IntRect location;
+    bool        blocked = false;
 };
 
 #endif //ENFUSION___LVLSTRUCTS_H

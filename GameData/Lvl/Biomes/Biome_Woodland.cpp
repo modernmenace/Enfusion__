@@ -21,7 +21,7 @@ void Biome_Woodland::generate(sf::Vector2i position, sf::Vector2i area, std::vec
     }
 }
 
-void Biome_Woodland::initializeTileTextures()
+void Biome_Woodland::initialize()
 {
     biome_tileTextures.push_back({41,  1});
     biome_tileTextures.push_back({42,  1});

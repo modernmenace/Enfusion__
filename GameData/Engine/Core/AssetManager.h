@@ -10,7 +10,6 @@ class AssetManager {
 public:
     static AssetManager* Instance();
     sf::Texture& getTexture(std::string const& fileName);
-    sf::Texture& getModTexture(const char *modDirectory, const std::string &fileName);
 
 private:
     AssetManager() {};
