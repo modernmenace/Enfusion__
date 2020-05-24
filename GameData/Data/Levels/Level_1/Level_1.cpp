@@ -4,7 +4,7 @@
 //TODO: Break level into chunks
 
 Level_1::Level_1() : Level("Level_1", "Levels/Level_1_back.png"),
-                     player("Objects/mount1.png", sf::Vector2f(600, 300)),
+                     player("Objects/chara2.png", sf::Vector2f(600, 300)),
                      i_menu(&player),
                      p_menu(),
                      hotbar(&player, sf::Vector2f(-300, 350), &i_menu),
