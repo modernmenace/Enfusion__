@@ -1,6 +1,10 @@
 #include "AnimatedSprite.h"
 #include "../Base/Position.h"
 
+//TODO: fix switchstate flickering
+//TODO: find where this is updated
+//TODO: idle frame when done moving
+
 AnimatedSprite::AnimatedSprite(string_t spriteSheet, uint8_t sheetsPerRow, int numberFrames, sf::IntRect characterSheetSize, sf::Vector2i sheet)
 {
     this->s_sheet           = spriteSheet;
@@ -19,7 +23,7 @@ void AnimatedSprite::initialize()
 
     this->sprite = sf::Sprite(AssetManager::Instance()->getTexture(s_sheet), charRect);
     this->sprite.setPosition(entity->getComponent<Position>().getPosition());
-    this->sprite.setScale(GLOBAL_SCALE_GAMEOBJECT);
+    this->sprite.setScale(3,3);
 
     switchState(0, 0);
 }
@@ -31,7 +35,6 @@ void AnimatedSprite::render(sf::RenderWindow *window)
 
 void AnimatedSprite::switchState(int row, int frame)
 {
-    //TODO; incorporate sheet map into this
     auto sheetHeight = charRect.height;
     auto sheetWidth  = charRect.width;
 
