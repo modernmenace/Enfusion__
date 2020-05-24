@@ -2,7 +2,7 @@
 
 void Biome_Desert::generate(sf::Vector2i position, sf::Vector2i area, std::vector<Tile> *map, sf::Vector2i mapArea)
 {
-    //generate ground tile
+    //generate ground tiles
     auto nPos = position;
     for(uint16_t j = 0; j < area.y; j++)
     {
@@ -19,6 +19,13 @@ void Biome_Desert::generate(sf::Vector2i position, sf::Vector2i area, std::vecto
         nPos.x = position.x;
         nPos.y++;
     }
+
+    //generate map objects
+    // 1) determine amount of map objects in biome
+    // 2) determine weighted object to place
+    // 3) determine random location
+
+    dbg_log("Biome Size (Desert): " << area.x << ", " << area.y)
 }
 
 void Biome_Desert::initializeTileTextures()
