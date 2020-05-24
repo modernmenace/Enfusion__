@@ -18,6 +18,9 @@ BiomeManager::BiomeManager()
 {
     biomes[LEVEL_BIOME_ID_WOODLAND] = new Biome_Woodland();
     biomes[LEVEL_BIOME_ID_DESERT]   = new Biome_Desert();
+
+    for(int i = 1; i < LEVEL_AMOUNT_BIOMES+1; i++)
+        biomes[i]->initializeTileTextures();
 }
 
 BiomeManager::~BiomeManager()

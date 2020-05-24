@@ -11,7 +11,7 @@ void Biome_Desert::generate(sf::Vector2i position, sf::Vector2i area, std::vecto
             if ((nPos.y+nPos.x) < (nPos.y + mapArea.x))
             {
                 Tile* t = &map->at((nPos.y * mapArea.x)+nPos.x);
-                t->tilesetID = getWeightedRandomTile();
+                t->tilesetID = randomTile();
                 t->biome = LEVEL_BIOME_ID_DESERT;
                 nPos.x++;
             }
@@ -21,21 +21,20 @@ void Biome_Desert::generate(sf::Vector2i position, sf::Vector2i area, std::vecto
     }
 }
 
-uint16_t Biome_Desert::getWeightedRandomTile()
+void Biome_Desert::initializeTileTextures()
 {
-    float weightedSum = 0;
-    for(uint16_t i = 0; i < tileTextures; i++)
-        weightedSum += tiles[i].tileWeight;
-
-    float weightedRand = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/weightedSum));
-
-    for(uint16_t i = 0; i < tileTextures; i++)
-    {
-        if (weightedRand < tiles[i].tileWeight)
-            return tiles[i].tilesetID;
-        else
-            weightedRand -= tiles[i].tileWeight;
-    }
-
-    return tiles[0].tilesetID;
+    biome_tileTextures.push_back({352,  1});
+    biome_tileTextures.push_back({353,  1});
+    biome_tileTextures.push_back({354,  1});
+    biome_tileTextures.push_back({355,  1});
+    biome_tileTextures.push_back({356,  1});
+    biome_tileTextures.push_back({357,  1});
+    biome_tileTextures.push_back({361,  0.01});
+    biome_tileTextures.push_back({362,  0.01});
+    biome_tileTextures.push_back({363,  0.01});
+    biome_tileTextures.push_back({364,  0.01});
+    biome_tileTextures.push_back({365,  0.01});
+    biome_tileTextures.push_back({366,  0.01});
+    biome_tileTextures.push_back({367,  0.01});
+    biome_tileTextures.push_back({368,  0.01});
 }
