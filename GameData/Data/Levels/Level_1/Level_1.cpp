@@ -19,14 +19,6 @@ Level_1::Level_1() : Level("Level_1", "Levels/Level_1_back.png"),
     addUIEntity(&p_menu);
     l_player = &player;
 
-    //Debug Display
-    #ifdef DEBUG_BUILD
-    TextDisplay* debugText = new TextDisplay("Debug Build", sf::Vector2f(-950, -545), 30);
-    playerPosDebugText     = new TextDisplay("(100, 100)", sf::Vector2f(-950, -510), 30);
-    addUIEntity(debugText);
-    addUIEntity(playerPosDebugText);
-    #endif
-
     auto level = MapGenerator::Instance()->generateMap(250, 250);
 
     map = new Tilemap("Levels/terrain.png", level, MapGenerator::Instance()->size(), 16);
@@ -46,11 +38,6 @@ void Level_1::initialize()
 
 void Level_1::update(sf::Time tickRate)
 {
-    #ifdef DEBUG_BUILD
-    auto playerPos = player.getComponent<Position>().getPosition();
-    playerPosDebugText->setText(std::string("(") + std::to_string((int)playerPos.x)
-            + std::string(", ") + std::to_string((int)playerPos.y) + std::string(")"));
-    #endif
 
     Level::update(tickRate);
 }

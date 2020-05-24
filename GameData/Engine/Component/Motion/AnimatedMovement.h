@@ -29,8 +29,9 @@ class AnimatedMovement : public Component {
 public:
     AnimatedMovement(float speed = 425.0f);
 
-    void initialize()              override;
-    void update(sf::Time tickRate) override;
+    void initialize()                       override;
+    void update(sf::Time tickRate)          override;
+    void handleInput(sf::Keyboard::Key key) override;
 
 private:
     float speed;
@@ -50,12 +51,8 @@ private:
     float currAnimTime    = 0.0f;
     float animThreshhold  = 0.175f;
 
+    bool moving    = false;
     bool sprinting = false;
-
-    inline bool isMoving() const
-    {
-        return (st.up || st.down || st.left || st.right);
-    }
 
 };
 

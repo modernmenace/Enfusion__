@@ -16,71 +16,89 @@ void AnimatedMovement::initialize()
     entity->getComponent<AnimatedSprite>().switchState(0, 1);
 }
 
+void AnimatedMovement::handleInput(sf::Keyboard::Key key)
+{
+    if (LevelManager::Instance()->getCurrentLevel().state() == GameState::PAUSE)
+        return;
+
+    moving = (sf::Keyboard::isKeyPressed(sf::Keyboard::W )|| sf::Keyboard::isKeyPressed(sf::Keyboard::S) ||
+            sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::D));
+}
+
 void AnimatedMovement::update(sf::Time tickRate)
 {
     if (LevelManager::Instance()->getCurrentLevel().state() == GameState::PAUSE)
         return;
 
-    auto tempSpeed = speed;
-    #ifdef DEBUG_BUILD
-    if (sprinting) speed *= 15;
-    #else
-    if (sprinting) speed *= 2;
-    #endif
-    auto currDT = tickRate.asSeconds();
-    currAnimTime += currDT;
+    if (moving)
+    {
+        auto currTickRate = tickRate.asSeconds();
+        auto tempSpeed = speed;
+        #ifdef DEBUG_BUILD
+        if (sprinting) speed *= 15;
+        #else
+        if (sprinting) speed *= 2;
+        #endif
 
-    sf::Keyboard::isKeyPressed(sf::Keyboard::W)      ? st.up    = true  : st.up    = false;
-    sf::Keyboard::isKeyPressed(sf::Keyboard::S)      ? st.down  = true  : st.down  = false;
-    sf::Keyboard::isKeyPressed(sf::Keyboard::A)      ? st.left  = true  : st.left  = false;
-    sf::Keyboard::isKeyPressed(sf::Keyboard::D)      ? st.right = true  : st.right = false;
-    sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) ? sprinting = true : sprinting = false;
+        currAnimTime += currTickRate;
 
-    if (st.up)
-    {
-        if (st.down) { }
-        else if (st.left)
-            characterSprite->move(-speed_diag * currDT, -speed_diag * currDT);
-        else if (st.right)
-            characterSprite->move(speed_diag * currDT, -speed_diag * currDT);
-        else
-            characterSprite->move(0, -speed_vert * currDT);
-    }
-    else if (st.left)
-    {
-        if (st.right) { }
-        else if (st.up)
-            characterSprite->move(-speed_diag * currDT, -speed_diag * currDT);
-        else if (st.down)
-            characterSprite->move(-speed_diag * currDT, speed_diag * currDT);
-        else
-            characterSprite->move(-speed_horz * currDT, 0);
+        sf::Keyboard::isKeyPressed(sf::Keyboard::W)      ? st.up    = true  : st.up    = false;
+        sf::Keyboard::isKeyPressed(sf::Keyboard::S)      ? st.down  = true  : st.down  = false;
+        sf::Keyboard::isKeyPressed(sf::Keyboard::A)      ? st.left  = true  : st.left  = false;
+        sf::Keyboard::isKeyPressed(sf::Keyboard::D)      ? st.right = true  : st.right = false;
+        sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) ? sprinting = true : sprinting = false;
 
-    }
-    else if (st.down)
-    {
-        if(st.left)
-            characterSprite->move(-speed_diag * currDT, speed_diag * currDT);
-        else if (st.right)
-            characterSprite->move(speed_diag * currDT, speed_diag * currDT);
-        else
-            characterSprite->move(0, speed_vert * currDT);
-    }
-    else if (st.right)
-    {
 
         if (st.up)
-            characterSprite->move(speed_diag * currDT, -speed_diag * currDT);
-        else if (st.down)
-            characterSprite->move(speed_diag * currDT, speed_diag * currDT);
-        else
-            characterSprite->move(speed_horz * currDT, 0);
+        {
+            if (st.down) { }
+            else if (st.left)
+                characterSprite->move(-speed_diag * currTickRate, -speed_diag * currTickRate);
+            else if (st.right)
+                characterSprite->move(speed_diag * currTickRate, -speed_diag * currTickRate);
+            else
+                characterSprite->move(0, -speed_vert * currTickRate);
+        }
+        else if (st.left)
+        {
+            if (st.right) { }
+            else if (st.up)
+                characterSprite->move(-speed_diag * currTickRate, -speed_diag * currTickRate);
+            else if (st.down)
+                characterSprite->move(-speed_diag * currTickRate, speed_diag * currTickRate);
+            else
+                characterSprite->move(-speed_horz * currTickRate, 0);
 
+        }
+        else if (st.down)
+        {
+            if(st.left)
+                characterSprite->move(-speed_diag * currTickRate, speed_diag * currTickRate);
+            else if (st.right)
+                characterSprite->move(speed_diag * currTickRate, speed_diag * currTickRate);
+            else
+                characterSprite->move(0, speed_vert * currTickRate);
+        }
+        else if (st.right)
+        {
+
+            if (st.up)
+                characterSprite->move(speed_diag * currTickRate, -speed_diag * currTickRate);
+            else if (st.down)
+                characterSprite->move(speed_diag * currTickRate, speed_diag * currTickRate);
+            else
+                characterSprite->move(speed_horz * currTickRate, 0);
+
+        }
+        else
+        {
+            moving = false;
+        }
+        checkAnimState();
+        animate();
+        speed = tempSpeed;
+        entity->getComponent<Position>().setPosition(characterSprite->getPosition());
     }
-    checkAnimState();
-    animate();
-    speed = tempSpeed;
-    entity->getComponent<Position>().setPosition(characterSprite->getPosition());
 }
 
 void AnimatedMovement::switchAnimState(int frame)
@@ -114,12 +132,11 @@ int AnimatedMovement::getRow()
 
 void AnimatedMovement::animate()
 {
-    auto moving = isMoving();
     if (!moving)
     {
         currentFrame = 1;
         currAnimTime = 0.0f;
-        switchAnimState();
+        switchAnimState(currentFrame);
         return;
     }
 

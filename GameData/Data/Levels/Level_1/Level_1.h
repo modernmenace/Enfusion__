@@ -7,13 +7,9 @@
 #include "../../../Entity/UI/Menus/Hotbar.h"
 #include "../../../Entity/UI/Menus/InventoryMenu.h"
 
-#ifdef DEBUG_BUILD
-#include "../../../Entity/UI/Elements/TextDisplay.h"
 #include "../../../Entity/UI/Menus/PauseMenu.h"
 #include "../../../Entity/UI/Elements/Minimap.h"
 #include "../../../Entity/UI/Elements/QuestDisplay.h"
-
-#endif
 
 class Level_1 : public Level {
 
@@ -35,10 +31,6 @@ private:
     PauseMenu     p_menu;
     Minimap       minimap;
     QuestDisplay  q_display;
-
-    #ifdef DEBUG_BUILD
-    TextDisplay* playerPosDebugText = nullptr;
-    #endif
 
 };
 
