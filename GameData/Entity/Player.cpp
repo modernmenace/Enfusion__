@@ -5,10 +5,10 @@
 #include "../Engine/Component/Misc/Camera.h"
 #include "../Component/Inventory.h"
 
-Player::Player(string_t spriteName, sf::Vector2f position)
+Player::Player(sf::Vector2f position)
 {
     addComponent<Position>(position);
-    addComponent<AnimatedSprite>(spriteName, 4, 3, sf::IntRect(0, 0, 80, 146));
+    addComponent<AnimatedSprite>("Objects/chara2.png", 4, 3, sf::IntRect(0, 0, 78, 146), sf::Vector2i(1, 0));
     addComponent<Camera>(CameraType::FOLLOW);
     addComponent<AnimatedMovement>();
     addComponent<Inventory>();

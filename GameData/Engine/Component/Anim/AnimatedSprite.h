@@ -6,7 +6,7 @@
 class AnimatedSprite : public Component {
 
 public:
-    AnimatedSprite(string_t spriteSheet, int numberRows, int numberFrames, sf::IntRect characterSheetSize);
+    AnimatedSprite(string_t spriteSheet, uint8_t sheetsPerRow, int numberFrames, sf::IntRect characterSheetSize, sf::Vector2i sheet);
 
     void initialize() override;
     void render(sf::RenderWindow* window) override;
@@ -20,11 +20,11 @@ private:
     string_t     s_sheet;
     sf::IntRect  charRect;
 
-    int numRows;
-    int numFrames;
+    uint8_t sheetsPerRow;
+    uint8_t directionalFrames;
 
-    sf::Sprite sprite;
-
+    sf::Sprite   sprite;
+    sf::Vector2i sprite_sheetMap;
 };
 
 

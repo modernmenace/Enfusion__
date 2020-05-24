@@ -1,17 +1,22 @@
 #include "AnimatedSprite.h"
 #include "../Base/Position.h"
 
-AnimatedSprite::AnimatedSprite(string_t spriteSheet, int numberRows, int numberFrames, sf::IntRect characterSheetSize)
+AnimatedSprite::AnimatedSprite(string_t spriteSheet, uint8_t sheetsPerRow, int numberFrames, sf::IntRect characterSheetSize, sf::Vector2i sheet)
 {
-    this->s_sheet     = spriteSheet;
-    this->charRect    = characterSheetSize;
-    this->numRows     = numberRows;
-    this->numFrames   = numberFrames;
+    this->s_sheet           = spriteSheet;
+    this->charRect          = characterSheetSize;
+    this->sheetsPerRow      = sheetsPerRow;
+    this->directionalFrames = numberFrames;
+    this->sprite_sheetMap   = sheet;
 }
 
 void AnimatedSprite::initialize()
 {
     assert(entity->hasComponent<Position>());
+
+    charRect.left += (sprite_sheetMap.x * (charRect.width));
+    charRect.top  += (sprite_sheetMap.y * (charRect.height));
+
     this->sprite = sf::Sprite(AssetManager::Instance()->getTexture(s_sheet), charRect);
     this->sprite.setPosition(entity->getComponent<Position>().getPosition());
     this->sprite.setScale(GLOBAL_SCALE_GAMEOBJECT);
@@ -26,22 +31,26 @@ void AnimatedSprite::render(sf::RenderWindow *window)
 
 void AnimatedSprite::switchState(int row, int frame)
 {
+    //TODO; incorporate sheet map into this
     auto sheetHeight = charRect.height;
     auto sheetWidth  = charRect.width;
 
-    charRect.width  = sheetWidth  / numFrames;
-    charRect.height = sheetHeight / numRows;
+    charRect.width  = sheetWidth  / directionalFrames;
+    charRect.height = sheetHeight / sheetsPerRow;
 
     if (row != 0)
-        charRect.top  = (((row-1) * charRect.height) + (sheetHeight / numRows));
+        charRect.top  = (((row-1) * charRect.height) + (sheetHeight / sheetsPerRow));
     else
         charRect.top = 0;
 
     if (frame != 0)
-        charRect.left = (((frame-1) * charRect.width) + (sheetWidth / numFrames));
+        charRect.left = (((frame-1) * charRect.width * sprite_sheetMap.x) + (sheetWidth / directionalFrames));
     else
         charRect.left = 0;
 
+    //TODO: flickering between characters?
+    charRect.left += (sprite_sheetMap.x * (charRect.width));
+    charRect.top  += (sprite_sheetMap.y * (charRect.height));
 
     sprite.setTextureRect(charRect);
 
