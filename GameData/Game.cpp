@@ -76,6 +76,7 @@ void Game::initialize()
 
 void Game::update(sf::Time tickRate)
 {
+    if (flag_close) exit(0);
     LEVEL.update(tickRate);
 }
 
@@ -93,10 +94,8 @@ void Game::render(sf::RenderWindow* window)
     while (window->isOpen())
     {
         if (flag_close)
-        {
-            window->close();
             renderThread->terminate();
-        }
+
         window->clear(sf::Color::Black);
         LEVEL.render(window);
         window->display();
