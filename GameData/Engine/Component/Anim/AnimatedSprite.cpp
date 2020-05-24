@@ -1,10 +1,6 @@
 #include "AnimatedSprite.h"
 #include "../Base/Position.h"
 
-//TODO: fix switchstate flickering
-//TODO: find where this is updated
-//TODO: idle frame when done moving
-
 AnimatedSprite::AnimatedSprite(string_t spriteSheet, uint8_t sheetsPerRow, int numberFrames, sf::IntRect characterSheetSize, sf::Vector2i sheet)
 {
     this->s_sheet           = spriteSheet;
@@ -33,30 +29,17 @@ void AnimatedSprite::render(sf::RenderWindow *window)
     window->draw(sprite);
 }
 
-void AnimatedSprite::switchState(int row, int frame)
+void AnimatedSprite::switchState(uint8_t row, uint8_t frame)
 {
-    auto sheetHeight = charRect.height;
-    auto sheetWidth  = charRect.width;
+    if (row > 4)                   row = 4;
+    if (frame > directionalFrames) frame = directionalFrames;
 
-    charRect.width  = sheetWidth  / directionalFrames;
-    charRect.height = sheetHeight / sheetsPerRow;
+    sf::IntRect texRect;
+    texRect.height = charRect.height / 4;
+    texRect.width  = charRect.width / directionalFrames;
 
-    if (row != 0)
-        charRect.top  = (((row-1) * charRect.height) + (sheetHeight / sheetsPerRow));
-    else
-        charRect.top = 0;
+    texRect.top  = (texRect.height * row)  + (sprite_sheetMap.y * (charRect.height));
+    texRect.left = (texRect.width * frame) + (sprite_sheetMap.x * (charRect.width));
 
-    if (frame != 0)
-        charRect.left = (((frame-1) * charRect.width * sprite_sheetMap.x) + (sheetWidth / directionalFrames));
-    else
-        charRect.left = 0;
-
-    //TODO: flickering between characters?
-    charRect.left += (sprite_sheetMap.x * (charRect.width));
-    charRect.top  += (sprite_sheetMap.y * (charRect.height));
-
-    sprite.setTextureRect(charRect);
-
-    charRect.width = sheetWidth;
-    charRect.height = sheetHeight;
+    sprite.setTextureRect(texRect);
 }

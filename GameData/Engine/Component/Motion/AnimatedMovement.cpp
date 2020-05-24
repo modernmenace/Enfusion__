@@ -1,9 +1,6 @@
 #include "AnimatedMovement.h"
 #include "../../Lvl/LevelManager.h"
 
-//TODO: AnimState kind of phasing out status due to framing
-//TODO: When removed: weird slowdowns with getRow()
-
 AnimatedMovement::AnimatedMovement(float speed)
 {
     this->speed = speed;
@@ -15,7 +12,7 @@ void AnimatedMovement::initialize()
     this->characterSprite = &entity->getComponent<AnimatedSprite>().getSprite();
     //TODO: frame is based on whole sheet, not just 3 starting at curerent character
     //TODO: see below
-    entity->getComponent<AnimatedSprite>().switchState(0, 10);
+    entity->getComponent<AnimatedSprite>().switchState(0, 1);
 }
 
 void AnimatedMovement::handleInput(sf::Keyboard::Key key)
