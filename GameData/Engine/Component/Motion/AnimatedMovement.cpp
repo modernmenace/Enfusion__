@@ -13,7 +13,9 @@ void AnimatedMovement::initialize()
 {
     assert(entity->hasComponent<AnimatedSprite>());
     this->characterSprite = &entity->getComponent<AnimatedSprite>().getSprite();
-    entity->getComponent<AnimatedSprite>().switchState(0, 1);
+    //TODO: frame is based on whole sheet, not just 3 starting at curerent character
+    //TODO: see below
+    entity->getComponent<AnimatedSprite>().switchState(0, 10);
 }
 
 void AnimatedMovement::handleInput(sf::Keyboard::Key key)
