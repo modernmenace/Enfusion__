@@ -21,13 +21,23 @@ void Biome_Desert::generate(sf::Vector2i position, sf::Vector2i area, std::vecto
         nPos.y++;
     }
 
-    //generate map objects
-    // 1) determine amount of map objects in biome
-    // 2) determine weighted object to place
-    // 3) determine random location
-    //pass objects to 'objs' vector
+    //TODO: 1) determine amount of objects to place
+    //TODO: min and max hard coded and not based on size
+    uint16_t maxObjects = 10;
+    uint16_t minObjects = 2;
+    uint16_t objectCount = rand() % ((maxObjects - minObjects) + 1) + minObjects;
 
-    objs->push_back(new Cactus(sf::Vector2f(0, 0)));
+    //TODO: 2) determine weighted object to place
+
+
+    //TODO: 3) pick random position for object
+    //TODO: major issues here
+    for(uint16_t j = 0; j < objectCount; j++)
+    {
+        uint16_t randX = rand() % (((position.x + area.x) - position.x) + 1) + position.x;
+        uint16_t randY = rand() % (((position.y + area.y) - position.y) + 1) + position.y;
+        objs->push_back(new Cactus(sf::Vector2f(randX, randY)));
+    }
 
 }
 
