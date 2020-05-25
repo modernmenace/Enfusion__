@@ -1,12 +1,12 @@
 #include "StaticMapObject.h"
 
-StaticMapObject::StaticMapObject(string_t tileset, sf::IntRect texBounds)
+StaticMapObject::StaticMapObject(string_t tileset, sf::IntRect texBounds, sf::Vector2f position)
 {
     o_sprite.setTexture(AssetManager::Instance()->getTexture(tileset));
     o_bounds = texBounds;
     o_sprite.setTextureRect(o_bounds);
 
-    o_sprite.setPosition(0, 0); //for now
+    o_sprite.setPosition(position);
 }
 
 void StaticMapObject::render(sf::RenderWindow *window)

@@ -23,7 +23,7 @@ public:
 private:
     static MapGenerator*         m_Instance;
     std::vector<Tile>            m_lvl;
-    std::vector<StaticMapObject> m_staticObjects;
+    std::vector<StaticMapObject*> m_staticObjects; // TODO: *this is not unallocated
     std::vector<int>             m_tilemap;
     sf::Vector2i                 m_size;
 

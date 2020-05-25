@@ -1,6 +1,7 @@
 #include "Biome_Desert.h"
+#include "Objects/Desert/Cactus.h"
 
-void Biome_Desert::generate(sf::Vector2i position, sf::Vector2i area, std::vector<Tile> *map, std::vector<StaticMapObject>* objs, sf::Vector2i mapArea)
+void Biome_Desert::generate(sf::Vector2i position, sf::Vector2i area, std::vector<Tile> *map, std::vector<StaticMapObject*>* objs, sf::Vector2i mapArea)
 {
     //generate ground tiles
     auto nPos = position;
@@ -24,7 +25,10 @@ void Biome_Desert::generate(sf::Vector2i position, sf::Vector2i area, std::vecto
     // 1) determine amount of map objects in biome
     // 2) determine weighted object to place
     // 3) determine random location
-    //these need to be stored somewhere else
+    //pass objects to 'objs' vector
+
+    objs->push_back(new Cactus(sf::Vector2f(0, 0)));
+
 }
 
 void Biome_Desert::initialize()

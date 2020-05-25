@@ -6,9 +6,8 @@
 class StaticMapObject {
 
 public:
-    StaticMapObject(string_t tileset, sf::IntRect texBounds);
+    StaticMapObject(string_t tileset, sf::IntRect texBounds, sf::Vector2f position);
 
-    virtual void initialize() {};
     virtual void render(sf::RenderWindow* window);
 
     inline void setTileset(string_t tileset)  { o_sprite.setTexture(AssetManager::Instance()->getTexture(tileset)); }
