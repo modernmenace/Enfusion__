@@ -14,6 +14,8 @@ public:
     static MapGenerator* Instance();
     std::vector<int> generateMap(uint16_t sizeX, uint16_t sizeY);
 
+    void render(sf::RenderWindow* window);
+
     inline sf::Vector2i size()        { return m_size; }
     inline std::vector<int> tilemap() { return m_tilemap; }
     inline std::vector<Tile>* map()   { return &m_lvl; }

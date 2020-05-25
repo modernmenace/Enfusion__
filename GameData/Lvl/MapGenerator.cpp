@@ -118,4 +118,9 @@ std::vector<int> MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY)
     return tilemap();
 }
 
+void MapGenerator::render(sf::RenderWindow *window)
+{
+    for(StaticMapObject &staticObject : m_staticObjects)
+        staticObject.render(window);
+}
 

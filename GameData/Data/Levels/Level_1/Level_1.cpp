@@ -63,5 +63,6 @@ void Level_1::handleInput(sf::Keyboard::Key key)
 void Level_1::render(sf::RenderWindow *window)
 {
     map->render(window);
+    MapGenerator::Instance()->render(window);
     Level::render(window);
 }
