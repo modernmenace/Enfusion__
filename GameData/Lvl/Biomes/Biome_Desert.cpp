@@ -31,12 +31,13 @@ void Biome_Desert::generate(sf::Vector2i position, sf::Vector2i area, std::vecto
 
 
     //TODO: 3) pick random position for object
-    //TODO: major issues here
+    //TODO: using window coordinates not correct ones
     for(uint16_t j = 0; j < objectCount; j++)
     {
         uint16_t randX = rand() % (((position.x + area.x) - position.x) + 1) + position.x;
         uint16_t randY = rand() % (((position.y + area.y) - position.y) + 1) + position.y;
         objs->push_back(new Cactus(sf::Vector2f(randX, randY)));
+        dbg_log("Random Object Placed at " << randX << ", " << randY << " based on bounds " << position.x << ", " << position.y << ", " << area.x << ", " << area.y)
     }
 
 }
