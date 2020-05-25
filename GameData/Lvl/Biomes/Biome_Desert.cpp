@@ -24,7 +24,7 @@ void Biome_Desert::generate(sf::Vector2i position, sf::Vector2i area, std::vecto
     // 1) determine amount of map objects in biome
     // 2) determine weighted object to place
     // 3) determine random location
-
+    //these need to be stored somewhere else
 }
 
 void Biome_Desert::initialize()
