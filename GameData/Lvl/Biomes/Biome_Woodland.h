@@ -7,7 +7,7 @@ class Biome_Woodland : public Biome
 {
 
 public:
-    void generate(sf::Vector2i position, sf::Vector2i area, std::vector<Tile>* map, sf::Vector2i mapArea) override;
+    void generate(sf::Vector2i position, sf::Vector2i area, std::vector<Tile>* map, std::vector<StaticMapObject>*, sf::Vector2i mapArea) override;
     void initialize() override;
 
     void createTransitionTile(Tile* tile, uint16_t fromBiome) override

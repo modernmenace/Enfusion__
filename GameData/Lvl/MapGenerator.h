@@ -3,6 +3,7 @@
 
 #include "../Engine/Core/Engine.h"
 #include "BiomeManager.h"
+#include "Biomes/Objects/StaticMapObject.h"
 
 #define LEVEL_BIOME_SIZE_MIN 60
 #define LEVEL_BIOME_SIZE_MAX 200
@@ -18,10 +19,11 @@ public:
     inline std::vector<Tile>* map()   { return &m_lvl; }
 
 private:
-    static MapGenerator* m_Instance;
-    std::vector<Tile>    m_lvl;
-    std::vector<int>     m_tilemap;
-    sf::Vector2i         m_size;
+    static MapGenerator*         m_Instance;
+    std::vector<Tile>            m_lvl;
+    std::vector<StaticMapObject> m_staticObjects;
+    std::vector<int>             m_tilemap;
+    sf::Vector2i                 m_size;
 
 
 };

@@ -48,7 +48,7 @@ std::vector<int> MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY)
             size.y = sizeY - pos.y;
             lastRun = true;
         }
-        biome->generate(pos, size, map(), sf::Vector2i(sizeX, sizeY));
+        biome->generate(pos, size, map(), &m_staticObjects, sf::Vector2i(sizeX, sizeY));
 
 
         if ((pos.x + size.x) > (sizeX))
