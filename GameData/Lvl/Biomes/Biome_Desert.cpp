@@ -21,10 +21,13 @@ void Biome_Desert::generate(sf::Vector2i position, sf::Vector2i area, std::vecto
         nPos.y++;
     }
 
+    //TODO: possible other method: after generation, check every tile for
+    //TODO; biome type, and random chance for each tile
+
     //TODO: 1) determine amount of objects to place
     //TODO: min and max hard coded and not based on size
-    uint16_t maxObjects = 20;
-    uint16_t minObjects = 10;
+    uint16_t maxObjects = 80;
+    uint16_t minObjects = 70;
     uint16_t objectCount = rand() % ((maxObjects - minObjects) + 1) + minObjects;
 
     //TODO: 2) determine weighted object to place
