@@ -2,6 +2,7 @@
 #define ENFUSION___LVLSTRUCTS_H
 
 #include "../Engine/Core/Engine.h"
+#include "Biomes/Objects/StaticMapObject.h"
 #include <vector>
 
 struct Tile
@@ -14,6 +15,12 @@ struct TileTexture
 {
     uint16_t tilesetID;
     float    weight;
+};
+
+struct WeightedMapObject
+{
+    StaticMapObject obj;
+    float weight;
 };
 
 #endif //ENFUSION___LVLSTRUCTS_H

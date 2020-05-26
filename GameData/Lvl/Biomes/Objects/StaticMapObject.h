@@ -12,6 +12,7 @@ public:
 
     inline void setTileset(string_t tileset)  { o_sprite.setTexture(AssetManager::Instance()->getTexture(tileset)); }
     inline void setBounds(sf::IntRect bounds) { o_sprite.setTextureRect(bounds); }
+    inline void setPosition(sf::Vector2f pos) { o_sprite.setPosition(pos); }
 
 private:
     sf::Sprite  o_sprite;

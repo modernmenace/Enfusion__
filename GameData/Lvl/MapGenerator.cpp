@@ -1,9 +1,15 @@
 #include "MapGenerator.h"
+#include "Biomes/Objects/Desert/Cactus.h"
 
 MapGenerator* MapGenerator::m_Instance = nullptr;
 
 
 //TODO: Eventually use simplex noise for map generation to smooth transitions
+
+MapGenerator::MapGenerator()
+{
+    populateBiomeObjects();
+}
 
 MapGenerator* MapGenerator::Instance()
 {
@@ -11,6 +17,11 @@ MapGenerator* MapGenerator::Instance()
         m_Instance = new MapGenerator();
 
     return m_Instance;
+}
+
+void MapGenerator::populateBiomeObjects()
+{
+    m_biomeObjects[LEVEL_BIOME_ID_DESERT].push_back({Cactus(sf::Vector2f(0,0)), 1});
 }
 
 std::vector<int> MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY)
@@ -106,6 +117,27 @@ std::vector<int> MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY)
             }
         }
     }
+
+    //place static objects
+    //TODO: figure out a good way to store static object types
+    //TODO: weighted storage
+    int posX = 10;
+    int posY = 10;
+    for(uint32_t i = 0; i < (sizeX * sizeY); i++)
+    {
+        //auto& vec = m_biomeObjects[m_lvl[i].biome];
+        StaticMapObject* r = getRandomObject(m_lvl[i].biome);
+        if (r == nullptr) continue;
+
+        StaticMapObject* obj = new StaticMapObject(*getRandomObject(m_lvl[i].biome));
+
+        //how to get position
+        obj->setPosition(sf::Vector2f(posX, posY));
+        posX += 100;
+        posY += 100;
+        m_staticObjects.push_back(obj);
+    }
+
 
     //set up texture tilemap
     for (uint32_t i = 0; i < (sizeX * sizeY); i++)
