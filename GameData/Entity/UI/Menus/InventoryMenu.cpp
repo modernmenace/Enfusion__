@@ -18,7 +18,7 @@ InventoryMenu::InventoryMenu(Entity *entity) : i_tooltip()
     addComponent<Position>(sf::Vector2f(-200, -450));
     addComponent<Sprite>("UI/ui.png");
     i_playerView.addComponent<Position>(sf::Vector2f(-150, -375));
-    i_playerView.addComponent<Sprite>("UI/ui.png");
+    i_playerView.addComponent<Sprite>("Objects/chara2.png");
 }
 
 InventoryMenu::~InventoryMenu()
@@ -44,8 +44,8 @@ void InventoryMenu::initialize()
     Entity::initialize();
     i_tooltip.initialize();
     i_playerView.initialize();
-    i_playerView.getComponent<Sprite>().getSprite().setTextureRect(sf::IntRect(66, 32, 16, 16));
-    i_playerView.getComponent<Sprite>().getSprite().setScale(sf::Vector2f(13, 15));
+    i_playerView.getComponent<Sprite>().getSprite().setTextureRect(sf::IntRect(105, 0, 28, 38));
+    i_playerView.getComponent<Sprite>().getSprite().setScale(sf::Vector2f(6, 6));
 
     getComponent<Sprite>().getSprite().setTextureRect(sf::IntRect(0, 0, 48, 48));
     getComponent<Sprite>().getSprite().setScale(12, 15);
