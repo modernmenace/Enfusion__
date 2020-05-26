@@ -11,6 +11,12 @@ MapGenerator::MapGenerator()
     populateBiomeObjects();
 }
 
+MapGenerator::~MapGenerator()
+{
+    for(uint32_t i = 0; i < m_staticObjects.size(); i++)
+        delete m_staticObjects[i];
+}
+
 MapGenerator* MapGenerator::Instance()
 {
     if (m_Instance == nullptr)
@@ -118,9 +124,8 @@ std::vector<int> MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY)
         }
     }
 
-    //place static objects
-    //TODO: figure out a good way to store static object types
-    //TODO: weighted storage
+    //TODO: place static objects
+    //TODO: finish this
     int posX = 10;
     int posY = 10;
     for(uint32_t i = 0; i < (sizeX * sizeY); i++)
