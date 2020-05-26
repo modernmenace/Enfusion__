@@ -54,8 +54,10 @@ void InventoryMenu::initialize()
     //initialize slots
     sf::Vector2f slotPos(getComponent<Position>().getPosition().x + 45,
                      getComponent<Position>().getPosition().y + 350);
-    for(int j = 0; j < 3; j++) {
-        for (int i = 0; i < 5; i++) {
+    for(int j = 0; j < 3; j++)
+    {
+        for (int i = 0; i < 5; i++)
+        {
             Slot *s = new Slot(slotPos, &i_entity->getComponent<Inventory>());
             s->setVisible(false);
             slots.emplace_back(s);
@@ -186,13 +188,29 @@ void InventoryMenu::update(sf::Time tickRate)
                 }
                 else
                 {
+                    bool wasSlot = false;
                     for(int s = 0; s < slots.size(); s++)
                     {
                         if (slots[s]->getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition))
                         {
                             i_entity->getComponent<Inventory>().swapItem(i_dragIndex, s);
                             updateSlots();
+                            wasSlot = true;
+                            break;
                         }
+                    }
+                    //if not slot still in menu
+                    if (!wasSlot)
+                    {
+                        if (i_playerView.getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition))
+                        {
+                            i_entity->getComponent<Inventory>().activated(i_dragIndex);
+                            slots[i_dragIndex]->activateItem();
+                            slots.at(i_dragIndex)->setItem(i_entity->getComponent<Inventory>().item(i_dragIndex));
+                            slots.at(i_dragIndex)->setCount(i_entity->getComponent<Inventory>().amount(i_dragIndex));
+                        }
+                        else
+                            updateSlots();
                     }
                 }
             }
@@ -280,6 +298,8 @@ void InventoryMenu::render(sf::RenderWindow *window)
     if (!active()) return;
     Entity::render(window);
 
+    i_playerView.render(window);
+
     for(auto &s : slots)
         s->render(window);
 
@@ -292,5 +312,4 @@ void InventoryMenu::render(sf::RenderWindow *window)
     }
 
     i_tooltip.render(window);
-    i_playerView.render(window);
 }
