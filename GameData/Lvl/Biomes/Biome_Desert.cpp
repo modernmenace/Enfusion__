@@ -31,6 +31,7 @@ void Biome_Desert::generate(sf::Vector2i position, sf::Vector2i area, std::vecto
 
 
     //TODO: 3) pick random position for object
+    //TODO: not accountng for transition tiles
     for(uint16_t j = 0; j < objectCount; j++)
     {
         uint16_t randX = rand() % (((position.x + area.x) - position.x) + 1) + position.x;
