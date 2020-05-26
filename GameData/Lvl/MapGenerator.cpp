@@ -130,13 +130,18 @@ std::vector<int> MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY)
     int posY = 10;
     for(uint32_t i = 0; i < (sizeX * sizeY); i++)
     {
-        //auto& vec = m_biomeObjects[m_lvl[i].biome];
+        bool place = (rand() % 100) < MAPGEN_CHANCE_STATICOBJECT;
+        if (!place) continue;
         StaticMapObject* r = getRandomObject(m_lvl[i].biome);
         if (r == nullptr) continue;
 
         StaticMapObject* obj = new StaticMapObject(*getRandomObject(m_lvl[i].biome));
 
-        //how to get position
+        //TODO: how to get tile position?
+        //->at((nPos.y * mapArea.x)+nPos.x)
+        uint16_t vecX = m_tilemap.size() % sizeX;
+        uint16_t vecY = 0;
+        dbg_log("Placing object at array pos " << i << " ; " <<"Translated to vector position (" << vecX << ", " << vecY << ")")
         obj->setPosition(sf::Vector2f(posX, posY));
         posX += 100;
         posY += 100;

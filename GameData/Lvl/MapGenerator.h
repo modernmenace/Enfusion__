@@ -8,6 +8,8 @@
 #define LEVEL_BIOME_SIZE_MIN 60
 #define LEVEL_BIOME_SIZE_MAX 200
 
+#define MAPGEN_CHANCE_STATICOBJECT 1
+
 class MapGenerator {
 
 public:
