@@ -137,8 +137,30 @@ std::vector<int> MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY)
 
         StaticMapObject* obj = new StaticMapObject(*getRandomObject(m_lvl[i].biome));
 
-        //TODO: how to get tile position?
-        //->at((nPos.y * mapArea.x)+nPos.x)
+        //TODO: 1) determine random point within biomes bounds
+        //TODO: 2) check if that point is actually of that biome
+        //TODO: 3) check if an object is already placed at that location
+
+        //TODO 1)
+        //Should bounds be stored in biomemanager?
+        //BiomeMnaagerID in struct?
+        //Biome Start X: ???
+        //Biome End   X: ???
+        //Biome Start Y: ???
+        //Biome End   Y: ???
+
+
+
+        //TODO 2)
+
+
+
+        //TODO 3)
+
+
+        //TODO: old code below
+        //TODO: how to get tile position? aka PosX and PosY
+        ///>at((nPos.y * mapArea.x)+nPos.x)
         uint16_t vecX = m_tilemap.size() % sizeX;
         uint16_t vecY = 0;
         dbg_log("Placing object at array pos " << i << " ; " <<"Translated to vector position (" << vecX << ", " << vecY << ")")
