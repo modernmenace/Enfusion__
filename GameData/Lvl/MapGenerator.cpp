@@ -137,17 +137,11 @@ std::vector<int> MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY)
 
         StaticMapObject* obj = new StaticMapObject(*getRandomObject(m_lvl[i].biome));
 
-        //TODO: 1) determine random point within biomes bounds
-        //TODO: 2) check if that point is actually of that biome
-        //TODO: 3) check if an object is already placed at that location
-
+        //TODO: count tiles on each biome and base
+        //TODO: base chance on that
         //TODO 1)
         //Should bounds be stored in biomemanager?
         //BiomeMnaagerID in struct?
-        //Biome Start X: ???
-        //Biome End   X: ???
-        //Biome Start Y: ???
-        //Biome End   Y: ???
 
 
 
