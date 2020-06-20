@@ -13,7 +13,7 @@ Tilemap::Tilemap(std::string tileSetName, std::vector<int> tiles, sf::Vector2i s
 
 void Tilemap::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-// apply the transform
+    // apply the transform
     auto transform = getTransform();
     transform.scale(sf::Vector2f(2, 2));
     states.transform *= transform;

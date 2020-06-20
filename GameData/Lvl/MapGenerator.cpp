@@ -98,6 +98,7 @@ std::vector<int> MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY)
         }
     }
 
+    uint16_t numTiles[LEVEL_AMOUNT_BIOMES+1];
     //smooth transitions between terrains a bit
     pos.x = 0; pos.y = 0;
     for(uint32_t i = 0; i < (sizeX * sizeY); i++)
@@ -122,6 +123,7 @@ std::vector<int> MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY)
                     BiomeManager::Instance()->biome(m_lvl[i-sizeX].biome)->createTransitionTile(&m_lvl[i], m_lvl[i-1].biome);
             }
         }
+        numTiles[m_lvl[i].biome]++;
     }
 
     //TODO: place static objects
@@ -130,18 +132,18 @@ std::vector<int> MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY)
     int posY = 10;
     for(uint32_t i = 0; i < (sizeX * sizeY); i++)
     {
+        //todo: please rewrite this entire thing
+
         bool place = (rand() % 100) < MAPGEN_CHANCE_STATICOBJECT;
         if (!place) continue;
+        //why is this r here and why does removing it crash program?
         StaticMapObject* r = getRandomObject(m_lvl[i].biome);
         if (r == nullptr) continue;
 
         StaticMapObject* obj = new StaticMapObject(*getRandomObject(m_lvl[i].biome));
 
-        //TODO: count tiles on each biome and base
-        //TODO: base chance on that
+        //TODO: base chance on numTiles['biome']
         //TODO 1)
-        //Should bounds be stored in biomemanager?
-        //BiomeMnaagerID in struct?
 
 
 
@@ -155,6 +157,7 @@ std::vector<int> MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY)
         //TODO: old code below
         //TODO: how to get tile position? aka PosX and PosY
         ///>at((nPos.y * mapArea.x)+nPos.x)
+
         uint16_t vecX = m_tilemap.size() % sizeX;
         uint16_t vecY = 0;
         dbg_log("Placing object at array pos " << i << " ; " <<"Translated to vector position (" << vecX << ", " << vecY << ")")
@@ -162,6 +165,7 @@ std::vector<int> MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY)
         posX += 100;
         posY += 100;
         m_staticObjects.push_back(obj);
+
     }
 
 
