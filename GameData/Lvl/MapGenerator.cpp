@@ -33,7 +33,7 @@ void MapGenerator::populateBiomeObjects()
 std::vector<int> MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY)
 {
     m_lvl.clear();
-    m_tilemap.clear();
+    m_tileVec.clear();
     m_size.x = sizeX;
     m_size.y = sizeY;
 
@@ -128,8 +128,8 @@ std::vector<int> MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY)
 
     //TODO: place static objects
     //TODO: finish this
-    int posX = 10;
-    int posY = 10;
+    int posX = 0;
+    int posY = 0;
     for(uint32_t i = 0; i < (sizeX * sizeY); i++)
     {
         bool place = (rand() % 100) < MAPGEN_CHANCE_STATICOBJECT;
@@ -137,15 +137,21 @@ std::vector<int> MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY)
         //why is this r here and why does removing it crash program?
         StaticMapObject* r = getRandomObject(m_lvl[i].biome);
         if (r == nullptr) continue;
-        
-        //posX = (i % sizeX) * 16;
-        //posY = (i % sizeX) * 16;
+
+        //todo: below can find position
+        //todo: merge this class with tilemap
+        //sf::Vector2f vertexPosition = getTransform().transformPoint( m_vertices[n].position );
+        posX = (i % sizeX) * 16 * GLOBAL_SCALE_TILE.x;
+        posY = 0;
+        m_lvl[i].tilesetID = 0;
 
         //todo: get correct posY and posY
         StaticMapObject* obj = new StaticMapObject(*getRandomObject(m_lvl[i].biome));
         obj->setPosition(sf::Vector2f(posX, posY));
         m_staticObjects.push_back(obj);
-        posY += 100;
+        //todo: mess with these values
+        posX += 16 * GLOBAL_SCALE_TILE.x;
+        posY += 16 * GLOBAL_SCALE_TILE.y;
     }
 
 
@@ -153,11 +159,11 @@ std::vector<int> MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY)
     for (uint32_t i = 0; i < (sizeX * sizeY); i++)
     {
         assert(m_lvl[i].biome != LEVEL_BIOME_ID_NONE);
-        m_tilemap.push_back(m_lvl[i].tilesetID);
+        m_tileVec.push_back(m_lvl[i].tilesetID);
     }
 
 
-    return tilemap();
+    return m_tileVec;
 }
 
 void MapGenerator::render(sf::RenderWindow *window)

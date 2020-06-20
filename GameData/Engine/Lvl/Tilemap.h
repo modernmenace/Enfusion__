@@ -14,7 +14,8 @@ public:
     void initialize();
     void render(sf::RenderWindow* window);
 
-    inline uint16_t getTileSize() { return tileSize; };
+    inline uint16_t getTileSize()           { return tileSize; };
+    const inline sf::Transform& transform() { return getTransform(); }
 
 private:
     sf::Texture     tileset;

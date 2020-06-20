@@ -4,6 +4,7 @@
 #include "../Engine/Core/Engine.h"
 #include "BiomeManager.h"
 #include "Biomes/Objects/StaticMapObject.h"
+#include "../Engine/Lvl/Tilemap.h"
 
 #define LEVEL_BIOME_SIZE_MIN 60
 #define LEVEL_BIOME_SIZE_MAX 200
@@ -21,14 +22,13 @@ public:
     void render(sf::RenderWindow* window);
 
     inline sf::Vector2i size()        { return m_size; }
-    inline std::vector<int> tilemap() { return m_tilemap; }
     inline std::vector<Tile>* map()   { return &m_lvl; }
 
 private:
     static MapGenerator*          m_Instance;
     std::vector<Tile>             m_lvl;
     std::vector<StaticMapObject*> m_staticObjects;
-    std::vector<int>              m_tilemap;
+    std::vector<int>              m_tileVec;
     sf::Vector2i                  m_size;
 
     std::vector<WeightedMapObject> m_biomeObjects[LEVEL_AMOUNT_BIOMES+1];
