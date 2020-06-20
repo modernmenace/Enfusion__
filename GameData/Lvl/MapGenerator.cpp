@@ -132,40 +132,20 @@ std::vector<int> MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY)
     int posY = 10;
     for(uint32_t i = 0; i < (sizeX * sizeY); i++)
     {
-        //todo: please rewrite this entire thing
-
         bool place = (rand() % 100) < MAPGEN_CHANCE_STATICOBJECT;
         if (!place) continue;
         //why is this r here and why does removing it crash program?
         StaticMapObject* r = getRandomObject(m_lvl[i].biome);
         if (r == nullptr) continue;
+        
+        //posX = (i % sizeX) * 16;
+        //posY = (i % sizeX) * 16;
 
+        //todo: get correct posY and posY
         StaticMapObject* obj = new StaticMapObject(*getRandomObject(m_lvl[i].biome));
-
-        //TODO: base chance on numTiles['biome']
-        //TODO 1)
-
-
-
-        //TODO 2)
-
-
-
-        //TODO 3)
-
-
-        //TODO: old code below
-        //TODO: how to get tile position? aka PosX and PosY
-        ///>at((nPos.y * mapArea.x)+nPos.x)
-
-        uint16_t vecX = m_tilemap.size() % sizeX;
-        uint16_t vecY = 0;
-        dbg_log("Placing object at array pos " << i << " ; " <<"Translated to vector position (" << vecX << ", " << vecY << ")")
         obj->setPosition(sf::Vector2f(posX, posY));
-        posX += 100;
-        posY += 100;
         m_staticObjects.push_back(obj);
-
+        posY += 100;
     }
 
 
