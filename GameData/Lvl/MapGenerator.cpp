@@ -126,11 +126,11 @@ std::vector<int> MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY)
         numTiles[m_lvl[i].biome]++;
     }
 
-    //TODO: place static objects
-    //TODO: finish this
+    //generate static objects
+    //todo: currently big sections without objects, transition tiles?
     int posX = 0;
     int posY = 0;
-    for(uint32_t i = 0; i < (sizeX * sizeY); i++)
+    for(uint32_t i = 0; i < (m_size.x * m_size.y); i++)
     {
         bool place = (rand() % 100) < MAPGEN_CHANCE_STATICOBJECT;
         if (!place) continue;
@@ -138,22 +138,12 @@ std::vector<int> MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY)
         StaticMapObject* r = getRandomObject(m_lvl[i].biome);
         if (r == nullptr) continue;
 
-        //todo: below can find position
-        //todo: merge this class with tilemap
-        //sf::Vector2f vertexPosition = getTransform().transformPoint( m_vertices[n].position );
-        posX = (i % sizeX) * 16 * GLOBAL_SCALE_TILE.x;
-        posY = 0;
-        m_lvl[i].tilesetID = 0;
-
-        //todo: get correct posY and posY
+        posX = m_lvl[i].position.x;
+        posY = m_lvl[i].position.y;
         StaticMapObject* obj = new StaticMapObject(*getRandomObject(m_lvl[i].biome));
         obj->setPosition(sf::Vector2f(posX, posY));
         m_staticObjects.push_back(obj);
-        //todo: mess with these values
-        posX += 16 * GLOBAL_SCALE_TILE.x;
-        posY += 16 * GLOBAL_SCALE_TILE.y;
     }
-
 
     //set up texture tilemap
     for (uint32_t i = 0; i < (sizeX * sizeY); i++)

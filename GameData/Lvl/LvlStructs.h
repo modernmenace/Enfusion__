@@ -7,8 +7,9 @@
 
 struct Tile
 {
-    uint16_t biome;
-    uint16_t tilesetID;
+    uint16_t     biome;
+    uint16_t     tilesetID;
+    sf::Vector2f position;
 };
 
 struct TileTexture

@@ -13,6 +13,10 @@ void Biome_Woodland::generate(sf::Vector2i position, sf::Vector2i area, std::vec
                 Tile* t = &map->at((nPos.y * mapArea.x)+nPos.x);
                 t->tilesetID = randomTile();
                 t->biome = LEVEL_BIOME_ID_WOODLAND;
+                //todo: using magic number here, fix
+                //todo: 32 = tileSize (16) * transform scale (2)
+                t->position.x = (nPos.x * 32);
+                t->position.y = (nPos.y * 32);
                 nPos.x++;
             }
         }
