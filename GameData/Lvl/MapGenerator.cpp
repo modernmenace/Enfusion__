@@ -94,7 +94,13 @@ std::vector<int> MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY)
         }
         if (m_lvl[i].biome == LEVEL_BIOME_ID_NONE)
         {
-            BiomeManager::Instance()->biome(m_lvl[i-1].biome)->createTransitionTile(&m_lvl[i], m_lvl[i-1].biome);
+            //todo: determine position and pass
+            sf::Vector2f tempPos;
+            tempPos.x = pos.x * 32;
+            tempPos.y = pos.y * 32;
+            dbg_log("MapGen: creating tempPos "
+                << tempPos.x << ", " << tempPos.y)
+            BiomeManager::Instance()->biome(m_lvl[i-1].biome)->createTransitionTile(&m_lvl[i], tempPos, m_lvl[i-1].biome);
         }
     }
 
@@ -105,13 +111,24 @@ std::vector<int> MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY)
     {
         if (i == 0) continue;
 
+        if (pos.x++ == sizeX)
+        {
+            pos.y++;
+            pos.x = 0;
+        }
+
         //check last X biome
         if (m_lvl[i-1].biome != m_lvl[i].biome)
         {
             //random value of two biomes
             uint8_t r = rand() % 2;
             if (r == 1)
-                BiomeManager::Instance()->biome(m_lvl[i-1].biome)->createTransitionTile(&m_lvl[i], m_lvl[i-1].biome);
+            {
+                sf::Vector2f tempPos;
+                tempPos.x = pos.x * 32;
+                tempPos.y = pos.y * 32;
+                BiomeManager::Instance()->biome(m_lvl[i-1].biome)->createTransitionTile(&m_lvl[i], tempPos, m_lvl[i-1].biome);
+            }
         }
 
         if ((int)i-sizeX >= 0)
@@ -120,7 +137,12 @@ std::vector<int> MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY)
             {
                 uint8_t r = rand() % 2;
                 if (r == 1)
-                    BiomeManager::Instance()->biome(m_lvl[i-sizeX].biome)->createTransitionTile(&m_lvl[i], m_lvl[i-1].biome);
+                {
+                    sf::Vector2f tempPos;
+                    tempPos.x = pos.x * 32;
+                    tempPos.y = pos.y * 32;
+                    BiomeManager::Instance()->biome(m_lvl[i-sizeX].biome)->createTransitionTile(&m_lvl[i], tempPos, m_lvl[i-1].biome);
+                }
             }
         }
         numTiles[m_lvl[i].biome]++;
@@ -138,8 +160,10 @@ std::vector<int> MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY)
         StaticMapObject* r = getRandomObject(m_lvl[i].biome);
         if (r == nullptr) continue;
 
+        //are transition tiles being set to 0, 0??
         posX = m_lvl[i].position.x;
         posY = m_lvl[i].position.y;
+
         StaticMapObject* obj = new StaticMapObject(*getRandomObject(m_lvl[i].biome));
         obj->setPosition(sf::Vector2f(posX, posY));
         m_staticObjects.push_back(obj);

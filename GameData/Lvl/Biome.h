@@ -16,7 +16,7 @@ class Biome
 
 public:
     virtual void generate(sf::Vector2i position, sf::Vector2i area, std::vector<Tile>* map, std::vector<StaticMapObject*>* objs, sf::Vector2i mapArea) {};
-    virtual void createTransitionTile(Tile* tile, uint16_t fromBiome) {};
+    virtual void createTransitionTile(Tile* tile, sf::Vector2f position, uint16_t fromBiome) {};
     virtual void initialize() {};
 
 protected:

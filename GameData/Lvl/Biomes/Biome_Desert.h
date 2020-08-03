@@ -10,9 +10,10 @@ public:
     void generate(sf::Vector2i, sf::Vector2i, std::vector<Tile>*, std::vector<StaticMapObject*>*, sf::Vector2i) override;
     void initialize() override;
 
-    void createTransitionTile(Tile* tile, uint16_t fromBiome) override
+    void createTransitionTile(Tile* tile, sf::Vector2f position, uint16_t fromBiome) override
     {
         tile->tilesetID = randomTile();
+        tile->position  = position;
         tile->biome = LEVEL_BIOME_ID_DESERT;
     }
 
