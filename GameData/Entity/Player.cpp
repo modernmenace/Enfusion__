@@ -4,6 +4,7 @@
 #include "../Engine/Component/Motion/AnimatedMovement.h"
 #include "../Engine/Component/Misc/Camera.h"
 #include "../Component/Inventory.h"
+#include "../Engine/Lvl/LevelManager.h"
 
 Player::Player(sf::Vector2f position)
 {
@@ -12,9 +13,21 @@ Player::Player(sf::Vector2f position)
     addComponent<Camera>(CameraType::FOLLOW);
     addComponent<AnimatedMovement>();
     addComponent<Inventory>();
+
+    LevelManager::Instance()->setPlayer(this);
 }
 
 sf::FloatRect Player::bounds()
 {
     return getComponent<AnimatedSprite>().getSprite().getGlobalBounds();
+}
+
+sf::Vector2f Player::currentPosition()
+{
+    return getComponent<AnimatedSprite>().getSprite().getPosition();
+}
+
+bool Player::isMoving()
+{
+    return getComponent<AnimatedMovement>().isMoving();
 }

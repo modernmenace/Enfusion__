@@ -149,7 +149,7 @@ std::vector<int> MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY)
     }
 
     //generate static objects
-    //todo: currently big sections without objects, transition tiles?
+    //todo: object collisons
     int posX = 0;
     int posY = 0;
     for(uint32_t i = 0; i < (m_size.x * m_size.y); i++)

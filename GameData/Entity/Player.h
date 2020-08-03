@@ -8,6 +8,9 @@ class Player : public Entity {
 public:
     Player(sf::Vector2f position);
     sf::FloatRect bounds() override;
+    sf::Vector2f currentPosition();
+
+    bool isMoving();
 
 };
 

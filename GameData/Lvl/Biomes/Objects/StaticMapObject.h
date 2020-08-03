@@ -14,9 +14,13 @@ public:
     inline void setBounds(sf::IntRect bounds) { o_sprite.setTextureRect(bounds); }
     inline void setPosition(sf::Vector2f pos) { o_sprite.setPosition(pos); }
 
+protected:
+    inline void setBlocksMovement(bool b) { o_blockMovement = b; };
+
 private:
     sf::Sprite  o_sprite;
     sf::IntRect o_bounds;
+    bool        o_blockMovement = false;
 
 };
 

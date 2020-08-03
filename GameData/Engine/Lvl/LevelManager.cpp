@@ -21,6 +21,11 @@ LevelManager* LevelManager::Instance()
     return m_Instance;
 }
 
+void LevelManager::setPlayer(Player* player)
+{
+    this->m_player = player;
+}
+
 void LevelManager::setLevel(std::string level)
 {
     //maybe eventually move to some kind of map here
@@ -30,7 +35,7 @@ void LevelManager::setLevel(std::string level)
     if (level == "Level_1")
     {
         dbg_log("LevelManager: Level_1 loaded.");
-        this->currentLevel = new Level_1();
+        this->m_currentLevel = new Level_1();
     }
     else
     {
@@ -48,5 +53,5 @@ void LevelManager::setLevel(std::string level)
 Level& LevelManager::getCurrentLevel()
 {
     assert(m_Instance);
-    return *this->currentLevel;
+    return *this->m_currentLevel;
 }

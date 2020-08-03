@@ -33,6 +33,8 @@ public:
     void update(sf::Time tickRate)          override;
     void handleInput(sf::Keyboard::Key key) override;
 
+    inline bool isMoving() { return moving; }
+
 private:
     float speed;
 

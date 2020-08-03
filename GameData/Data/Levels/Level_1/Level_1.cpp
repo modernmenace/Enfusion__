@@ -38,7 +38,6 @@ void Level_1::initialize()
 
 void Level_1::update(sf::Time tickRate)
 {
-
     Level::update(tickRate);
 }
 

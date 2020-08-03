@@ -10,13 +10,15 @@ class LevelManager {
 public:
     static LevelManager* Instance();
     void setLevel(std::string level);
+    void setPlayer(Player*);
     Level& getCurrentLevel();
 
 private:
     LevelManager() {};
 
-    Level* currentLevel;
+    Level*               m_currentLevel;
     static LevelManager* m_Instance;
+    Player*              m_player = nullptr;
 
 };
 
