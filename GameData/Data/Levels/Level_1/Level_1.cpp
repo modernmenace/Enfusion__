@@ -39,6 +39,22 @@ void Level_1::initialize()
 void Level_1::update(sf::Time tickRate)
 {
     Level::update(tickRate);
+
+    //check for collisions
+    //todo: this is inefficient, read up
+    //todo: may also help when split into chunks
+    for(StaticMapObject* o : *MapGenerator::Instance()->staticMapObjects())
+    {
+        if (o->blocksMovement())
+        {
+            if (o->bounds().intersects(player.bounds()))
+            {
+                //todo: implement collision
+            }
+        }
+    }
+
+
 }
 
 void Level_1::handleInput(sf::Keyboard::Key key)

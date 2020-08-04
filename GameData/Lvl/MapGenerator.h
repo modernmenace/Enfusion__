@@ -24,6 +24,8 @@ public:
     inline sf::Vector2i size()        { return m_size; }
     inline std::vector<Tile>* map()   { return &m_lvl; }
 
+    std::vector<StaticMapObject*>* staticMapObjects() { return &m_staticObjects; }
+
 private:
     static MapGenerator*          m_Instance;
     std::vector<Tile>             m_lvl;

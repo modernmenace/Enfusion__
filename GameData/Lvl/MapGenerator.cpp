@@ -94,12 +94,9 @@ std::vector<int> MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY)
         }
         if (m_lvl[i].biome == LEVEL_BIOME_ID_NONE)
         {
-            //todo: determine position and pass
             sf::Vector2f tempPos;
             tempPos.x = pos.x * 32;
             tempPos.y = pos.y * 32;
-            dbg_log("MapGen: creating tempPos "
-                << tempPos.x << ", " << tempPos.y)
             BiomeManager::Instance()->biome(m_lvl[i-1].biome)->createTransitionTile(&m_lvl[i], tempPos, m_lvl[i-1].biome);
         }
     }
