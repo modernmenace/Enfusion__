@@ -32,7 +32,9 @@ public:
     void initialize()                       override;
     void update(sf::Time tickRate)          override;
     void handleInput(sf::Keyboard::Key key) override;
+    void render(sf::RenderWindow* window)   override;
 
+    void setMoving(bool b) { moving = b; }
     inline bool isMoving() { return moving; }
 
 private:
@@ -55,6 +57,8 @@ private:
 
     bool moving    = false;
     bool sprinting = false;
+
+    sf::RectangleShape c_test_rect;
 
 };
 

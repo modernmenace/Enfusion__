@@ -11,6 +11,7 @@ public:
     sf::Vector2f currentPosition();
 
     bool isMoving();
+    void stopMovement();
 
 };
 

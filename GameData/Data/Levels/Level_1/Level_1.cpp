@@ -43,17 +43,22 @@ void Level_1::update(sf::Time tickRate)
     //check for collisions
     //todo: this is inefficient, read up
     //todo: may also help when split into chunks
-    for(StaticMapObject* o : *MapGenerator::Instance()->staticMapObjects())
+    if (player.isMoving())
     {
-        if (o->blocksMovement())
+        for(StaticMapObject* o : *MapGenerator::Instance()->staticMapObjects())
         {
-            if (o->bounds().intersects(player.bounds()))
+            if (o->blocksMovement())
             {
-                //todo: implement collision
+                //todo: create box for checking player collision
+                //todo: in front of sprte based on direction
+                if (o->bounds().intersects(player.bounds()))
+                {
+                    //todo: implement collision
+                    player.stopMovement();
+                }
             }
         }
     }
-
 
 }
 

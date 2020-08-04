@@ -1,18 +1,30 @@
 #include "AnimatedMovement.h"
 #include "../../Lvl/LevelManager.h"
 
+//TODO: implement movement collider
+
 AnimatedMovement::AnimatedMovement(float speed)
 {
     this->speed = speed;
+}
+
+void AnimatedMovement::render(sf::RenderWindow *window)
+{
+    //todo: remove this when done testing rectangle
+    if (moving)
+    {
+        window->draw(c_test_rect);
+    }
 }
 
 void AnimatedMovement::initialize()
 {
     assert(entity->hasComponent<AnimatedSprite>());
     this->characterSprite = &entity->getComponent<AnimatedSprite>().getSprite();
-    //TODO: frame is based on whole sheet, not just 3 starting at curerent character
-    //TODO: see below
     entity->getComponent<AnimatedSprite>().switchState(0, 1);
+
+    c_test_rect.setSize(sf::Vector2f(characterSprite->getGlobalBounds().width, characterSprite->getGlobalBounds().height));
+    c_test_rect.setFillColor(sf::Color::Green);
 }
 
 void AnimatedMovement::handleInput(sf::Keyboard::Key key)
@@ -97,6 +109,23 @@ void AnimatedMovement::update(sf::Time tickRate)
         animate();
         speed = tempSpeed;
         entity->getComponent<Position>().setPosition(characterSprite->getPosition());
+
+        //todo: change this rect stuff to an actual collider
+        switch (currentState)
+        {
+            case UP:
+                c_test_rect.setPosition(characterSprite->getPosition().x, characterSprite->getPosition().y - (characterSprite->getGlobalBounds().height / 2));
+                break;
+            case LEFT:
+                c_test_rect.setPosition(characterSprite->getPosition().x - characterSprite->getGlobalBounds().width, characterSprite->getPosition().y);
+                break;
+            case RIGHT:
+                c_test_rect.setPosition(characterSprite->getPosition().x + characterSprite->getGlobalBounds().width, characterSprite->getPosition().y);
+                break;
+            case DOWN:
+                c_test_rect.setPosition(characterSprite->getPosition().x, characterSprite->getPosition().y + characterSprite->getGlobalBounds().height);
+                break;
+        }
     }
 }
 

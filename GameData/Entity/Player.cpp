@@ -17,6 +17,11 @@ Player::Player(sf::Vector2f position)
     LevelManager::Instance()->setPlayer(this);
 }
 
+void Player::stopMovement()
+{
+    getComponent<AnimatedMovement>().setMoving(false);
+}
+
 sf::FloatRect Player::bounds()
 {
     return getComponent<AnimatedSprite>().getSprite().getGlobalBounds();
