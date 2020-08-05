@@ -14,7 +14,7 @@ void AnimatedMovement::render(sf::RenderWindow *window)
 {
     //todo: remove this when done testing rectangle
     #if DEBUG_MOVEMENT_SHOW_COLLIDERS == 1
-    if (moving)
+    if (m_hasCollider && moving)
     {
         window->draw(c_test_rect);
     }
@@ -28,8 +28,11 @@ void AnimatedMovement::initialize()
     entity->getComponent<AnimatedSprite>().switchState(0, 1);
 
     #if DEBUG_MOVEMENT_SHOW_COLLIDERS == 1
-    c_test_rect.setSize(sf::Vector2f(characterSprite->getGlobalBounds().width, characterSprite->getGlobalBounds().height));
-    c_test_rect.setFillColor(sf::Color::Green);
+    if (m_hasCollider)
+    {
+        c_test_rect.setSize(sf::Vector2f(characterSprite->getGlobalBounds().width, characterSprite->getGlobalBounds().height));
+        c_test_rect.setFillColor(sf::Color::Green);
+    }
     #endif
 }
 
@@ -116,29 +119,35 @@ void AnimatedMovement::update(sf::Time tickRate)
         speed = tempSpeed;
         entity->getComponent<Position>().setPosition(characterSprite->getPosition());
 
-        //todo: change this rect stuff to an actual collider
         //todo: mess with these collider size values
+        //todo: diagonal movement colliders
         if (m_hasCollider)
         {
             switch (currentState)
             {
                 case UP:
-                    m_colliderRect.left = characterSprite->getPosition().x;
-                    m_colliderRect.top  = characterSprite->getPosition().y - (characterSprite->getGlobalBounds().height / 2);
+                    m_colliderRect.left = characterSprite->getPosition().x + (characterSprite->getLocalBounds().width / 2);
+                    m_colliderRect.top  = characterSprite->getPosition().y + characterSprite->getGlobalBounds().height / 2;
+                    m_colliderRect.width = characterSprite->getGlobalBounds().width * 0.7;
+                    m_colliderRect.height = 10;
                     break;
                 case LEFT:
-                    m_colliderRect.left = characterSprite->getPosition().x - characterSprite->getGlobalBounds().width;
-                    m_colliderRect.top  = characterSprite->getPosition().y;
+                    m_colliderRect.left = characterSprite->getPosition().x;
+                    m_colliderRect.top  = characterSprite->getPosition().y + (characterSprite->getGlobalBounds().height / 2);
+                    m_colliderRect.width = 10;
+                    m_colliderRect.height = characterSprite->getGlobalBounds().height * 0.4;
                     break;
                 case RIGHT:
-                    m_colliderRect.left = characterSprite->getPosition().x + characterSprite->getGlobalBounds().width;
+                    m_colliderRect.left = characterSprite->getPosition().x + characterSprite->getGlobalBounds().width * 0.8;
                     m_colliderRect.top  = characterSprite->getPosition().y + (characterSprite->getGlobalBounds().height / 2);
-                    m_colliderRect.width = characterSprite->getGlobalBounds().width;
-                    m_colliderRect.height = characterSprite->getGlobalBounds().height * 0.6;
+                    m_colliderRect.width = 10;
+                    m_colliderRect.height = characterSprite->getGlobalBounds().height * 0.4;
                     break;
                 case DOWN:
-                    m_colliderRect.left = characterSprite->getPosition().x;
+                    m_colliderRect.left = characterSprite->getPosition().x + (characterSprite->getLocalBounds().width / 2);
                     m_colliderRect.top  = characterSprite->getPosition().y + characterSprite->getGlobalBounds().height;
+                    m_colliderRect.width = characterSprite->getGlobalBounds().width * 0.7;
+                    m_colliderRect.height = 10;
                     break;
             }
             #if DEBUG_MOVEMENT_SHOW_COLLIDERS == 1

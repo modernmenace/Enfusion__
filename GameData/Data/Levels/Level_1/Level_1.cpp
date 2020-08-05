@@ -41,7 +41,7 @@ void Level_1::update(sf::Time tickRate)
     Level::update(tickRate);
 
     //check for collisions
-    //todo: this is inefficient, read up
+    //todo: this is inefficient, implement quadtrees for nearby
     //todo: may also help when split into chunks
     if (player.isMoving())
     {
@@ -49,11 +49,8 @@ void Level_1::update(sf::Time tickRate)
         {
             if (o->blocksMovement())
             {
-                //todo: create box for checking player collision
-                //todo: in front of sprte based on direction
                 if (o->bounds().intersects(*player.collider()))
                 {
-                    //todo: implement collision
                     player.stopMovement();
                 }
             }
