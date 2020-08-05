@@ -51,7 +51,7 @@ void Level_1::update(sf::Time tickRate)
             {
                 //todo: create box for checking player collision
                 //todo: in front of sprte based on direction
-                if (o->bounds().intersects(player.bounds()))
+                if (o->bounds().intersects(*player.collider()))
                 {
                     //todo: implement collision
                     player.stopMovement();

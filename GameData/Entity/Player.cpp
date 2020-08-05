@@ -11,7 +11,7 @@ Player::Player(sf::Vector2f position)
     addComponent<Position>(position);
     addComponent<AnimatedSprite>("Objects/chara2.png", 4, 3, sf::IntRect(0, 0, 78, 146), sf::Vector2i(1, 0));
     addComponent<Camera>(CameraType::FOLLOW);
-    addComponent<AnimatedMovement>();
+    addComponent<AnimatedMovement>(true);
     addComponent<Inventory>();
 
     LevelManager::Instance()->setPlayer(this);
@@ -20,6 +20,11 @@ Player::Player(sf::Vector2f position)
 void Player::stopMovement()
 {
     getComponent<AnimatedMovement>().setMoving(false);
+}
+
+sf::FloatRect* Player::collider()
+{
+    return getComponent<AnimatedMovement>().collider();
 }
 
 sf::FloatRect Player::bounds()

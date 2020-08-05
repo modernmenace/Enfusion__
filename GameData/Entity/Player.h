@@ -13,6 +13,8 @@ public:
     bool isMoving();
     void stopMovement();
 
+    sf::FloatRect* collider();
+
 };
 
 

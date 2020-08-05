@@ -27,7 +27,7 @@ enum AnimState
 class AnimatedMovement : public Component {
 
 public:
-    AnimatedMovement(float speed = 425.0f);
+    AnimatedMovement(bool hasCollider = false, float speed = 425.0f);
 
     void initialize()                       override;
     void update(sf::Time tickRate)          override;
@@ -36,6 +36,7 @@ public:
 
     void setMoving(bool b) { moving = b; }
     inline bool isMoving() { return moving; }
+    inline sf::FloatRect* collider() { return &m_colliderRect; }
 
 private:
     float speed;
@@ -58,7 +59,12 @@ private:
     bool moving    = false;
     bool sprinting = false;
 
+    bool          m_hasCollider;
+    sf::FloatRect m_colliderRect;
+
+#if DEBUG_MOVEMENT_SHOW_COLLIDERS == 1
     sf::RectangleShape c_test_rect;
+#endif
 
 };
 
