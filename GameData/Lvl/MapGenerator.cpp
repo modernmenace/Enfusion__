@@ -1,6 +1,7 @@
 #include "MapGenerator.h"
 #include "Biomes/Objects/Desert/Cactus.h"
 #include "Biomes/Objects/Desert/Cactus2.h"
+#include "Biomes/Objects/Desert/DeadTree.h"
 
 MapGenerator* MapGenerator::m_Instance = nullptr;
 
@@ -30,6 +31,7 @@ void MapGenerator::populateBiomeObjects()
 {
     m_biomeObjects[LEVEL_BIOME_ID_DESERT].push_back({Cactus(), 1});
     m_biomeObjects[LEVEL_BIOME_ID_DESERT].push_back({Cactus2(), 1});
+    m_biomeObjects[LEVEL_BIOME_ID_DESERT].push_back({DeadTree(), 0.5});
 }
 
 std::vector<int> MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY)
