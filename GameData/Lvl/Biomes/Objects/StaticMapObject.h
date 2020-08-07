@@ -6,7 +6,7 @@
 class StaticMapObject {
 
 public:
-    StaticMapObject(string_t tileset, sf::IntRect texBounds, sf::Vector2f position);
+    StaticMapObject(string_t tileset, sf::IntRect texBounds);
 
     virtual void render(sf::RenderWindow* window);
 

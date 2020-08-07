@@ -18,7 +18,7 @@
 // if true, debug messages are enabled
 #define DEBUG_BUILD true
 
-#define DEBUG_MOVEMENT_SHOW_COLLIDERS 1
+#define DEBUG_MOVEMENT_SHOW_COLLIDERS 0
 
 #define WINDOW_TITLE "Enfusion++"
 
