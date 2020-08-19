@@ -20,6 +20,16 @@ void Camera::initialize()
     view = new sf::View(centerVec, sizeVec);
 }
 
+sf::FloatRect Camera::getCameraView()
+{
+    sf::FloatRect c_view;
+    c_view.left   = view->getCenter().x - (view->getSize().x / 2);
+    c_view.top    = view->getCenter().y - (view->getSize().y / 2);
+    c_view.width  = view->getSize().x;
+    c_view.height = view->getSize().y;
+    return c_view;
+}
+
 //TODO: On lower resolutions DO NOT FLOOR, causes flickering rather than preventing it
 //TODO: Revisit this once resolutions are implemented
 //NOTE: Flooring view values fixes flickering of tile map, however player sprite looks shakey

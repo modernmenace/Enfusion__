@@ -19,6 +19,8 @@ public:
     void update(sf::Time tickRate)        override;
     void render(sf::RenderWindow *window) override;
 
+    sf::FloatRect getCameraView();
+
 private:
     CameraType type;
 
