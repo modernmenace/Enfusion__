@@ -2,6 +2,7 @@
 #include "Biomes/Objects/Desert/Cactus.h"
 #include "Biomes/Objects/Desert/Cactus2.h"
 #include "Biomes/Objects/Desert/DeadTree.h"
+#include "../Engine/Lvl/LevelManager.h"
 
 MapGenerator* MapGenerator::m_Instance = nullptr;
 
@@ -34,12 +35,17 @@ void MapGenerator::populateBiomeObjects()
     m_biomeObjects[LEVEL_BIOME_ID_DESERT].push_back({DeadTree(), 0.5});
 }
 
-std::vector<int> MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY)
+std::vector<int> MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY, uint16_t tileSize)
 {
     m_lvl.clear();
     m_tileVec.clear();
     m_size.x = sizeX;
     m_size.y = sizeY;
+    m_tileSize = tileSize;
+
+    m_boundaries.x = m_size.x * tileSize * 2; //scaled by 2 in tilemap.cpp
+    m_boundaries.y = m_size.y * tileSize * 2; //scaled by 2 in tilemap.cpp
+    LevelManager::Instance()->setBoundaries(m_boundaries);
 
     //set initial empty map array
     for(uint32_t i = 0; i < (sizeX * sizeY); i++)

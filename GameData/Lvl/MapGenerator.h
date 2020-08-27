@@ -17,11 +17,12 @@ public:
     MapGenerator();
     ~MapGenerator();
     static MapGenerator* Instance();
-    std::vector<int> generateMap(uint16_t sizeX, uint16_t sizeY);
+    std::vector<int> generateMap(uint16_t sizeX, uint16_t sizeY, uint16_t tileSize);
 
     void render(sf::RenderWindow* window);
 
     inline sf::Vector2i size()        { return m_size; }
+    inline sf::Vector2i boundaries()  { return m_boundaries; }
     inline std::vector<Tile>* map()   { return &m_lvl; }
 
     std::vector<StaticMapObject*>* staticMapObjects() { return &m_staticObjects; }
@@ -32,6 +33,8 @@ private:
     std::vector<StaticMapObject*> m_staticObjects;
     std::vector<int>              m_tileVec;
     sf::Vector2i                  m_size;
+    sf::Vector2i                  m_boundaries;
+    uint16_t                      m_tileSize;
 
     std::vector<WeightedMapObject> m_biomeObjects[LEVEL_AMOUNT_BIOMES+1];
 

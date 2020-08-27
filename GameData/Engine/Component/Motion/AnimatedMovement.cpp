@@ -156,23 +156,6 @@ void AnimatedMovement::update(sf::Time tickRate)
             c_test_rect.setSize(sf::Vector2f(m_colliderRect.width, m_colliderRect.height));
             #endif
         }
-
-        //check for edge collision
-        if (entity->hasComponent<Camera>())
-        {
-            //todo: hit right edge, hit bottom, hit top
-            sf::FloatRect c_v = entity->getComponent<Camera>().getCameraView();
-            dbg_log("Position: " << c_v.left << ", " << c_v.top)
-            dbg_log("Size: " << c_v.width << ", " << c_v.height)
-            if (c_v.left < 0)
-            {
-                dbg_log("hit left edge")
-            }
-            if (c_v.top < 0)
-            {
-                dbg_log("hit top edge")
-            }
-        }
     }
 }
 
