@@ -3,7 +3,7 @@
 #include "../../Engine/Component/Anim/AnimatedSprite.h"
 #include "../../Engine/Component/Base/Collider.h"
 
-ItemPickup::ItemPickup(Item *item, uint8_t count)
+ItemPickup::ItemPickup(Item *item, uint8_t count) : p_countText("", sf::Vector2f(0, 0), 20)
 {
     p_item = item;
     p_count = count;
@@ -18,6 +18,19 @@ void ItemPickup::create()
     addComponent<Position>(p_pos);
     addComponent<Sprite>(p_item->icon());
     addComponent<Collider>(sf::FloatRect(p_pos.x, p_pos.y, 10, 10));
+    if (p_count != 1)
+    {
+        p_countText.setText(std::to_string(p_count));
+        p_countText.setPosition(sf::Vector2f(p_pos.x +(p_item->icon().getSize().x), p_pos.y + (p_item->icon().getSize().y)));
+        p_countText.initialize();
+    }
+}
+
+void ItemPickup::render(sf::RenderWindow* window)
+{
+    Entity::render(window);
+    if (p_count != 1)
+        p_countText.render(window);
 }
 
 void ItemPickup::handleInput(sf::Keyboard::Key key)

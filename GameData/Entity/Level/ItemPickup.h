@@ -3,19 +3,22 @@
 
 #include "../../Engine/Entity/Entity.h"
 #include "../../Engine/Item/Item.h"
+#include "../UI/Elements/TextDisplay.h"
 
 class ItemPickup : public Entity {
 
 public:
     ItemPickup(Item* item, uint8_t count = 1);
+    void render(sf::RenderWindow*)      override;
     void handleInput(sf::Keyboard::Key) override;
 
 private:
     void create();
     void pickup();
 
-    Item*   p_item  = nullptr;
-    uint8_t p_count;
+    Item*       p_item  = nullptr;
+    TextDisplay p_countText;
+    uint8_t     p_count;
 };
 
 
