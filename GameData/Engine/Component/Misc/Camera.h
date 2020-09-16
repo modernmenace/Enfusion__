@@ -20,6 +20,7 @@ public:
     void render(sf::RenderWindow *window) override;
 
     sf::FloatRect getCameraView();
+    sf::FloatRect getPlayerCenteredCameraView();
 
 private:
     CameraType type;
@@ -29,6 +30,8 @@ private:
 
     sf::Vector2f centerVec;
     sf::Vector2f sizeVec;
+
+    sf::Vector2f lastCenter;
 };
 
 

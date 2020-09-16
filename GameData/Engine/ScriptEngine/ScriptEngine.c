@@ -22,6 +22,11 @@ bool SE_init(const char* programName)
     //initialize engine here
     if (!SE_checkForScripts()) return false;
 
+    #if (DEBUG_DISABLE_MOD_LOADING == true)
+        dbg_log("(Debug) Mod Loading Disabled");
+        return false;
+    #endif
+
     printf("Script Engine Initializing (Python ");
     printf(PY_VERSION);
     printf(")\n");
