@@ -1,6 +1,10 @@
 #include "Level_1.h"
 #include "../../../Lvl/MapGenerator.h"
 
+#if DEBUG_ENABLE_DEBUG_MENU == 1
+#include "../../../Engine/Component/Misc/Camera.h"
+#endif
+
 //TODO: Break level into chunks
 
 Level_1::Level_1() : Level("Level_1", "Levels/Level_1_back.png"),
@@ -31,14 +35,38 @@ void Level_1::initialize()
     map->initialize();
     hotbar.updateSlots();
 
-    auto p_posX = (rand()%(MapGenerator::Instance()->size().x * map[0].getTileSize())-1) + 1;
-    auto p_posY = (rand()%(MapGenerator::Instance()->size().y * map[0].getTileSize())-1) + 1;
-    player.getComponent<Position>().setPosition(sf::Vector2f(p_posX, p_posY));
+    //auto p_posX = (rand()%(MapGenerator::Instance()->size().x * map[0].getTileSize())-1) + 1;
+    //auto p_posY = (rand()%(MapGenerator::Instance()->size().y * map[0].getTileSize())-1) + 1;
+    //player.getComponent<Position>().setPosition(sf::Vector2f(p_posX, p_posY));
+    player.getComponent<Position>().setPosition(sf::Vector2f(7000, 0));
+
+    #if DEBUG_ENABLE_DEBUG_MENU == 1
+    dbg_playerPosText  = new TextDisplay("Test", sf::Vector2f(-950, -530), 12);
+    dbg_viewBoundsText = new TextDisplay("Test2", sf::Vector2f(-950, -510), 12);
+    dbg_playerPosText->initialize();
+    dbg_viewBoundsText->initialize();
+    dbg_playerPosText->setVisible(false);
+    dbg_viewBoundsText->setVisible(false);
+    dbg_menuVisible = false;
+    addUIEntity(dbg_playerPosText);
+    addUIEntity(dbg_viewBoundsText);
+    #endif
 }
 
 void Level_1::update(sf::Time tickRate)
 {
     Level::update(tickRate);
+
+    #if DEBUG_ENABLE_DEBUG_MENU == 1
+    if (dbg_menuVisible)
+    {
+        auto p_pos = player.getComponent<Position>().getPosition();
+        dbg_playerPosText->setText("Player Position: (" + std::to_string(p_pos.x) + ", " + std::to_string(p_pos.y) + ")");
+        auto c_view = player.getComponent<Camera>().getCameraView();
+        dbg_viewBoundsText->setText("Camera View: (" + std::to_string(c_view.top) + "t, "
+            + std::to_string(c_view.left) + "l, " + std::to_string(c_view.width) + "w, " + std::to_string(c_view.height) + "h)");
+    }
+    #endif
 
     //check for collisions
     //todo: this is inefficient, implement quadtrees for nearby
@@ -74,6 +102,17 @@ void Level_1::handleInput(sf::Keyboard::Key key)
         else
             l_state = GameState::RUNNING;
     }
+
+    #if DEBUG_ENABLE_DEBUG_MENU == 1
+    //keycode 85 = F1
+    if (key == 85)
+    {
+        dbg_playerPosText->setVisible(!dbg_playerPosText->visible());
+        dbg_viewBoundsText->setVisible(!dbg_viewBoundsText->visible());
+        dbg_menuVisible = !dbg_menuVisible;
+    }
+    #endif
+
     Level::handleInput(key);
 }
 

@@ -13,12 +13,13 @@ AnimatedMovement::AnimatedMovement(bool hasCollider, float speed)
 
 void AnimatedMovement::render(sf::RenderWindow *window)
 {
-    //todo: remove this when done testing rectangle
+    #if DEBUG_MOVEMENT_IGNORE_COLLISION != 1
     #if DEBUG_MOVEMENT_SHOW_COLLIDERS == 1
     if (m_hasCollider && moving)
     {
         window->draw(c_test_rect);
     }
+    #endif
     #endif
 }
 
@@ -28,12 +29,14 @@ void AnimatedMovement::initialize()
     this->characterSprite = &entity->getComponent<AnimatedSprite>().getSprite();
     entity->getComponent<AnimatedSprite>().switchState(0, 1);
 
+    #if DEBUG_MOVEMENT_IGNORE_COLLISION != 1
     #if DEBUG_MOVEMENT_SHOW_COLLIDERS == 1
     if (m_hasCollider)
     {
         c_test_rect.setSize(sf::Vector2f(characterSprite->getGlobalBounds().width, characterSprite->getGlobalBounds().height));
         c_test_rect.setFillColor(sf::Color::Green);
     }
+    #endif
     #endif
 }
 
@@ -55,10 +58,10 @@ void AnimatedMovement::update(sf::Time tickRate)
     {
         auto currTickRate = tickRate.asSeconds();
         auto tempSpeed = speed;
-        #ifdef DEBUG_BUILD
+        #if DEBUG_MOVEMENT_FAST_SPRINT == 1
         if (sprinting) speed *= 15;
         #else
-        if (sprinting) speed *= 2;
+        if (sprinting) speed *= 3;
         #endif
 
         currAnimTime += currTickRate;
@@ -122,6 +125,7 @@ void AnimatedMovement::update(sf::Time tickRate)
 
         //todo: mess with these collider size values
         //todo: diagonal movement colliders
+        #if DEBUG_MOVEMENT_IGNORE_COLLISION != 1
         if (m_hasCollider)
         {
             switch (currentState)
@@ -156,6 +160,7 @@ void AnimatedMovement::update(sf::Time tickRate)
             c_test_rect.setSize(sf::Vector2f(m_colliderRect.width, m_colliderRect.height));
             #endif
         }
+        #endif
     }
 }
 

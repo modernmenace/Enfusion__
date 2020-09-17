@@ -16,11 +16,14 @@ public:
     void setPosition(sf::Vector2f p);
     void setText(string_t t);
 
-    inline sf::Text& text() { return t_text; }
+    inline void setVisible(bool b) { t_visible = b; }
+    inline bool visible()          { return t_visible; }
+    inline sf::Text& text()        { return t_text; }
 
 private:
     sf::Text           t_text;
     sf::RectangleShape t_bounds;
+    bool               t_visible;
 
     bool textChanged = false;
 

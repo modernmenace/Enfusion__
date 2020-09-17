@@ -31,6 +31,12 @@ private:
     Minimap       minimap;
     QuestDisplay  q_display;
 
+    //debug menu items before
+    #if DEBUG_ENABLE_DEBUG_MENU == 1
+    bool         dbg_menuVisible;
+    TextDisplay* dbg_playerPosText;
+    TextDisplay* dbg_viewBoundsText;
+    #endif
 };
 
 #endif //ENFUSION_LEVEL_1_H

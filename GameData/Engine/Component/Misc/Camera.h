@@ -27,6 +27,7 @@ private:
 
     sf::View* view;
     bool viewSet = false;
+    bool c_hasVerifiedSpawnView = false;
 
     sf::Vector2f centerVec;
     sf::Vector2f sizeVec;

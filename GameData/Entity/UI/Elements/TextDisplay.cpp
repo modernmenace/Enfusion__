@@ -10,6 +10,7 @@ TextDisplay::TextDisplay(string_t text, sf::Vector2f position, uint16_t size, sf
     t_text.setOutlineThickness(1);
     t_text.setOutlineColor(sf::Color::Black);
     t_text.setFillColor(sf::Color::White);
+    t_visible = true;
     addComponent<Position>(position);
 }
 
@@ -59,5 +60,6 @@ void TextDisplay::setPosition(sf::Vector2f p)
 
 void TextDisplay::render(sf::RenderWindow* window)
 {
-    window->draw(t_text);
+    if (t_visible)
+        window->draw(t_text);
 }

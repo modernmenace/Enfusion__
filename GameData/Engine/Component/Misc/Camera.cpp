@@ -4,10 +4,6 @@
 #include "../../Lvl/LevelManager.h"
 #include "../Anim/AnimatedSprite.h"
 
-//todo: finish camera edge collision
-//todo: currently issues when spawning with view over edge
-//todo: issues getting stuck with camera locked
-
 Camera::Camera(CameraType type) : centerVec(0, 0), sizeVec(1920, 1080)
 {
     this->type = type;
@@ -68,8 +64,43 @@ void Camera::update(sf::Time tickRate)
         centerPos.x = floor(pos.x);          // todo: see note on flooring
         centerPos.y = floor(pos.y + 75); // todo: see note on flooring
 
-        //todo: find out what this magic number 75 is
-        if (c_v.left < 75)
+        //todo: fix spawning over edge
+        if (!c_hasVerifiedSpawnView)
+        {
+
+            //start with left edge
+            dbg_log("verifying spawn view")
+            dbg_log("Player Position: " << pos.x << ", " << pos.y)
+            dbg_log("View Bounds: " << c_v.top << "t, " << c_v.left <<
+                "l, " << c_v.width << "w, " << c_v.height << "h")
+            dbg_log("View Center: " << centerPos.x << ", " << centerPos.y)
+            dbg_log("Level Bounds: " << l_bounds.x << ", " << l_bounds.y)
+
+            if (c_v.top < 75)
+            {
+                centerPos.y -= (c_v.top - 75);
+            }
+            if (c_v.left < 78)
+            {
+                centerPos.x -= (c_v.left - 78);
+            }
+            if ((c_v.left + c_v.width) > l_bounds.x)
+            {
+                //todo: fix this and implement bottom
+                centerPos.x -= (c_v.left - c_v.width);
+            }
+
+
+            dbg_log("New View Center: " << centerPos.x << ", " << centerPos.y)
+
+            c_hasVerifiedSpawnView = true;
+            view->setCenter(centerPos.x, centerPos.y);
+            lastCenter.x = centerPos.x;
+            lastCenter.y = centerPos.y;
+            return;
+        }
+
+        if (c_v.left < 78)
         {
             centerPos.x = lastCenter.x;
         }
