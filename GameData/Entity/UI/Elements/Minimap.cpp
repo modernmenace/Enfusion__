@@ -1,6 +1,8 @@
 #include <cmath>
 #include "Minimap.h"
 
+//todo: implement minimap boundaries
+
 Minimap::Minimap(Entity* centerEntity, Level* level) : m_view(), m_center_marker()
 {
     addComponent<Position>(sf::Vector2f(650, -525));
@@ -31,6 +33,10 @@ void Minimap::update(sf::Time tickRate)
 {
     Entity::update(tickRate);
     m_center_marker.getComponent<Position>().setPosition(m_center->getComponent<Position>().getPosition());
+
+    //todo: implement edge boundaries
+
+
 }
 
 void Minimap::render(sf::RenderWindow* window)

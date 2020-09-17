@@ -20,8 +20,6 @@ void Camera::initialize()
         assert(entity->hasComponent<Position>());
 
     view = new sf::View(centerVec, sizeVec);
-
-    //todo: calculate initial center vector
 }
 
 sf::FloatRect Camera::getCameraView()
@@ -64,18 +62,9 @@ void Camera::update(sf::Time tickRate)
         centerPos.x = floor(pos.x);          // todo: see note on flooring
         centerPos.y = floor(pos.y + 75); // todo: see note on flooring
 
-        //todo: fix spawning over edge
+        //fix issues caused by spawning over the edge
         if (!c_hasVerifiedSpawnView)
         {
-
-            //start with left edge
-            dbg_log("verifying spawn view")
-            dbg_log("Player Position: " << pos.x << ", " << pos.y)
-            dbg_log("View Bounds: " << c_v.top << "t, " << c_v.left <<
-                "l, " << c_v.width << "w, " << c_v.height << "h")
-            dbg_log("View Center: " << centerPos.x << ", " << centerPos.y)
-            dbg_log("Level Bounds: " << l_bounds.x << ", " << l_bounds.y)
-
             if (c_v.top < 75)
             {
                 centerPos.y -= (c_v.top - 75);
@@ -90,12 +79,8 @@ void Camera::update(sf::Time tickRate)
             }
             if ((c_v.top + c_v.height) > l_bounds.y)
             {
-                //todo: bottom
                 centerPos.y = l_bounds.y - c_v.height + (c_v.height / 2);
             }
-
-
-            dbg_log("New View Center: " << centerPos.x << ", " << centerPos.y)
 
             c_hasVerifiedSpawnView = true;
             view->setCenter(centerPos.x, centerPos.y);
