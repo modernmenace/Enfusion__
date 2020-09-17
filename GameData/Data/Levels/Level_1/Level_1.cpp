@@ -35,10 +35,9 @@ void Level_1::initialize()
     map->initialize();
     hotbar.updateSlots();
 
-    //auto p_posX = (rand()%(MapGenerator::Instance()->size().x * map[0].getTileSize())-1) + 1;
-    //auto p_posY = (rand()%(MapGenerator::Instance()->size().y * map[0].getTileSize())-1) + 1;
-    //player.getComponent<Position>().setPosition(sf::Vector2f(p_posX, p_posY));
-    player.getComponent<Position>().setPosition(sf::Vector2f(7000, 0));
+    auto p_posX = (rand()%(MapGenerator::Instance()->size().x * map[0].getTileSize())-1) + 1;
+    auto p_posY = (rand()%(MapGenerator::Instance()->size().y * map[0].getTileSize())-1) + 1;
+    player.getComponent<Position>().setPosition(sf::Vector2f(p_posX, p_posY));
 
     #if DEBUG_ENABLE_DEBUG_MENU == 1
     dbg_playerPosText  = new TextDisplay("Test", sf::Vector2f(-950, -530), 12);

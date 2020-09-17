@@ -86,8 +86,12 @@ void Camera::update(sf::Time tickRate)
             }
             if ((c_v.left + c_v.width) > l_bounds.x)
             {
-                //todo: fix this and implement bottom
-                centerPos.x -= (c_v.left - c_v.width);
+                centerPos.x = l_bounds.x - c_v.width + (c_v.width / 2);
+            }
+            if ((c_v.top + c_v.height) > l_bounds.y)
+            {
+                //todo: bottom
+                centerPos.y = l_bounds.y - c_v.height + (c_v.height / 2);
             }
 
 
