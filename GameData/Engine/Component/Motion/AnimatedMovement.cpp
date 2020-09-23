@@ -150,7 +150,7 @@ void AnimatedMovement::update(sf::Time tickRate)
                     break;
                 case DOWN:
                     m_colliderRect.left = characterSprite->getPosition().x + (characterSprite->getLocalBounds().width / 2);
-                    m_colliderRect.top  = characterSprite->getPosition().y + characterSprite->getGlobalBounds().height;
+                    m_colliderRect.top  = characterSprite->getPosition().y + (characterSprite->getGlobalBounds().height * 2/3);
                     m_colliderRect.width = characterSprite->getGlobalBounds().width * 0.7;
                     m_colliderRect.height = 10;
                     break;
