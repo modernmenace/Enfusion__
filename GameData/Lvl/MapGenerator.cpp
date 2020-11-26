@@ -30,27 +30,6 @@ MapGenerator::MapGenerator()
 }
 
 /************************************************************************
- * FUNCTION :       MapGenerator::~MapGenerator
- *
- * DESCRIPTION :
- *       Destructor, delete static objects
- *
- *  INPUTS:  NONE
- *
- *  OUTPUTS: NONE
- *
- *  VERSION   	DATE    		WHO     DETAIL
- *  V1.00.00   	2020.11.26 	    JCB     Documentation Start
- *
- ************************************************************************/
-
-MapGenerator::~MapGenerator()
-{
-    for(uint32_t i = 0; i < m_staticObjects.size(); i++)
-        delete m_staticObjects[i];
-}
-
-/************************************************************************
  * FUNCTION :       MapGenerator::Instance
  *
  * DESCRIPTION :
@@ -112,12 +91,13 @@ void MapGenerator::populateBiomeObjects()
  *
  ************************************************************************/
 
-std::vector<Tile> MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY, uint16_t tileSize)
+Map MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY, uint16_t tileSize)
 {
     m_lvl.clear();
     m_size.x = sizeX;
     m_size.y = sizeY;
     m_tileSize = tileSize;
+    std::vector<StaticMapObject*> m_staticObjects;
 
     m_boundaries.x = m_size.x * tileSize * 2; //scaled by 2 in tilemap.cpp
     m_boundaries.y = m_size.y * tileSize * 2; //scaled by 2 in tilemap.cpp
@@ -252,27 +232,9 @@ std::vector<Tile> MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY, uint
         m_staticObjects.push_back(obj);
     }
 
-    return m_lvl;
-}
-
-/************************************************************************
- * FUNCTION :       MapGenerator::render
- *
- * DESCRIPTION :
- *       Render map objects
- *
- *  INPUTS:  NONE
- *
- *  OUTPUTS: NONE
- *
- *  VERSION   	DATE    		WHO     DETAIL
- *  V1.00.00   	2020.11.26 	    JCB     Documentation Start
- *
- ************************************************************************/
-
-void MapGenerator::render(sf::RenderWindow *window)
-{
-    for(auto staticObject : m_staticObjects)
-        staticObject->render(window);
+    Map m;
+    m.m_tiles      = m_lvl;
+    m.m_mapObjects = m_staticObjects;
+    return m;
 }
 

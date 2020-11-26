@@ -115,7 +115,7 @@ void Level_1::update(sf::Time tickRate)
     //todo: may also help when split into chunks
     if (player.isMoving())
     {
-        for(StaticMapObject* o : *MapGenerator::Instance()->staticMapObjects())
+        for(StaticMapObject* o : map->map()->m_mapObjects)
         {
             if (o->blocksMovement())
             {
@@ -191,6 +191,5 @@ void Level_1::handleInput(sf::Keyboard::Key key)
 void Level_1::render(sf::RenderWindow *window)
 {
     map->render(window);
-    MapGenerator::Instance()->render(window);
     Level::render(window);
 }

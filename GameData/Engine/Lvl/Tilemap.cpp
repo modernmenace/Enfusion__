@@ -25,14 +25,38 @@
  *
  ************************************************************************/
 
-Tilemap::Tilemap(std::string tileSetName, std::vector<Tile> tiles, sf::Vector2i size, uint16_t tileSize)
+Tilemap::Tilemap(std::string tileSetName, Map tiles, sf::Vector2i size, uint16_t tileSize)
 {
     this->tileset  = AssetManager::Instance()->getTexture(tileSetName);
     this->width    = size.x;
     this->height   = size.y;
 
-    this->tiles    = std::move(tiles);
+    this->t_map      = std::move(tiles);
     this->tileSize = tileSize;
+}
+
+/************************************************************************
+ * FUNCTION :       Tilemap::~Tilemap
+ *
+ * DESCRIPTION :
+ *       Destructor, delete static map objects
+ *
+ *  INPUTS:  string tileSetName :
+ *           vector<Tile> tiles : vector containing
+ *           Vector2i    size   : size of the tile map (width and height)
+ *           uint16_t  tileSize : size of individual tiles
+ *
+ *  OUTPUTS: NONE
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2020.11.25 	    JCB     Documentation Start
+ *
+ ************************************************************************/
+
+Tilemap::~Tilemap()
+{
+    for(uint32_t i = 0; i < t_map.m_mapObjects.size(); i++)
+        delete t_map.m_mapObjects[i];
 }
 
 /************************************************************************
@@ -89,7 +113,7 @@ void Tilemap::initialize()
         for (unsigned int j = 0; j < height; ++j)
         {
             // get the current tile number
-            int tileNumber = tiles[i + j * width].tilesetID;
+            int tileNumber = t_map.m_tiles[i + j * width].tilesetID;
 
             // find its position in the tileset texture
             int tu = tileNumber % (tileset.getSize().x / tileSize);
@@ -130,4 +154,7 @@ void Tilemap::initialize()
 void Tilemap::render(sf::RenderWindow *window)
 {
     window->draw(*this);
+
+    for(auto staticObject : t_map.m_mapObjects)
+        staticObject->render(window);
 }

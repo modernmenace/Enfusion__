@@ -24,4 +24,10 @@ struct WeightedMapObject
     float weight;
 };
 
+struct Map
+{
+    std::vector<StaticMapObject*> m_mapObjects;
+    std::vector<Tile>             m_tiles;
+};
+
 #endif //ENFUSION___LVLSTRUCTS_H
