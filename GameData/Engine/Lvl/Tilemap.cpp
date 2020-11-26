@@ -4,7 +4,8 @@
 
 //todo: Overhaul
 //todo:  1 - Rethink tile vector, necessary?
-//todo:  2 - Merge with mapgenerator?
+//todo:  2 - Blocked tiles
+//todo:  3 - Rethink how static objects are handled
 
 /************************************************************************
  * FUNCTION :       Tilemap::Tilemap
@@ -13,7 +14,7 @@
  *       Constructor, set up parameters
  *
  *  INPUTS:  string tileSetName :
- *           vector<int> tiles  : vector containing
+ *           vector<Tile> tiles : vector containing
  *           Vector2i    size   : size of the tile map (width and height)
  *           uint16_t  tileSize : size of individual tiles
  *
@@ -24,7 +25,7 @@
  *
  ************************************************************************/
 
-Tilemap::Tilemap(std::string tileSetName, std::vector<int> tiles, sf::Vector2i size, uint16_t tileSize)
+Tilemap::Tilemap(std::string tileSetName, std::vector<Tile> tiles, sf::Vector2i size, uint16_t tileSize)
 {
     this->tileset  = AssetManager::Instance()->getTexture(tileSetName);
     this->width    = size.x;
@@ -88,7 +89,7 @@ void Tilemap::initialize()
         for (unsigned int j = 0; j < height; ++j)
         {
             // get the current tile number
-            int tileNumber = tiles[i + j * width];
+            int tileNumber = tiles[i + j * width].tilesetID;
 
             // find its position in the tileset texture
             int tu = tileNumber % (tileset.getSize().x / tileSize);

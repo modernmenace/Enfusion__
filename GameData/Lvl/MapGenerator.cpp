@@ -9,16 +9,61 @@ MapGenerator* MapGenerator::m_Instance = nullptr;
 
 //TODO: Eventually use simplex noise for map generation to smooth transitions
 
+/************************************************************************
+ * FUNCTION :       MapGenerator::MapGenerator
+ *
+ * DESCRIPTION :
+ *       Constructor
+ *
+ *  INPUTS:  NONE
+ *
+ *  OUTPUTS: NONE
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2020.11.26 	    JCB     Documentation Start
+ *
+ ************************************************************************/
+
 MapGenerator::MapGenerator()
 {
     populateBiomeObjects();
 }
+
+/************************************************************************
+ * FUNCTION :       MapGenerator::~MapGenerator
+ *
+ * DESCRIPTION :
+ *       Destructor, delete static objects
+ *
+ *  INPUTS:  NONE
+ *
+ *  OUTPUTS: NONE
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2020.11.26 	    JCB     Documentation Start
+ *
+ ************************************************************************/
 
 MapGenerator::~MapGenerator()
 {
     for(uint32_t i = 0; i < m_staticObjects.size(); i++)
         delete m_staticObjects[i];
 }
+
+/************************************************************************
+ * FUNCTION :       MapGenerator::Instance
+ *
+ * DESCRIPTION :
+ *       Fetch the singleton instance of the map generator
+ *
+ *  INPUTS:  NONE
+ *
+ *  OUTPUTS: MapGenerator* : instance
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2020.11.26 	    JCB     Documentation Start
+ *
+ ************************************************************************/
 
 MapGenerator* MapGenerator::Instance()
 {
@@ -28,6 +73,21 @@ MapGenerator* MapGenerator::Instance()
     return m_Instance;
 }
 
+/************************************************************************
+ * FUNCTION :       MapGenerator::populateBiomeObjects
+ *
+ * DESCRIPTION :
+ *       Set up biome object types for the generator
+ *
+ *  INPUTS:  NONE
+ *
+ *  OUTPUTS: NONE
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2020.11.26 	    JCB     Documentation Start
+ *
+ ************************************************************************/
+
 void MapGenerator::populateBiomeObjects()
 {
     m_biomeObjects[LEVEL_BIOME_ID_DESERT].push_back({Cactus(), 1});
@@ -35,10 +95,26 @@ void MapGenerator::populateBiomeObjects()
     m_biomeObjects[LEVEL_BIOME_ID_DESERT].push_back({DeadTree(), 0.5});
 }
 
-std::vector<int> MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY, uint16_t tileSize)
+/************************************************************************
+ * FUNCTION :       MapGenerator::generateMap
+ *
+ * DESCRIPTION :
+ *       Generate and populate the map
+ *
+ *  INPUTS:  uint16_t sizeX    : X-size of the map
+ *           uint16_t sizeY    : Y-size of the map
+ *           uint16_t tileSize : Size of individual tiles
+ *
+ *  OUTPUTS: NONE
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2020.11.26 	    JCB     Documentation Start
+ *
+ ************************************************************************/
+
+std::vector<Tile> MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY, uint16_t tileSize)
 {
     m_lvl.clear();
-    m_tileVec.clear();
     m_size.x = sizeX;
     m_size.y = sizeY;
     m_tileSize = tileSize;
@@ -176,16 +252,23 @@ std::vector<int> MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY, uint1
         m_staticObjects.push_back(obj);
     }
 
-    //set up texture tilemap
-    for (uint32_t i = 0; i < (sizeX * sizeY); i++)
-    {
-        assert(m_lvl[i].biome != LEVEL_BIOME_ID_NONE);
-        m_tileVec.push_back(m_lvl[i].tilesetID);
-    }
-
-
-    return m_tileVec;
+    return m_lvl;
 }
+
+/************************************************************************
+ * FUNCTION :       MapGenerator::render
+ *
+ * DESCRIPTION :
+ *       Render map objects
+ *
+ *  INPUTS:  NONE
+ *
+ *  OUTPUTS: NONE
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2020.11.26 	    JCB     Documentation Start
+ *
+ ************************************************************************/
 
 void MapGenerator::render(sf::RenderWindow *window)
 {

@@ -17,7 +17,7 @@ public:
     MapGenerator();
     ~MapGenerator();
     static MapGenerator* Instance();
-    std::vector<int> generateMap(uint16_t sizeX, uint16_t sizeY, uint16_t tileSize);
+    std::vector<Tile> generateMap(uint16_t sizeX, uint16_t sizeY, uint16_t tileSize);
 
     void render(sf::RenderWindow* window);
 
@@ -31,7 +31,6 @@ private:
     static MapGenerator*          m_Instance;
     std::vector<Tile>             m_lvl;
     std::vector<StaticMapObject*> m_staticObjects;
-    std::vector<int>              m_tileVec;
     sf::Vector2i                  m_size;
     sf::Vector2i                  m_boundaries;
     uint16_t                      m_tileSize;
