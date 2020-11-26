@@ -5,7 +5,20 @@
 #include "../../../Engine/Component/Misc/Camera.h"
 #endif
 
-//TODO: Break level into chunks
+/************************************************************************
+ * FUNCTION :       Level_1::Level_1
+ *
+ * DESCRIPTION :
+ *       Level constructor, set up objects
+ *
+ *  INPUTS:  NONE
+ *
+ *  OUTPUTS: NONE
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2020.11.25 	    JCB     Documentation Start
+ *
+ ************************************************************************/
 
 Level_1::Level_1() : Level("Level_1", "Levels/Level_1_back.png"),
                      player(sf::Vector2f(600, 300)),
@@ -29,6 +42,21 @@ Level_1::Level_1() : Level("Level_1", "Levels/Level_1_back.png"),
     minimap.setTilemap(map);
 }
 
+/************************************************************************
+ * FUNCTION :       Level_1::initialize
+ *
+ * DESCRIPTION :
+ *       Initialize the level and generate the map
+ *
+ *  INPUTS:  NONE
+ *
+ *  OUTPUTS: NONE
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2020.11.25 	    JCB     Documentation Start
+ *
+ ************************************************************************/
+
 void Level_1::initialize()
 {
     Level::initialize();
@@ -51,6 +79,21 @@ void Level_1::initialize()
     addUIEntity(dbg_viewBoundsText);
     #endif
 }
+
+/************************************************************************
+ * FUNCTION :       Level_1::update
+ *
+ * DESCRIPTION :
+ *       Called every tick, update debug menu and check for collisions (temp)
+ *
+ *  INPUTS:  NONE
+ *
+ *  OUTPUTS: NONE
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2020.11.25 	    JCB     Documentation Start
+ *
+ ************************************************************************/
 
 void Level_1::update(sf::Time tickRate)
 {
@@ -86,6 +129,21 @@ void Level_1::update(sf::Time tickRate)
 
 }
 
+/************************************************************************
+ * FUNCTION :       Level_1::handleInput
+ *
+ * DESCRIPTION :
+ *       Process control input
+ *
+ *  INPUTS:  Key key : key that was pressed
+ *
+ *  OUTPUTS: NONE
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2020.11.25 	    JCB     Documentation Start
+ *
+ ************************************************************************/
+
 void Level_1::handleInput(sf::Keyboard::Key key)
 {
     if (key == CONTROL("INVENTORY")
@@ -114,6 +172,21 @@ void Level_1::handleInput(sf::Keyboard::Key key)
 
     Level::handleInput(key);
 }
+
+/************************************************************************
+ * FUNCTION :       Level_1::render
+ *
+ * DESCRIPTION :
+ *       Render level objects
+ *
+ *  INPUTS:  RenderWindow* window : window to render to
+ *
+ *  OUTPUTS: NONE
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2020.11.25 	    JCB     Documentation Start
+ *
+ ************************************************************************/
 
 void Level_1::render(sf::RenderWindow *window)
 {

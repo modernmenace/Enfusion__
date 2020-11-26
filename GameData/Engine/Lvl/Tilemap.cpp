@@ -1,5 +1,28 @@
 #include "Tilemap.h"
 
+#include <utility>
+
+//todo: Overhaul
+//todo:  1 - Rethink tile vector, necessary?
+//todo:  2 - Merge with mapgenerator?
+
+/************************************************************************
+ * FUNCTION :       Tilemap::Tilemap
+ *
+ * DESCRIPTION :
+ *       Constructor, set up parameters
+ *
+ *  INPUTS:  string tileSetName :
+ *           vector<int> tiles  : vector containing
+ *           Vector2i    size   : size of the tile map (width and height)
+ *           uint16_t  tileSize : size of individual tiles
+ *
+ *  OUTPUTS: NONE
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2020.11.25 	    JCB     Documentation Start
+ *
+ ************************************************************************/
 
 Tilemap::Tilemap(std::string tileSetName, std::vector<int> tiles, sf::Vector2i size, uint16_t tileSize)
 {
@@ -7,9 +30,25 @@ Tilemap::Tilemap(std::string tileSetName, std::vector<int> tiles, sf::Vector2i s
     this->width    = size.x;
     this->height   = size.y;
 
-    this->tiles    = tiles;
+    this->tiles    = std::move(tiles);
     this->tileSize = tileSize;
 }
+
+/************************************************************************
+ * FUNCTION :       Tilemap::draw
+ *
+ * DESCRIPTION :
+ *       Draw the tilemap to the specified target
+ *
+ *  INPUTS:  RenderTarget& target : target to draw to
+ *           RenderStates states  : render states to be used
+ *
+ *  OUTPUTS: NONE
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2020.11.25 	    JCB     Documentation Start
+ *
+ ************************************************************************/
 
 void Tilemap::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
@@ -23,6 +62,21 @@ void Tilemap::draw(sf::RenderTarget& target, sf::RenderStates states) const
     // draw the vertex array
     target.draw(vertices, states);
 }
+
+/************************************************************************
+ * FUNCTION :       Tilemap::initialize
+ *
+ * DESCRIPTION :
+ *       Initialize the tile map
+ *
+ *  INPUTS:  NONE
+ *
+ *  OUTPUTS: NONE
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2020.11.25 	    JCB     Documentation Start
+ *
+ ************************************************************************/
 
 void Tilemap::initialize()
 {;
@@ -56,6 +110,21 @@ void Tilemap::initialize()
             quad[3].texCoords = sf::Vector2f(tu * tileSize, (tv + 1) * tileSize);
         }
 }
+
+/************************************************************************
+ * FUNCTION :       Tilemap::render
+ *
+ * DESCRIPTION :
+ *       Render the tilemap
+ *
+ *  INPUTS:  RenderWindow* window : Window to render to
+ *
+ *  OUTPUTS: NONE
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2020.11.25 	    JCB     Documentation Start
+ *
+ ************************************************************************/
 
 void Tilemap::render(sf::RenderWindow *window)
 {

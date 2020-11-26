@@ -123,8 +123,8 @@ void AnimatedMovement::update(sf::Time tickRate)
         speed = tempSpeed;
         entity->getComponent<Position>().setPosition(characterSprite->getPosition());
 
-        //todo: mess with these collider size values
-        //todo: diagonal movement colliders
+        //todo: fine tune further (DEBUG_MOVEMENT_SHOW_COLLIDERS)
+        //todo: look into diagonal movement colliders
         #if DEBUG_MOVEMENT_IGNORE_COLLISION != 1
         if (m_hasCollider)
         {
