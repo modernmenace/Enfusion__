@@ -10,6 +10,7 @@ struct Tile
     uint16_t     biome;
     uint16_t     tilesetID;
     sf::Vector2f position;
+    bool         blocked;
 };
 
 struct TileTexture

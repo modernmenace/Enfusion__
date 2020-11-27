@@ -13,6 +13,8 @@ public:
     void createTransitionTile(Tile* tile, sf::Vector2f position, uint16_t fromBiome) override
     {
         tile->tilesetID = randomTile();
+        tile->position  = position;
+        tile->blocked   = false;
         tile->biome = LEVEL_BIOME_ID_WOODLAND;
     }
 

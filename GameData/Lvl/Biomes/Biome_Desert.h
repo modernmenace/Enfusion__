@@ -14,7 +14,8 @@ public:
     {
         tile->tilesetID = randomTile();
         tile->position  = position;
-        tile->biome = LEVEL_BIOME_ID_DESERT;
+        tile->biome     = LEVEL_BIOME_ID_DESERT;
+        tile->blocked   = false;
     }
 
 };

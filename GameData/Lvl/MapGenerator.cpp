@@ -146,6 +146,7 @@ Map MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY, uint16_t tileSize)
         Tile t;
         t.tilesetID = 0;
         t.biome     = LEVEL_BIOME_ID_NONE;
+        t.blocked   = false;
         m_lvl.push_back(t);
     }
 
