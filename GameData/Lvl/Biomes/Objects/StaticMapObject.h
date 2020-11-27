@@ -17,17 +17,12 @@ public:
     inline void setBounds(sf::IntRect bounds) { o_sprite.setTextureRect(bounds); }
 
     inline sf::FloatRect bounds() { return o_sprite.getGlobalBounds(); }
-    inline bool blocksMovement()  { return o_blockMovement; }
-
-protected:
-    inline void setBlocksMovement(bool b) { o_blockMovement = b; };
 
 private:
     sf::Sprite   o_sprite;
     sf::IntRect  o_bounds;
 
     Tile*        o_tile = nullptr;
-    bool         o_blockMovement = false;
 
 };
 

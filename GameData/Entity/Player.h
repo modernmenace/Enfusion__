@@ -2,18 +2,20 @@
 #define ENFUSION_PLAYER_H
 
 #include "../Engine/Entity/Entity.h"
+#include "../Lvl/LvlStructs.h"
 
 class Player : public Entity {
 
 public:
     Player(sf::Vector2f position);
     sf::FloatRect bounds() override;
-    sf::Vector2f currentPosition();
+    inline sf::Vector2f currentPosition();
+    inline Tile& currentTile() { return *p_tile; }
 
     bool isMoving();
-    void stopMovement();
 
-    sf::FloatRect* collider();
+private:
+    Tile* p_tile = nullptr;
 
 };
 

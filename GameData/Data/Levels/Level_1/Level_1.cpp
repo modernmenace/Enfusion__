@@ -109,24 +109,6 @@ void Level_1::update(sf::Time tickRate)
             + std::to_string(c_view.left) + "l, " + std::to_string(c_view.width) + "w, " + std::to_string(c_view.height) + "h)");
     }
     #endif
-
-    //check for collisions
-    //todo: this is inefficient, implement quadtrees for nearby
-    //todo: may also help when split into chunks
-    if (player.isMoving())
-    {
-        for(StaticMapObject* o : map->map()->m_mapObjects)
-        {
-            if (o->blocksMovement())
-            {
-                if (o->bounds().intersects(*player.collider()))
-                {
-                    player.stopMovement();
-                }
-            }
-        }
-    }
-
 }
 
 /************************************************************************

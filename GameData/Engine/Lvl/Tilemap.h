@@ -8,12 +8,11 @@
 class Tilemap : public sf::Drawable, public sf::Transformable {
 
 public:
-    Tilemap(std::string tileSetName, Map tiles, sf::Vector2i size, uint16_t tileSize);
+    Tilemap(std::string tileSetName, Map* tiles, sf::Vector2i size, uint16_t tileSize);
     ~Tilemap();
 
     void initialize();
     void render(sf::RenderWindow* window);
-    Map* map() { return &t_map; }
 
     inline uint16_t getTileSize()           { return tileSize; };
 
@@ -25,7 +24,7 @@ private:
     uint16_t height;
     uint16_t tileSize;
 
-    Map t_map;
+    Map* t_map = nullptr;
 
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };

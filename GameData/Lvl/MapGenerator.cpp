@@ -128,8 +128,9 @@ StaticMapObject* MapGenerator::getRandomObject(uint16_t biomeID)
  *
  ************************************************************************/
 
-Map MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY, uint16_t tileSize)
+Map* MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY, uint16_t tileSize)
 {
+    assert(m_map == nullptr);
     m_lvl.clear();
     m_size.x = sizeX;
     m_size.y = sizeY;
@@ -254,8 +255,6 @@ Map MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY, uint16_t tileSize)
     }
 
     //generate static objects
-    int posX = 0;
-    int posY = 0;
     for(uint32_t i = 0; i < (m_size.x * m_size.y); i++)
     {
         bool place = (rand() % 100) < MAPGEN_CHANCE_STATICOBJECT;
@@ -269,9 +268,10 @@ Map MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY, uint16_t tileSize)
         m_staticObjects.push_back(obj);
     }
 
-    Map m;
-    m.m_tiles      = m_lvl;
-    m.m_mapObjects = m_staticObjects;
-    return m;
+    m_map = new Map;
+    m_map->m_tiles      = m_lvl;
+    m_map->m_mapObjects = m_staticObjects;
+
+    return m_map;
 }
 

@@ -9,7 +9,8 @@ class Cactus : public StaticMapObject
 public:
     Cactus() : StaticMapObject("Levels/desert.png", sf::IntRect(112, 192, 16, 32))
     {
-        setBlocksMovement(true);
+        //todo: block tiles
+        //todo: pass map?
     };
 
 

@@ -25,13 +25,13 @@
  *
  ************************************************************************/
 
-Tilemap::Tilemap(std::string tileSetName, Map tiles, sf::Vector2i size, uint16_t tileSize)
+Tilemap::Tilemap(std::string tileSetName, Map* tiles, sf::Vector2i size, uint16_t tileSize)
 {
     this->tileset  = AssetManager::Instance()->getTexture(tileSetName);
     this->width    = size.x;
     this->height   = size.y;
 
-    this->t_map      = std::move(tiles);
+    this->t_map      = tiles;
     this->tileSize = tileSize;
 }
 
@@ -55,8 +55,8 @@ Tilemap::Tilemap(std::string tileSetName, Map tiles, sf::Vector2i size, uint16_t
 
 Tilemap::~Tilemap()
 {
-    for(uint32_t i = 0; i < t_map.m_mapObjects.size(); i++)
-        delete t_map.m_mapObjects[i];
+    for(uint32_t i = 0; i < t_map->m_mapObjects.size(); i++)
+        delete t_map->m_mapObjects[i];
 }
 
 /************************************************************************
@@ -113,7 +113,7 @@ void Tilemap::initialize()
         for (unsigned int j = 0; j < height; ++j)
         {
             // get the current tile number
-            int tileNumber = t_map.m_tiles[i + j * width].tilesetID;
+            int tileNumber = t_map->m_tiles[i + j * width].tilesetID;
 
             // find its position in the tileset texture
             int tu = tileNumber % (tileset.getSize().x / tileSize);
@@ -155,6 +155,6 @@ void Tilemap::render(sf::RenderWindow *window)
 {
     window->draw(*this);
 
-    for(auto staticObject : t_map.m_mapObjects)
+    for(auto staticObject : t_map->m_mapObjects)
         staticObject->render(window);
 }
