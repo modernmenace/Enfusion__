@@ -15,7 +15,7 @@ class MapGenerator {
 
 public:
     MapGenerator();
-    ~MapGenerator();
+    ~MapGenerator() { if (m_Instance) delete m_Instance; }
     static MapGenerator* Instance();
     Map generateMap(uint16_t sizeX, uint16_t sizeY, uint16_t tileSize);
 
@@ -34,28 +34,7 @@ private:
 
     void populateBiomeObjects();
 
-    StaticMapObject* getRandomObject(uint16_t biomeID)
-    {
-        auto& vec = m_biomeObjects[biomeID];
-        if (vec.size() == 0)
-            return nullptr;
-
-        float weightedSum = 0;
-        for(uint16_t i = 0; i < vec.size(); i++)
-            weightedSum += vec[i].weight;
-
-        float weightedRand = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/weightedSum));
-
-        for(uint16_t i = 0; i < vec.size(); i++)
-        {
-            if (weightedRand < vec[i].weight)
-                return &vec[i].obj;
-            else
-                weightedRand -= vec[i].weight;
-        }
-
-        return &vec[0].obj;
-    }
+    StaticMapObject* getRandomObject(uint16_t biomeID);
 };
 
 

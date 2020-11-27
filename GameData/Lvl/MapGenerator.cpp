@@ -6,7 +6,6 @@
 
 MapGenerator* MapGenerator::m_Instance = nullptr;
 
-
 //TODO: Eventually use simplex noise for map generation to smooth transitions
 
 /************************************************************************
@@ -72,6 +71,44 @@ void MapGenerator::populateBiomeObjects()
     m_biomeObjects[LEVEL_BIOME_ID_DESERT].push_back({Cactus(), 1});
     m_biomeObjects[LEVEL_BIOME_ID_DESERT].push_back({Cactus2(), 1});
     m_biomeObjects[LEVEL_BIOME_ID_DESERT].push_back({DeadTree(), 0.5});
+}
+
+/************************************************************************
+ * FUNCTION :       MapGenerator::getRandomObject
+ *
+ * DESCRIPTION :
+ *       Returns a random weighted object by biome type
+ *
+ *  INPUTS:  uint16_t biomeID : Biome type of object
+ *
+ *  OUTPUTS: StaticMapObject* : return address of the object
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2020.11.26 	    JCB     Documentation Start
+ *
+ ************************************************************************/
+
+StaticMapObject* MapGenerator::getRandomObject(uint16_t biomeID)
+{
+    auto& vec = m_biomeObjects[biomeID];
+    if (vec.size() == 0)
+        return nullptr;
+
+    float weightedSum = 0;
+    for(uint16_t i = 0; i < vec.size(); i++)
+        weightedSum += vec[i].weight;
+
+    float weightedRand = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/weightedSum));
+
+    for(uint16_t i = 0; i < vec.size(); i++)
+    {
+        if (weightedRand < vec[i].weight)
+            return &vec[i].obj;
+        else
+            weightedRand -= vec[i].weight;
+    }
+
+    return &vec[0].obj;
 }
 
 /************************************************************************

@@ -3,9 +3,9 @@
 #include <utility>
 
 //todo: Overhaul
-//todo:  1 - Rethink tile vector, necessary?
-//todo:  2 - Blocked tiles
+//todo:  2 - Blocked tiles (redo collision)
 //todo:  3 - Rethink how static objects are handled
+//todo:  4 - store player tile andswa show on debug menu
 
 /************************************************************************
  * FUNCTION :       Tilemap::Tilemap
