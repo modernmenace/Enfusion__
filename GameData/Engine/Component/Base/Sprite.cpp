@@ -36,6 +36,6 @@ void Sprite::initialize()
 
 void Sprite::render(sf::RenderWindow *window)
 {
-    if (visible)
+    if (s_visible)
         window->draw(sprite);
 }

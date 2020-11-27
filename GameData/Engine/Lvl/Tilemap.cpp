@@ -79,7 +79,7 @@ void Tilemap::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     // apply the transform
     auto transform = getTransform();
-    transform.scale(sf::Vector2f(2, 2));
+    transform.scale(GLOBAL_SCALE_TILE);
     states.transform *= transform;
 
     // apply the tileset texture

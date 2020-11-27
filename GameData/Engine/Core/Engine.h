@@ -31,7 +31,7 @@ typedef std::string string_t;
 
 // scale data
 #define GLOBAL_SCALE_GAMEOBJECT sf::Vector2f(2.5f, 2.5f)
-#define GLOBAL_SCALE_TILE       sf::Vector2f(2.5f, 2.5f)
+#define GLOBAL_SCALE_TILE       sf::Vector2f(2   , 2)
 
 // debug macros
 #if DEBUG_BUILD

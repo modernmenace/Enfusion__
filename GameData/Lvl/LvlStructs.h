@@ -9,7 +9,9 @@ struct Tile
 {
     uint16_t     biome;
     uint16_t     tilesetID;
+    uint16_t     tileSize;
     sf::Vector2f position;
+    uint32_t     arrayPos;
     bool         blocked;
 };
 

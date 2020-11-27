@@ -49,7 +49,7 @@ void InventoryMenu::initialize()
 
     getComponent<Sprite>().getSprite().setTextureRect(sf::IntRect(0, 0, 48, 48));
     getComponent<Sprite>().getSprite().setScale(12, 15);
-    getComponent<Sprite>().visible = false;
+    getComponent<Sprite>().setVisible(false);
 
     //initialize slots
     sf::Vector2f slotPos(getComponent<Position>().getPosition().x + 45,
@@ -111,13 +111,13 @@ void InventoryMenu::toggleMenu()
     {
         updateSlots();
 
-        getComponent<Sprite>().visible = true;
+        getComponent<Sprite>().setVisible(true);
         for(auto &s : slots)
             s->setVisible(true);
     }
     else
     {
-        getComponent<Sprite>().visible = false;
+        getComponent<Sprite>().setVisible(false);
         for(auto &s : slots)
             s->setVisible(false);
         i_tooltip.hide();

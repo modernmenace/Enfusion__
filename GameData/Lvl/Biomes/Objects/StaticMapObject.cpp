@@ -1,4 +1,5 @@
 #include "StaticMapObject.h"
+#include "../../LvlStructs.h"
 
 StaticMapObject::StaticMapObject(string_t tileset, sf::IntRect texBounds) : o_sprite()
 {
@@ -7,8 +8,16 @@ StaticMapObject::StaticMapObject(string_t tileset, sf::IntRect texBounds) : o_sp
     o_sprite.setScale(GLOBAL_SCALE_GAMEOBJECT);
     o_sprite.setTextureRect(o_bounds);
 
-    //o_sprite.setPosition(position);
 }
+
+void StaticMapObject::setPosition(Tile& tile)
+{
+    o_tile = &tile;
+    dbg_log(o_tile->tileSize)
+    o_sprite.setPosition(o_tile->position);
+}
+
+
 
 void StaticMapObject::render(sf::RenderWindow *window)
 {

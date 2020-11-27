@@ -136,17 +136,21 @@ Map MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY, uint16_t tileSize)
     m_tileSize = tileSize;
     std::vector<StaticMapObject*> m_staticObjects;
 
-    m_boundaries.x = m_size.x * tileSize * 2; //scaled by 2 in tilemap.cpp
-    m_boundaries.y = m_size.y * tileSize * 2; //scaled by 2 in tilemap.cpp
+    m_boundaries.x = m_size.x * tileSize * GLOBAL_SCALE_TILE.x; //scaled by 2 in tilemap.cpp
+    m_boundaries.y = m_size.y * tileSize * GLOBAL_SCALE_TILE.y; //scaled by 2 in tilemap.cpp
     LevelManager::Instance()->setBoundaries(m_boundaries);
 
     //set initial empty map array
     for(uint32_t i = 0; i < (sizeX * sizeY); i++)
     {
+        //if issue pops up here, arrayPos and tileSize
+        //may need to be initialized in transition tiles
         Tile t;
         t.tilesetID = 0;
         t.biome     = LEVEL_BIOME_ID_NONE;
         t.blocked   = false;
+        t.tileSize  = tileSize * GLOBAL_SCALE_TILE.x;
+        t.arrayPos  = i;
         m_lvl.push_back(t);
     }
 
@@ -250,7 +254,6 @@ Map MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY, uint16_t tileSize)
     }
 
     //generate static objects
-    //todo: object collisons
     int posX = 0;
     int posY = 0;
     for(uint32_t i = 0; i < (m_size.x * m_size.y); i++)
@@ -261,12 +264,8 @@ Map MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY, uint16_t tileSize)
         StaticMapObject* r = getRandomObject(m_lvl[i].biome);
         if (r == nullptr) continue;
 
-        //are transition tiles being set to 0, 0??
-        posX = m_lvl[i].position.x;
-        posY = m_lvl[i].position.y;
-
         StaticMapObject* obj = new StaticMapObject(*getRandomObject(m_lvl[i].biome));
-        obj->setPosition(sf::Vector2f(posX, posY));
+        obj->setPosition(m_lvl[i]);
         m_staticObjects.push_back(obj);
     }
 

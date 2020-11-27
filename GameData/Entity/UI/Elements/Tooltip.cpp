@@ -29,7 +29,7 @@ void Tooltip::show(Item* item, sf::Vector2f position)
 {
     getComponent<Position>().setPosition(position);
     getComponent<Sprite>().getSprite().setPosition(position);
-    getComponent<Sprite>().visible = true;
+    getComponent<Sprite>().setVisible(true);
 
     t_iName.setText(item->name());
     t_iDesc.setText(item->description());

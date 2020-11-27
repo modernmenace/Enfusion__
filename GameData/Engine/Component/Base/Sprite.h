@@ -11,7 +11,7 @@ public:
 
     void initialize()                     override;
     void render(sf::RenderWindow* window) override;
-    bool visible = true;
+    void setVisible(bool v) { s_visible = v; }
 
     inline void updatePosition(sf::Vector2f p)  { sprite.setPosition(p); }
     inline sf::Sprite& getSprite(){ return sprite; }
@@ -19,6 +19,7 @@ public:
 private:
     sf::Sprite   sprite;
     string_t     s_name;
+    bool s_visible = true;
     sf::Texture* s_tex = nullptr;
 };
 
