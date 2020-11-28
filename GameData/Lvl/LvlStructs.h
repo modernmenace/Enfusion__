@@ -4,6 +4,7 @@
 #include "../Engine/Core/Engine.h"
 #include "Biomes/Objects/StaticMapObject.h"
 #include <vector>
+#include <cmath>
 
 struct Tile
 {
@@ -33,9 +34,11 @@ struct Map
     std::vector<Tile>             m_tiles;
 };
 
-static void resolvePositionToTile(uint32_t x, uint32_t y)
+static uint32_t resolvePositionToTile(uint16_t x, uint16_t y)
 {
-    //todo: this?
+    uint16_t px = ceil(x);
+    uint16_t py = ceil(y);
+    return ((py / 32) * 250)+(px / 32);
 }
 
 #endif //ENFUSION___LVLSTRUCTS_H

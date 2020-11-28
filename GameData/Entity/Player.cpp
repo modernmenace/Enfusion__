@@ -59,9 +59,7 @@ void Player::initialize()
 {
     Entity::initialize();
     sf::Vector2f pos = getComponent<Position>().getPosition();
-    uint16_t px = ceil(pos.x);
-    uint16_t py = ceil(pos.y);
-    uint32_t aPos = ((py / 32) * 250)+(px / 32);
+    uint32_t aPos = resolvePositionToTile(pos.x, pos.y);
     p_tile = &MapGenerator::Instance()->map()->m_tiles[aPos];
 }
 
