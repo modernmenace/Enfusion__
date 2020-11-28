@@ -8,9 +8,10 @@ class Player : public Entity {
 
 public:
     Player(sf::Vector2f position);
+    void initialize() override;
     sf::FloatRect bounds() override;
     inline sf::Vector2f currentPosition();
-    inline Tile& currentTile() { return *p_tile; }
+    inline Tile* currentTile() { return p_tile; }
 
     bool isMoving();
 

@@ -59,24 +59,29 @@ Level_1::Level_1() : Level("Level_1", "Levels/Level_1_back.png"),
 
 void Level_1::initialize()
 {
-    Level::initialize();
-    map->initialize();
-    hotbar.updateSlots();
-
     auto p_posX = (rand()%(MapGenerator::Instance()->size().x * map[0].getTileSize())-1) + 1;
     auto p_posY = (rand()%(MapGenerator::Instance()->size().y * map[0].getTileSize())-1) + 1;
     player.getComponent<Position>().setPosition(sf::Vector2f(p_posX, p_posY));
 
+    Level::initialize();
+    map->initialize();
+    hotbar.updateSlots();
+
+
     #if DEBUG_ENABLE_DEBUG_MENU == 1
     dbg_playerPosText  = new TextDisplay("Test", sf::Vector2f(-950, -530), 12);
     dbg_viewBoundsText = new TextDisplay("Test2", sf::Vector2f(-950, -510), 12);
+    dbg_playerTileText = new TextDisplay("Test3", sf::Vector2f(-950, -490), 12);
     dbg_playerPosText->initialize();
     dbg_viewBoundsText->initialize();
+    dbg_playerTileText->initialize();
     dbg_playerPosText->setVisible(false);
     dbg_viewBoundsText->setVisible(false);
+    dbg_playerTileText->setVisible(false);
     dbg_menuVisible = false;
     addUIEntity(dbg_playerPosText);
     addUIEntity(dbg_viewBoundsText);
+    addUIEntity(dbg_playerTileText);
     #endif
 }
 
@@ -107,6 +112,13 @@ void Level_1::update(sf::Time tickRate)
         auto c_view = player.getComponent<Camera>().getCameraView();
         dbg_viewBoundsText->setText("Camera View: (" + std::to_string(c_view.top) + "t, "
             + std::to_string(c_view.left) + "l, " + std::to_string(c_view.width) + "w, " + std::to_string(c_view.height) + "h)");
+
+        if (player.currentTile() != nullptr)
+            dbg_playerTileText->setText("Player Tile: (" + std::to_string(player.currentTile()->arrayPos)
+            + ", (" + std::to_string(player.currentTile()->position.x) + ", " + std::to_string(player.currentTile()->position.y)
+            + ") -> (" + std::to_string(player.currentTile()->position.x + player.currentTile()->tileSize) + ", " + std::to_string(player.currentTile()->position.y + player.currentTile()->tileSize) + ")");
+        else
+            dbg_playerTileText->setText("Player Tile: (NULL)");
     }
     #endif
 }
@@ -148,6 +160,7 @@ void Level_1::handleInput(sf::Keyboard::Key key)
     {
         dbg_playerPosText->setVisible(!dbg_playerPosText->visible());
         dbg_viewBoundsText->setVisible(!dbg_viewBoundsText->visible());
+        dbg_playerTileText->setVisible(!dbg_playerTileText->visible());
         dbg_menuVisible = !dbg_menuVisible;
     }
     #endif

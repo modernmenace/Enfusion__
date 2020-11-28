@@ -21,7 +21,8 @@ public:
 
     inline sf::Vector2i size()        { return m_size; }
     inline sf::Vector2i boundaries()  { return m_boundaries; }
-    inline std::vector<Tile>* map()   { return &m_lvl; }
+    inline Map* map()                 { return m_map; }
+    inline uint16_t tileSize()        { return m_tileSize; }
 
 private:
     static MapGenerator*          m_Instance;

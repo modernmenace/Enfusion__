@@ -1,4 +1,5 @@
 #include "Biome_Woodland.h"
+#include <cmath>
 
 void Biome_Woodland::generate(sf::Vector2i position, sf::Vector2i area, std::vector<Tile> *map, std::vector<StaticMapObject*>* objs, sf::Vector2i mapArea)
 {
@@ -10,13 +11,15 @@ void Biome_Woodland::generate(sf::Vector2i position, sf::Vector2i area, std::vec
         {
             if ((nPos.y+nPos.x) < (nPos.y + mapArea.x))
             {
-                Tile* t = &map->at((nPos.y * mapArea.x)+nPos.x);
+                uint16_t px = ceil(nPos.x);
+                uint16_t py = ceil(nPos.y);
+                Tile* t = &map->at((py * mapArea.x)+px);
                 t->tilesetID = randomTile();
                 t->biome = LEVEL_BIOME_ID_WOODLAND;
                 //todo: using magic number here, fix
                 //todo: 32 = tileSize (16) * transform scale (2)
-                t->position.x = (nPos.x * 32);
-                t->position.y = (nPos.y * 32);
+                t->position.x = (px * 32);
+                t->position.y = (py* 32);
                 nPos.x++;
             }
         }

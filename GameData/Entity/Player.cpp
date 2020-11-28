@@ -5,6 +5,8 @@
 #include "../Engine/Component/Misc/Camera.h"
 #include "../Component/Inventory.h"
 #include "../Engine/Lvl/LevelManager.h"
+#include "../Lvl/MapGenerator.h"
+#include <cmath>
 
 /************************************************************************
  * FUNCTION :       Player::Player
@@ -50,8 +52,17 @@ Player::Player(sf::Vector2f position)
     }
      */
 
-
     LevelManager::Instance()->setPlayer(this);
+}
+
+void Player::initialize()
+{
+    Entity::initialize();
+    sf::Vector2f pos = getComponent<Position>().getPosition();
+    uint16_t px = ceil(pos.x);
+    uint16_t py = ceil(pos.y);
+    uint32_t aPos = ((py / 32) * 250)+(px / 32);
+    p_tile = &MapGenerator::Instance()->map()->m_tiles[aPos];
 }
 
 /************************************************************************

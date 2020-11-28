@@ -174,7 +174,7 @@ Map* MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY, uint16_t tileSize
             size.y = sizeY - pos.y;
             lastRun = true;
         }
-        biome->generate(pos, size, map(), &m_staticObjects, sf::Vector2i(sizeX, sizeY));
+        biome->generate(pos, size, &m_lvl, &m_staticObjects, sf::Vector2i(sizeX, sizeY));
 
 
         if ((pos.x + size.x) > (sizeX))

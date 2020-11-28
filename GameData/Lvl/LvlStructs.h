@@ -33,4 +33,9 @@ struct Map
     std::vector<Tile>             m_tiles;
 };
 
+static void resolvePositionToTile(uint32_t x, uint32_t y)
+{
+    //todo: this?
+}
+
 #endif //ENFUSION___LVLSTRUCTS_H

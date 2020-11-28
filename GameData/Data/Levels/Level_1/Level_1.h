@@ -36,6 +36,7 @@ private:
     bool         dbg_menuVisible;
     TextDisplay* dbg_playerPosText;
     TextDisplay* dbg_viewBoundsText;
+    TextDisplay* dbg_playerTileText;
     #endif
 };
 

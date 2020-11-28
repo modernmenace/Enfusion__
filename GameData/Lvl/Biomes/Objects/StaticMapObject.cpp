@@ -13,7 +13,6 @@ StaticMapObject::StaticMapObject(string_t tileset, sf::IntRect texBounds) : o_sp
 void StaticMapObject::setPosition(Tile& tile)
 {
     o_tile = &tile;
-    dbg_log(o_tile->tileSize)
     o_sprite.setPosition(o_tile->position);
 }
 
