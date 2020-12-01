@@ -11,10 +11,12 @@ public:
     void setPosition(sf::Vector2f pos);
     void setPosition(Tile*);
 
-    inline sf::Vector2f getPosition() { return this->position; }
+    inline sf::Vector2f getPosition() { return p_pos;  }
+    inline Tile*        getTile()     { return p_tile; }
 
 private:
-    sf::Vector2f position;
+    sf::Vector2f p_pos;
+    Tile*        p_tile = nullptr;
 
 };
 

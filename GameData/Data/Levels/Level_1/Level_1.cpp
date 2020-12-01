@@ -113,10 +113,11 @@ void Level_1::update(sf::Time tickRate)
         dbg_viewBoundsText->setText("Camera View: (" + std::to_string(c_view.top) + "t, "
             + std::to_string(c_view.left) + "l, " + std::to_string(c_view.width) + "w, " + std::to_string(c_view.height) + "h)");
 
-        if (player.currentTile() != nullptr)
-            dbg_playerTileText->setText("Player Tile: (" + std::to_string(player.currentTile()->arrayPos)
-            + ", (" + std::to_string(player.currentTile()->position.x) + ", " + std::to_string(player.currentTile()->position.y)
-            + ") -> (" + std::to_string(player.currentTile()->position.x + player.currentTile()->tileSize) + ", " + std::to_string(player.currentTile()->position.y + player.currentTile()->tileSize) + ")");
+        Tile* pTile = player.getComponent<Position>().getTile();
+        if (pTile != nullptr)
+            dbg_playerTileText->setText("Player Tile: (" + std::to_string(pTile->arrayPos)
+            + ", (" + std::to_string(pTile->position.x) + ", " + std::to_string(pTile->position.y)
+            + ") -> (" + std::to_string(pTile->position.x + pTile->tileSize) + ", " + std::to_string(pTile->position.y + pTile->tileSize) + ")");
         else
             dbg_playerTileText->setText("Player Tile: (NULL)");
     }
