@@ -15,3 +15,10 @@ void Position::setPosition(sf::Vector2f pos)
     if (entity->hasComponent<AnimatedSprite>())
         entity->getComponent<AnimatedSprite>().setPosition(position);
 }
+
+void Position::setPosition(Tile* tile)
+{
+    this->position = tile->position;
+
+    setPosition(position);
+}

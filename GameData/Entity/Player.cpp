@@ -31,27 +31,6 @@ Player::Player(sf::Vector2f position)
     addComponent<AnimatedMovement>(true);
     addComponent<Inventory>();
 
-    //todo: set initial tile (p_tile)
-    //todo: map pointer stored in mapgenerator
-    /*
-     * pos.x = 0; pos.y = 0;
-    for(uint32_t i = 0; i < (sizeX * sizeY); i++)
-    {
-        if (pos.x++ == sizeX)
-        {
-            pos.y++;
-            pos.x = 0;
-        }
-        if (m_lvl[i].biome == LEVEL_BIOME_ID_NONE)
-        {
-            sf::Vector2f tempPos;
-            tempPos.x = pos.x * 32;
-            tempPos.y = pos.y * 32;
-            BiomeManager::Instance()->biome(m_lvl[i-1].biome)->createTransitionTile(&m_lvl[i], tempPos, m_lvl[i-1].biome);
-        }
-    }
-     */
-
     LevelManager::Instance()->setPlayer(this);
 }
 

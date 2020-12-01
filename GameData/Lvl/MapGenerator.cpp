@@ -274,4 +274,3 @@ Map* MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY, uint16_t tileSize
 
     return m_map;
 }
-

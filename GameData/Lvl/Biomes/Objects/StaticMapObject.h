@@ -3,7 +3,7 @@
 
 #include "../../../Engine/Core/Engine.h"
 
-extern struct Tile;
+struct Tile;
 
 class StaticMapObject {
 

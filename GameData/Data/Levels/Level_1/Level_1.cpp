@@ -59,9 +59,9 @@ Level_1::Level_1() : Level("Level_1", "Levels/Level_1_back.png"),
 
 void Level_1::initialize()
 {
-    auto p_posX = (rand()%(MapGenerator::Instance()->size().x * map[0].getTileSize())-1) + 1;
-    auto p_posY = (rand()%(MapGenerator::Instance()->size().y * map[0].getTileSize())-1) + 1;
-    player.getComponent<Position>().setPosition(sf::Vector2f(p_posX, p_posY));
+    //choose player start position
+    Tile* p_pos = &MapGenerator::Instance()->map()->m_tiles[rand()%(MapGenerator::Instance()->size().x * MapGenerator::Instance()->size().y)];
+    player.getComponent<Position>().setPosition(p_pos);
 
     Level::initialize();
     map->initialize();
