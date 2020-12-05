@@ -41,4 +41,12 @@ static uint32_t resolvePositionToTile(uint16_t x, uint16_t y)
     return ((py / 32) * 250)+(px / 32); //250 is map sizeX
 }
 
+static sf::Vector2i resolveTileDistance(Tile* t1, Tile* t2)
+{
+    sf::Vector2i ret;
+    ret.x = abs(t2->position.x - t1->position.x);
+    ret.y = abs(t2->position.y - t1->position.y);
+    return ret;
+}
+
 #endif //ENFUSION___LVLSTRUCTS_H

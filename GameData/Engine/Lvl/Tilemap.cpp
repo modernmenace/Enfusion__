@@ -1,6 +1,7 @@
 #include "Tilemap.h"
 #include <utility>
 #include "../../Lvl/MapGenerator.h"
+#include "LevelManager.h"
 
 //todo: Overhaul
 //todo:  2 - Blocked tiles (redo collision)
@@ -155,11 +156,22 @@ void Tilemap::render(sf::RenderWindow *window)
 {
     window->draw(*this);
 
+    //todo: culling
+    Tile* playerTile = LevelManager::Instance()->getCurrentLevel().player()->getComponent<Position>().getTile();
+
     for(auto staticObject : t_map->m_mapObjects)
+    {
+        //todo: culling
         staticObject->render(window);
+    }
 
     for(auto& outline : t_outlines)
-        window->draw(outline);
+    {
+        //todo: culling
+        auto dist = resolveTileDistance(playerTile, outline.tile);
+        if (dist.x < CULLING_TILE_DISTANCE && dist.y < CULLING_TILE_DISTANCE)
+            window->draw(outline.rect);
+    }
 
 }
 
@@ -172,7 +184,6 @@ void Tilemap::showOutlines(bool show)
         return;
     }
 
-    //todo: push outlines to array
     auto mSize = MapGenerator::Instance()->size();
     sf::Vector2f tSize;
     tSize.x = (MapGenerator::Instance()->tileSize() * GLOBAL_SCALE_TILE.x);
@@ -198,7 +209,11 @@ void Tilemap::showOutlines(bool show)
         sh.setOutlineThickness(1);
         sh.setFillColor(sf::Color::Transparent);
         sh.setPosition(tempPos);
-        t_outlines.push_back(sh);
+
+        t_outline out;
+        out.rect = sh;
+        out.tile = &MapGenerator::Instance()->map()->m_tiles[i];
+        t_outlines.push_back(out);
     }
 
     t_drawOutlines = true;

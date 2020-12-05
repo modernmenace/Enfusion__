@@ -5,6 +5,8 @@
 #include "../../Lvl/LvlStructs.h"
 #include <vector>
 
+#define CULLING_TILE_DISTANCE 250
+
 class Tilemap : public sf::Drawable, public sf::Transformable {
 
 public:
@@ -26,8 +28,14 @@ private:
     uint16_t tileSize;
 
     Map* t_map = nullptr;
+
+    struct t_outline
+    {
+        Tile*              tile;
+        sf::RectangleShape rect;
+    };
     bool t_drawOutlines = false;
-    std::vector<sf::RectangleShape> t_outlines;
+    std::vector<t_outline> t_outlines;
 
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };
