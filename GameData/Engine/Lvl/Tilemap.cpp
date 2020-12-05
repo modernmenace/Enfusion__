@@ -1,6 +1,6 @@
 #include "Tilemap.h"
-
 #include <utility>
+#include "../../Lvl/MapGenerator.h"
 
 //todo: Overhaul
 //todo:  2 - Blocked tiles (redo collision)
@@ -157,4 +157,49 @@ void Tilemap::render(sf::RenderWindow *window)
 
     for(auto staticObject : t_map->m_mapObjects)
         staticObject->render(window);
+
+    for(auto& outline : t_outlines)
+        window->draw(outline);
+
+}
+
+void Tilemap::showOutlines(bool show)
+{
+    if (!show)
+    {
+        t_drawOutlines = false;
+        t_outlines.clear();
+        return;
+    }
+
+    //todo: push outlines to array
+    auto mSize = MapGenerator::Instance()->size();
+    sf::Vector2f tSize;
+    tSize.x = (MapGenerator::Instance()->tileSize() * GLOBAL_SCALE_TILE.x);
+    tSize.y = (MapGenerator::Instance()->tileSize() * GLOBAL_SCALE_TILE.y);
+
+    uint16_t posX = 0;
+    uint16_t posY = 0;
+    for(uint32_t i = 0; i < (mSize.x * mSize.y); i++)
+    {
+        if (posX++ == mSize.x)
+        {
+            posY++;
+            posX = 0;
+        }
+
+        sf::Vector2f tempPos;
+        tempPos.x = posX * 32;
+        tempPos.y = posY * 32;
+
+        sf::RectangleShape sh;
+        sh.setSize(tSize);
+        sh.setOutlineColor(sf::Color::Black);
+        sh.setOutlineThickness(1);
+        sh.setFillColor(sf::Color::Transparent);
+        sh.setPosition(tempPos);
+        t_outlines.push_back(sh);
+    }
+
+    t_drawOutlines = true;
 }

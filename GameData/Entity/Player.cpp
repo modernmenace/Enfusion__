@@ -28,7 +28,6 @@ Player::Player(sf::Vector2f position)
     addComponent<Camera>(CameraType::FOLLOW);
     addComponent<AnimatedMovement>(true);
     addComponent<Inventory>();
-
     LevelManager::Instance()->setPlayer(this);
 }
 

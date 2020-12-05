@@ -163,6 +163,7 @@ void Level_1::handleInput(sf::Keyboard::Key key)
         dbg_viewBoundsText->setVisible(!dbg_viewBoundsText->visible());
         dbg_playerTileText->setVisible(!dbg_playerTileText->visible());
         dbg_menuVisible = !dbg_menuVisible;
+        map->showOutlines(!map->outlinesShowing());
     }
     #endif
 

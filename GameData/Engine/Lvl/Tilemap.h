@@ -13,9 +13,10 @@ public:
 
     void initialize();
     void render(sf::RenderWindow* window);
+    void showOutlines(bool);
 
-    inline uint16_t getTileSize()           { return tileSize; };
-
+    inline uint16_t getTileSize()     { return tileSize; };
+    inline bool     outlinesShowing() { return t_drawOutlines; }
 private:
     sf::Texture     tileset;
     sf::VertexArray vertices;
@@ -25,6 +26,8 @@ private:
     uint16_t tileSize;
 
     Map* t_map = nullptr;
+    bool t_drawOutlines = false;
+    std::vector<sf::RectangleShape> t_outlines;
 
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };

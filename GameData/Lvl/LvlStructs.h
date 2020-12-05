@@ -38,7 +38,7 @@ static uint32_t resolvePositionToTile(uint16_t x, uint16_t y)
 {
     uint16_t px = ceil(x);
     uint16_t py = ceil(y);
-    return ((py / 32) * 250)+(px / 32);
+    return ((py / 32) * 250)+(px / 32); //250 is map sizeX
 }
 
 #endif //ENFUSION___LVLSTRUCTS_H
