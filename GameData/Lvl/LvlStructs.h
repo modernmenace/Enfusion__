@@ -34,6 +34,7 @@ struct Map
     std::vector<Tile>             m_tiles;
 };
 
+//todo: magic numbers!
 static uint32_t resolvePositionToTile(uint16_t x, uint16_t y)
 {
     uint16_t px = ceil(x);

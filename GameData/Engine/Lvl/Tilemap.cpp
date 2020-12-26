@@ -135,54 +135,6 @@ void Tilemap::initialize()
             quad[2].texCoords = sf::Vector2f((tu + 1) * tileSize, (tv + 1) * tileSize);
             quad[3].texCoords = sf::Vector2f(tu * tileSize, (tv + 1) * tileSize);
         }
-}
-
-/************************************************************************
- * FUNCTION :       Tilemap::render
- *
- * DESCRIPTION :
- *       Render the tilemap
- *
- *  INPUTS:  RenderWindow* window : Window to render to
- *
- *  OUTPUTS: NONE
- *
- *  VERSION   	DATE    		WHO     DETAIL
- *  V1.00.00   	2020.11.25 	    JCB     Documentation Start
- *
- ************************************************************************/
-
-void Tilemap::render(sf::RenderWindow *window)
-{
-    window->draw(*this);
-
-    //todo: culling
-    Tile* playerTile = LevelManager::Instance()->getCurrentLevel().player()->getComponent<Position>().getTile();
-
-    for(auto staticObject : t_map->m_mapObjects)
-    {
-        //todo: culling
-        staticObject->render(window);
-    }
-
-    for(auto& outline : t_outlines)
-    {
-        //todo: culling
-        auto dist = resolveTileDistance(playerTile, outline.tile);
-        if (dist.x < CULLING_TILE_DISTANCE && dist.y < CULLING_TILE_DISTANCE)
-            window->draw(outline.rect);
-    }
-
-}
-
-void Tilemap::showOutlines(bool show)
-{
-    if (!show)
-    {
-        t_drawOutlines = false;
-        t_outlines.clear();
-        return;
-    }
 
     auto mSize = MapGenerator::Instance()->size();
     sf::Vector2f tSize;
@@ -215,6 +167,62 @@ void Tilemap::showOutlines(bool show)
         out.tile = &MapGenerator::Instance()->map()->m_tiles[i];
         t_outlines.push_back(out);
     }
+    t_drawOutlines = false;
+}
 
-    t_drawOutlines = true;
+/************************************************************************
+ * FUNCTION :       Tilemap::render
+ *
+ * DESCRIPTION :
+ *       Render the tilemap
+ *
+ *  INPUTS:  RenderWindow* window : Window to render to
+ *
+ *  OUTPUTS: NONE
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2020.11.25 	    JCB     Documentation Start
+ *
+ ************************************************************************/
+
+void Tilemap::render(sf::RenderWindow *window)
+{
+    window->draw(*this);
+
+    //todo: culling
+    //todo: virtual method crash is somewhere in culling
+    //todo: looks like its window->draw ?????
+    Tile* playerTile = LevelManager::Instance()->getCurrentLevel().player()->getComponent<Position>().getTile();
+
+    for(auto staticObject : t_map->m_mapObjects)
+    {
+        //todo: culling
+        staticObject->render(window);
+    }
+
+    if (t_drawOutlines)
+    {
+        for(auto& outline : t_outlines)
+        {
+            //todo:
+            //todo: today
+            //todo: 1) forbid player from leaving bounds
+            assert(outline.tile); //todo: are outlines being set up properly?
+            //todo: magic numbers!
+            auto dist = resolveTileDistance(playerTile, outline.tile) / 32;
+            if (dist.x < CULLING_TILE_DISTANCE_X && dist.y < CULLING_TILE_DISTANCE_Y)
+            {
+                window->draw(outline.rect);
+            }
+        }
+    }
+
+}
+
+void Tilemap::showOutlines(bool show)
+{
+    if (!show)
+        t_drawOutlines = false;
+    else
+        t_drawOutlines = true;
 }
