@@ -136,38 +136,24 @@ void Tilemap::initialize()
             quad[3].texCoords = sf::Vector2f(tu * tileSize, (tv + 1) * tileSize);
         }
 
-    auto mSize = MapGenerator::Instance()->size();
-    sf::Vector2f tSize;
-    tSize.x = (MapGenerator::Instance()->tileSize() * GLOBAL_SCALE_TILE.x);
-    tSize.y = (MapGenerator::Instance()->tileSize() * GLOBAL_SCALE_TILE.y);
-
-    uint16_t posX = 0;
-    uint16_t posY = 0;
-    for(uint32_t i = 0; i < (mSize.x * mSize.y); i++)
+    #if DEBUG_ENABLE_TILE_OUTLINES == 1
+    for(auto& tile : MapGenerator::Instance()->map()->m_tiles)
     {
-        if (posX++ == mSize.x)
-        {
-            posY++;
-            posX = 0;
-        }
-
-        sf::Vector2f tempPos;
-        tempPos.x = posX * 32;
-        tempPos.y = posY * 32;
+        t_outline out;
+        out.tile = &tile;
 
         sf::RectangleShape sh;
-        sh.setSize(tSize);
+        sh.setSize(sf::Vector2f(tile.tileSize, tile.tileSize));
         sh.setOutlineColor(sf::Color::Black);
         sh.setOutlineThickness(1);
         sh.setFillColor(sf::Color::Transparent);
-        sh.setPosition(tempPos);
+        sh.setPosition(tile.position);
 
-        t_outline out;
         out.rect = sh;
-        out.tile = &MapGenerator::Instance()->map()->m_tiles[i];
         t_outlines.push_back(out);
     }
     t_drawOutlines = false;
+    #endif
 }
 
 /************************************************************************
@@ -200,6 +186,7 @@ void Tilemap::render(sf::RenderWindow *window)
         staticObject->render(window);
     }
 
+    #if DEBUG_ENABLE_TILE_OUTLINES == 1
     if (t_drawOutlines)
     {
         for(auto& outline : t_outlines)
@@ -207,15 +194,31 @@ void Tilemap::render(sf::RenderWindow *window)
             //todo:
             //todo: today
             //todo: 1) forbid player from leaving bounds
-            assert(outline.tile); //todo: are outlines being set up properly?
+            //todo: 2) highlight player tile green
             //todo: magic numbers!
-            auto dist = resolveTileDistance(playerTile, outline.tile) / 32;
-            if (dist.x < CULLING_TILE_DISTANCE_X && dist.y < CULLING_TILE_DISTANCE_Y)
+            sf::Vector2i dist = resolveTileDistance(playerTile, outline.tile) / 32;
+            //todo: issue is gone when x culling removed from below
+            if (dist.y < CULLING_TILE_DISTANCE_Y)
             {
-                window->draw(outline.rect);
+                if (dist.x < CULLING_TILE_DISTANCE_X)
+                {
+                    window->draw(outline.rect);
+                    if (outline.tile == playerTile)
+                    {
+                        dbg_log("Tile: " << playerTile->arrayPos)
+                        dbg_log("oTile: " << outline.tile->arrayPos)
+                        dbg_log("Pos: " << playerTile->position.x << ", "
+                                                << playerTile->position.y)
+                        //todo: outline pos for bad tiles is differrent from tile position
+                        //todo: problem must be in setup
+                        dbg_log("oPos: " << outline.rect.getPosition().x
+                        << ", " << outline.rect.getPosition().y)
+                    }
+                }
             }
         }
     }
+    #endif
 
 }
 
