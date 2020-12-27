@@ -14,6 +14,7 @@ public:
     {
         tile->tilesetID = randomTile();
         tile->position  = position;
+        tile->tileSize  = 16 * GLOBAL_SCALE_TILE.x;
         tile->biome     = LEVEL_BIOME_ID_DESERT;
         tile->blocked   = false;
     }

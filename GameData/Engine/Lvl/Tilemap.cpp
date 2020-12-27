@@ -191,29 +191,27 @@ void Tilemap::render(sf::RenderWindow *window)
     {
         for(auto& outline : t_outlines)
         {
-            //todo:
             //todo: today
             //todo: 1) forbid player from leaving bounds
             //todo: 2) highlight player tile green
             //todo: magic numbers!
             sf::Vector2i dist = resolveTileDistance(playerTile, outline.tile) / 32;
-            //todo: issue is gone when x culling removed from below
-            if (dist.y < CULLING_TILE_DISTANCE_Y)
+            if (dist.x < CULLING_TILE_DISTANCE_X && dist.y < CULLING_TILE_DISTANCE_Y)
             {
-                if (dist.x < CULLING_TILE_DISTANCE_X)
+                window->draw(outline.rect);
+                if (outline.tile == playerTile)
                 {
-                    window->draw(outline.rect);
-                    if (outline.tile == playerTile)
-                    {
-                        dbg_log("Tile: " << playerTile->arrayPos)
-                        dbg_log("oTile: " << outline.tile->arrayPos)
-                        dbg_log("Pos: " << playerTile->position.x << ", "
-                                                << playerTile->position.y)
-                        //todo: outline pos for bad tiles is differrent from tile position
-                        //todo: problem must be in setup
-                        dbg_log("oPos: " << outline.rect.getPosition().x
-                        << ", " << outline.rect.getPosition().y)
-                    }
+                    //todo: issue is in tiles which dont spawn items either
+                    //todo: fix two issues with one bug hunt
+                    //todo: sometimes the x position of the tile doesnt line up
+                    //todo: with the players x position (on issue tiles)
+                    dbg_log("arrayPos: " << playerTile->arrayPos)
+                    dbg_log("tileSize: " << playerTile->tileSize)
+                    dbg_log("pos: " << playerTile->position.x << ", "
+                                            << playerTile->position.y)
+                    dbg_log("biome: " << playerTile->biome)
+                    dbg_log("tileID: " << playerTile->tilesetID)
+                    dbg_log("blocked: " << playerTile->blocked)
                 }
             }
         }
