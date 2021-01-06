@@ -175,15 +175,16 @@ void Tilemap::render(sf::RenderWindow *window)
 {
     window->draw(*this);
 
-    //todo: culling
-    //todo: virtual method crash is somewhere in culling
-    //todo: looks like its window->draw ?????
     Tile* playerTile = LevelManager::Instance()->getCurrentLevel().player()->getComponent<Position>().getTile();
 
     for(auto staticObject : t_map->m_mapObjects)
     {
-        //todo: culling
-        staticObject->render(window);
+        //todo: magic numbers!
+        sf::Vector2i dist = resolveTileDistance(playerTile, staticObject->tile()) / 32;
+        if (dist.x < CULLING_TILE_DISTANCE_X && dist.y < CULLING_TILE_DISTANCE_Y)
+        {
+            staticObject->render(window);
+        }
     }
 
     #if DEBUG_ENABLE_TILE_OUTLINES == 1

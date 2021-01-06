@@ -5,8 +5,8 @@
 #include "../../Lvl/LvlStructs.h"
 #include <vector>
 
-#define CULLING_TILE_DISTANCE_X 20
-#define CULLING_TILE_DISTANCE_Y 15
+#define CULLING_TILE_DISTANCE_X 32
+#define CULLING_TILE_DISTANCE_Y 20
 
 class Tilemap : public sf::Drawable, public sf::Transformable {
 

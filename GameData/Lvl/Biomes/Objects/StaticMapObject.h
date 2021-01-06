@@ -17,6 +17,7 @@ public:
     inline void setBounds(sf::IntRect bounds) { o_sprite.setTextureRect(bounds); }
 
     inline sf::FloatRect bounds() { return o_sprite.getGlobalBounds(); }
+    inline Tile*         tile()   { return o_tile; }
 
 private:
     sf::Sprite   o_sprite;
