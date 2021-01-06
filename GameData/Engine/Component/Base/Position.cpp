@@ -3,6 +3,11 @@
 #include "../Anim/AnimatedSprite.h"
 #include "../../../Lvl/MapGenerator.h"
 
+
+//todo: fundamental changes here - need more info
+//todo: need: tile if on map
+//todo: absolute for UI position ( no rect)
+
 Position::Position(sf::Vector2f position)
 {
     p_pos = position;
