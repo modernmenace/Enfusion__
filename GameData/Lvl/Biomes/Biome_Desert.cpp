@@ -17,10 +17,6 @@ void Biome_Desert::generate(sf::Vector2i position, sf::Vector2i area, std::vecto
                 Tile* t = &map->at((py * mapArea.x)+px);
                 t->tilesetID = randomTile();
                 t->biome = LEVEL_BIOME_ID_DESERT;
-                //todo: using magic number here, fix
-                //todo: 32 = tileSize (16) * transform scale (2)
-                t->position.x = (px * 32);
-                t->position.y = (py * 32);
                 nPos.x++;
             }
         }

@@ -146,15 +146,17 @@ Map* MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY, uint16_t tileSize
     {
         //if issue pops up here, arrayPos and tileSize
         //may need to be initialized in transition tiles
+        auto pos = resolveTileToPosition(i);
         Tile t;
         t.tilesetID = 0;
         t.biome     = LEVEL_BIOME_ID_NONE;
+        t.position.x = pos.x;
+        t.position.y = pos.y;
         t.blocked   = false;
         t.tileSize  = tileSize * GLOBAL_SCALE_TILE.x;
         t.arrayPos  = i;
         m_lvl.push_back(t);
     }
-
 
     sf::Vector2i pos(0, 0);
     uint16_t largestBiomeHeight = 0;
@@ -193,22 +195,26 @@ Map* MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY, uint16_t tileSize
     // Fill in empty sections
     // Temporary solution: set all tile biomes to that of last tile
     // causes weird biome strips in some areas
-    pos.x = 0; pos.y = 0;
+
     for(uint32_t i = 0; i < (sizeX * sizeY); i++)
     {
-        if (pos.x++ == sizeX)
-        {
-            pos.y++;
-            pos.x = 0;
-        }
         if (m_lvl[i].biome == LEVEL_BIOME_ID_NONE)
         {
             sf::Vector2f tempPos;
-            tempPos.x = pos.x * 32;
-            tempPos.y = pos.y * 32;
-            BiomeManager::Instance()->biome(m_lvl[i-1].biome)->createTransitionTile(&m_lvl[i], tempPos, m_lvl[i-1].biome);
+            if (i % 250 != 0)
+            {
+                tempPos.x = m_lvl[i-1].position.x + (tileSize * GLOBAL_SCALE_TILE.x);
+                tempPos.y = m_lvl[i-1].position.y;
+            }
+            else
+            {
+                tempPos.x = m_lvl[i-1].position.x;
+                tempPos.y = m_lvl[i-1].position.y + (tileSize * GLOBAL_SCALE_TILE.y);
+            }
+            BiomeManager::Instance()->biome(m_lvl[i-1].biome)->createTransitionTile(&m_lvl[i], m_lvl[i-1].biome);
         }
     }
+
 
     uint16_t numTiles[LEVEL_AMOUNT_BIOMES+1];
     //smooth transitions between terrains a bit
@@ -233,7 +239,7 @@ Map* MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY, uint16_t tileSize
                 sf::Vector2f tempPos;
                 tempPos.x = pos.x * 32;
                 tempPos.y = pos.y * 32;
-                BiomeManager::Instance()->biome(m_lvl[i-1].biome)->createTransitionTile(&m_lvl[i], tempPos, m_lvl[i-1].biome);
+                BiomeManager::Instance()->biome(m_lvl[i-1].biome)->createTransitionTile(&m_lvl[i], m_lvl[i-1].biome);
             }
         }
 
@@ -247,7 +253,7 @@ Map* MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY, uint16_t tileSize
                     sf::Vector2f tempPos;
                     tempPos.x = pos.x * 32;
                     tempPos.y = pos.y * 32;
-                    BiomeManager::Instance()->biome(m_lvl[i-sizeX].biome)->createTransitionTile(&m_lvl[i], tempPos, m_lvl[i-1].biome);
+                    BiomeManager::Instance()->biome(m_lvl[i-sizeX].biome)->createTransitionTile(&m_lvl[i], m_lvl[i-1].biome);
                 }
             }
         }

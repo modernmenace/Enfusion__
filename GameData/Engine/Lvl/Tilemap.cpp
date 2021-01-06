@@ -193,26 +193,14 @@ void Tilemap::render(sf::RenderWindow *window)
         {
             //todo: today
             //todo: 1) forbid player from leaving bounds
-            //todo: 2) highlight player tile green
+            //todo: 2) highlight player tiles green
+            //todo: 3) highlight blocked tiles red
+
             //todo: magic numbers!
             sf::Vector2i dist = resolveTileDistance(playerTile, outline.tile) / 32;
             if (dist.x < CULLING_TILE_DISTANCE_X && dist.y < CULLING_TILE_DISTANCE_Y)
             {
                 window->draw(outline.rect);
-                if (outline.tile == playerTile)
-                {
-                    //todo: issue is in tiles which dont spawn items either
-                    //todo: fix two issues with one bug hunt
-                    //todo: sometimes the x position of the tile doesnt line up
-                    //todo: with the players x position (on issue tiles)
-                    dbg_log("arrayPos: " << playerTile->arrayPos)
-                    dbg_log("tileSize: " << playerTile->tileSize)
-                    dbg_log("pos: " << playerTile->position.x << ", "
-                                            << playerTile->position.y)
-                    dbg_log("biome: " << playerTile->biome)
-                    dbg_log("tileID: " << playerTile->tilesetID)
-                    dbg_log("blocked: " << playerTile->blocked)
-                }
             }
         }
     }

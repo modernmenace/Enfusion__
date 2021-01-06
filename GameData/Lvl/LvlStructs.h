@@ -40,6 +40,12 @@ inline static uint32_t resolvePositionToTile(uint16_t x, uint16_t y)
     return ((y / 32) * 250)+(x / 32); //250 is map sizeX
 }
 
+//todo: magic numbers!
+inline static sf::Vector2u resolveTileToPosition(uint16_t arrayPos)
+{
+    return sf::Vector2u((arrayPos % 250) * 32, (32 * (arrayPos / 250)));
+}
+
 static sf::Vector2i resolveTileDistance(Tile* t1, Tile* t2)
 {
     sf::Vector2i ret;
