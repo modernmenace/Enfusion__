@@ -4,15 +4,59 @@
 #include "../../Lvl/LevelManager.h"
 #include "../Anim/AnimatedSprite.h"
 
+/************************************************************************
+ * FUNCTION :       Camera::Camera
+ *
+ * DESCRIPTION :
+ *       Constructor, set the camera type
+ *
+ *  INPUTS:  CameraType type : type of camera
+ *
+ *  OUTPUTS: NONE
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2021.01.06 	    JCB     Documentation Start
+ *
+ ************************************************************************/
+
 Camera::Camera(CameraType type) : centerVec(0, 0), sizeVec(1920, 1080)
 {
     this->type = type;
 }
+/************************************************************************
+ * FUNCTION :       Camera::~Camera
+ *
+ * DESCRIPTION :
+ *       Destructor, cleanup
+ *
+ *  INPUTS:  NONE
+ *
+ *  OUTPUTS: NONE
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2021.01.06 	    JCB     Documentation Start
+ *
+ ************************************************************************/
 
 Camera::~Camera()
 {
     delete view;
 }
+
+/************************************************************************
+ * FUNCTION :       Camera::initialize
+ *
+ * DESCRIPTION :
+ *       Sets up the view
+ *
+ *  INPUTS:  NONE
+ *
+ *  OUTPUTS: NONE
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2021.01.06 	    JCB     Documentation Start
+ *
+ ************************************************************************/
 
 void Camera::initialize()
 {
@@ -21,6 +65,21 @@ void Camera::initialize()
 
     view = new sf::View(centerVec, sizeVec);
 }
+
+/************************************************************************
+ * FUNCTION :       Camera::getCameraView
+ *
+ * DESCRIPTION :
+ *       Returns the current view
+ *
+ *  INPUTS:  NONE
+ *
+ *  OUTPUTS: sf::FloatRect : the current camera view
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2021.01.06 	    JCB     Documentation Start
+ *
+ ************************************************************************/
 
 sf::FloatRect Camera::getCameraView()
 {
@@ -31,6 +90,21 @@ sf::FloatRect Camera::getCameraView()
     c_view.height = view->getSize().y;
     return c_view;
 }
+
+/************************************************************************
+ * FUNCTION :       Camera::getPlayerCenteredCameraView
+ *
+ * DESCRIPTION :
+ *       Returns a view centered on the player
+ *
+ *  INPUTS:  NONE
+ *
+ *  OUTPUTS: sf::FloatRect : player-centered camera view
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2021.01.06 	    JCB     Documentation Start
+ *
+ ************************************************************************/
 
 sf::FloatRect Camera::getPlayerCenteredCameraView()
 {
@@ -45,6 +119,21 @@ sf::FloatRect Camera::getPlayerCenteredCameraView()
 
     return c_view;
 }
+
+/************************************************************************
+ * FUNCTION :       Camera::update
+ *
+ * DESCRIPTION :
+ *       Updates the camera position + view based on type
+ *
+ *  INPUTS:  sf::Time tickRate : the current tick rate
+ *
+ *  OUTPUTS: NONE
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2021.01.06 	    JCB     Documentation Start
+ *
+ ************************************************************************/
 
 //TODO: On lower resolutions DO NOT FLOOR, causes flickering rather than preventing it
 //TODO: Revisit this once resolutions are implemented
@@ -110,6 +199,21 @@ void Camera::update(sf::Time tickRate)
         lastCenter.y = centerPos.y;
     }
 }
+
+/************************************************************************
+ * FUNCTION :       Camera::render
+ *
+ * DESCRIPTION :
+ *       Sets the camera view if not yet set
+ *
+ *  INPUTS:  sf::RednerWindow *window : the current window
+ *
+ *  OUTPUTS: NONE
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2021.01.06 	    JCB     Documentation Start
+ *
+ ************************************************************************/
 
 void Camera::render(sf::RenderWindow *window)
 {

@@ -2,6 +2,7 @@
 #include <utility>
 #include "../../Lvl/MapGenerator.h"
 #include "LevelManager.h"
+#include "../Component/Misc/Camera.h"
 
 //todo: Overhaul
 //todo:  2 - Blocked tiles (redo collision)
@@ -175,16 +176,12 @@ void Tilemap::render(sf::RenderWindow *window)
 {
     window->draw(*this);
 
-    Tile* playerTile = LevelManager::Instance()->getCurrentLevel().player()->getComponent<Position>().getTile();
+    sf::FloatRect v = LevelManager::Instance()->getCurrentLevel().player()->getComponent<Camera>().getCameraView();
 
     for(auto staticObject : t_map->m_mapObjects)
     {
-        //todo: magic numbers!
-        sf::Vector2i dist = resolveTileDistance(playerTile, staticObject->tile()) / 32;
-        if (dist.x < CULLING_TILE_DISTANCE_X && dist.y < CULLING_TILE_DISTANCE_Y)
-        {
+        if (v.intersects(staticObject->bounds()))
             staticObject->render(window);
-        }
     }
 
     #if DEBUG_ENABLE_TILE_OUTLINES == 1
@@ -193,16 +190,12 @@ void Tilemap::render(sf::RenderWindow *window)
         for(auto& outline : t_outlines)
         {
             //todo: today
-            //todo: 1) forbid player from leaving bounds
-            //todo: 2) highlight player tiles green
-            //todo: 3) highlight blocked tiles red
-
-            //todo: magic numbers!
-            sf::Vector2i dist = resolveTileDistance(playerTile, outline.tile) / 32;
-            if (dist.x < CULLING_TILE_DISTANCE_X && dist.y < CULLING_TILE_DISTANCE_Y)
-            {
+            //todo: 0.5) culling when approaching map edges
+            //todo: 1)   forbid player from leaving bounds
+            //todo: 2)   highlight player tiles green
+            //todo: 3)   highlight blocked tiles red
+            if (v.intersects(outline.rect.getGlobalBounds()))
                 window->draw(outline.rect);
-            }
         }
     }
     #endif
