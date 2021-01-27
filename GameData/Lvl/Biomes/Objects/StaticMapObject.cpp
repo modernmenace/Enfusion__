@@ -1,6 +1,9 @@
 #include "StaticMapObject.h"
 #include "../../LvlStructs.h"
 
+//todo: how to block?
+//todo: blocked tile array vs position rect
+
 StaticMapObject::StaticMapObject(string_t tileset, sf::IntRect texBounds) : o_sprite()
 {
     o_sprite.setTexture(AssetManager::Instance()->getTexture(tileset));
