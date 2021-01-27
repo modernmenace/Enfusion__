@@ -31,6 +31,10 @@ private:
     sf::Clock   i_mouseClock;
     Tooltip     i_tooltip;
     Entity      i_playerView;
+    Slot*       i_equipmentSlotHead  = nullptr;
+    Slot*       i_equipmentSlotBody = nullptr;
+    TextDisplay i_playerNameDisplay;
+    TextDisplay i_playerLevelDisplay;
 
 };
 

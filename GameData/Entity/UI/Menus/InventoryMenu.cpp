@@ -3,16 +3,24 @@
 #include "../../../Engine/Component/Base/Position.h"
 #include "../../../Component/Inventory.h"
 
-/*
- *  InventoryMenu
+/************************************************************************
+ * FUNCTION :       Inventory::Inventory
  *
- *  DESC: Visual management of inventory
+ * DESCRIPTION :
+ *       Constructor, set up components
  *
- *  REQUIRES: Parent Entity has Inventory Component
+ *  INPUTS:  Entity *entity : attatched entity
  *
- */
+ *  OUTPUTS: NONE
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2021.01.27 	    JCB     Documentation Start
+ *
+ ************************************************************************/
 
-InventoryMenu::InventoryMenu(Entity *entity) : i_tooltip()
+InventoryMenu::InventoryMenu(Entity *entity) : i_tooltip(),
+                                               i_playerNameDisplay("Player Name", sf::Vector2f(150, -375), 20),
+                                               i_playerLevelDisplay("Level 1 (0/1000)", sf::Vector2f(150, -350), 20)
 {
     i_entity = entity;
     addComponent<Position>(sf::Vector2f(-200, -450));
@@ -21,22 +29,45 @@ InventoryMenu::InventoryMenu(Entity *entity) : i_tooltip()
     i_playerView.addComponent<Sprite>("Objects/chara2.png");
 }
 
+/************************************************************************
+ * FUNCTION :       Inventory::~Inventory
+ *
+ * DESCRIPTION :
+ *       Destructor, delete allocated slots
+ *
+ *  INPUTS:  NONE
+ *
+ *  OUTPUTS: NONE
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2021.01.27 	    JCB     Documentation Start
+ *
+ ************************************************************************/
+
 InventoryMenu::~InventoryMenu()
 {
     for(std::vector<Slot*>::iterator i = slots.begin(),
             e = slots.end(); i != e; ++i)
         delete (*i);
+
+    delete i_equipmentSlotHead;
+    delete i_equipmentSlotBody;
 }
 
-/*
- *  Initialize
- *  DESC: Initializes menu, sets up slots
+/************************************************************************
+ * FUNCTION :       Inventory::initialize
  *
- *  IN:  NONE
+ * DESCRIPTION :
+ *       Initializes components and set up slots
  *
- *  OUT: NONE
+ *  INPUTS:  NONE
  *
- */
+ *  OUTPUTS: NONE
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2021.01.27 	    JCB     Documentation Start
+ *
+ ************************************************************************/
 
 void InventoryMenu::initialize()
 {
@@ -50,6 +81,9 @@ void InventoryMenu::initialize()
     getComponent<Sprite>().getSprite().setTextureRect(sf::IntRect(0, 0, 48, 48));
     getComponent<Sprite>().getSprite().setScale(12, 15);
     getComponent<Sprite>().setVisible(false);
+
+    i_playerNameDisplay.initialize();
+    i_playerLevelDisplay.initialize();
 
     //initialize slots
     sf::Vector2f slotPos(getComponent<Position>().getPosition().x + 45,
@@ -69,18 +103,26 @@ void InventoryMenu::initialize()
 
     for(int s = 0; s < slots.size(); s++)
         slots.at(s)->setItem(i_entity->getComponent<Inventory>().item(s));
+
+    //initialize equipment slots
+    i_equipmentSlotHead = new Slot(sf::Vector2f(0, -350), &i_entity->getComponent<Inventory>());
+    i_equipmentSlotBody = new Slot(sf::Vector2f(0, -250), &i_entity->getComponent<Inventory>());
 }
 
-/*
- *  UpdateSlots
- *  DESC: Updates the slots with the most recent contents
- *        of the inventory
+/************************************************************************
+ * FUNCTION :       Inventory::updateSlots
  *
- *  IN:  NONE
+ * DESCRIPTION :
+ *       Updates slots with most recent contents of the inventory
  *
- *  OUT: NONE
+ *  INPUTS:  NONE
  *
- */
+ *  OUTPUTS: NONE
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2021.01.27 	    JCB     Documentation Start
+ *
+ ************************************************************************/
 
 void InventoryMenu::updateSlots()
 {
@@ -93,15 +135,20 @@ void InventoryMenu::updateSlots()
     }
 }
 
-/*
- *  ToggleMenu
- *  DESC: Shows/Hides the menu
+/************************************************************************
+ * FUNCTION :       Inventory::toggleMenu
  *
- *  IN:  NONE
+ * DESCRIPTION :
+ *       Shows/hides the menu
  *
- *  OUT: NONE
+ *  INPUTS:  NONE
  *
- */
+ *  OUTPUTS: NONE
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2021.01.27 	    JCB     Documentation Start
+ *
+ ************************************************************************/
 
 void InventoryMenu::toggleMenu()
 {
@@ -114,26 +161,37 @@ void InventoryMenu::toggleMenu()
         getComponent<Sprite>().setVisible(true);
         for(auto &s : slots)
             s->setVisible(true);
+
+        i_equipmentSlotHead->setVisible(true);
+        i_equipmentSlotBody->setVisible(true);
     }
     else
     {
         getComponent<Sprite>().setVisible(false);
         for(auto &s : slots)
             s->setVisible(false);
+
+        i_equipmentSlotHead->setVisible(false);
+        i_equipmentSlotBody->setVisible(false);
+
         i_tooltip.hide();
     }
 }
 
-/*
- *  Update
- *  DESC: If menu active, checks if tooltip should be
- *        displayed
+/************************************************************************
+ * FUNCTION :       Inventory::update
  *
- *  IN:  tickRate: current tick rate
+ * DESCRIPTION :
+ *       Determines whether a tool-tip should be displayed
  *
- *  OUT: NONE
+ *  INPUTS:  sf::Time tickRate | current tick rate
  *
- */
+ *  OUTPUTS: NONE
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2021.01.27 	    JCB     Documentation Start
+ *
+ ************************************************************************/
 
 void InventoryMenu::update(sf::Time tickRate)
 {
@@ -263,15 +321,20 @@ void InventoryMenu::update(sf::Time tickRate)
     }
 }
 
-/*
- *  HandleInput
- *  DESC: Checks if slot has been clicked
+/************************************************************************
+ * FUNCTION :       Inventory::handleInput
  *
- *  IN:  button: Mouse button pressed
+ * DESCRIPTION :
+ *       Checks whether a slot has been clicked
  *
- *  OUT: NONE
+ *  INPUTS:  sf::Mouse::Button button | Mouse button status
  *
- */
+ *  OUTPUTS: NONE
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2021.01.27 	    JCB     Documentation Start
+ *
+ ************************************************************************/
 
 void InventoryMenu::handleInput(sf::Mouse::Button button)
 {
@@ -283,15 +346,20 @@ void InventoryMenu::handleInput(sf::Mouse::Button button)
     }
 }
 
-/*
- *  Render
- *  DESC: Renders menu/slots/tooltip
+/************************************************************************
+ * FUNCTION :       Inventory::render
  *
- *  IN:  window: render window
+ * DESCRIPTION :
+ *       Renders everything to the window if active
  *
- *  OUT: NONE
+ *  INPUTS:  sf::RenderWindow *window | The window
  *
- */
+ *  OUTPUTS: NONE
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2021.01.27 	    JCB     Documentation Start
+ *
+ ************************************************************************/
 
 void InventoryMenu::render(sf::RenderWindow *window)
 {
@@ -302,6 +370,11 @@ void InventoryMenu::render(sf::RenderWindow *window)
 
     for(auto &s : slots)
         s->render(window);
+
+    i_equipmentSlotHead->render(window);
+    i_equipmentSlotBody->render(window);
+    i_playerNameDisplay.render(window);
+    i_playerLevelDisplay.render(window);
 
     if (i_drag)
     {
