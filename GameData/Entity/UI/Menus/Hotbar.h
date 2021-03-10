@@ -23,10 +23,10 @@ public:
 private:
     std::vector<Slot*>  slots;
     sf::RectangleShape selectionRect;
-    uint8_t            selectedSlot = 0;
 
 
     Entity*        i_entity = nullptr;
+    Inventory*     i_i      = nullptr;
     InventoryMenu* i_menu   = nullptr;
     TextDisplay*   h_text   = nullptr;
 };

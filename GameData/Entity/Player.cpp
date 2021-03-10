@@ -32,6 +32,38 @@ Player::Player(sf::Vector2f position)
 }
 
 /************************************************************************
+ * FUNCTION :       Player::handleInput
+ *
+ * DESCRIPTION :
+ *       Handle keyboard input
+ *
+ *  INPUTS:  sf::Keyboard::Key key | key pressed
+ *
+ *  OUTPUTS: NONE
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2021.03.09 	    JCB     Documentation Start
+ *
+ ************************************************************************/
+
+void Player::handleInput(sf::Keyboard::Key key)
+{
+    //todo: move item usage here? think it over
+
+    //check if a tool is to be used
+    //if (__selecteditem__.type() == Item_Tool)
+    //if (getComponent<Inventory>().)
+
+    Entity::handleInput(key);
+}
+
+void Player::handleInput(sf::Mouse::Button button)
+{
+
+    Entity::handleInput(button);
+}
+
+/************************************************************************
  * FUNCTION :       Player::bounds
  *
  * DESCRIPTION :

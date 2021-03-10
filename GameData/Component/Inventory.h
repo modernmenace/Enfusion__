@@ -23,7 +23,8 @@ private:
 
     int     lastItemActivated;
     int     nextEmptySlot();
-    bool    changeFlag = false;
+    bool    changeFlag  = false;
+    uint8_t activeIndex = 0;
 
 public:
     Inventory();
@@ -91,9 +92,11 @@ public:
     void swapItem(uint16_t i1, uint16_t i2);
     bool changePending();
 
-    inline Item* item(uint8_t id) { return inv_items[id];   }
-    inline int amount(uint8_t id) { return inv_amounts[id]; }
-    inline void activated(int id) { lastItemActivated = id; }
+    inline Item* item(uint8_t id)    { return inv_items[id];   }
+    inline int amount(uint8_t id)    { return inv_amounts[id]; }
+    inline uint8_t activeItem()      { return activeIndex;     }
+    inline void activated(int id)    { lastItemActivated = id; }
+    inline void setActive(uint8_t s) { activeIndex = s; }
 };
 
 

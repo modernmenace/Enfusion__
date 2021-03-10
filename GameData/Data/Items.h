@@ -17,11 +17,17 @@ CREATE_ITEM(ITEM_TEST, "Test Item", "Test Description",
                     dbg_log("This Is A Test Item!");
                     }, Item_Consumable, 16);
 
+CREATE_ITEM(ITEM_AXE, "Axe", "Used for chopping",
+            "Objects/Consumables/testitem.png",
+            {
+                        dbg_log("Axe used!")
+            }, Item_Tool, 1);
 
 static void generateItemRegistry()
 {
     REGISTRY_ADD(ITEM_TOMATO)
     REGISTRY_ADD(ITEM_TEST)
+    REGISTRY_ADD(ITEM_AXE)
 
     dbg_log("Item Registry Generation Finished")
 }

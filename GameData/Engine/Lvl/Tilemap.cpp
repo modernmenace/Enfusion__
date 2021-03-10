@@ -7,7 +7,7 @@
 //todo: Overhaul
 //todo:  2 - Blocked tiles (redo collision)
 //todo:  3 - Rethink how static objects are handled
-//todo:  4 - store player tile andswa show on debug menu
+//todo:  4 - store player tile and show on debug menu
 
 /************************************************************************
  * FUNCTION :       Tilemap::Tilemap

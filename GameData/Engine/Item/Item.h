@@ -7,6 +7,7 @@
 enum ItemType
 {
     Item_Consumable,
+    Item_Tool,
     Item_Other
 };
 
