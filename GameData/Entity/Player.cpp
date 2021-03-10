@@ -35,9 +35,9 @@ Player::Player(sf::Vector2f position)
  * FUNCTION :       Player::handleInput
  *
  * DESCRIPTION :
- *       Handle keyboard input
+ *       Handle mouse input
  *
- *  INPUTS:  sf::Keyboard::Key key | key pressed
+ *  INPUTS:  sf::Mouse::Button button | button pressed
  *
  *  OUTPUTS: NONE
  *
@@ -46,19 +46,11 @@ Player::Player(sf::Vector2f position)
  *
  ************************************************************************/
 
-void Player::handleInput(sf::Keyboard::Key key)
-{
-    //todo: move item usage here? think it over
-
-    //check if a tool is to be used
-    //if (__selecteditem__.type() == Item_Tool)
-    //if (getComponent<Inventory>().)
-
-    Entity::handleInput(key);
-}
-
 void Player::handleInput(sf::Mouse::Button button)
 {
+    Inventory* inv = &getComponent<Inventory>();
+    if (inv->item(inv->activeItem())->type() == Item_Tool)
+        inv->item(inv->activeItem())->activate();
 
     Entity::handleInput(button);
 }
