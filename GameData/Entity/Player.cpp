@@ -48,9 +48,9 @@ Player::Player(sf::Vector2f position)
 
 void Player::handleInput(sf::Mouse::Button button)
 {
-    Inventory* inv = &getComponent<Inventory>();
-    if (inv->item(inv->activeItem())->type() == Item_Tool)
-        inv->item(inv->activeItem())->activate();
+    Item* itm = getComponent<Inventory>().item(getComponent<Inventory>().activeItem());
+    if (itm->type() == Item_Tool)
+        itm->activate();
 
     Entity::handleInput(button);
 }

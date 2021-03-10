@@ -2,7 +2,6 @@
 #define ENFUSION_PLAYER_H
 
 #include "../Engine/Entity/Entity.h"
-#include "../Lvl/LvlStructs.h"
 
 class Player : public Entity {
 

@@ -14,13 +14,15 @@ public:
     void initialize()              override;
     void render(sf::RenderWindow*) override;
     void show(Item* item, sf::Vector2f position);
-    inline void hide() { t_visible = false; };
+    inline void hide() { t_visible = false; currentItem = nullptr; };
 
 private:
     TextDisplay t_iName;
     TextDisplay t_iDesc;
+    TextDisplay t_iType;
 
     bool t_visible = false;
+    Item* currentItem = nullptr;
 
 };
 

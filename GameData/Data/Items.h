@@ -18,7 +18,7 @@ CREATE_ITEM(ITEM_TEST, "Test Item", "Test Description",
                     }, Item_Consumable, 16);
 
 CREATE_ITEM(ITEM_AXE, "Axe", "Used for chopping",
-            "Objects/Consumables/testitem.png",
+            "Objects/Tools/Tool_Axe.png",
             {
                         dbg_log("Axe used!")
             }, Item_Tool, 1);

@@ -13,19 +13,23 @@ public:
 
     void initialize() override;
     void render(sf::RenderWindow* window) override;
-    void setPosition(sf::Vector2f p);
-    void setText(string_t t);
+    void setPosition(sf::Vector2f);
+    void setText(string_t);
 
-    inline void setVisible(bool b) { t_visible = b; }
-    inline bool visible()          { return t_visible; }
-    inline sf::Text& text()        { return t_text; }
+    inline void setVisible(bool b)    { t_visible = b; }
+    inline void setColor(sf::Color c) { t_color = c;
+                                        t_text.setFillColor(t_color); }
+    inline bool visible()             { return t_visible; }
+    inline sf::Text& text()           { return t_text; }
 
 private:
     sf::Text           t_text;
     sf::RectangleShape t_bounds;
     bool               t_visible;
+    sf::Color          t_color;
 
-    bool textChanged = false;
+    bool textChanged   = false;
+    bool renderBlocked = false;
 
 };
 
