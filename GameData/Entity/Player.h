@@ -9,7 +9,7 @@ class Player : public Entity {
 public:
     Player(sf::Vector2f position);
     void equipItem(Item*);
-    void unequipItem(Item*);
+    void unequipItem(ItemType);
     void handleInput(sf::Mouse::Button button) override;
     sf::FloatRect bounds()                     override;
 

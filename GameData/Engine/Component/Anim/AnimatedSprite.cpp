@@ -24,7 +24,6 @@ AnimatedSprite::~AnimatedSprite()
 void AnimatedSprite::initialize()
 {
     assert(entity->hasComponent<Position>());
-
     for(int i = 0; i < PROTAGONIST_LAYERS; i++)
         s_layerMap.insert(std::make_pair(static_cast<Layer_Type>(i), nullptr));
 
@@ -54,13 +53,18 @@ void AnimatedSprite::addLayer(string_t spriteSheet, Layer_Type type)
         layer->setTextureRect(charRect);
         layer->setScale(3, 3);
     }
+    refreshState();
 }
 
 void AnimatedSprite::removeLayer(Layer_Type type)
 {
     auto *s = s_layerMap[type];
     if (s != nullptr)
+    {
         delete s;
+        s_layerMap[type] = nullptr;
+    }
+    refreshState();
 }
 
 void AnimatedSprite::setPosition(sf::Vector2f pos)
@@ -101,4 +105,7 @@ void AnimatedSprite::switchState(uint8_t row, uint8_t frame)
         if (s != nullptr)
             s->setTextureRect(texRect);
     }
+
+    s_currentState_frame = frame;
+    s_currentState_row   = row;
 }

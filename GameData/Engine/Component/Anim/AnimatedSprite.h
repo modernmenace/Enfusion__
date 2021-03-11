@@ -28,6 +28,8 @@ public:
     void addLayer(string_t, Layer_Type);
     void removeLayer(Layer_Type);
 
+    inline void refreshState() { switchState(s_currentState_row, s_currentState_frame); }
+
     inline sf::IntRect bounds()             { return charRect; };
     inline sf::Sprite* getSprite()          { return s_layerMap[Layer_Type_BASE]; }
 
@@ -38,6 +40,9 @@ private:
     uint8_t directionalFrames;
 
     std::map<Layer_Type, sf::Sprite*> s_layerMap; //remember maps are ordered
+
+    uint8_t s_currentState_row;
+    uint8_t s_currentState_frame;
 };
 
 

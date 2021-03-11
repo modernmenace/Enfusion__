@@ -26,12 +26,14 @@ Player::Player(sf::Vector2f position)
     addComponent<Position>(position);
     addComponent<AnimatedSprite>("Protagonist/base_body.png", 3, sf::IntRect(0, 0, 87, 152));
     getComponent<AnimatedSprite>().addLayer("Protagonist/base_head.png", Layer_Type_HEAD);
+    //getComponent<AnimatedSprite>().addLayer("Protagonist/axe.png", Layer_Type_WEAPON);
     addComponent<Camera>(CameraType::FOLLOW);
     addComponent<AnimatedMovement>(true);
     addComponent<Inventory>();
     LevelManager::Instance()->setPlayer(this);
 }
 
+//todo: axe works fine when added in constructor, but breaks when added here
 void Player::equipItem(Item* itm)
 {
     switch (itm->type())
@@ -44,9 +46,9 @@ void Player::equipItem(Item* itm)
     }
 }
 
-void Player::unequipItem(Item* itm)
+void Player::unequipItem(ItemType type)
 {
-    switch (itm->type())
+    switch (type)
     {
         case Item_Tool:
             getComponent<AnimatedSprite>().removeLayer(Layer_Type_WEAPON);

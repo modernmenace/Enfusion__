@@ -86,7 +86,7 @@ void Hotbar::updateSlots()
         {
             if (itm->type() != Item_Tool)
             {
-                LevelManager::Instance()->getCurrentLevel().player()->unequipItem(itm);
+                LevelManager::Instance()->getCurrentLevel().player()->unequipItem(Item_Tool);
                 h_toolEquipped = false;
             }
         }
