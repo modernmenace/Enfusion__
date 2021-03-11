@@ -3,19 +3,33 @@
 
 #include "../Component.h"
 
+#define PROTAGONIST_LAYERS 6
+
+enum Layer_Type
+{
+    Layer_Type_BASE,
+    Layer_Type_CHEST,
+    Layer_Type_Pants,
+    Layer_Type_Boots,
+    Layer_Type_HEAD,
+    Layer_Type_WEAPON
+};
+
 class AnimatedSprite : public Component {
 
 public:
     AnimatedSprite(string_t spriteSheet, int numberFrames, sf::IntRect characterSheetSize);
+    ~AnimatedSprite();
 
     void initialize() override;
     void render(sf::RenderWindow* window) override;
     void switchState(uint8_t, uint8_t);
     void setPosition(sf::Vector2f);
-    void addLayer(string_t);
+    void addLayer(string_t, Layer_Type);
+    void removeLayer(Layer_Type);
 
     inline sf::IntRect bounds()             { return charRect; };
-    inline sf::Sprite& getSprite()          { return s_layerSprites[0]; }
+    inline sf::Sprite* getSprite()          { return s_layerMap[Layer_Type_BASE]; }
 
 private:
     string_t     s_sheet;
@@ -23,8 +37,7 @@ private:
 
     uint8_t directionalFrames;
 
-    int s_layers;
-    std::vector<sf::Sprite> s_layerSprites;
+    std::map<Layer_Type, sf::Sprite*> s_layerMap; //remember maps are ordered
 };
 
 

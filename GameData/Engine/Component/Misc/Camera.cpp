@@ -112,8 +112,8 @@ sf::FloatRect Camera::getPlayerCenteredCameraView()
     auto p_pos  = entity->getComponent<Position>().getPosition();
     auto p_size = entity->getComponent<AnimatedSprite>().getSprite();
 
-    c_view.left = (p_pos.x+ p_size.getGlobalBounds().width)   - (view->getSize().x / 2);
-    c_view.top  = (p_pos.y + p_size.getGlobalBounds().height) - (view->getSize().y / 2);
+    c_view.left = (p_pos.x+ p_size->getGlobalBounds().width)   - (view->getSize().x / 2);
+    c_view.top  = (p_pos.y + p_size->getGlobalBounds().height) - (view->getSize().y / 2);
     c_view.width  = view->getSize().x;
     c_view.height = view->getSize().y;
 

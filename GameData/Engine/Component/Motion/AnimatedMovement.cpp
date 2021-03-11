@@ -26,7 +26,7 @@ void AnimatedMovement::render(sf::RenderWindow *window)
 void AnimatedMovement::initialize()
 {
     assert(entity->hasComponent<AnimatedSprite>());
-    this->characterSprite = &entity->getComponent<AnimatedSprite>().getSprite();
+    this->characterSprite = entity->getComponent<AnimatedSprite>().getSprite();
     entity->getComponent<AnimatedSprite>().switchState(0, 1);
 
     #if DEBUG_MOVEMENT_IGNORE_COLLISION != 1
