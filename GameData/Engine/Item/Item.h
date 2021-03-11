@@ -28,12 +28,13 @@ public:
         id++;
     }
 
-    inline uint16_t  id()          { return i_id;   }
-    inline string_t  name()        { return i_name; }
-    inline string_t  description() { return i_desc; }
-    inline uint16_t  stackSize()   { return i_max;  }
-    inline ItemType type()         { return i_type; }
-    inline sf::Texture& icon()     { return AssetManager::Instance()->getTexture(i_icon); }
+    inline uint16_t  id()            { return i_id;   }
+    inline string_t  name()          { return i_name; }
+    inline string_t  linkedTexture() { return i_linkedTexture; }
+    inline string_t  description()   { return i_desc; }
+    inline uint16_t  stackSize()     { return i_max;  }
+    inline ItemType type()           { return i_type; }
+    inline sf::Texture& icon()       { return AssetManager::Instance()->getTexture(i_icon); }
 
     inline void setLinkedTexture(string_t s) { i_linkedTexture = s; }
 
@@ -53,8 +54,8 @@ private:
 #define REGISTRY_ADD(itemClass)                                                    \
 ItemRegistry::Instance()->createItem(new itemClass());                             \
 
-//#define LINKED_TEXTURE(itemClass)                                                  \
-//ItemRegistry::Instance()
+#define LINKED_TEXTURE(itemClass, texture)                                         \
+ItemRegistry::Instance()->getItem<itemClass>()->setLinkedTexture(texture);         \
 
 #define CREATE_ITEM(className, name, description, icon, effect, type, stackSize)   \
 class className : public Item                                                      \

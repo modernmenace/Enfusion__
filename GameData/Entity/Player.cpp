@@ -34,12 +34,26 @@ Player::Player(sf::Vector2f position)
 
 void Player::equipItem(Item* itm)
 {
-    dbg_log("equipping tool")
+    switch (itm->type())
+    {
+        case Item_Tool:
+            getComponent<AnimatedSprite>().addLayer(itm->linkedTexture(), Layer_Type_WEAPON);
+            break;
+        default:
+            break;
+    }
 }
 
 void Player::unequipItem(Item* itm)
 {
-    dbg_log("unequipping tool")
+    switch (itm->type())
+    {
+        case Item_Tool:
+            getComponent<AnimatedSprite>().removeLayer(Layer_Type_WEAPON);
+            break;
+        default:
+            break;
+    }
 }
 
 /************************************************************************

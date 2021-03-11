@@ -22,7 +22,7 @@ static void generateItemRegistry()
     REGISTRY_ADD(ITEM_TOMATO)
     REGISTRY_ADD(ITEM_AXE)
 
-    ItemRegistry::Instance()->getItem<ITEM_AXE>()->setLinkedTexture("Protagonist/axe.png");
+    LINKED_TEXTURE(ITEM_AXE, "Protagonist/axe.png")
 
     dbg_log("Item Registry Generation Finished")
 }
