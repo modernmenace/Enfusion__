@@ -24,7 +24,9 @@
 Player::Player(sf::Vector2f position)
 {
     addComponent<Position>(position);
-    addComponent<AnimatedSprite>("Objects/chara2.png", 4, 3, sf::IntRect(0, 0, 78, 146), sf::Vector2i(1, 0));
+    //addComponent<AnimatedSprite>("Objects/chara2.png", 4, 3, sf::IntRect(0, 0, 78, 146), sf::Vector2i(1, 0));
+    addComponent<AnimatedSprite>("Protagonist/base_body.png", 3, sf::IntRect(0, 0, 87, 152));
+    getComponent<AnimatedSprite>().addLayer("Protagonist/base_head.png");
     addComponent<Camera>(CameraType::FOLLOW);
     addComponent<AnimatedMovement>(true);
     addComponent<Inventory>();

@@ -29,7 +29,6 @@ private:
     sf::Color          t_color;
 
     bool textChanged   = false;
-    bool renderBlocked = false;
 
 };
 

@@ -6,25 +6,25 @@
 class AnimatedSprite : public Component {
 
 public:
-    AnimatedSprite(string_t spriteSheet, uint8_t sheetsPerRow, int numberFrames, sf::IntRect characterSheetSize, sf::Vector2i sheet);
+    AnimatedSprite(string_t spriteSheet, int numberFrames, sf::IntRect characterSheetSize);
 
     void initialize() override;
     void render(sf::RenderWindow* window) override;
     void switchState(uint8_t, uint8_t);
+    void setPosition(sf::Vector2f);
+    void addLayer(string_t);
 
     inline sf::IntRect bounds()             { return charRect; };
-    inline void setPosition(sf::Vector2f p) { sprite.setPosition(p); }
-    inline sf::Sprite& getSprite()          { return sprite; }
+    inline sf::Sprite& getSprite()          { return s_layerSprites[0]; }
 
 private:
     string_t     s_sheet;
     sf::IntRect  charRect;
 
-    uint8_t sheetsPerRow;
     uint8_t directionalFrames;
 
-    sf::Sprite   sprite;
-    sf::Vector2i sprite_sheetMap;
+    int s_layers;
+    std::vector<sf::Sprite> s_layerSprites;
 };
 
 
