@@ -35,6 +35,8 @@ public:
     inline ItemType type()         { return i_type; }
     inline sf::Texture& icon()     { return AssetManager::Instance()->getTexture(i_icon); }
 
+    inline void setLinkedTexture(string_t s) { i_linkedTexture = s; }
+
     virtual void activate() {};
 
 private:
@@ -44,10 +46,15 @@ private:
     string_t    i_icon;
     uint16_t    i_max;
     ItemType    i_type;
+
+    string_t    i_linkedTexture;
 };
 
 #define REGISTRY_ADD(itemClass)                                                    \
 ItemRegistry::Instance()->createItem(new itemClass());                             \
+
+//#define LINKED_TEXTURE(itemClass)                                                  \
+//ItemRegistry::Instance()
 
 #define CREATE_ITEM(className, name, description, icon, effect, type, stackSize)   \
 class className : public Item                                                      \

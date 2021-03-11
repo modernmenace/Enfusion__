@@ -32,6 +32,16 @@ Player::Player(sf::Vector2f position)
     LevelManager::Instance()->setPlayer(this);
 }
 
+void Player::equipItem(Item* itm)
+{
+    dbg_log("equipping tool")
+}
+
+void Player::unequipItem(Item* itm)
+{
+    dbg_log("unequipping tool")
+}
+
 /************************************************************************
  * FUNCTION :       Player::handleInput
  *

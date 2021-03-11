@@ -69,6 +69,28 @@ void Hotbar::updateSlots()
         h_text->setText("Current Item: " + slots.at(i_i->activeItem())->item()->name());
     else
         h_text->setText("Current Item: None");
+
+    //check for tool equip/unequip
+    auto* itm = slots.at(i_i->activeItem())->item();
+    if (itm != nullptr)
+    {
+        if (!h_toolEquipped)
+        {
+            if (itm->type() == Item_Tool)
+            {
+                LevelManager::Instance()->getCurrentLevel().player()->equipItem(itm);
+                h_toolEquipped = true;
+            }
+        }
+        else
+        {
+            if (itm->type() != Item_Tool)
+            {
+                LevelManager::Instance()->getCurrentLevel().player()->unequipItem(itm);
+                h_toolEquipped = false;
+            }
+        }
+    }
 }
 
 void Hotbar::handleInput(sf::Keyboard::Key key)

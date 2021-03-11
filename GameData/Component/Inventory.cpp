@@ -22,10 +22,9 @@ Inventory::Inventory()
 
 void Inventory::initialize()
 {
-    //TODO: remove this
-    this->add(ItemRegistry::Instance()->getItem<ITEM_TOMATO>());
-    this->add(ItemRegistry::Instance()->getItem<ITEM_TEST>(), 16);
+    //TODO: redo starting items
     this->add(ItemRegistry::Instance()->getItem<ITEM_AXE>());
+    this->add(ItemRegistry::Instance()->getItem<ITEM_TOMATO>(), 4);
 }
 
 void Inventory::swapItem(uint16_t i1, uint16_t i2)

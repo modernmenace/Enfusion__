@@ -11,12 +11,6 @@ CREATE_ITEM(ITEM_TOMATO, "Tomato",
                 dbg_log("Used a tomato!");
             }, Item_Consumable, 16);
 
-CREATE_ITEM(ITEM_TEST, "Test Item", "Test Description",
-            "Objects/Consumables/testitem.png",
-            {
-                    dbg_log("This Is A Test Item!");
-                    }, Item_Consumable, 16);
-
 CREATE_ITEM(ITEM_AXE, "Axe", "Used for chopping",
             "Objects/Tools/Tool_Axe.png",
             {
@@ -26,8 +20,9 @@ CREATE_ITEM(ITEM_AXE, "Axe", "Used for chopping",
 static void generateItemRegistry()
 {
     REGISTRY_ADD(ITEM_TOMATO)
-    REGISTRY_ADD(ITEM_TEST)
     REGISTRY_ADD(ITEM_AXE)
+
+    ItemRegistry::Instance()->getItem<ITEM_AXE>()->setLinkedTexture("Protagonist/axe.png");
 
     dbg_log("Item Registry Generation Finished")
 }

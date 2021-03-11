@@ -5,6 +5,7 @@
 
 #include "../Core/Engine.h"
 #include "../Entity/Entity.h"
+#include "../../Entity/Player.h"
 
 enum GameState
 {
@@ -39,7 +40,7 @@ public:
 
     void removeEntity(Entity* e);
 
-    inline Entity* player() { return l_player; }
+    inline Player* player() { return l_player; }
 
 protected:
     sf::RectangleShape background;
@@ -50,7 +51,7 @@ protected:
 
     sf::View defaultView;
     GameState l_state  = GameState::RUNNING;
-    Entity*   l_player = nullptr;
+    Player*   l_player = nullptr;
 
 };
 

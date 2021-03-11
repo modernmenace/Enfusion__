@@ -29,6 +29,8 @@ private:
     Inventory*     i_i      = nullptr;
     InventoryMenu* i_menu   = nullptr;
     TextDisplay*   h_text   = nullptr;
+
+    bool h_toolEquipped = false;
 };
 
 
