@@ -15,14 +15,22 @@ CREATE_ITEM(ITEM_AXE, "Axe", "Used for chopping",
             "Objects/Tools/Tool_Axe.png",
             {
                         dbg_log("Axe used!")
-            }, Item_Tool, 1);
+            }, Item_Weapon, 1);
+
+CREATE_ITEM(ITEM_TOP001, "Top001", "Test Top",
+            "Protagonist/Equipment/Top/top001_icon.png",
+            {}, Item_Clothing_Top, 1);
 
 static void generateItemRegistry()
 {
     REGISTRY_ADD(ITEM_TOMATO)
     REGISTRY_ADD(ITEM_AXE)
+    REGISTRY_ADD(ITEM_TOP001)
 
-    LINKED_TEXTURE(ITEM_AXE, "Protagonist/axe.png")
+    LINKED_TEXTURE(ITEM_AXE, "Protagonist/Equipment/Weapon/axe.png")
+    LINKED_TEXTURE(ITEM_TOP001,     "Protagonist/Equipment/Top/top001.png")
+
+    //CLOTHING_STATS() //todo: add stats to clothing and weapons
 
     dbg_log("Item Registry Generation Finished")
 }

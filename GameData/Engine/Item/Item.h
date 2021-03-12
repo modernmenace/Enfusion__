@@ -7,9 +7,22 @@
 enum ItemType
 {
     Item_Consumable,
-    Item_Tool,
+    Item_Weapon,
+    Item_Clothing_Top,
+    Item_Clothing_Bottom,
+    Item_Clothing_Head,
     Item_Other
 };
+
+typedef struct WeaponStats
+{
+
+} WeaponStats_t;
+
+typedef struct ClothingStats
+{
+
+} ClothingStats_t;
 
 class Item
 {
@@ -38,6 +51,18 @@ public:
 
     inline void setLinkedTexture(string_t s) { i_linkedTexture = s; }
 
+    void setWeaponStats(WeaponStats_t s)
+    {
+        assert(i_type == Item_Weapon);
+        i_weaponStats = s;
+    }
+    void setClothingStats(ClothingStats_t s)
+    {
+        assert(i_type == Item_Clothing_Bottom || i_type == Item_Clothing_Top
+                                              || i_type == Item_Clothing_Head);
+        i_clothingStats = s;
+    }
+
     virtual void activate() {};
 
 private:
@@ -48,7 +73,9 @@ private:
     uint16_t    i_max;
     ItemType    i_type;
 
-    string_t    i_linkedTexture;
+    string_t        i_linkedTexture;
+    WeaponStats_t   i_weaponStats;
+    ClothingStats_t i_clothingStats;
 };
 
 #define REGISTRY_ADD(itemClass)                                                    \
@@ -56,6 +83,12 @@ ItemRegistry::Instance()->createItem(new itemClass());                          
 
 #define LINKED_TEXTURE(itemClass, texture)                                         \
 ItemRegistry::Instance()->getItem<itemClass>()->setLinkedTexture(texture);         \
+
+#define WEAPON_STATS(itemClass, wStats)                                            \
+ItemRegistry::Instance()->getItem<itemClass>()->setWeaponStats(wStats);            \
+
+#define CLOTHING_STATS(itemClass, cStats)                                          \
+ItemRegistry::Instance()->getItem<itemClass>()->setClothingStats(cStats);          \
 
 #define CREATE_ITEM(className, name, description, icon, effect, type, stackSize)   \
 class className : public Item                                                      \

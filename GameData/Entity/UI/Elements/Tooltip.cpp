@@ -88,9 +88,9 @@ void Tooltip::show(Item* item, sf::Vector2f position)
             pos.y += 12;
             t_iType.setPosition(pos);
             break;
-        case Item_Tool:
-            t_iType.setText("Tool");
-            pos.x += 155;
+        case Item_Weapon:
+            t_iType.setText("Weapon");
+            pos.x += 145;
             pos.y += 12;
             t_iType.setPosition(pos);
             break;

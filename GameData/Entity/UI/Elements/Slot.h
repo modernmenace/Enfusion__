@@ -10,7 +10,7 @@
 class Slot : public Entity {
 
 public:
-    Slot(sf::Vector2f position, Inventory* inv, Item* item = nullptr);
+    Slot(sf::Vector2f position, Inventory* inv, float scale = 1, Item* item = nullptr);
     void render(sf::RenderWindow *window) override;
     void setItem(Item* item);
     void setCount(int c);

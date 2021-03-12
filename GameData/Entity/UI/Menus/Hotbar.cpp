@@ -78,7 +78,7 @@ void Hotbar::updateSlots()
     {
         if (!h_toolEquipped)
         {
-            if (itm->type() == Item_Tool)
+            if (itm->type() == Item_Weapon)
             {
                 LevelManager::Instance()->getCurrentLevel().player()->equipItem(itm);
                 h_toolEquipped = true;
@@ -86,9 +86,9 @@ void Hotbar::updateSlots()
         }
         else
         {
-            if (itm->type() != Item_Tool)
+            if (itm->type() != Item_Weapon)
             {
-                LevelManager::Instance()->getCurrentLevel().player()->unequipItem(Item_Tool);
+                LevelManager::Instance()->getCurrentLevel().player()->unequipItem(Item_Weapon);
                 h_toolEquipped = false;
             }
         }
@@ -97,7 +97,7 @@ void Hotbar::updateSlots()
     {
         if (h_toolEquipped)
         {
-            LevelManager::Instance()->getCurrentLevel().player()->unequipItem(Item_Tool);
+            LevelManager::Instance()->getCurrentLevel().player()->unequipItem(Item_Weapon);
             h_toolEquipped = false;
         }
     }

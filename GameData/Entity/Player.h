@@ -13,6 +13,11 @@ public:
     void handleInput(sf::Mouse::Button button) override;
     sf::FloatRect bounds()                     override;
 
+
+
+private:
+
+
 };
 
 

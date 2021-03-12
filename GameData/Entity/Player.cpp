@@ -26,7 +26,6 @@ Player::Player(sf::Vector2f position)
     addComponent<Position>(position);
     addComponent<AnimatedSprite>("Protagonist/base_body.png", 3, sf::IntRect(0, 0, 87, 152));
     getComponent<AnimatedSprite>().addLayer("Protagonist/base_head.png", Layer_Type_HEAD);
-    //getComponent<AnimatedSprite>().addLayer("Protagonist/axe.png", Layer_Type_WEAPON);
     addComponent<Camera>(CameraType::FOLLOW);
     addComponent<AnimatedMovement>(true);
     addComponent<Inventory>();
@@ -53,7 +52,7 @@ void Player::equipItem(Item* itm)
 {
     switch (itm->type())
     {
-        case Item_Tool:
+        case Item_Weapon:
             getComponent<AnimatedSprite>().addLayer(itm->linkedTexture(), Layer_Type_WEAPON);
             break;
         default:
@@ -81,7 +80,7 @@ void Player::unequipItem(ItemType type)
 {
     switch (type)
     {
-        case Item_Tool:
+        case Item_Weapon:
             getComponent<AnimatedSprite>().removeLayer(Layer_Type_WEAPON);
             break;
         default:
@@ -107,7 +106,7 @@ void Player::unequipItem(ItemType type)
 void Player::handleInput(sf::Mouse::Button button)
 {
     Item* itm = getComponent<Inventory>().item(getComponent<Inventory>().activeItem());
-    if (itm->type() == Item_Tool)
+    if (itm->type() == Item_Weapon)
         itm->activate();
 
     Entity::handleInput(button);

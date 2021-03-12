@@ -1,6 +1,6 @@
 #include "Slot.h"
 
-Slot::Slot(sf::Vector2f position, Inventory* inv, Item *item) : s_sprite(), s_text("", sf::Vector2f(0, 0), 25)
+Slot::Slot(sf::Vector2f position, Inventory* inv, float scale, Item *item) : s_sprite(), s_text("", sf::Vector2f(0, 0), 25)
 {
     s_inv     = inv;
     s_item    = item;
@@ -9,7 +9,7 @@ Slot::Slot(sf::Vector2f position, Inventory* inv, Item *item) : s_sprite(), s_te
     addComponent<Position>(position);
     addComponent<Sprite>("UI/ui.png");
     getComponent<Sprite>().getSprite().setTextureRect(sf::IntRect(66, 32, 16, 16));
-    getComponent<Sprite>().getSprite().setScale(6, 6);
+    getComponent<Sprite>().getSprite().setScale(scale * 6, scale * 6);
     s_text.initialize();
     s_text.setText("");
     auto s_x = getComponent<Position>().getPosition().x + 10;

@@ -1,7 +1,8 @@
 #include "InventoryMenu.h"
-#include "../../../Engine/Component/Base/Sprite.h"
-#include "../../../Engine/Component/Base/Position.h"
-#include "../../../Component/Inventory.h"
+
+//todo: once slots resizable, add head and make all 3 smaller
+//todo: just references "equipped" equipment on player
+//todo: when dragged to, call method in player.cpp
 
 /************************************************************************
  * FUNCTION :       Inventory::Inventory
@@ -51,7 +52,8 @@ InventoryMenu::~InventoryMenu()
         delete (*i);
 
     delete i_equipmentSlotHead;
-    delete i_equipmentSlotBody;
+    delete i_equipmentSlotTop;
+    delete i_equipmentSlotBottom;
 }
 
 /************************************************************************
@@ -105,8 +107,9 @@ void InventoryMenu::initialize()
         slots.at(s)->setItem(i_entity->getComponent<Inventory>().item(s));
 
     //initialize equipment slots
-    i_equipmentSlotHead = new Slot(sf::Vector2f(0, -350), &i_entity->getComponent<Inventory>());
-    i_equipmentSlotBody = new Slot(sf::Vector2f(0, -250), &i_entity->getComponent<Inventory>());
+    i_equipmentSlotHead = new Slot(sf::Vector2f(0, -350), &i_entity->getComponent<Inventory>(), 0.75);
+    i_equipmentSlotTop = new Slot(sf::Vector2f(0, -275), &i_entity->getComponent<Inventory>(), 0.75);
+    i_equipmentSlotBottom = new Slot(sf::Vector2f(0, -200), &i_entity->getComponent<Inventory>(), 0.75);
 }
 
 /************************************************************************
@@ -163,7 +166,8 @@ void InventoryMenu::toggleMenu()
             s->setVisible(true);
 
         i_equipmentSlotHead->setVisible(true);
-        i_equipmentSlotBody->setVisible(true);
+        i_equipmentSlotTop->setVisible(true);
+        i_equipmentSlotBottom->setVisible(true);
     }
     else
     {
@@ -172,7 +176,8 @@ void InventoryMenu::toggleMenu()
             s->setVisible(false);
 
         i_equipmentSlotHead->setVisible(false);
-        i_equipmentSlotBody->setVisible(false);
+        i_equipmentSlotTop->setVisible(false);
+        i_equipmentSlotBottom->setVisible(false);
 
         i_tooltip.hide();
     }
@@ -372,7 +377,8 @@ void InventoryMenu::render(sf::RenderWindow *window)
         s->render(window);
 
     i_equipmentSlotHead->render(window);
-    i_equipmentSlotBody->render(window);
+    i_equipmentSlotTop->render(window);
+    i_equipmentSlotBottom->render(window);
     i_playerNameDisplay.render(window);
     i_playerLevelDisplay.render(window);
 
