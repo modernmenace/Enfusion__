@@ -1,8 +1,22 @@
 #include "AnimatedSprite.h"
 #include "../Base/Position.h"
 
-//TODO: documentation
-//TODO: generalize this as a animated character, maybe move some shared movement here
+/************************************************************************
+ * FUNCTION :       AnimatedSprite::AnimatedSprite
+ *
+ * DESCRIPTION :
+ *       AnimatedSprite is used for animated character sprites currently
+ *
+ *  INPUTS:  string_t spriteSheet           | Spritesheet file name
+ *           int numberFrames               | Number of frames per direction
+ *           sf::IntRect characterSheetSize | Size of the character sheet
+ *
+ *  OUTPUTS: NONE
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2021.03.12 	    JCB     Documentation Start
+ *
+ ************************************************************************/
 
 AnimatedSprite::AnimatedSprite(string_t spriteSheet, int numberFrames, sf::IntRect characterSheetSize)
 {
@@ -10,6 +24,21 @@ AnimatedSprite::AnimatedSprite(string_t spriteSheet, int numberFrames, sf::IntRe
     this->charRect          = characterSheetSize;
     this->directionalFrames = numberFrames;
 }
+
+/************************************************************************
+ * FUNCTION :       AnimatedSprite::~AnimatedSprite
+ *
+ * DESCRIPTION :
+ *       Destructor, free manually allocated memory
+ *
+ *  INPUTS:  NONE
+ *
+ *  OUTPUTS: NONE
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2021.03.12 	    JCB     Documentation Start
+ *
+ ************************************************************************/
 
 AnimatedSprite::~AnimatedSprite()
 {
@@ -20,6 +49,21 @@ AnimatedSprite::~AnimatedSprite()
             delete s;
     }
 }
+
+/************************************************************************
+ * FUNCTION :       AnimatedSprite::initialize
+ *
+ * DESCRIPTION :
+ *       Initialize components and layers, set initial state
+ *
+ *  INPUTS:  NONE
+ *
+ *  OUTPUTS: NONE
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2021.03.12 	    JCB     Documentation Start
+ *
+ ************************************************************************/
 
 void AnimatedSprite::initialize()
 {
@@ -34,6 +78,22 @@ void AnimatedSprite::initialize()
 
     switchState(0, 0);
 }
+
+/************************************************************************
+ * FUNCTION :       AnimatedSprite::addLayer
+ *
+ * DESCRIPTION :
+ *       Add or override the specified visual layer
+ *
+ *  INPUTS:  string_t spriteSheet | Spritesheet file name for the layer
+ *           Layer_Type type      | Layer type to add/override
+ *
+ *  OUTPUTS: NONE
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2021.03.12 	    JCB     Documentation Start
+ *
+ ************************************************************************/
 
 void AnimatedSprite::addLayer(string_t spriteSheet, Layer_Type type)
 {
@@ -56,6 +116,21 @@ void AnimatedSprite::addLayer(string_t spriteSheet, Layer_Type type)
     refreshState();
 }
 
+/************************************************************************
+ * FUNCTION :       AnimatedSprite::removeLayer
+ *
+ * DESCRIPTION :
+ *       Remove the specified visual layer
+ *
+ *  INPUTS:  Layer_Type type | Layer type to be removed
+ *
+ *  OUTPUTS: NONE
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2021.03.12 	    JCB     Documentation Start
+ *
+ ************************************************************************/
+
 void AnimatedSprite::removeLayer(Layer_Type type)
 {
     auto *s = s_layerMap[type];
@@ -67,6 +142,21 @@ void AnimatedSprite::removeLayer(Layer_Type type)
     refreshState();
 }
 
+/************************************************************************
+ * FUNCTION :       AnimatedSprite::setPosition
+ *
+ * DESCRIPTION :
+ *       Set the sprites position (for all layers)
+ *
+ *  INPUTS:  sf::Vector2f pos | The new position
+ *
+ *  OUTPUTS: NONE
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2021.03.12 	    JCB     Documentation Start
+ *
+ ************************************************************************/
+
 void AnimatedSprite::setPosition(sf::Vector2f pos)
 {
     for(int i = 0; i < PROTAGONIST_LAYERS; i++)
@@ -77,6 +167,21 @@ void AnimatedSprite::setPosition(sf::Vector2f pos)
     }
 }
 
+/************************************************************************
+ * FUNCTION :       AnimatedSprite::render
+ *
+ * DESCRIPTION :
+ *       Render all layers of the sprite to the window
+ *
+ *  INPUTS:  sf::RenderWindow *window | Window to render to
+ *
+ *  OUTPUTS: NONE
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2021.03.12 	    JCB     Documentation Start
+ *
+ ************************************************************************/
+
 void AnimatedSprite::render(sf::RenderWindow *window)
 {
     for(int i = 0; i < PROTAGONIST_LAYERS; i++)
@@ -86,6 +191,22 @@ void AnimatedSprite::render(sf::RenderWindow *window)
             window->draw(*s_layerMap[static_cast<Layer_Type>(i)]);
     }
 }
+
+/************************************************************************
+ * FUNCTION :       AnimatedSprite::switchState
+ *
+ * DESCRIPTION :
+ *       Switch the current frame state for all layers
+ *
+ *  INPUTS:  uint8_t row   | The current state's row
+ *           uint8_t frame | The current state's frame
+ *
+ *  OUTPUTS: NONE
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2021.03.12 	    JCB     Documentation Start
+ *
+ ************************************************************************/
 
 void AnimatedSprite::switchState(uint8_t row, uint8_t frame)
 {

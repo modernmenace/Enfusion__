@@ -33,7 +33,22 @@ Player::Player(sf::Vector2f position)
     LevelManager::Instance()->setPlayer(this);
 }
 
-//todo: axe works fine when added in constructor, but breaks when added here
+/************************************************************************
+ * FUNCTION :       Player::equipItem
+ *
+ * DESCRIPTION :
+ *       Equip item, note that this is just visual as of now and weapons
+ *       are not actually stored anywhere yet
+ *
+ *  INPUTS:  Item* itm   |  The item to be equipped
+ *
+ *  OUTPUTS: NONE
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2021.03.12 	    JCB     Documentation Start
+ *
+ ************************************************************************/
+
 void Player::equipItem(Item* itm)
 {
     switch (itm->type())
@@ -45,6 +60,22 @@ void Player::equipItem(Item* itm)
             break;
     }
 }
+
+/************************************************************************
+ * FUNCTION :       Player::unequipItem
+ *
+ * DESCRIPTION :
+ *       Unequip item, note that this is just visual as of now and weapons
+ *       are not actually stored anywhere yet
+ *
+ *  INPUTS:  ItemType type   |  The type of item to be unequipped
+ *
+ *  OUTPUTS: NONE
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2021.03.12 	    JCB     Documentation Start
+ *
+ ************************************************************************/
 
 void Player::unequipItem(ItemType type)
 {
