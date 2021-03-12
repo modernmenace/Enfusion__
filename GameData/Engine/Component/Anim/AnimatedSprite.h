@@ -3,14 +3,13 @@
 
 #include "../Component.h"
 
-#define PROTAGONIST_LAYERS 6
+#define PROTAGONIST_LAYERS 5
 
 enum Layer_Type
 {
     Layer_Type_BASE,
-    Layer_Type_CHEST,
-    Layer_Type_Pants,
-    Layer_Type_Boots,
+    Layer_Type_BOTTOM,
+    Layer_Type_TOP,
     Layer_Type_HEAD,
     Layer_Type_WEAPON
 };

@@ -57,6 +57,8 @@ void Hotbar::initialize()
     Entity::initialize();
 }
 
+//TODO: BUG: this is called on a delay, meaning that hotbar is not instantly
+//TODO:      updated on inv menu changes, and the dropped item will still show in hand
 void Hotbar::updateSlots()
 {
     for(int i = 0; i < HOTBAR_SLOTS; i++)
@@ -89,6 +91,14 @@ void Hotbar::updateSlots()
                 LevelManager::Instance()->getCurrentLevel().player()->unequipItem(Item_Tool);
                 h_toolEquipped = false;
             }
+        }
+    }
+    else
+    {
+        if (h_toolEquipped)
+        {
+            LevelManager::Instance()->getCurrentLevel().player()->unequipItem(Item_Tool);
+            h_toolEquipped = false;
         }
     }
 }
