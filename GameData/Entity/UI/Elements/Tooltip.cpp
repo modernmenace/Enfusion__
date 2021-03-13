@@ -94,9 +94,15 @@ void Tooltip::show(Item* item, sf::Vector2f position)
             pos.y += 12;
             t_iType.setPosition(pos);
             break;
+        case Item_Clothing_Head: case Item_Clothing_Top: case Item_Clothing_Bottom:
+            t_iType.setText("Equipment");
+            pos.x += 128;
+            pos.y += 12;
+            t_iType.setPosition(pos);
+            break;
         default:
             t_iType.setText("Unknown");
-            pos.x += 130;
+            pos.x += 137;
             pos.y += 12;
             t_iType.setPosition(pos);
             break;

@@ -277,14 +277,27 @@ void InventoryMenu::update(sf::Time tickRate)
                             {
                                 LevelManager::Instance()->getCurrentLevel().player()->equipItem(itm);
 
+                                Item* itm2;
                                 if (itm->type() == Item_Clothing_Head)
+                                {
+                                    itm2 = i_equipmentSlotHead->item();
                                     i_equipmentSlotHead->setItem(itm);
+                                }
                                 else if (itm->type() == Item_Clothing_Top)
+                                {
+                                    itm2 = i_equipmentSlotTop->item();
                                     i_equipmentSlotTop->setItem(itm);
+                                }
                                 else if (itm->type() == Item_Clothing_Bottom)
+                                {
+                                    itm2 = i_equipmentSlotBottom->item();
                                     i_equipmentSlotBottom->setItem(itm);
+                                }
 
                                 i_entity->getComponent<Inventory>().remove(i_dragIndex);
+                                if (itm2 != nullptr)
+                                    i_entity->getComponent<Inventory>().add(itm2);
+
                                 updateSlots();
                             }
                         }
@@ -343,6 +356,32 @@ void InventoryMenu::update(sf::Time tickRate)
                         i_tooltip.show(slots[s]->item(), t_pos);
                         f = true;
                     }
+                }
+
+                //check equipment slot hover
+                if (i_equipmentSlotHead->getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition.x, MousePosition.y)
+                    && i_equipmentSlotHead->item() != nullptr)
+                {
+                    auto t_pos = i_equipmentSlotHead->getComponent<Position>().getPosition();
+                    t_pos.x += 96;
+                    i_tooltip.show(i_equipmentSlotHead->item(), t_pos);
+                    f = true;
+                }
+                else if (i_equipmentSlotTop->getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition.x, MousePosition.y)
+                         && i_equipmentSlotTop->item() != nullptr)
+                {
+                    auto t_pos = i_equipmentSlotTop->getComponent<Position>().getPosition();
+                    t_pos.x += 96;
+                    i_tooltip.show(i_equipmentSlotTop->item(), t_pos);
+                    f = true;
+                }
+                else if (i_equipmentSlotBottom->getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition.x, MousePosition.y)
+                         && i_equipmentSlotBottom->item() != nullptr)
+                {
+                    auto t_pos = i_equipmentSlotBottom->getComponent<Position>().getPosition();
+                    t_pos.x += 96;
+                    i_tooltip.show(i_equipmentSlotBottom->item(), t_pos);
+                    f = true;
                 }
             }
             if (!f) i_tooltip.hide();
