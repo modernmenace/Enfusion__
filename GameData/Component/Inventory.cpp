@@ -50,9 +50,16 @@ void Inventory::remove(Item* item, uint16_t amount)
     }
 }
 
-void Inventory::remove(uint16_t index)
+void Inventory::drop(uint16_t index)
 {
     LevelManager::Instance()->getCurrentLevel().addEntity(new ItemPickup(inv_items[index], inv_amounts[index]));
+    inv_items[index]   = nullptr;
+    inv_amounts[index] = 0;
+    changeFlag = true;
+}
+
+void Inventory::remove(uint16_t index)
+{
     inv_items[index]   = nullptr;
     inv_amounts[index] = 0;
     changeFlag = true;

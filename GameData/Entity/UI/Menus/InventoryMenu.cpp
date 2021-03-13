@@ -1,4 +1,5 @@
 #include "InventoryMenu.h"
+#include "../../../Engine/Lvl/LevelManager.h"
 
 //todo: once slots resizable, add head and make all 3 smaller
 //todo: just references "equipped" equipment on player
@@ -246,7 +247,7 @@ void InventoryMenu::update(sf::Time tickRate)
                 sf::Sprite &i_m_s = getComponent<Sprite>().getSprite();
                 if (!i_m_s.getGlobalBounds().contains(MousePosition.x, MousePosition.y))
                 {
-                    i_entity->getComponent<Inventory>().remove(i_dragIndex);
+                    i_entity->getComponent<Inventory>().drop(i_dragIndex);
                     updateSlots();
                 }
                 else
@@ -265,6 +266,31 @@ void InventoryMenu::update(sf::Time tickRate)
                     //if not slot still in menu
                     if (!wasSlot)
                     {
+                        if (i_equipmentSlotHead->getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition) ||
+                            i_equipmentSlotTop->getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition) ||
+                            i_equipmentSlotBottom->getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition))
+                        {
+                            //treating all equipment slots as the same for now
+                            auto* itm = i_entity->getComponent<Inventory>().item(i_dragIndex);
+                            if (itm->type() == Item_Clothing_Top || itm->type() == Item_Clothing_Head
+                                || itm->type() == Item_Clothing_Bottom)
+                            {
+                                LevelManager::Instance()->getCurrentLevel().player()->equipItem(itm);
+
+                                if (itm->type() == Item_Clothing_Head)
+                                    i_equipmentSlotHead->setItem(itm);
+                                else if (itm->type() == Item_Clothing_Top)
+                                    i_equipmentSlotTop->setItem(itm);
+                                else if (itm->type() == Item_Clothing_Bottom)
+                                    i_equipmentSlotBottom->setItem(itm);
+
+                                i_entity->getComponent<Inventory>().remove(i_dragIndex);
+                                updateSlots();
+                            }
+                        }
+
+
+                        //todo: reassess below code, dragging to player image
                         if (i_playerView.getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition))
                         {
                             i_entity->getComponent<Inventory>().activated(i_dragIndex);

@@ -30,6 +30,7 @@ private:
     sf::Sprite  s_sprite;
     bool        s_visible = true;
     int         s_amount;
+    float       s_scale;
 };
 
 

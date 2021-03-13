@@ -5,6 +5,7 @@ Slot::Slot(sf::Vector2f position, Inventory* inv, float scale, Item *item) : s_s
     s_inv     = inv;
     s_item    = item;
     s_amount  = 0;
+    s_scale   = scale;
 
     addComponent<Position>(position);
     addComponent<Sprite>("UI/ui.png");
@@ -24,7 +25,7 @@ void Slot::setItem(Item *item)
     {
         s_sprite.setTexture(s_item->icon());
         s_sprite.setPosition(getComponent<Position>().getPosition());
-        s_sprite.setScale(6, 6);
+        s_sprite.setScale(s_scale * 6, s_scale * 6);
     }
 }
 
