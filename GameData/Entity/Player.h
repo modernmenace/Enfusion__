@@ -4,6 +4,20 @@
 #include "../Engine/Entity/Entity.h"
 #include "../Engine/Item/Item.h"
 
+typedef struct PlayerEquipment
+{
+    bool head   = false;
+    bool top    = false;
+    bool bottom = false;
+    bool weapon = false;
+    
+    WeaponStats_t   weapon_stats;
+    ClothingStats_t head_stats;
+    ClothingStats_t top_stats;
+    ClothingStats_t bottom_stats;
+
+} PlayerEquipment_t;
+
 class Player : public Entity {
 
 public:
@@ -16,7 +30,7 @@ public:
 
 
 private:
-
+    PlayerEquipment_t p_equipment;
 
 };
 

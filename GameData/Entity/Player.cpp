@@ -54,6 +54,8 @@ void Player::equipItem(Item* itm)
     {
         case Item_Weapon:
             getComponent<AnimatedSprite>().addLayer(itm->linkedTexture(), Layer_Type_WEAPON);
+            p_equipment.weapon = true;
+            p_equipment.weapon_stats = itm->getWeaponStats();
             break;
         default:
             break;
@@ -82,6 +84,7 @@ void Player::unequipItem(ItemType type)
     {
         case Item_Weapon:
             getComponent<AnimatedSprite>().removeLayer(Layer_Type_WEAPON);
+            p_equipment.weapon = false;
             break;
         default:
             break;

@@ -52,15 +52,23 @@ public:
     inline void setLinkedTexture(string_t s) { i_linkedTexture = s; }
 
     void setWeaponStats(WeaponStats_t s)
-    {
-        assert(i_type == Item_Weapon);
-        i_weaponStats = s;
-    }
+    { assert(i_type == Item_Weapon); i_weaponStats = s; }
+
+    WeaponStats_t getWeaponStats()
+    { assert(i_type == Item_Weapon); return i_weaponStats; }
+
     void setClothingStats(ClothingStats_t s)
     {
         assert(i_type == Item_Clothing_Bottom || i_type == Item_Clothing_Top
                                               || i_type == Item_Clothing_Head);
         i_clothingStats = s;
+    }
+
+    ClothingStats_t getClothingStats()
+    {
+        assert(i_type == Item_Clothing_Bottom || i_type == Item_Clothing_Top
+               || i_type == Item_Clothing_Head);
+        return i_clothingStats;
     }
 
     virtual void activate() {};
