@@ -52,6 +52,7 @@ Player::Player(sf::Vector2f position)
 void Player::initialize()
 {
     equipItem(ItemRegistry::Instance()->getItem<ITEM_TOP001>());
+    equipItem(ItemRegistry::Instance()->getItem<ITEM_BOTTOM001>());
     Inventory* inv = &getComponent<Inventory>();
     inv->add(ItemRegistry::Instance()->getItem<ITEM_AXE>());
     inv->add(ItemRegistry::Instance()->getItem<ITEM_TOMATO>(), 4);

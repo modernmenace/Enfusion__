@@ -9,26 +9,32 @@ CREATE_ITEM(ITEM_TOMATO, "Tomato",
             "Objects/Consumables/tomato.png",
             {
                 dbg_log("Used a tomato!");
-            }, Item_Consumable, 16);
+            }, Item_Consumable, 16)
 
 CREATE_ITEM(ITEM_AXE, "Axe", "Used for chopping",
             "Objects/Tools/Tool_Axe.png",
             {
                         dbg_log("Axe used!")
-            }, Item_Weapon, 1);
+            }, Item_Weapon, 1)
 
 CREATE_ITEM(ITEM_TOP001, "Top001", "Test Top",
             "Protagonist/Equipment/Top/top001_icon.png",
-            {}, Item_Clothing_Top, 1);
+            {}, Item_Clothing_Top, 1)
+
+CREATE_ITEM(ITEM_BOTTOM001, "Bottom001", "Test Bottom",
+            "Protagonist/Equipment/Bottom/bottom001_icon.png",
+            {}, Item_Clothing_Bottom, 1)
 
 static void generateItemRegistry()
 {
     REGISTRY_ADD(ITEM_TOMATO)
     REGISTRY_ADD(ITEM_AXE)
     REGISTRY_ADD(ITEM_TOP001)
+    REGISTRY_ADD(ITEM_BOTTOM001)
 
     LINKED_TEXTURE(ITEM_AXE, "Protagonist/Equipment/Weapon/axe.png")
     LINKED_TEXTURE(ITEM_TOP001,     "Protagonist/Equipment/Top/top001.png")
+    LINKED_TEXTURE(ITEM_BOTTOM001, "Protagonist/Equipment/Bottom/bottom001.png")
 
     //CLOTHING_STATS() //todo: add stats to clothing and weapons
 
