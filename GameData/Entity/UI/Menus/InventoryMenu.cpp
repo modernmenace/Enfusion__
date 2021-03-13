@@ -1,9 +1,6 @@
 #include "InventoryMenu.h"
 #include "../../../Engine/Lvl/LevelManager.h"
-
-//todo: once slots resizable, add head and make all 3 smaller
-//todo: just references "equipped" equipment on player
-//todo: when dragged to, call method in player.cpp
+#include "../../Level/ItemPickup.h"
 
 /************************************************************************
  * FUNCTION :       Inventory::Inventory
@@ -218,7 +215,17 @@ void InventoryMenu::update(sf::Time tickRate)
         if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
         {
             if (i_drag)
-                slots[i_dragIndex]->itemSprite()->setPosition(MousePosition);
+            {
+                //dragging, update position
+                if (i_dragIndex == DRAG_EQ_HEAD_INDEX)
+                    i_equipmentSlotHead->itemSprite()->setPosition(MousePosition);
+                else if (i_dragIndex == DRAG_EQ_TOP_INDEX)
+                    i_equipmentSlotTop->itemSprite()->setPosition(MousePosition);
+                else if (i_dragIndex == DRAG_EQ_BOTTOM_INDEX)
+                    i_equipmentSlotBottom->itemSprite()->setPosition(MousePosition);
+                else
+                    slots[i_dragIndex]->itemSprite()->setPosition(MousePosition);
+            }
 
             if(i_mouseClock.getElapsedTime().asSeconds() > DRAG_THRESHOLD_S && !i_drag)
             {
@@ -232,6 +239,14 @@ void InventoryMenu::update(sf::Time tickRate)
                             toDrag = s;
                             break;
                         }
+
+                //check for equipment drag
+                if (i_equipmentSlotHead->getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition))
+                    toDrag = DRAG_EQ_HEAD_INDEX;
+                else if (i_equipmentSlotTop->getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition))
+                    toDrag = DRAG_EQ_TOP_INDEX;
+                else if (i_equipmentSlotBottom->getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition))
+                    toDrag = DRAG_EQ_BOTTOM_INDEX;
 
                 if (toDrag >= 0)
                 {
@@ -253,17 +268,61 @@ void InventoryMenu::update(sf::Time tickRate)
                 sf::Sprite &i_m_s = getComponent<Sprite>().getSprite();
                 if (!i_m_s.getGlobalBounds().contains(MousePosition.x, MousePosition.y))
                 {
-                    i_entity->getComponent<Inventory>().drop(i_dragIndex);
+                    if (i_dragIndex == DRAG_EQ_HEAD_INDEX)
+                    {
+                        Player* p = LevelManager::Instance()->getCurrentLevel().player();
+                        LevelManager::Instance()->getCurrentLevel().addEntity(new ItemPickup(p->equipment()->head, 1));
+                        p->unequipItem(Item_Clothing_Head);
+                    }
+                    else if (i_dragIndex == DRAG_EQ_TOP_INDEX)
+                    {
+                        Player* p = LevelManager::Instance()->getCurrentLevel().player();
+                        LevelManager::Instance()->getCurrentLevel().addEntity(new ItemPickup(p->equipment()->top, 1));
+                        p->unequipItem(Item_Clothing_Top);
+                    }
+                    else if (i_dragIndex == DRAG_EQ_BOTTOM_INDEX)
+                    {
+                        Player* p = LevelManager::Instance()->getCurrentLevel().player();
+                        LevelManager::Instance()->getCurrentLevel().addEntity(new ItemPickup(p->equipment()->bottom, 1));
+                        p->unequipItem(Item_Clothing_Bottom);
+                    }
+                    else
+                    {
+                        i_entity->getComponent<Inventory>().drop(i_dragIndex);
+                    }
                     updateSlots();
                 }
                 else
                 {
+                    //todo: equipment item to inventory slot
                     bool wasSlot = false;
                     for(int s = 0; s < slots.size(); s++)
                     {
                         if (slots[s]->getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition))
                         {
-                            i_entity->getComponent<Inventory>().swapItem(i_dragIndex, s);
+                            //todo: new code here
+
+                            if (i_dragIndex == DRAG_EQ_HEAD_INDEX)
+                            {
+                                Player* p = LevelManager::Instance()->getCurrentLevel().player();
+                                i_entity->getComponent<Inventory>().add(p->equipment()->head);
+                                p->unequipItem(Item_Clothing_Head);
+                            }
+                            else if (i_dragIndex == DRAG_EQ_TOP_INDEX)
+                            {
+                                Player* p = LevelManager::Instance()->getCurrentLevel().player();
+                                i_entity->getComponent<Inventory>().add(p->equipment()->top);
+                                p->unequipItem(Item_Clothing_Top);
+                            }
+                            else if (i_dragIndex == DRAG_EQ_BOTTOM_INDEX)
+                            {
+                                Player* p = LevelManager::Instance()->getCurrentLevel().player();
+                                i_entity->getComponent<Inventory>().add(p->equipment()->bottom);
+                                p->unequipItem(Item_Clothing_Bottom);
+                            }
+                            else
+                                i_entity->getComponent<Inventory>().swapItem(i_dragIndex, s);
+
                             updateSlots();
                             wasSlot = true;
                             break;
@@ -305,10 +364,14 @@ void InventoryMenu::update(sf::Time tickRate)
                         //todo: reassess below code, dragging to player image
                         if (i_playerView.getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition))
                         {
-                            i_entity->getComponent<Inventory>().activated(i_dragIndex);
-                            slots[i_dragIndex]->activateItem();
-                            slots.at(i_dragIndex)->setItem(i_entity->getComponent<Inventory>().item(i_dragIndex));
-                            slots.at(i_dragIndex)->setCount(i_entity->getComponent<Inventory>().amount(i_dragIndex));
+                            if (i_dragIndex != DRAG_EQ_HEAD_INDEX && i_dragIndex != DRAG_EQ_BOTTOM_INDEX
+                                && i_dragIndex != DRAG_EQ_TOP_INDEX)
+                            {
+                                i_entity->getComponent<Inventory>().activated(i_dragIndex);
+                                slots[i_dragIndex]->activateItem();
+                                slots.at(i_dragIndex)->setItem(i_entity->getComponent<Inventory>().item(i_dragIndex));
+                                slots.at(i_dragIndex)->setCount(i_entity->getComponent<Inventory>().amount(i_dragIndex));
+                            }
                         }
                         else
                             updateSlots();
@@ -448,10 +511,34 @@ void InventoryMenu::render(sf::RenderWindow *window)
 
     if (i_drag)
     {
-        window->draw(*slots[i_dragIndex]->itemSprite());
-        slots[i_dragIndex]->itemText()->setPosition(sf::Vector2f(slots[i_dragIndex]->itemSprite()->getPosition().x + 10,
-                                                                 slots[i_dragIndex]->itemSprite()->getPosition().y + 62));
-        slots[i_dragIndex]->itemText()->render(window);
+        if (i_dragIndex == DRAG_EQ_HEAD_INDEX)
+        {
+            window->draw(*i_equipmentSlotHead->itemSprite());
+            i_equipmentSlotHead->itemText()->setPosition(sf::Vector2f(i_equipmentSlotHead->itemSprite()->getPosition().x + 10,
+                                                                      i_equipmentSlotHead->itemSprite()->getPosition().y + 62));
+            i_equipmentSlotHead->itemText()->render(window);
+        }
+        else if (i_dragIndex == DRAG_EQ_TOP_INDEX)
+        {
+            window->draw(*i_equipmentSlotTop->itemSprite());
+            i_equipmentSlotTop->itemText()->setPosition(sf::Vector2f(i_equipmentSlotTop->itemSprite()->getPosition().x + 10,
+                                                                      i_equipmentSlotTop->itemSprite()->getPosition().y + 62));
+            i_equipmentSlotTop->itemText()->render(window);
+        }
+        else if (i_dragIndex == DRAG_EQ_BOTTOM_INDEX)
+        {
+            window->draw(*i_equipmentSlotBottom->itemSprite());
+            i_equipmentSlotBottom->itemText()->setPosition(sf::Vector2f(i_equipmentSlotBottom->itemSprite()->getPosition().x + 10,
+                                                                      i_equipmentSlotBottom->itemSprite()->getPosition().y + 62));
+            i_equipmentSlotBottom->itemText()->render(window);
+        }
+        else
+        {
+            window->draw(*slots[i_dragIndex]->itemSprite());
+            slots[i_dragIndex]->itemText()->setPosition(sf::Vector2f(slots[i_dragIndex]->itemSprite()->getPosition().x + 10,
+                                                                     slots[i_dragIndex]->itemSprite()->getPosition().y + 62));
+            slots[i_dragIndex]->itemText()->render(window);
+        }
     }
 
     i_tooltip.render(window);

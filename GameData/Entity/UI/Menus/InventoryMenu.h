@@ -6,6 +6,9 @@
 #include "../Elements/Tooltip.h"
 
 #define DRAG_THRESHOLD_S 0.1
+#define DRAG_EQ_HEAD_INDEX   97
+#define DRAG_EQ_TOP_INDEX    98
+#define DRAG_EQ_BOTTOM_INDEX 99
 
 class InventoryMenu : public Entity {
 
