@@ -6,16 +6,10 @@
 
 typedef struct PlayerEquipment
 {
-    bool head   = false;
-    bool top    = false;
-    bool bottom = false;
-    bool weapon = false;
-    
-    WeaponStats_t   weapon_stats;
-    ClothingStats_t head_stats;
-    ClothingStats_t top_stats;
-    ClothingStats_t bottom_stats;
-
+    Item* head   = nullptr;
+    Item* top    = nullptr;
+    Item* bottom = nullptr;
+    Item* weapon = nullptr;
 } PlayerEquipment_t;
 
 class Player : public Entity {
@@ -24,10 +18,11 @@ public:
     Player(sf::Vector2f position);
     void equipItem(Item*);
     void unequipItem(ItemType);
+    void initialize()                          override;
     void handleInput(sf::Mouse::Button button) override;
     sf::FloatRect bounds()                     override;
 
-
+    PlayerEquipment_t* equipment() { return &p_equipment; }
 
 private:
     PlayerEquipment_t p_equipment;

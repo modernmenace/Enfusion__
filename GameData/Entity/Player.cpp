@@ -5,6 +5,8 @@
 #include "../Engine/Component/Misc/Camera.h"
 #include "../Component/Inventory.h"
 #include "../Engine/Lvl/LevelManager.h"
+#include "../Engine/Item/ItemRegistry.h"
+#include "../Data/Items.h"
 
 /************************************************************************
  * FUNCTION :       Player::Player
@@ -33,6 +35,30 @@ Player::Player(sf::Vector2f position)
 }
 
 /************************************************************************
+ * FUNCTION :       Player::initialize
+ *
+ * DESCRIPTION :
+ *       Set starting equipment
+ *
+ *  INPUTS:  NONE
+ *
+ *  OUTPUTS: NONE
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2021.03.13 	    JCB     Documentation Start
+ *
+ ************************************************************************/
+
+void Player::initialize()
+{
+    equipItem(ItemRegistry::Instance()->getItem<ITEM_TOP001>());
+    Inventory* inv = &getComponent<Inventory>();
+    inv->add(ItemRegistry::Instance()->getItem<ITEM_AXE>());
+    inv->add(ItemRegistry::Instance()->getItem<ITEM_TOMATO>(), 4);
+    Entity::initialize();
+}
+
+/************************************************************************
  * FUNCTION :       Player::equipItem
  *
  * DESCRIPTION :
@@ -54,23 +80,19 @@ void Player::equipItem(Item* itm)
     {
         case Item_Weapon:
             getComponent<AnimatedSprite>().addLayer(itm->linkedTexture(), Layer_Type_WEAPON);
-            p_equipment.weapon = true;
-            p_equipment.weapon_stats = itm->getWeaponStats();
+            p_equipment.weapon = itm;
             break;
         case Item_Clothing_Head:
             getComponent<AnimatedSprite>().addLayer(itm->linkedTexture(), Layer_Type_HEAD);
-            p_equipment.head = true;
-            p_equipment.head_stats = itm->getClothingStats();
+            p_equipment.head = itm;
             break;
         case Item_Clothing_Top:
             getComponent<AnimatedSprite>().addLayer(itm->linkedTexture(), Layer_Type_TOP);
-            p_equipment.top = true;
-            p_equipment.top_stats = itm->getClothingStats();
+            p_equipment.top = itm;
             break;
         case Item_Clothing_Bottom:
             getComponent<AnimatedSprite>().addLayer(itm->linkedTexture(), Layer_Type_BOTTOM);
-            p_equipment.bottom = true;
-            p_equipment.bottom_stats = itm->getClothingStats();
+            p_equipment.bottom = itm;
             break;
         default:
             break;
@@ -99,19 +121,19 @@ void Player::unequipItem(ItemType type)
     {
         case Item_Weapon:
             getComponent<AnimatedSprite>().removeLayer(Layer_Type_WEAPON);
-            p_equipment.weapon = false;
+            p_equipment.weapon = nullptr;
             break;
         case Item_Clothing_Head:
             getComponent<AnimatedSprite>().removeLayer(Layer_Type_HEAD);
-            p_equipment.head = false;
+            p_equipment.head = nullptr;
             break;
         case Item_Clothing_Top:
             getComponent<AnimatedSprite>().removeLayer(Layer_Type_TOP);
-            p_equipment.top = false;
+            p_equipment.top = nullptr;
             break;
         case Item_Clothing_Bottom:
             getComponent<AnimatedSprite>().removeLayer(Layer_Type_BOTTOM);
-            p_equipment.bottom = false;
+            p_equipment.bottom = nullptr;
             break;
         default:
             break;

@@ -28,7 +28,6 @@ private:
 
 public:
     Inventory();
-    void initialize() override;
 
     template<class It>
     bool add(It* item, uint16_t amount = 1)

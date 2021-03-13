@@ -20,14 +20,6 @@ Inventory::Inventory()
     }
 }
 
-void Inventory::initialize()
-{
-    //TODO: redo starting items
-    this->add(ItemRegistry::Instance()->getItem<ITEM_AXE>());
-    this->add(ItemRegistry::Instance()->getItem<ITEM_TOMATO>(), 4);
-    this->add(ItemRegistry::Instance()->getItem<ITEM_TOP001>());
-}
-
 void Inventory::swapItem(uint16_t i1, uint16_t i2)
 {
     auto i1_i = inv_items[i1];

@@ -137,6 +137,12 @@ void InventoryMenu::updateSlots()
         slots[s]->itemText()->setPosition(sf::Vector2f(slots[s]->itemSprite()->getPosition().x + 10,
                                                           slots[s]->itemSprite()->getPosition().y + 62));
     }
+
+    //update equipment slots
+    Player* player = LevelManager::Instance()->getCurrentLevel().player();
+    i_equipmentSlotHead->setItem(player->equipment()->head);
+    i_equipmentSlotTop->setItem(player->equipment()->top);
+    i_equipmentSlotBottom->setItem(player->equipment()->bottom);
 }
 
 /************************************************************************
@@ -279,20 +285,13 @@ void InventoryMenu::update(sf::Time tickRate)
 
                                 Item* itm2;
                                 if (itm->type() == Item_Clothing_Head)
-                                {
                                     itm2 = i_equipmentSlotHead->item();
-                                    i_equipmentSlotHead->setItem(itm);
-                                }
+
                                 else if (itm->type() == Item_Clothing_Top)
-                                {
                                     itm2 = i_equipmentSlotTop->item();
-                                    i_equipmentSlotTop->setItem(itm);
-                                }
+
                                 else if (itm->type() == Item_Clothing_Bottom)
-                                {
                                     itm2 = i_equipmentSlotBottom->item();
-                                    i_equipmentSlotBottom->setItem(itm);
-                                }
 
                                 i_entity->getComponent<Inventory>().remove(i_dragIndex);
                                 if (itm2 != nullptr)
