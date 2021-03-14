@@ -242,11 +242,20 @@ void InventoryMenu::update(sf::Time tickRate)
 
                 //check for equipment drag
                 if (i_equipmentSlotHead->getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition))
-                    toDrag = DRAG_EQ_HEAD_INDEX;
+                {
+                    if (LevelManager::Instance()->getCurrentLevel().player()->equipment()->head != nullptr)
+                        toDrag = DRAG_EQ_HEAD_INDEX;
+                }
                 else if (i_equipmentSlotTop->getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition))
-                    toDrag = DRAG_EQ_TOP_INDEX;
+                {
+                    if (LevelManager::Instance()->getCurrentLevel().player()->equipment()->top != nullptr)
+                        toDrag = DRAG_EQ_TOP_INDEX;
+                }
                 else if (i_equipmentSlotBottom->getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition))
-                    toDrag = DRAG_EQ_BOTTOM_INDEX;
+                {
+                    if (LevelManager::Instance()->getCurrentLevel().player()->equipment()->bottom != nullptr)
+                        toDrag = DRAG_EQ_BOTTOM_INDEX;
+                }
 
                 if (toDrag >= 0)
                 {
@@ -271,20 +280,29 @@ void InventoryMenu::update(sf::Time tickRate)
                     if (i_dragIndex == DRAG_EQ_HEAD_INDEX)
                     {
                         Player* p = LevelManager::Instance()->getCurrentLevel().player();
-                        LevelManager::Instance()->getCurrentLevel().addEntity(new ItemPickup(p->equipment()->head, 1));
-                        p->unequipItem(Item_Clothing_Head);
+                        if (p->equipment()->head != nullptr)
+                        {
+                            LevelManager::Instance()->getCurrentLevel().addEntity(new ItemPickup(p->equipment()->head, 1));
+                            p->unequipItem(Item_Clothing_Head);
+                        }
                     }
                     else if (i_dragIndex == DRAG_EQ_TOP_INDEX)
                     {
                         Player* p = LevelManager::Instance()->getCurrentLevel().player();
-                        LevelManager::Instance()->getCurrentLevel().addEntity(new ItemPickup(p->equipment()->top, 1));
-                        p->unequipItem(Item_Clothing_Top);
+                        if (p->equipment()->top != nullptr)
+                        {
+                            LevelManager::Instance()->getCurrentLevel().addEntity(new ItemPickup(p->equipment()->top, 1));
+                            p->unequipItem(Item_Clothing_Top);
+                        }
                     }
                     else if (i_dragIndex == DRAG_EQ_BOTTOM_INDEX)
                     {
                         Player* p = LevelManager::Instance()->getCurrentLevel().player();
-                        LevelManager::Instance()->getCurrentLevel().addEntity(new ItemPickup(p->equipment()->bottom, 1));
-                        p->unequipItem(Item_Clothing_Bottom);
+                        if (p->equipment()->bottom != nullptr)
+                        {
+                            LevelManager::Instance()->getCurrentLevel().addEntity(new ItemPickup(p->equipment()->bottom, 1));
+                            p->unequipItem(Item_Clothing_Bottom);
+                        }
                     }
                     else
                     {
@@ -333,30 +351,34 @@ void InventoryMenu::update(sf::Time tickRate)
                     {
                         if (i_equipmentSlotHead->getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition) ||
                             i_equipmentSlotTop->getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition) ||
-                            i_equipmentSlotBottom->getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition))
+                            i_equipmentSlotBottom->getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition)
+                            && i_dragIndex != DRAG_EQ_HEAD_INDEX && i_dragIndex != DRAG_EQ_TOP_INDEX && i_dragIndex != DRAG_EQ_BOTTOM_INDEX)
                         {
                             //treating all equipment slots as the same for now
                             auto* itm = i_entity->getComponent<Inventory>().item(i_dragIndex);
-                            if (itm->type() == Item_Clothing_Top || itm->type() == Item_Clothing_Head
-                                || itm->type() == Item_Clothing_Bottom)
+                            if (itm != nullptr)
                             {
-                                LevelManager::Instance()->getCurrentLevel().player()->equipItem(itm);
+                                if (itm->type() == Item_Clothing_Top || itm->type() == Item_Clothing_Head
+                                    || itm->type() == Item_Clothing_Bottom)
+                                {
+                                    LevelManager::Instance()->getCurrentLevel().player()->equipItem(itm);
 
-                                Item* itm2;
-                                if (itm->type() == Item_Clothing_Head)
-                                    itm2 = i_equipmentSlotHead->item();
+                                    Item* itm2;
+                                    if (itm->type() == Item_Clothing_Head)
+                                        itm2 = i_equipmentSlotHead->item();
 
-                                else if (itm->type() == Item_Clothing_Top)
-                                    itm2 = i_equipmentSlotTop->item();
+                                    else if (itm->type() == Item_Clothing_Top)
+                                        itm2 = i_equipmentSlotTop->item();
 
-                                else if (itm->type() == Item_Clothing_Bottom)
-                                    itm2 = i_equipmentSlotBottom->item();
+                                    else if (itm->type() == Item_Clothing_Bottom)
+                                        itm2 = i_equipmentSlotBottom->item();
 
-                                i_entity->getComponent<Inventory>().remove(i_dragIndex);
-                                if (itm2 != nullptr)
-                                    i_entity->getComponent<Inventory>().add(itm2);
+                                    i_entity->getComponent<Inventory>().remove(i_dragIndex);
+                                    if (itm2 != nullptr)
+                                        i_entity->getComponent<Inventory>().add(itm2);
 
-                                updateSlots();
+                                    updateSlots();
+                                }
                             }
                         }
 
