@@ -312,14 +312,11 @@ void InventoryMenu::update(sf::Time tickRate)
                 }
                 else
                 {
-                    //todo: equipment item to inventory slot
                     bool wasSlot = false;
                     for(int s = 0; s < slots.size(); s++)
                     {
                         if (slots[s]->getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition))
                         {
-                            //todo: new code here
-
                             if (i_dragIndex == DRAG_EQ_HEAD_INDEX)
                             {
                                 Player* p = LevelManager::Instance()->getCurrentLevel().player();
@@ -349,10 +346,11 @@ void InventoryMenu::update(sf::Time tickRate)
                     //if not slot still in menu
                     if (!wasSlot)
                     {
-                        if (i_equipmentSlotHead->getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition) ||
+                        if (i_dragIndex == DRAG_EQ_HEAD_INDEX || i_dragIndex == DRAG_EQ_TOP_INDEX || i_dragIndex == DRAG_EQ_BOTTOM_INDEX)
+                            updateSlots();
+                        else if (i_equipmentSlotHead->getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition) ||
                             i_equipmentSlotTop->getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition) ||
-                            i_equipmentSlotBottom->getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition)
-                            && i_dragIndex != DRAG_EQ_HEAD_INDEX && i_dragIndex != DRAG_EQ_TOP_INDEX && i_dragIndex != DRAG_EQ_BOTTOM_INDEX)
+                            i_equipmentSlotBottom->getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition))
                         {
                             //treating all equipment slots as the same for now
                             auto* itm = i_entity->getComponent<Inventory>().item(i_dragIndex);
