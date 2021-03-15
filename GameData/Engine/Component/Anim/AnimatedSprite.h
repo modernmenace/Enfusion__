@@ -2,6 +2,7 @@
 #define ENFUSION_ANIMATEDSPRITE_H
 
 #include "../Component.h"
+#include "../../../Entity/Player.h"
 
 #define PROTAGONIST_LAYERS 5
 
@@ -26,19 +27,21 @@ public:
     void setPosition(sf::Vector2f);
     void addLayer(string_t, Layer_Type);
     void removeLayer(Layer_Type);
+    void setScale(sf::Vector2f);
 
     inline void refreshState() { switchState(s_currentState_row, s_currentState_frame); }
 
-    inline sf::IntRect bounds()             { return charRect; };
+    sf::IntRect bounds();
     inline sf::Sprite* getSprite()          { return s_layerMap[Layer_Type_BASE]; }
 
 private:
     string_t     s_sheet;
     sf::IntRect  charRect;
+    sf::Vector2f s_scale;
 
     uint8_t directionalFrames;
 
-    std::map<Layer_Type, sf::Sprite*> s_layerMap; //remember maps are ordered
+    std::map<Layer_Type, sf::Sprite*> s_layerMap;
 
     uint8_t s_currentState_row;
     uint8_t s_currentState_frame;

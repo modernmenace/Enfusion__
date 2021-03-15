@@ -97,6 +97,7 @@ public:
     template <typename T>
     inline T& getComponent() const
     {
+        assert(hasComponent<T>());
         return *static_cast<T*>(componentMap.at(getComponentID<T>()).get());
     }
 

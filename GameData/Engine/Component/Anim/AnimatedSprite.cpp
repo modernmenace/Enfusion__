@@ -18,7 +18,7 @@
  *
  ************************************************************************/
 
-AnimatedSprite::AnimatedSprite(string_t spriteSheet, int numberFrames, sf::IntRect characterSheetSize)
+AnimatedSprite::AnimatedSprite(string_t spriteSheet, int numberFrames, sf::IntRect characterSheetSize) : s_scale(3, 3)
 {
     this->s_sheet           = spriteSheet;
     this->charRect          = characterSheetSize;
@@ -80,6 +80,39 @@ void AnimatedSprite::initialize()
 }
 
 /************************************************************************
+ * FUNCTION :       AnimatedSprite::setScale
+ *
+ * DESCRIPTION :
+ *       Set the scale for all layers
+ *
+ *  INPUTS:  NONE
+ *
+ *  OUTPUTS: NONE
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2021.03.14 	    JCB     Documentation Start
+ *
+ ************************************************************************/
+
+void AnimatedSprite::setScale(sf::Vector2f scale)
+{
+    s_scale = scale;
+    for(int i = 0; i < PROTAGONIST_LAYERS; i++)
+    {
+        auto* s = s_layerMap[static_cast<Layer_Type>(i)];
+        if (s != nullptr)
+            s_layerMap[static_cast<Layer_Type>(i)]->setScale(scale);
+    }
+}
+
+sf::IntRect AnimatedSprite::bounds()
+{
+    //todo: return bounds for all layers
+
+    return charRect;
+}
+
+/************************************************************************
  * FUNCTION :       AnimatedSprite::addLayer
  *
  * DESCRIPTION :
@@ -102,7 +135,7 @@ void AnimatedSprite::addLayer(string_t spriteSheet, Layer_Type type)
         //doesnt exist yet, add to map
         sf::Sprite* layer = new sf::Sprite(AssetManager::Instance()->getTexture(spriteSheet), charRect);
         layer->setPosition(entity->getComponent<Position>().getPosition());
-        layer->setScale(3,3);
+        layer->setScale(s_scale);
         s_layerMap.at(type) = layer;
     }
     else
@@ -111,7 +144,7 @@ void AnimatedSprite::addLayer(string_t spriteSheet, Layer_Type type)
         sf::Sprite* layer = s_layerMap.at(type);
         layer->setTexture(AssetManager::Instance()->getTexture(spriteSheet));
         layer->setTextureRect(charRect);
-        layer->setScale(3, 3);
+        layer->setScale(s_scale);
     }
     refreshState();
 }

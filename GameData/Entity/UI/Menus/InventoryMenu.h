@@ -33,12 +33,12 @@ private:
     int         i_dragIndex;
     sf::Clock   i_mouseClock;
     Tooltip     i_tooltip;
-    Entity      i_playerView;
     Slot*       i_equipmentSlotHead   = nullptr;
     Slot*       i_equipmentSlotTop    = nullptr;
     Slot*       i_equipmentSlotBottom = nullptr;
     TextDisplay i_playerNameDisplay;
     TextDisplay i_playerLevelDisplay;
+    Entity      i_playerView;
 
 };
 

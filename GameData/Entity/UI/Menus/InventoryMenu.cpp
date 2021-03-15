@@ -1,6 +1,7 @@
 #include "InventoryMenu.h"
 #include "../../../Engine/Lvl/LevelManager.h"
 #include "../../Level/ItemPickup.h"
+#include "../../../Engine/Component/Anim/AnimatedSprite.h"
 
 /************************************************************************
  * FUNCTION :       Inventory::Inventory
@@ -24,8 +25,10 @@ InventoryMenu::InventoryMenu(Entity *entity) : i_tooltip(),
     i_entity = entity;
     addComponent<Position>(sf::Vector2f(-200, -450));
     addComponent<Sprite>("UI/ui.png");
-    i_playerView.addComponent<Position>(sf::Vector2f(-150, -375));
-    i_playerView.addComponent<Sprite>("Objects/chara2.png");
+    i_playerView.addComponent<Position>(sf::Vector2f(-160, -350));
+    i_playerView.addComponent<AnimatedSprite>("Protagonist/base_body.png", 3, sf::IntRect(0, 0, 87, 152));
+    i_playerView.getComponent<AnimatedSprite>().addLayer("Protagonist/base_head.png", Layer_Type_HEAD);
+
 }
 
 /************************************************************************
@@ -75,8 +78,9 @@ void InventoryMenu::initialize()
     Entity::initialize();
     i_tooltip.initialize();
     i_playerView.initialize();
-    i_playerView.getComponent<Sprite>().getSprite().setTextureRect(sf::IntRect(105, 0, 28, 38));
-    i_playerView.getComponent<Sprite>().getSprite().setScale(sf::Vector2f(6, 6));
+    i_playerView.getComponent<AnimatedSprite>().setScale(sf::Vector2f(6, 6));
+
+
 
     getComponent<Sprite>().getSprite().setTextureRect(sf::IntRect(0, 0, 48, 48));
     getComponent<Sprite>().getSprite().setScale(12, 15);
@@ -108,6 +112,18 @@ void InventoryMenu::initialize()
     i_equipmentSlotHead = new Slot(sf::Vector2f(0, -350), &i_entity->getComponent<Inventory>(), 0.75);
     i_equipmentSlotTop = new Slot(sf::Vector2f(0, -275), &i_entity->getComponent<Inventory>(), 0.75);
     i_equipmentSlotBottom = new Slot(sf::Vector2f(0, -200), &i_entity->getComponent<Inventory>(), 0.75);
+
+    //initialize starting player view
+    auto* p  = LevelManager::Instance()->getCurrentLevel().player();
+    auto* as = &i_playerView.getComponent<AnimatedSprite>();
+    if (p->equipment()->head != nullptr)
+        as->addLayer(p->equipment()->head->linkedTexture(), Layer_Type_HEAD);
+    if (p->equipment()->top != nullptr)
+        as->addLayer(p->equipment()->top->linkedTexture(), Layer_Type_TOP);
+    if (p->equipment()->bottom != nullptr)
+        as->addLayer(p->equipment()->bottom->linkedTexture(), Layer_Type_BOTTOM);
+
+    as->switchState(0, 1);
 }
 
 /************************************************************************
@@ -284,6 +300,7 @@ void InventoryMenu::update(sf::Time tickRate)
                         {
                             LevelManager::Instance()->getCurrentLevel().addEntity(new ItemPickup(p->equipment()->head, 1));
                             p->unequipItem(Item_Clothing_Head);
+                            i_playerView.getComponent<AnimatedSprite>().removeLayer(Layer_Type_HEAD);
                         }
                     }
                     else if (i_dragIndex == DRAG_EQ_TOP_INDEX)
@@ -293,6 +310,7 @@ void InventoryMenu::update(sf::Time tickRate)
                         {
                             LevelManager::Instance()->getCurrentLevel().addEntity(new ItemPickup(p->equipment()->top, 1));
                             p->unequipItem(Item_Clothing_Top);
+                            i_playerView.getComponent<AnimatedSprite>().removeLayer(Layer_Type_TOP);
                         }
                     }
                     else if (i_dragIndex == DRAG_EQ_BOTTOM_INDEX)
@@ -302,6 +320,7 @@ void InventoryMenu::update(sf::Time tickRate)
                         {
                             LevelManager::Instance()->getCurrentLevel().addEntity(new ItemPickup(p->equipment()->bottom, 1));
                             p->unequipItem(Item_Clothing_Bottom);
+                            i_playerView.getComponent<AnimatedSprite>().removeLayer(Layer_Type_BOTTOM);
                         }
                     }
                     else
@@ -322,18 +341,21 @@ void InventoryMenu::update(sf::Time tickRate)
                                 Player* p = LevelManager::Instance()->getCurrentLevel().player();
                                 i_entity->getComponent<Inventory>().add(p->equipment()->head);
                                 p->unequipItem(Item_Clothing_Head);
+                                i_playerView.getComponent<AnimatedSprite>().removeLayer(Layer_Type_HEAD);
                             }
                             else if (i_dragIndex == DRAG_EQ_TOP_INDEX)
                             {
                                 Player* p = LevelManager::Instance()->getCurrentLevel().player();
                                 i_entity->getComponent<Inventory>().add(p->equipment()->top);
                                 p->unequipItem(Item_Clothing_Top);
+                                i_playerView.getComponent<AnimatedSprite>().removeLayer(Layer_Type_TOP);
                             }
                             else if (i_dragIndex == DRAG_EQ_BOTTOM_INDEX)
                             {
                                 Player* p = LevelManager::Instance()->getCurrentLevel().player();
                                 i_entity->getComponent<Inventory>().add(p->equipment()->bottom);
                                 p->unequipItem(Item_Clothing_Bottom);
+                                i_playerView.getComponent<AnimatedSprite>().removeLayer(Layer_Type_BOTTOM);
                             }
                             else
                                 i_entity->getComponent<Inventory>().swapItem(i_dragIndex, s);
@@ -361,15 +383,22 @@ void InventoryMenu::update(sf::Time tickRate)
                                 {
                                     LevelManager::Instance()->getCurrentLevel().player()->equipItem(itm);
 
-                                    Item* itm2;
+                                    Item* itm2 = nullptr;
                                     if (itm->type() == Item_Clothing_Head)
+                                    {
                                         itm2 = i_equipmentSlotHead->item();
-
+                                        i_playerView.getComponent<AnimatedSprite>().addLayer(itm->linkedTexture(), Layer_Type_HEAD);
+                                    }
                                     else if (itm->type() == Item_Clothing_Top)
+                                    {
                                         itm2 = i_equipmentSlotTop->item();
-
+                                        i_playerView.getComponent<AnimatedSprite>().addLayer(itm->linkedTexture(), Layer_Type_TOP);
+                                    }
                                     else if (itm->type() == Item_Clothing_Bottom)
+                                    {
                                         itm2 = i_equipmentSlotBottom->item();
+                                        i_playerView.getComponent<AnimatedSprite>().addLayer(itm->linkedTexture(), Layer_Type_BOTTOM);
+                                    }
 
                                     i_entity->getComponent<Inventory>().remove(i_dragIndex);
                                     if (itm2 != nullptr)
@@ -382,7 +411,7 @@ void InventoryMenu::update(sf::Time tickRate)
 
 
                         //todo: reassess below code, dragging to player image
-                        if (i_playerView.getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition))
+                        if (i_playerView.getComponent<AnimatedSprite>().getSprite()->getGlobalBounds().contains(MousePosition))
                         {
                             if (i_dragIndex != DRAG_EQ_HEAD_INDEX && i_dragIndex != DRAG_EQ_BOTTOM_INDEX
                                 && i_dragIndex != DRAG_EQ_TOP_INDEX)
