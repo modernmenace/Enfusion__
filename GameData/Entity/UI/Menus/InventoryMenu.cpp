@@ -416,10 +416,43 @@ void InventoryMenu::update(sf::Time tickRate)
                             if (i_dragIndex != DRAG_EQ_HEAD_INDEX && i_dragIndex != DRAG_EQ_BOTTOM_INDEX
                                 && i_dragIndex != DRAG_EQ_TOP_INDEX)
                             {
-                                i_entity->getComponent<Inventory>().activated(i_dragIndex);
-                                slots[i_dragIndex]->activateItem();
-                                slots.at(i_dragIndex)->setItem(i_entity->getComponent<Inventory>().item(i_dragIndex));
-                                slots.at(i_dragIndex)->setCount(i_entity->getComponent<Inventory>().amount(i_dragIndex));
+                                auto type = i_entity->getComponent<Inventory>().item(i_dragIndex)->type();
+                                if (type == Item_Consumable)
+                                {
+                                    i_entity->getComponent<Inventory>().activated(i_dragIndex);
+                                    slots[i_dragIndex]->activateItem();
+                                    slots.at(i_dragIndex)->setItem(i_entity->getComponent<Inventory>().item(i_dragIndex));
+                                    slots.at(i_dragIndex)->setCount(i_entity->getComponent<Inventory>().amount(i_dragIndex));
+                                }
+                                else if (type == Item_Clothing_Head || type == Item_Clothing_Top
+                                         || type == Item_Clothing_Bottom)
+                                {
+                                    auto* itm = i_entity->getComponent<Inventory>().item(i_dragIndex);
+                                    LevelManager::Instance()->getCurrentLevel().player()->equipItem(itm);
+
+                                    Item* itm2 = nullptr;
+                                    if (itm->type() == Item_Clothing_Head)
+                                    {
+                                        itm2 = i_equipmentSlotHead->item();
+                                        i_playerView.getComponent<AnimatedSprite>().addLayer(itm->linkedTexture(), Layer_Type_HEAD);
+                                    }
+                                    else if (itm->type() == Item_Clothing_Top)
+                                    {
+                                        itm2 = i_equipmentSlotTop->item();
+                                        i_playerView.getComponent<AnimatedSprite>().addLayer(itm->linkedTexture(), Layer_Type_TOP);
+                                    }
+                                    else if (itm->type() == Item_Clothing_Bottom)
+                                    {
+                                        itm2 = i_equipmentSlotBottom->item();
+                                        i_playerView.getComponent<AnimatedSprite>().addLayer(itm->linkedTexture(), Layer_Type_BOTTOM);
+                                    }
+
+                                    i_entity->getComponent<Inventory>().remove(i_dragIndex);
+                                    if (itm2 != nullptr)
+                                        i_entity->getComponent<Inventory>().add(itm2);
+
+                                    updateSlots();
+                                }
                             }
                         }
                         else
