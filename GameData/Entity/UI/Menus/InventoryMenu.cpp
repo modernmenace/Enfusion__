@@ -409,13 +409,13 @@ void InventoryMenu::update(sf::Time tickRate)
                             }
                         }
 
-
-                        //todo: reassess below code, dragging to player image
                         if (i_playerView.getComponent<AnimatedSprite>().getSprite()->getGlobalBounds().contains(MousePosition))
                         {
                             if (i_dragIndex != DRAG_EQ_HEAD_INDEX && i_dragIndex != DRAG_EQ_BOTTOM_INDEX
                                 && i_dragIndex != DRAG_EQ_TOP_INDEX)
                             {
+                                if (i_entity->getComponent<Inventory>().item(i_dragIndex) == nullptr)
+                                    return;
                                 auto type = i_entity->getComponent<Inventory>().item(i_dragIndex)->type();
                                 if (type == Item_Consumable)
                                 {
