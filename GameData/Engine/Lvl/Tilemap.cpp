@@ -189,14 +189,12 @@ void Tilemap::render(sf::RenderWindow *window)
     {
         for(auto& outline : t_outlines)
         {
-            //todo: next
-            //todo: 1)   forbid player from leaving bounds
-            //todo: 2)   highlight player tiles green
-            //todo: 3)   highlight blocked tiles red
-            //todo: 3.5) update ALL tiles occupied by object if needed
-            //todo: 4)   update movement out of bounds for tile approach
             if (v.intersects(outline.rect.getGlobalBounds()))
+            {
+                if (outline.tile->blocked)
+                    outline.rect.setFillColor(sf::Color::Red);
                 window->draw(outline.rect);
+            }
         }
     }
     #endif

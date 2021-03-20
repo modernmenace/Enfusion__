@@ -46,6 +46,7 @@ inline static uint32_t resolvePositionToTile(sf::Vector2f position)
 }
 
 //todo: magic numbers!
+//todo: something is off here
 static sf::Rect<uint32_t> resolvePositionRectToTileRect(sf::Rect<float> rect)
 {
     sf::Rect<uint32_t> ret;
@@ -53,7 +54,7 @@ static sf::Rect<uint32_t> resolvePositionRectToTileRect(sf::Rect<float> rect)
     ret.top    = ret.left;
     ret.width  = resolvePositionToTile(rect.left + rect.width, rect.top) - ret.left;
     ret.height = (resolvePositionToTile(rect.left, rect.top + rect.height) / 250)
-                 - (ret.left / 250);
+                  - (ret.left / 250);
     return ret;
 }
 

@@ -110,6 +110,7 @@ void AnimatedMovement::update(sf::Time tickRate)
         sf::Rect<uint32_t> occTiles = resolvePositionRectToTileRect(characterSprite->getGlobalBounds());
 
         //check if any tiles are blocked
+        //todo: show blocked tiles and maybe this in F1 menu
         //todo: right now only checking player's top left, not whole sprite
         bool coll = false;
         for(int i = 0; i < occTiles.width; i++)
