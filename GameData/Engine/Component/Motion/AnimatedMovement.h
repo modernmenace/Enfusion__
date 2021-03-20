@@ -36,7 +36,6 @@ public:
 
     void setMoving(bool b) { moving = b; }
     inline bool isMoving() { return moving; }
-    inline sf::FloatRect* collider() { return &m_colliderRect; }
 
 private:
     float speed;
@@ -60,12 +59,6 @@ private:
     bool sprinting = false;
 
     bool          m_hasCollider;
-    sf::FloatRect m_colliderRect;
-
-#if DEBUG_MOVEMENT_SHOW_COLLIDERS == 1
-    sf::RectangleShape c_test_rect;
-#endif
-
 };
 
 

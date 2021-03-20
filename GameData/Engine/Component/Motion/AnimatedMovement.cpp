@@ -1,6 +1,6 @@
 #include "AnimatedMovement.h"
 #include "../../Lvl/LevelManager.h"
-#include "../Misc/Camera.h"
+#include "../../../Lvl/MapGenerator.h"
 
 //TODO: Collision Work
 //TODO: Somehow check next tile for blocked before moving to it
@@ -13,14 +13,7 @@ AnimatedMovement::AnimatedMovement(bool hasCollider, float speed)
 
 void AnimatedMovement::render(sf::RenderWindow *window)
 {
-    #if DEBUG_MOVEMENT_IGNORE_COLLISION != 1
-    #if DEBUG_MOVEMENT_SHOW_COLLIDERS == 1
-    if (m_hasCollider && moving)
-    {
-        window->draw(c_test_rect);
-    }
-    #endif
-    #endif
+
 }
 
 void AnimatedMovement::initialize()
@@ -28,16 +21,6 @@ void AnimatedMovement::initialize()
     assert(entity->hasComponent<AnimatedSprite>());
     this->characterSprite = entity->getComponent<AnimatedSprite>().getSprite();
     entity->getComponent<AnimatedSprite>().switchState(0, 1);
-
-    #if DEBUG_MOVEMENT_IGNORE_COLLISION != 1
-    #if DEBUG_MOVEMENT_SHOW_COLLIDERS == 1
-    if (m_hasCollider)
-    {
-        c_test_rect.setSize(sf::Vector2f(characterSprite->getGlobalBounds().width, characterSprite->getGlobalBounds().height));
-        c_test_rect.setFillColor(sf::Color::Green);
-    }
-    #endif
-    #endif
 }
 
 void AnimatedMovement::handleInput(sf::Keyboard::Key key)
@@ -49,6 +32,8 @@ void AnimatedMovement::handleInput(sf::Keyboard::Key key)
             sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::D));
 }
 
+//TODO: using magic numbers to check for collision
+//TODO: similiar to lvlstructs.h
 void AnimatedMovement::update(sf::Time tickRate)
 {
     if (LevelManager::Instance()->getCurrentLevel().state() == GameState::PAUSE)
@@ -56,6 +41,7 @@ void AnimatedMovement::update(sf::Time tickRate)
 
     if (moving)
     {
+        sf::Vector2f lastPos = characterSprite->getPosition();
         auto currTickRate = tickRate.asSeconds();
         auto tempSpeed = speed;
         #if DEBUG_MOVEMENT_FAST_SPRINT == 1
@@ -118,49 +104,43 @@ void AnimatedMovement::update(sf::Time tickRate)
         {
             moving = false;
         }
+
+        //occTiles seems to be set correctly
+        #if DEBUG_MOVEMENT_IGNORE_COLLISION == 0
+        sf::Rect<uint32_t> occTiles = resolvePositionRectToTileRect(characterSprite->getGlobalBounds());
+
+        //check if any tiles are blocked
+        //todo: right now only checking player's top left, not whole sprite
+        bool coll = false;
+        for(int i = 0; i < occTiles.width; i++)
+        {
+            if (MapGenerator::Instance()->map()->m_tiles[occTiles.left + i].blocked)
+            {
+                coll = true;
+                break;
+            }
+        }
+        if (!coll)
+        {
+            for(int i = 0; i < occTiles.width; i++)
+            {
+                if (MapGenerator::Instance()->map()->m_tiles[occTiles.top + (250 * i)].blocked)
+                {
+                    coll = true;
+                    break;
+                }
+            }
+        }
+        if (coll)
+        {
+            characterSprite->setPosition(lastPos);
+            return;
+        }
+        #endif
         checkAnimState();
         animate();
         speed = tempSpeed;
         entity->getComponent<Position>().setPosition(characterSprite->getPosition());
-
-        //todo: fine tune further (DEBUG_MOVEMENT_SHOW_COLLIDERS)
-        //todo: look into diagonal movement colliders
-        #if DEBUG_MOVEMENT_IGNORE_COLLISION != 1
-        if (m_hasCollider)
-        {
-            switch (currentState)
-            {
-                case UP:
-                    m_colliderRect.left = characterSprite->getPosition().x + (characterSprite->getLocalBounds().width / 2);
-                    m_colliderRect.top  = characterSprite->getPosition().y + characterSprite->getGlobalBounds().height / 2;
-                    m_colliderRect.width = characterSprite->getGlobalBounds().width * 0.7;
-                    m_colliderRect.height = 10;
-                    break;
-                case LEFT:
-                    m_colliderRect.left = characterSprite->getPosition().x;
-                    m_colliderRect.top  = characterSprite->getPosition().y + (characterSprite->getGlobalBounds().height / 2);
-                    m_colliderRect.width = 10;
-                    m_colliderRect.height = characterSprite->getGlobalBounds().height * 0.4;
-                    break;
-                case RIGHT:
-                    m_colliderRect.left = characterSprite->getPosition().x + characterSprite->getGlobalBounds().width * 0.8;
-                    m_colliderRect.top  = characterSprite->getPosition().y + (characterSprite->getGlobalBounds().height / 2);
-                    m_colliderRect.width = 10;
-                    m_colliderRect.height = characterSprite->getGlobalBounds().height * 0.4;
-                    break;
-                case DOWN:
-                    m_colliderRect.left = characterSprite->getPosition().x + (characterSprite->getLocalBounds().width / 2);
-                    m_colliderRect.top  = characterSprite->getPosition().y + (characterSprite->getGlobalBounds().height * 2/3);
-                    m_colliderRect.width = characterSprite->getGlobalBounds().width * 0.7;
-                    m_colliderRect.height = 10;
-                    break;
-            }
-            #if DEBUG_MOVEMENT_SHOW_COLLIDERS == 1
-            c_test_rect.setPosition(m_colliderRect.left, m_colliderRect.top);
-            c_test_rect.setSize(sf::Vector2f(m_colliderRect.width, m_colliderRect.height));
-            #endif
-        }
-        #endif
     }
 }
 

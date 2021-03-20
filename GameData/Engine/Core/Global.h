@@ -7,7 +7,6 @@
 #define DEBUG_ENABLE_DEBUG_MENU           1
 #define DEBUG_ENABLE_TILE_OUTLINES        1 // potentially hogs memory
 #define DEBUG_DISABLE_MOD_LOADING         1
-#define DEBUG_MOVEMENT_SHOW_COLLIDERS     0 // requires collision
 #define DEBUG_MOVEMENT_FAST_SPRINT        1
 #define DEBUG_MOVEMENT_IGNORE_COLLISION   0
 

@@ -9,6 +9,7 @@ class DeadTree : public StaticMapObject
 public:
     DeadTree() : StaticMapObject("Levels/desert.png", sf::IntRect(0, 304, 32, 48))
     {
+        //todo: block tiles, how?
 
     };
 

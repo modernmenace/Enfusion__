@@ -260,6 +260,9 @@ Map* MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY, uint16_t tileSize
         numTiles[m_lvl[i].biome]++;
     }
 
+    m_map = new Map;
+    m_map->m_tiles      = m_lvl;
+
     //generate static objects
     for(uint32_t i = 0; i < (m_size.x * m_size.y); i++)
     {
@@ -274,8 +277,6 @@ Map* MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY, uint16_t tileSize
         m_staticObjects.push_back(obj);
     }
 
-    m_map = new Map;
-    m_map->m_tiles      = m_lvl;
     m_map->m_mapObjects = m_staticObjects;
 
     return m_map;

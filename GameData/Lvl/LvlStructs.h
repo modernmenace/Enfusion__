@@ -40,6 +40,23 @@ inline static uint32_t resolvePositionToTile(uint16_t x, uint16_t y)
     return ((y / 32) * 250)+(x / 32); //250 is map sizeX
 }
 
+inline static uint32_t resolvePositionToTile(sf::Vector2f position)
+{
+    resolvePositionToTile(position.x, position.y);
+}
+
+//todo: magic numbers!
+static sf::Rect<uint32_t> resolvePositionRectToTileRect(sf::Rect<float> rect)
+{
+    sf::Rect<uint32_t> ret;
+    ret.left   = resolvePositionToTile(rect.left, rect.top);
+    ret.top    = ret.left;
+    ret.width  = resolvePositionToTile(rect.left + rect.width, rect.top) - ret.left;
+    ret.height = (resolvePositionToTile(rect.left, rect.top + rect.height) / 250)
+                 - (ret.left / 250);
+    return ret;
+}
+
 //todo: magic numbers!
 inline static sf::Vector2u resolveTileToPosition(uint16_t arrayPos)
 {
