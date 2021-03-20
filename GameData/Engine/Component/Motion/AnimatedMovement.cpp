@@ -2,8 +2,8 @@
 #include "../../Lvl/LevelManager.h"
 #include "../Misc/Camera.h"
 
-//TODO: implement movement collider
-//todo: store collider pointer, switch based on direction
+//TODO: Collision Work
+//TODO: Somehow check next tile for blocked before moving to it
 
 AnimatedMovement::AnimatedMovement(bool hasCollider, float speed)
 {
