@@ -17,6 +17,7 @@ void StaticMapObject::setPosition(Tile& tile)
 
     //todo: temporary blocking, whole sprite and mandatory
     //todo: next, find way to choose tiles to block by object
+    //todo: startup crash (segfault) occuring here sometimes, line 24
     sf::Rect<uint32_t> occTiles = resolvePositionRectToTileRect(o_sprite.getGlobalBounds());
     for(int i = 0; i < occTiles.width; i++)
         for(int j = 0; j < occTiles.height; j++)
