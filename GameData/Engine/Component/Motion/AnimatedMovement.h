@@ -29,7 +29,7 @@ enum AnimState
 class AnimatedMovement : public Component {
 
 public:
-    AnimatedMovement(bool hasCollider = false, float speed = 425.0f);
+    AnimatedMovement(float speed = 425.0f);
 
     void initialize()                       override;
     void update(sf::Time tickRate)          override;

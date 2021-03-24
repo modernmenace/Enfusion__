@@ -29,7 +29,7 @@ Player::Player(sf::Vector2f position)
     addComponent<AnimatedSprite>("Protagonist/base_body.png", 3, sf::IntRect(0, 0, 87, 152));
     getComponent<AnimatedSprite>().addLayer("Protagonist/base_head.png", Layer_Type_HEAD);
     addComponent<Camera>(CameraType::FOLLOW);
-    addComponent<AnimatedMovement>(true);
+    addComponent<AnimatedMovement>();
     addComponent<Inventory>();
     LevelManager::Instance()->setPlayer(this);
 }

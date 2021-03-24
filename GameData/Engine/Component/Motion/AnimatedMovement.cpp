@@ -2,12 +2,12 @@
 #include "../../Lvl/LevelManager.h"
 #include "../../../Lvl/MapGenerator.h"
 
-//TODO: Collision Work
-//TODO: Somehow check next tile for blocked before moving to it
+//TODO: documentation
+//TODO: z-ordering
 
-AnimatedMovement::AnimatedMovement(bool hasCollider, float speed)
+AnimatedMovement::AnimatedMovement(float speed)
 {
-    this->speed         = speed;
+    this->speed = speed;
 }
 
 void AnimatedMovement::initialize()
@@ -105,8 +105,6 @@ void AnimatedMovement::update(sf::Time tickRate)
         sf::Rect<uint32_t> occTiles = resolvePositionRectToTileRect(characterSprite->getGlobalBounds());
 
         //check if any tiles are blocked
-        //todo: show blocked tiles and maybe this in F1 menu
-        //todo: right now only checking player's top left, not whole sprite
         bool coll = false;
         std::vector<Tile>* m_tiles = &MapGenerator::Instance()->map()->m_tiles;
         for(int i = 0; i < occTiles.width; i++)
