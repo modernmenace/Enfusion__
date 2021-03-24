@@ -8,12 +8,6 @@
 AnimatedMovement::AnimatedMovement(bool hasCollider, float speed)
 {
     this->speed         = speed;
-    this->m_hasCollider = hasCollider;
-}
-
-void AnimatedMovement::render(sf::RenderWindow *window)
-{
-
 }
 
 void AnimatedMovement::initialize()
@@ -42,6 +36,7 @@ void AnimatedMovement::update(sf::Time tickRate)
     if (moving)
     {
         sf::Vector2f lastPos = characterSprite->getPosition();
+        Tile* lastTile       = &MapGenerator::Instance()->map()->m_tiles[resolvePositionToTile(lastPos)];
         auto currTickRate = tickRate.asSeconds();
         auto tempSpeed = speed;
         #if DEBUG_MOVEMENT_FAST_SPRINT == 1
@@ -113,19 +108,13 @@ void AnimatedMovement::update(sf::Time tickRate)
         //todo: show blocked tiles and maybe this in F1 menu
         //todo: right now only checking player's top left, not whole sprite
         bool coll = false;
+        std::vector<Tile>* m_tiles = &MapGenerator::Instance()->map()->m_tiles;
         for(int i = 0; i < occTiles.width; i++)
         {
-            if (MapGenerator::Instance()->map()->m_tiles[occTiles.left + i].blocked)
+            if (coll) break;
+            for(int j = 0; j < occTiles.height; j++)
             {
-                coll = true;
-                break;
-            }
-        }
-        if (!coll)
-        {
-            for(int i = 0; i < occTiles.width; i++)
-            {
-                if (MapGenerator::Instance()->map()->m_tiles[occTiles.top + (250 * i)].blocked)
+                if (m_tiles->at(occTiles.top + i + (j * 250)).blocked)
                 {
                     coll = true;
                     break;

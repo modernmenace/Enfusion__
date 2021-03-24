@@ -8,6 +8,8 @@
 #define speed_horz speed
 #define speed_diag speed * 0.75f
 
+#define DEBUG_SHOW_ANIMATED_MOVEMENT_COLLISION_TILES 1
+
 struct MovementStatus
 {
     bool up    = false;
@@ -32,7 +34,6 @@ public:
     void initialize()                       override;
     void update(sf::Time tickRate)          override;
     void handleInput(sf::Keyboard::Key key) override;
-    void render(sf::RenderWindow* window)   override;
 
     void setMoving(bool b) { moving = b; }
     inline bool isMoving() { return moving; }
@@ -57,8 +58,6 @@ private:
 
     bool moving    = false;
     bool sprinting = false;
-
-    bool          m_hasCollider;
 };
 
 

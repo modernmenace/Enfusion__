@@ -51,8 +51,8 @@ static sf::Rect<uint32_t> resolvePositionRectToTileRect(sf::Rect<float> rect)
     sf::Rect<uint32_t> ret;
     ret.left   = resolvePositionToTile(rect.left, rect.top);
     ret.top    = ret.left;
-    ret.width  = rect.width / 32;
-    ret.height = rect.height / 32;
+    ret.width  = rect.width / 32  + 1;
+    ret.height = rect.height / 32 + 1;
     return ret;
 }
 
