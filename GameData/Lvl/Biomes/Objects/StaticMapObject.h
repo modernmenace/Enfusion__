@@ -1,6 +1,7 @@
 #ifndef ENFUSION___STATICMAPOBJECT_H
 #define ENFUSION___STATICMAPOBJECT_H
 
+#include <bitset>
 #include "../../../Engine/Core/Engine.h"
 
 struct Tile;
@@ -10,7 +11,7 @@ class StaticMapObject {
 public:
     StaticMapObject(string_t tileset, sf::IntRect texBounds);
 
-    void setPosition(Tile&);
+    virtual void setPosition(Tile&);
     virtual void render(sf::RenderWindow* window);
 
     inline void setTileset(string_t tileset)  { o_sprite.setTexture(AssetManager::Instance()->getTexture(tileset)); }
@@ -19,9 +20,14 @@ public:
     inline sf::FloatRect bounds() { return o_sprite.getGlobalBounds(); }
     inline Tile*         tile()   { return o_tile; }
 
+protected:
+    sf::Rect<uint32_t> o_tiles;
+
 private:
-    sf::Sprite   o_sprite;
-    sf::IntRect  o_bounds;
+    sf::Sprite         o_sprite;
+    sf::IntRect        o_bounds;
+    unsigned int       o_tileWidth;
+    unsigned int       o_tileHeight;
 
     Tile*        o_tile = nullptr;
 
