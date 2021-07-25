@@ -48,7 +48,7 @@ inline static uint32_t resolvePositionToTile(uint16_t x, uint16_t y)
 
 inline static uint32_t resolvePositionToTile(sf::Vector2f position)
 {
-    resolvePositionToTile(position.x, position.y);
+    return resolvePositionToTile(position.x, position.y);
 }
 
 //todo: magic numbers!

@@ -14,7 +14,7 @@ ScrollArea::ScrollArea(sf::Vector2f position, sf::Vector2f area)
     s_scrollBar.addComponent<Sprite>("UI/ui.png");
 }
 
-ScrollArea::~ScrollArea() noexcept
+ScrollArea::~ScrollArea()
 {
     for(auto* e : s_elements)
         delete e;

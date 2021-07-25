@@ -34,6 +34,8 @@ public:
     sf::IntRect bounds();
     inline sf::Sprite* getSprite()          { return s_layerMap[Layer_Type_BASE]; }
 
+    inline std::map<Layer_Type, sf::Sprite*>* layers() { return &s_layerMap; };
+
 private:
     string_t     s_sheet;
     sf::IntRect  charRect;
