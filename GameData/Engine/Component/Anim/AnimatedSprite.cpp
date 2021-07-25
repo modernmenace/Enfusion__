@@ -105,11 +105,45 @@ void AnimatedSprite::setScale(sf::Vector2f scale)
     }
 }
 
-sf::IntRect AnimatedSprite::bounds()
-{
-    //todo: return bounds for all layers
+/************************************************************************
+ * FUNCTION :       AnimatedSprite::bounds
+ *
+ * DESCRIPTION :
+ *       Returns the bounds for all layers
+ *
+ *  INPUTS:  NONE
+ *
+ *  OUTPUTS: sf::FloatRect, the bounds
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2021.07.25 	    JCB     Documentation Start
+ *
+ ************************************************************************/
 
-    return charRect;
+sf::FloatRect AnimatedSprite::bounds()
+{
+    sf::FloatRect bounds;
+
+    bounds = s_layerMap[Layer_Type_BASE]->getGlobalBounds();
+
+    for(int i = 0; i < Layer_Type::Layer_Type_WEAPON; i++)
+    {
+        if (!s_layerMap[static_cast<Layer_Type>(i)])
+            continue;
+        
+        auto lBounds = s_layerMap[static_cast<Layer_Type>(i)]->getGlobalBounds();
+
+        if ((lBounds.top + lBounds.height) > (bounds.top + bounds.height))
+            bounds.height = lBounds.height;
+        if (lBounds.top < bounds.top)
+            bounds.top = lBounds.top;
+        if ((lBounds.left + lBounds.width) > (bounds.left + bounds.width))
+            bounds.width = lBounds.width;
+        if (lBounds.left < bounds.left)
+            bounds.left = lBounds.left;
+    }
+
+    return bounds;
 }
 
 /************************************************************************
@@ -225,11 +259,26 @@ void AnimatedSprite::render(sf::RenderWindow *window)
     }
 }
 
+/************************************************************************
+ * FUNCTION :       AnimatedSprite::center
+ *
+ * DESCRIPTION :
+ *       Reterns the center of the sprite in global coordinates
+ *
+ *  INPUTS:  NONE
+ *
+ *  OUTPUTS: sf::Vector2u, the center's coordinates
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2021.07.25 	    JCB     Documentation Start
+ *
+ ************************************************************************/
+
 sf::Vector2u AnimatedSprite::center()
 {
     sf::Vector2u center;
 
-    sf::FloatRect gBounds = getSprite()->getGlobalBounds();
+    sf::FloatRect gBounds = bounds();
 
     center.x = gBounds.left + (gBounds.width / 2);
     center.y = gBounds.top  - (gBounds.height / 2);

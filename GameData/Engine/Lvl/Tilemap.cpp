@@ -202,26 +202,22 @@ void Tilemap::render(sf::RenderWindow *window)
 void Tilemap::renderObjectSet(sf::RenderWindow *window, bool objSet)
 {
     Player* player = LevelManager::Instance()->getCurrentLevel().player();
-    sf::FloatRect v = player->getComponent<Camera>().getCameraView();
 
-    for(auto staticObject : t_map->m_mapObjects)
+    sf::FloatRect pView = player->getComponent<Camera>().getCameraView();
+    sf::Vector2u  pCenter = player->getComponent<AnimatedSprite>().center();
+
+    for(auto& staticObject : t_map->m_mapObjects)
     {
         if (staticObject.renderOverPlayer == objSet)
         {
             // check if this object is still in the right set
-            if (player->getComponent<AnimatedSprite>().center().y > staticObject.object->center().y)
-            {
-                // render over
-                staticObject.renderOverPlayer = true;
-            }
-            else
-            {
-                // render under
+            if (pCenter.y > staticObject.object->center().y)
                 staticObject.renderOverPlayer = false;
-            }
+            else
+                staticObject.renderOverPlayer = true;
 
 
-            if (v.intersects(staticObject.object->bounds()))
+            if (pView.intersects(staticObject.object->bounds()))
             {
                 staticObject.object->render(window);
             }

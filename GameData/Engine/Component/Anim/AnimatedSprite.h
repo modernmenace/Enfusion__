@@ -31,7 +31,7 @@ public:
 
     inline void refreshState() { switchState(s_currentState_row, s_currentState_frame); }
 
-    sf::IntRect  bounds();
+    sf::FloatRect  bounds();
     sf::Vector2u center();
     inline sf::Sprite* getSprite()          { return s_layerMap[Layer_Type_BASE]; }
 

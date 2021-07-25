@@ -191,4 +191,5 @@ void Level_1::render(sf::RenderWindow *window)
     map->renderObjectSet(window, 0);
     Level::render(window);
     map->renderObjectSet(window, 1);
+    Level::renderUI(window);
 }

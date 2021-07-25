@@ -22,6 +22,7 @@ public:
     virtual void initialize();
     virtual void update(sf::Time tickRate);
     virtual void render(sf::RenderWindow* window);
+    virtual void renderUI(sf::RenderWindow* window);
     virtual void handleInput(sf::Keyboard::Key key);
     virtual void handleInput(sf::Mouse::Button button);
 
