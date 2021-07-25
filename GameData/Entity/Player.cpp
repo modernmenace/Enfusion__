@@ -159,6 +159,10 @@ void Player::unequipItem(ItemType type)
 void Player::handleInput(sf::Mouse::Button button)
 {
     Item* itm = getComponent<Inventory>().item(getComponent<Inventory>().activeItem());
+
+    if (itm == nullptr)
+        return;
+
     if (itm->type() == Item_Weapon)
         itm->activate();
 

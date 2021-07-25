@@ -58,7 +58,7 @@ Tilemap::Tilemap(std::string tileSetName, Map* tiles, sf::Vector2i size, uint16_
 Tilemap::~Tilemap()
 {
     for(uint32_t i = 0; i < t_map->m_mapObjects.size(); i++)
-        delete t_map->m_mapObjects[i];
+        delete t_map->m_mapObjects[i].object;
 }
 
 /************************************************************************
@@ -178,12 +178,6 @@ void Tilemap::render(sf::RenderWindow *window)
 
     sf::FloatRect v = LevelManager::Instance()->getCurrentLevel().player()->getComponent<Camera>().getCameraView();
 
-    for(auto staticObject : t_map->m_mapObjects)
-    {
-        if (v.intersects(staticObject->bounds()))
-            staticObject->render(window);
-    }
-
     #if DEBUG_ENABLE_TILE_OUTLINES == 1
     if (t_drawOutlines)
     {
@@ -201,6 +195,22 @@ void Tilemap::render(sf::RenderWindow *window)
 
 }
 
+//TODO: check here the player pos and determine which set it should be in
+//TODO: more efficient method of culling
+//TODO: order by distance and check less often for far ones?
+void Tilemap::renderObjectSet(sf::RenderWindow *window, bool objSet)
+{
+    sf::FloatRect v = LevelManager::Instance()->getCurrentLevel().player()->getComponent<Camera>().getCameraView();
+
+    for(auto staticObject : t_map->m_mapObjects)
+    {
+        if (staticObject.renderOverPlayer == objSet)
+            if (v.intersects(staticObject.object->bounds()))
+                staticObject.object->render(window);
+    }
+}
+
+#if DEBUG_ENABLE_TILE_OUTLINES == 1
 void Tilemap::showOutlines(bool show)
 {
     if (!show)
@@ -208,3 +218,4 @@ void Tilemap::showOutlines(bool show)
     else
         t_drawOutlines = true;
 }
+#endif

@@ -8,8 +8,8 @@ StaticMapObject::StaticMapObject(string_t tileset, sf::IntRect texBounds) : o_sp
     o_bounds = texBounds;
     o_sprite.setScale(GLOBAL_SCALE_GAMEOBJECT);
     o_sprite.setTextureRect(o_bounds);
-    o_tileWidth  = (o_sprite.getGlobalBounds().width / 32)  + 1;
-    o_tileHeight = (o_sprite.getGlobalBounds().height / 32) + 1;
+    o_tileWidth  = (unsigned int)(o_sprite.getGlobalBounds().width / 32)  + 1;
+    o_tileHeight = (unsigned int)(o_sprite.getGlobalBounds().height / 32) + 1;
 }
 
 void StaticMapObject::setPosition(Tile& tile)

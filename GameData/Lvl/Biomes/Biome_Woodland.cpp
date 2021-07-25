@@ -1,7 +1,7 @@
 #include "Biome_Woodland.h"
 #include <cmath>
 
-void Biome_Woodland::generate(sf::Vector2i position, sf::Vector2i area, std::vector<Tile> *map, std::vector<StaticMapObject*>* objs, sf::Vector2i mapArea)
+void Biome_Woodland::generate(sf::Vector2i position, sf::Vector2i area, std::vector<Tile> *map, sf::Vector2i mapArea)
 {
     //generate ground tile
     auto nPos = position;

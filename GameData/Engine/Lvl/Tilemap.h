@@ -16,6 +16,7 @@ public:
 
     void initialize();
     void render(sf::RenderWindow* window);
+    void renderObjectSet(sf::RenderWindow* window, bool objSet);
     void showOutlines(bool);
 
     inline uint16_t getTileSize()     { return tileSize; };
@@ -28,17 +29,21 @@ private:
     uint16_t height;
     uint16_t tileSize;
 
-    Map* t_map = nullptr;
-
+    #if DEBUG_ENABLE_TILE_OUTLINES == 1
     struct t_outline
     {
         Tile*              tile;
         sf::RectangleShape rect;
     };
     bool t_drawOutlines = false;
+    #endif
+
     std::vector<t_outline> t_outlines;
 
-    void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+
+    Map* t_map = nullptr;
+
+    void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 };
 
 

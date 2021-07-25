@@ -135,7 +135,7 @@ Map* MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY, uint16_t tileSize
     m_size.x = sizeX;
     m_size.y = sizeY;
     m_tileSize = tileSize;
-    std::vector<StaticMapObject*> m_staticObjects;
+    std::vector<OrderedMapObject> m_staticObjects;
 
     m_boundaries.x = m_size.x * tileSize * GLOBAL_SCALE_TILE.x; //scaled by 2 in tilemap.cpp
     m_boundaries.y = m_size.y * tileSize * GLOBAL_SCALE_TILE.y; //scaled by 2 in tilemap.cpp
@@ -176,7 +176,7 @@ Map* MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY, uint16_t tileSize
             size.y = sizeY - pos.y;
             lastRun = true;
         }
-        biome->generate(pos, size, &m_lvl, &m_staticObjects, sf::Vector2i(sizeX, sizeY));
+        biome->generate(pos, size, &m_lvl, sf::Vector2i(sizeX, sizeY));
 
 
         if ((pos.x + size.x) > (sizeX))
@@ -264,6 +264,9 @@ Map* MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY, uint16_t tileSize
     m_map->m_tiles      = m_lvl;
 
     //generate static objects
+    //todo: fix from stack overflow
+    // Base* base = new Derived;  // NOTE: declared type is "Base*"
+    // base->doSomething();  // This will call Derived version
     for(uint32_t i = 0; i < (m_size.x * m_size.y); i++)
     {
         bool place = (rand() % 100) < MAPGEN_CHANCE_STATICOBJECT;
@@ -274,7 +277,12 @@ Map* MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY, uint16_t tileSize
 
         StaticMapObject* obj = new StaticMapObject(*getRandomObject(m_lvl[i].biome));
         obj->setPosition(m_lvl[i]);
-        m_staticObjects.push_back(obj);
+
+        OrderedMapObject oObj;
+        oObj.object    = obj;
+        oObj.renderOverPlayer = false;
+
+        m_staticObjects.push_back(oObj);
     }
 
     m_map->m_mapObjects = m_staticObjects;
