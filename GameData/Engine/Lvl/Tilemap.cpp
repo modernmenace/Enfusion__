@@ -210,8 +210,8 @@ void Tilemap::renderObjectSet(sf::RenderWindow *window, bool objSet)
     {
         if (staticObject.renderOverPlayer == objSet)
         {
-            // check if this object is still in the right set
-            if (pCenter.y > staticObject.object->center().y)
+            // TODO: use override zOrderBoundary properly
+            if (pCenter.y > staticObject.object->zOrderBoundary())
                 staticObject.renderOverPlayer = false;
             else
                 staticObject.renderOverPlayer = true;

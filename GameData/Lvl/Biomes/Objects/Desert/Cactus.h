@@ -15,7 +15,10 @@ public:
 
     uint16_t zOrderBoundary() override
     {
-        return center().y - o_sprite.getGlobalBounds().height / 6;
+        //TODO: use override correctly
+        dbg_log("override used")
+        auto gBounds = o_sprite.getGlobalBounds();
+        return gBounds.top + (gBounds.height / 8);
     }
 
 
