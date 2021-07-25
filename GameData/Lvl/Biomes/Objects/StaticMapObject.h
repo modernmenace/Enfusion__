@@ -11,8 +11,9 @@ class StaticMapObject {
 public:
     StaticMapObject(string_t tileset, sf::IntRect texBounds);
 
-    virtual void setPosition(Tile&);
-    virtual void render(sf::RenderWindow* window);
+    virtual void     setPosition(Tile&);
+    virtual void     render(sf::RenderWindow* window);
+    virtual uint16_t zOrderBoundary();
 
     inline void setTileset(string_t tileset)  { o_sprite.setTexture(AssetManager::Instance()->getTexture(tileset)); }
     inline void setBounds(sf::IntRect bounds) { o_sprite.setTextureRect(bounds); }

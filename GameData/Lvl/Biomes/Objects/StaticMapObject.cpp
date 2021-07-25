@@ -1,6 +1,20 @@
 #include "StaticMapObject.h"
 #include "../../LvlStructs.h"
-#include "../../MapGenerator.h"
+
+/************************************************************************
+ * FUNCTION :       StaticMapObject
+ *
+ * DESCRIPTION :
+ *       Constructor
+ *
+ *  INPUTS:  NONE
+ *
+ *  OUTPUTS: NONE
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2021.07.25 	    JCB     Documentation Start
+ *
+ ************************************************************************/
 
 StaticMapObject::StaticMapObject(string_t tileset, sf::IntRect texBounds) : o_sprite()
 {
@@ -49,4 +63,9 @@ sf::Vector2u StaticMapObject::center()
 void StaticMapObject::render(sf::RenderWindow *window)
 {
     window->draw(o_sprite);
+}
+
+uint16_t StaticMapObject::zOrderBoundary()
+{
+    return center().y;
 }

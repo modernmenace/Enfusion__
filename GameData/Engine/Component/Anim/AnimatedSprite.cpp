@@ -130,7 +130,7 @@ sf::FloatRect AnimatedSprite::bounds()
     {
         if (!s_layerMap[static_cast<Layer_Type>(i)])
             continue;
-        
+
         auto lBounds = s_layerMap[static_cast<Layer_Type>(i)]->getGlobalBounds();
 
         if ((lBounds.top + lBounds.height) > (bounds.top + bounds.height))
