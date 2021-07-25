@@ -34,6 +34,18 @@ void StaticMapObject::setPosition(Tile& tile)
     o_tiles = occTiles;
 }
 
+sf::Vector2u StaticMapObject::center()
+{
+    sf::Vector2u center;
+
+    sf::FloatRect gBounds = o_sprite.getGlobalBounds();
+
+    center.x = gBounds.left + (gBounds.width / 2);
+    center.y = gBounds.top  - (gBounds.height / 2);
+
+    return center;
+}
+
 void StaticMapObject::render(sf::RenderWindow *window)
 {
     window->draw(o_sprite);

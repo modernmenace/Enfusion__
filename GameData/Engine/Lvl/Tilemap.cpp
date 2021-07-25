@@ -3,6 +3,7 @@
 #include "../../Lvl/MapGenerator.h"
 #include "LevelManager.h"
 #include "../Component/Misc/Camera.h"
+#include "../Component/Anim/AnimatedSprite.h"
 
 //todo: Overhaul
 //todo:  2 - Blocked tiles (redo collision)
@@ -200,13 +201,31 @@ void Tilemap::render(sf::RenderWindow *window)
 //TODO: order by distance and check less often for far ones?
 void Tilemap::renderObjectSet(sf::RenderWindow *window, bool objSet)
 {
-    sf::FloatRect v = LevelManager::Instance()->getCurrentLevel().player()->getComponent<Camera>().getCameraView();
+    Player* player = LevelManager::Instance()->getCurrentLevel().player();
+    sf::FloatRect v = player->getComponent<Camera>().getCameraView();
 
     for(auto staticObject : t_map->m_mapObjects)
     {
         if (staticObject.renderOverPlayer == objSet)
+        {
+            // check if this object is still in the right set
+            if (player->getComponent<AnimatedSprite>().center().y > staticObject.object->center().y)
+            {
+                // render over
+                staticObject.renderOverPlayer = true;
+            }
+            else
+            {
+                // render under
+                staticObject.renderOverPlayer = false;
+            }
+
+
             if (v.intersects(staticObject.object->bounds()))
+            {
                 staticObject.object->render(window);
+            }
+        }
     }
 }
 

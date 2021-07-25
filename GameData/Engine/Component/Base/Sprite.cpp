@@ -39,3 +39,15 @@ void Sprite::render(sf::RenderWindow *window)
     if (s_visible)
         window->draw(sprite);
 }
+
+sf::Vector2u Sprite::center()
+{
+    sf::Vector2u center;
+
+    sf::FloatRect gBounds = sprite.getGlobalBounds();
+
+    center.x = gBounds.left + (gBounds.width / 2);
+    center.y = gBounds.top  - (gBounds.height / 2);
+
+    return center;
+}

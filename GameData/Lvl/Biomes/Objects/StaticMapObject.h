@@ -20,6 +20,8 @@ public:
     inline sf::FloatRect bounds() { return o_sprite.getGlobalBounds(); }
     inline Tile*         tile()   { return o_tile; }
 
+    sf::Vector2u center();
+
 protected:
     sf::Rect<uint32_t> o_tiles;
 

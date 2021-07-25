@@ -225,6 +225,18 @@ void AnimatedSprite::render(sf::RenderWindow *window)
     }
 }
 
+sf::Vector2u AnimatedSprite::center()
+{
+    sf::Vector2u center;
+
+    sf::FloatRect gBounds = getSprite()->getGlobalBounds();
+
+    center.x = gBounds.left + (gBounds.width / 2);
+    center.y = gBounds.top  - (gBounds.height / 2);
+
+    return center;
+}
+
 /************************************************************************
  * FUNCTION :       AnimatedSprite::switchState
  *

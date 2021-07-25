@@ -12,6 +12,7 @@ public:
     void initialize()                     override;
     void render(sf::RenderWindow* window) override;
     void setVisible(bool v) { s_visible = v; }
+    sf::Vector2u center();
 
     inline void updatePosition(sf::Vector2f p)  { sprite.setPosition(p); }
     inline sf::Sprite& getSprite(){ return sprite; }
