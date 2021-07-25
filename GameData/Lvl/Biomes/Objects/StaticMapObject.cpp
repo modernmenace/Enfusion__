@@ -2,7 +2,7 @@
 #include "../../LvlStructs.h"
 
 /************************************************************************
- * FUNCTION :       StaticMapObject
+ * FUNCTION :       StaticMapObject::StaticMapObject
  *
  * DESCRIPTION :
  *       Constructor
@@ -26,6 +26,21 @@ StaticMapObject::StaticMapObject(string_t tileset, sf::IntRect texBounds) : o_sp
     o_tileHeight = (unsigned int)(o_sprite.getGlobalBounds().height / 32) + 1;
 }
 
+/************************************************************************
+ * FUNCTION :       StaticMapObject::setPosition
+ *
+ * DESCRIPTION :
+ *       Sets the object's position to a tile location
+ *
+ *  INPUTS:  Tile& tile : The tile to be placed at
+ *
+ *  OUTPUTS: NONE
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2021.07.25 	    JCB     Documentation Start
+ *
+ ************************************************************************/
+
 void StaticMapObject::setPosition(Tile& tile)
 {
     o_tile = &tile;
@@ -48,6 +63,21 @@ void StaticMapObject::setPosition(Tile& tile)
     o_tiles = occTiles;
 }
 
+/************************************************************************
+ * FUNCTION :       StaticMapObject::center
+ *
+ * DESCRIPTION :
+ *       Returns the center of the object in global coordinates
+ *
+ *  INPUTS:  NONE
+ *
+ *  OUTPUTS: sf::Vector2u : The tile's center point
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2021.07.25 	    JCB     Documentation Start
+ *
+ ************************************************************************/
+
 sf::Vector2u StaticMapObject::center()
 {
     sf::Vector2u center;
@@ -60,10 +90,40 @@ sf::Vector2u StaticMapObject::center()
     return center;
 }
 
+/************************************************************************
+ * FUNCTION :       StaticMapObject::render
+ *
+ * DESCRIPTION :
+ *       Renders the object
+ *
+ *  INPUTS:  sf::RenderWindow *window : pointer to the render window
+ *
+ *  OUTPUTS: NONE
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2021.07.25 	    JCB     Documentation Start
+ *
+ ************************************************************************/
+
 void StaticMapObject::render(sf::RenderWindow *window)
 {
     window->draw(o_sprite);
 }
+
+/************************************************************************
+ * FUNCTION :       StaticMapObject::zOrderBoundary
+ *
+ * DESCRIPTION :
+ *       Return's the y boundary determining the z-order
+ *
+ *  INPUTS:  NONE
+ *
+ *  OUTPUTS: uint16_t boundary : the y-boundary
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2021.07.25 	    JCB     Documentation Start
+ *
+ ************************************************************************/
 
 uint16_t StaticMapObject::zOrderBoundary()
 {

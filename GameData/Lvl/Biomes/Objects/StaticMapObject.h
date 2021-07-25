@@ -25,8 +25,6 @@ public:
 
 protected:
     sf::Rect<uint32_t> o_tiles;
-
-private:
     sf::Sprite         o_sprite;
     sf::IntRect        o_bounds;
     unsigned int       o_tileWidth;

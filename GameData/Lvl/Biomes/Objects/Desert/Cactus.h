@@ -13,6 +13,11 @@ public:
         //todo: pass map?
     };
 
+    uint16_t zOrderBoundary() override
+    {
+        return center().y - o_sprite.getGlobalBounds().height / 6;
+    }
+
 
 };
 

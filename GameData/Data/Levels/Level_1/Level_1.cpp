@@ -188,8 +188,8 @@ void Level_1::handleInput(sf::Keyboard::Key key)
 void Level_1::render(sf::RenderWindow *window)
 {
     map->render(window);
-    map->renderObjectSet(window, 0);
+    map->renderObjectSet(window, 0); // Render objects under the player
     Level::render(window);
-    map->renderObjectSet(window, 1);
+    map->renderObjectSet(window, 1); // Render objects over the player
     Level::renderUI(window);
 }
