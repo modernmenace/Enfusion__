@@ -196,30 +196,31 @@ void Tilemap::render(sf::RenderWindow *window)
 
 }
 
-//TODO: check here the player pos and determine which set it should be in
 //TODO: more efficient method of culling
 //TODO: order by distance and check less often for far ones?
 void Tilemap::renderObjectSet(sf::RenderWindow *window, bool objSet)
 {
     Player* player = LevelManager::Instance()->getCurrentLevel().player();
 
-    sf::FloatRect pView = player->getComponent<Camera>().getCameraView();
+    sf::FloatRect pView   = player->getComponent<Camera>().getCameraView();
     sf::Vector2u  pCenter = player->getComponent<AnimatedSprite>().center();
 
-    for(auto& staticObject : t_map->m_mapObjects)
+    for(auto& m_mapObject : t_map->m_mapObjects)
     {
-        if (staticObject.renderOverPlayer == objSet)
+        if (m_mapObject.renderOverPlayer == objSet)
         {
-            // TODO: use override zOrderBoundary properly
-            if (pCenter.y > staticObject.object->zOrderBoundary())
-                staticObject.renderOverPlayer = false;
+            if (pCenter.y > m_mapObject.object->zOrderBoundary())
+                m_mapObject.renderOverPlayer = false;
             else
-                staticObject.renderOverPlayer = true;
+                m_mapObject.renderOverPlayer = true;
 
-
-            if (pView.intersects(staticObject.object->bounds()))
+            if (pView.intersects(m_mapObject.object->bounds()))
             {
-                staticObject.object->render(window);
+                //TODO: we are never getting here with the changes
+                //TODO: the derived classes are now used correctly though
+                //TODO: is the issue there is only one object pointed to?
+                //TODO: yes that is the issue, as each object stores its position
+                m_mapObject.object->render(window);
             }
         }
     }

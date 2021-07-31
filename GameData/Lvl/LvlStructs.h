@@ -24,7 +24,7 @@ struct TileTexture
 
 struct WeightedMapObject
 {
-    StaticMapObject obj;
+    StaticMapObject* obj;
     float weight;
 };
 

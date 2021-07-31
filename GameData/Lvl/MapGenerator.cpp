@@ -68,9 +68,9 @@ MapGenerator* MapGenerator::Instance()
 
 void MapGenerator::populateBiomeObjects()
 {
-    m_biomeObjects[LEVEL_BIOME_ID_DESERT].push_back({Cactus(), 1});
-    m_biomeObjects[LEVEL_BIOME_ID_DESERT].push_back({Cactus2(), 1});
-    m_biomeObjects[LEVEL_BIOME_ID_DESERT].push_back({DeadTree(), 0.5});
+    m_biomeObjects[LEVEL_BIOME_ID_DESERT].push_back({new Cactus(), 1});
+    m_biomeObjects[LEVEL_BIOME_ID_DESERT].push_back({new Cactus2(), 1});
+    m_biomeObjects[LEVEL_BIOME_ID_DESERT].push_back({new DeadTree(), 0.5});
 }
 
 /************************************************************************
@@ -103,12 +103,12 @@ StaticMapObject* MapGenerator::getRandomObject(uint16_t biomeID)
     for(uint16_t i = 0; i < vec.size(); i++)
     {
         if (weightedRand < vec[i].weight)
-            return &vec[i].obj;
+            return vec[i].obj;
         else
             weightedRand -= vec[i].weight;
     }
 
-    return &vec[0].obj;
+    return vec[0].obj;
 }
 
 /************************************************************************
@@ -264,18 +264,16 @@ Map* MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY, uint16_t tileSize
     m_map->m_tiles      = m_lvl;
 
     //generate static objects
-    //todo: fix from stack overflow
-    // Base* base = new Derived;  // NOTE: declared type is "Base*"
-    // base->doSomething();  // This will call Derived version
     for(uint32_t i = 0; i < (m_size.x * m_size.y); i++)
     {
         bool place = (rand() % 100) < MAPGEN_CHANCE_STATICOBJECT;
-        if (!place) continue;
-        //why is this r here and why does removing it crash program?
-        StaticMapObject* r = getRandomObject(m_lvl[i].biome);
-        if (r == nullptr) continue;
+        if (!place)
+            continue;
 
-        StaticMapObject* obj = new StaticMapObject(*getRandomObject(m_lvl[i].biome));
+        StaticMapObject* obj = getRandomObject(m_lvl[i].biome);
+        if (!obj)
+            continue;
+
         obj->setPosition(m_lvl[i]);
 
         OrderedMapObject oObj;

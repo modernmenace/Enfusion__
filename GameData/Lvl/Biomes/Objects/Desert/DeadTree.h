@@ -17,6 +17,7 @@ public:
         StaticMapObject::setPosition(tile);
 
         //1,1 and 1,2 blocked
+        /*
         for(int i = 0; i < o_tiles.width; i++)
         {
             for(int j = 0; j < o_tiles.height; j++)
@@ -34,6 +35,7 @@ public:
                 }
             }
         }
+         */
     }
 };
 
