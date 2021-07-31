@@ -103,12 +103,12 @@ StaticMapObject* MapGenerator::getRandomObject(uint16_t biomeID)
     for(uint16_t i = 0; i < vec.size(); i++)
     {
         if (weightedRand < vec[i].weight)
-            return vec[i].obj;
+            return vec[i].obj->createCopy();
         else
             weightedRand -= vec[i].weight;
     }
 
-    return vec[0].obj;
+    return vec[0].obj->createCopy();
 }
 
 /************************************************************************
@@ -128,14 +128,13 @@ StaticMapObject* MapGenerator::getRandomObject(uint16_t biomeID)
  *
  ************************************************************************/
 
-Map* MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY, uint16_t tileSize)
+void MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY, uint16_t tileSize)
 {
-    assert(m_map == nullptr);
     m_lvl.clear();
+    m_map.m_mapObjects.clear();
     m_size.x = sizeX;
     m_size.y = sizeY;
     m_tileSize = tileSize;
-    std::vector<OrderedMapObject> m_staticObjects;
 
     m_boundaries.x = m_size.x * tileSize * GLOBAL_SCALE_TILE.x; //scaled by 2 in tilemap.cpp
     m_boundaries.y = m_size.y * tileSize * GLOBAL_SCALE_TILE.y; //scaled by 2 in tilemap.cpp
@@ -260,8 +259,7 @@ Map* MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY, uint16_t tileSize
         numTiles[m_lvl[i].biome]++;
     }
 
-    m_map = new Map;
-    m_map->m_tiles      = m_lvl;
+    m_map.m_tiles = m_lvl;
 
     //generate static objects
     for(uint32_t i = 0; i < (m_size.x * m_size.y); i++)
@@ -276,14 +274,10 @@ Map* MapGenerator::generateMap(uint16_t sizeX, uint16_t sizeY, uint16_t tileSize
 
         obj->setPosition(m_lvl[i]);
 
-        OrderedMapObject oObj;
-        oObj.object    = obj;
+        GeneratedMapObject oObj;
+        oObj.object = obj;
         oObj.renderOverPlayer = false;
 
-        m_staticObjects.push_back(oObj);
+        m_map.m_mapObjects.push_back(oObj);
     }
-
-    m_map->m_mapObjects = m_staticObjects;
-
-    return m_map;
 }

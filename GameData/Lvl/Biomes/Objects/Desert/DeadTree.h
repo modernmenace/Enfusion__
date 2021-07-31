@@ -12,6 +12,11 @@ public:
 
     };
 
+    StaticMapObject* createCopy() override
+    {
+        return new DeadTree(*this);
+    };
+
     void setPosition(Tile& tile) override
     {
         StaticMapObject::setPosition(tile);

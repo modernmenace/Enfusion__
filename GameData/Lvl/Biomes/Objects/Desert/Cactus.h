@@ -13,10 +13,15 @@ public:
         //todo: pass map?
     };
 
+    StaticMapObject* createCopy() override
+    {
+        return new Cactus(*this);
+    };
+
     uint16_t zOrderBoundary() override
     {
         auto gBounds = o_sprite.getGlobalBounds();
-        return gBounds.top + (gBounds.height / 8);
+        return gBounds.top - (gBounds.height / 1.5);
     }
 
 

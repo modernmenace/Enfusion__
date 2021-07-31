@@ -16,11 +16,11 @@ public:
     MapGenerator();
     ~MapGenerator() { if (m_Instance) delete m_Instance; }
     static MapGenerator* Instance();
-    Map* generateMap(uint16_t sizeX, uint16_t sizeY, uint16_t tileSize);
+    void generateMap(uint16_t sizeX, uint16_t sizeY, uint16_t tileSize);
 
     inline sf::Vector2i size()        { return m_size; }
     inline sf::Vector2i boundaries()  { return m_boundaries; }
-    inline Map* map()                 { return m_map; }
+    inline Map* map()                 { return &m_map; }
     inline uint16_t tileSize()        { return m_tileSize; }
 
 private:
@@ -30,7 +30,7 @@ private:
     sf::Vector2i                  m_boundaries;
     uint16_t                      m_tileSize;
 
-    Map* m_map = nullptr;
+    Map m_map;
 
     std::vector<WeightedMapObject> m_biomeObjects[LEVEL_AMOUNT_BIOMES+1];
 

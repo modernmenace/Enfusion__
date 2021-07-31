@@ -23,6 +23,8 @@ public:
 
     sf::Vector2u center();
 
+    virtual StaticMapObject* createCopy() { return new StaticMapObject(*this); };
+
 protected:
     sf::Rect<uint32_t> o_tiles;
     sf::Sprite         o_sprite;

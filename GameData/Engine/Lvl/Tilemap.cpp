@@ -216,10 +216,6 @@ void Tilemap::renderObjectSet(sf::RenderWindow *window, bool objSet)
 
             if (pView.intersects(m_mapObject.object->bounds()))
             {
-                //TODO: we are never getting here with the changes
-                //TODO: the derived classes are now used correctly though
-                //TODO: is the issue there is only one object pointed to?
-                //TODO: yes that is the issue, as each object stores its position
                 m_mapObject.object->render(window);
             }
         }

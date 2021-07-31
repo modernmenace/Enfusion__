@@ -28,7 +28,7 @@ struct WeightedMapObject
     float weight;
 };
 
-struct OrderedMapObject
+struct GeneratedMapObject
 {
     bool   renderOverPlayer;
     StaticMapObject* object;
@@ -36,7 +36,7 @@ struct OrderedMapObject
 
 struct Map
 {
-    std::vector<OrderedMapObject> m_mapObjects;
+    std::vector<GeneratedMapObject> m_mapObjects;
     std::vector<Tile>             m_tiles;
 };
 
