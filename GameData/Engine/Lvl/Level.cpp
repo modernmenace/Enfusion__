@@ -49,6 +49,19 @@ void Level::update(sf::Time tickRate)
         e->update(tickRate);
 }
 
+void Level::addEntity(Entity *e, uint8_t z)
+{
+    entities.insert(entities.begin(), RenderPair {z, e});
+    //right now sorting z-order every time an entity is added
+    //this is probably inefficient
+    std::sort(entities.begin(), entities.end(),
+            [](const RenderPair& left, const RenderPair& right)
+            {
+                //does this work?
+                return left.z > right.z;
+            });
+}
+
 void Level::render(sf::RenderWindow* window)
 {
     window->draw(background);

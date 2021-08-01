@@ -9,7 +9,7 @@ public:
     ScrollArea(sf::Vector2f, sf::Vector2f);
     ~ScrollArea();
     void initialize()              override;
-    void render(sf::RenderWindow*, uint8_t z = 0) override;
+    void render(sf::RenderWindow*) override;
 
     void addElement(Entity*);
 

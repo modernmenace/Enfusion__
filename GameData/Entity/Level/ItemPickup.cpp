@@ -26,11 +26,11 @@ void ItemPickup::create()
     }
 }
 
-void ItemPickup::render(sf::RenderWindow* window, uint8_t z)
+void ItemPickup::render(sf::RenderWindow* window)
 {
-    Entity::render(window, z);
+    Entity::render(window);
     if (p_count != 1)
-        p_countText.render(window, z);
+        p_countText.render(window);
 }
 
 void ItemPickup::handleInput(sf::Keyboard::Key key)

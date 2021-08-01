@@ -138,7 +138,7 @@ void TextDisplay::setPosition(sf::Vector2f p)
  *
  ************************************************************************/
 
-void TextDisplay::render(sf::RenderWindow* window, uint8_t z)
+void TextDisplay::render(sf::RenderWindow* window)
 {
     if (t_visible)
         window->draw(t_text);

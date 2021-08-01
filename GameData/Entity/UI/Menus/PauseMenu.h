@@ -12,7 +12,7 @@ public:
     void initialize() override;
     void handleInput(sf::Mouse::Button)     override;
     void handleInput(sf::Keyboard::Key)     override;
-    void render(sf::RenderWindow* window, uint8_t z = 0) override;
+    void render(sf::RenderWindow* window)   override;
 
     void toggleMenu();
 

@@ -12,6 +12,9 @@
 extern sf::Font*                 GlobalFont;
 extern sf::Vector2f              MousePosition;
 
+#define Z_TOP    UINT8_MAX
+#define Z_BOTTOM 0
+
 // Item Useful Macros
 #define forever for(;;)
 typedef std::string string_t;

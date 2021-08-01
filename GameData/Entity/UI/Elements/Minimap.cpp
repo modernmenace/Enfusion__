@@ -39,9 +39,9 @@ void Minimap::update(sf::Time tickRate)
 
 }
 
-void Minimap::render(sf::RenderWindow* window, uint8_t z)
+void Minimap::render(sf::RenderWindow* window)
 {
-    Entity::render(window, z);
+    Entity::render(window);
     auto oldView = window->getView();
     window->setView(m_view);
 
@@ -51,7 +51,7 @@ void Minimap::render(sf::RenderWindow* window, uint8_t z)
                          floor(m_center->getComponent<Position>().getPosition().y));
         window->draw(*m_tilemap);
     }
-    m_center_marker.render(window, z);
+    m_center_marker.render(window);
     window->setView(oldView);
 
 }

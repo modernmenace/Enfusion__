@@ -216,7 +216,7 @@ void Tilemap::renderObjectSet(sf::RenderWindow *window, bool objSet)
 
             if (pView.intersects(m_mapObject.object->bounds()))
             {
-                m_mapObject.object->render(window);
+                //m_mapObject.object->render(window);
             }
         }
     }

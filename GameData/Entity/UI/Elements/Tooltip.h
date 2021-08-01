@@ -12,7 +12,7 @@ class Tooltip : public Entity {
 public:
     Tooltip();
     void initialize()              override;
-    void render(sf::RenderWindow*, uint8_t z) override;
+    void render(sf::RenderWindow*) override;
     void show(Item* item, sf::Vector2f position);
     inline void hide() { t_visible = false; currentItem = nullptr; };
 

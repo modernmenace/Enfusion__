@@ -13,7 +13,7 @@ public:
     StaticMapObject(const StaticMapObject& obj);
 
     virtual void     setPosition(Tile&);
-    virtual void     render(sf::RenderWindow* window);
+    void     render(sf::RenderWindow* window) override;
     virtual uint16_t zOrderBoundary();
 
     inline sf::FloatRect bounds()  { return o_sprite.getGlobalBounds(); }

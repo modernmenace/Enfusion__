@@ -29,10 +29,7 @@ public:
     inline void setState(GameState g) { l_state = g; }
     inline GameState state()          { return l_state; }
 
-    inline void addEntity(Entity* e, uint8_t z = 0)
-    {
-        entities.insert(entities.begin(), RenderPair {z, e});
-    }
+    void addEntity(Entity* e, uint8_t z = 0);
 
     inline void addUIEntity(Entity* e)
     {

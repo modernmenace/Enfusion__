@@ -12,7 +12,7 @@ public:
                 sf::RectangleShape bounds = sf::RectangleShape(sf::Vector2f(0, 0)));
 
     void initialize() override;
-    void render(sf::RenderWindow* window, uint8_t z) override;
+    void render(sf::RenderWindow* window) override;
     void setPosition(sf::Vector2f);
     void setText(string_t);
 

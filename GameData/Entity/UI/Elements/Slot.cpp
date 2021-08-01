@@ -48,14 +48,14 @@ void Slot::setCount(int c)
         s_text.setText("");
 }
 
-void Slot::render(sf::RenderWindow *window, uint8_t z)
+void Slot::render(sf::RenderWindow *window)
 {
     if (s_visible)
     {
-        Entity::render(window, z);
+        Entity::render(window);
         if (item() != nullptr)
             window->draw(s_sprite);
 
-        s_text.render(window, z);
+        s_text.render(window);
     }
 }

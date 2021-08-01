@@ -18,9 +18,9 @@ void QuestDisplay::initialize()
     q_dropBox.getComponent<Sprite>().getSprite().setScale(sf::Vector2f(2, 2));
 }
 
-void QuestDisplay::render(sf::RenderWindow* window, uint8_t z)
+void QuestDisplay::render(sf::RenderWindow* window)
 {
-    Entity::render(window, z);
-    q_title.render(window, z);
-    q_dropBox.render(window, z);
+    Entity::render(window);
+    q_title.render(window);
+    q_dropBox.render(window);
 }

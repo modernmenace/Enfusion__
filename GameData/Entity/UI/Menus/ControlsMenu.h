@@ -14,7 +14,7 @@ public:
     void initialize() override;
     void handleInput(sf::Keyboard::Key) override;
     void handleInput(sf::Mouse::Button) override;
-    void render(sf::RenderWindow*, uint8_t z = 0) override;
+    void render(sf::RenderWindow*)      override;
 
     void show();
     inline void hide()   { c_active = false; };

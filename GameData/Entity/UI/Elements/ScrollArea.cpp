@@ -41,19 +41,19 @@ void ScrollArea::updateScrollbar()
     s_scrollbarNeeded = false;
 }
 
-void ScrollArea::render(sf::RenderWindow* window, uint8_t z)
+void ScrollArea::render(sf::RenderWindow* window)
 {
-    Entity::render(window, z);
+    Entity::render(window);
     window->draw(s_backRect);
 
     if (s_scrollbarNeeded)
     {
         window->draw(s_scrollRect);
-        s_scrollBar.render(window, z);
+        s_scrollBar.render(window);
     }
 
     for(auto* e : s_elements)
-        e->render(window, z);
+        e->render(window);
 }
 
 void ScrollArea::addElement(Entity* element)

@@ -23,10 +23,10 @@ void Entity::update(sf::Time tickRate)
         c.second->update(tickRate);
 }
 
-void Entity::render(sf::RenderWindow *window, uint8_t z)
+void Entity::render(sf::RenderWindow *window)
 {
     for (auto& c : componentMap)
-        c.second->render(window, z);
+        c.second->render(window);
 }
 
 void Entity::handleInput(sf::Keyboard::Key key)
