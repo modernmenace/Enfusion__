@@ -75,20 +75,20 @@ void SettingsMenu::handleInput(sf::Keyboard::Key key)
     if (key == 36)       hide();
 }
 
-void SettingsMenu::render(sf::RenderWindow* window)
+void SettingsMenu::render(sf::RenderWindow* window, uint8_t z)
 {
     if (c_menu.active())
     {
-        c_menu.render(window);
+        c_menu.render(window, z);
         return;
     }
     if (!s_active) return;
-    Entity::render(window);
-    applyButton.render(window);
-    cancelButton.render(window);
-    controlsButton.render(window);
-    s_fullscreenText.render(window);
-    s_resolutionText.render(window);
-    s_fsrnTickBox.render(window);
-    s_resDropBox.render(window);
+    Entity::render(window, z);
+    applyButton.render(window, z);
+    cancelButton.render(window, z);
+    controlsButton.render(window, z);
+    s_fullscreenText.render(window, z);
+    s_resolutionText.render(window, z);
+    s_fsrnTickBox.render(window, z);
+    s_resDropBox.render(window, z);
 }

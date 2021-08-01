@@ -16,10 +16,12 @@
  *
  ************************************************************************/
 
+StaticMapObject::StaticMapObject(const StaticMapObject &obj) : StaticMapObject(obj.o_tileset, obj.o_bounds) { }
 StaticMapObject::StaticMapObject(string_t tileset, sf::IntRect texBounds) : o_sprite()
 {
     o_sprite.setTexture(AssetManager::Instance()->getTexture(tileset));
     o_bounds = texBounds;
+    o_tileset = tileset;
     o_sprite.setScale(GLOBAL_SCALE_GAMEOBJECT);
     o_sprite.setTextureRect(o_bounds);
     o_tileWidth  = (unsigned int)(o_sprite.getGlobalBounds().width / 32)  + 1;

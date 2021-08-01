@@ -26,10 +26,10 @@ public:
                                         getComponent<Position>().getPosition().y+12));
     }
 
-    void render(sf::RenderWindow* window) override
+    void render(sf::RenderWindow* window, uint8_t z) override
     {
-        Entity::render(window);
-        d_text.render(window);
+        Entity::render(window, z);
+        d_text.render(window, z);
     }
 
 private:

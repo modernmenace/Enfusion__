@@ -215,7 +215,7 @@ void Camera::update(sf::Time tickRate)
  *
  ************************************************************************/
 
-void Camera::render(sf::RenderWindow *window)
+void Camera::render(sf::RenderWindow *window, uint8_t z)
 {
     if (viewSet) return;
 

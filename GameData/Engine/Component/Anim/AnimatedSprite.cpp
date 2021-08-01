@@ -249,7 +249,7 @@ void AnimatedSprite::setPosition(sf::Vector2f pos)
  *
  ************************************************************************/
 
-void AnimatedSprite::render(sf::RenderWindow *window)
+void AnimatedSprite::render(sf::RenderWindow *window, uint8_t z)
 {
     for(int i = 0; i < PROTAGONIST_LAYERS; i++)
     {

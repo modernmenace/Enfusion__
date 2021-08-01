@@ -575,21 +575,21 @@ void InventoryMenu::handleInput(sf::Mouse::Button button)
  *
  ************************************************************************/
 
-void InventoryMenu::render(sf::RenderWindow *window)
+void InventoryMenu::render(sf::RenderWindow *window, uint8_t z)
 {
     if (!active()) return;
-    Entity::render(window);
+    Entity::render(window, z);
 
-    i_playerView.render(window);
+    i_playerView.render(window, z);
 
     for(auto &s : slots)
-        s->render(window);
+        s->render(window, z);
 
-    i_equipmentSlotHead->render(window);
-    i_equipmentSlotTop->render(window);
-    i_equipmentSlotBottom->render(window);
-    i_playerNameDisplay.render(window);
-    i_playerLevelDisplay.render(window);
+    i_equipmentSlotHead->render(window, z);
+    i_equipmentSlotTop->render(window, z);
+    i_equipmentSlotBottom->render(window, z);
+    i_playerNameDisplay.render(window, z);
+    i_playerLevelDisplay.render(window, z);
 
     if (i_drag)
     {
@@ -598,30 +598,30 @@ void InventoryMenu::render(sf::RenderWindow *window)
             window->draw(*i_equipmentSlotHead->itemSprite());
             i_equipmentSlotHead->itemText()->setPosition(sf::Vector2f(i_equipmentSlotHead->itemSprite()->getPosition().x + 10,
                                                                       i_equipmentSlotHead->itemSprite()->getPosition().y + 62));
-            i_equipmentSlotHead->itemText()->render(window);
+            i_equipmentSlotHead->itemText()->render(window, z);
         }
         else if (i_dragIndex == DRAG_EQ_TOP_INDEX)
         {
             window->draw(*i_equipmentSlotTop->itemSprite());
             i_equipmentSlotTop->itemText()->setPosition(sf::Vector2f(i_equipmentSlotTop->itemSprite()->getPosition().x + 10,
                                                                       i_equipmentSlotTop->itemSprite()->getPosition().y + 62));
-            i_equipmentSlotTop->itemText()->render(window);
+            i_equipmentSlotTop->itemText()->render(window, z);
         }
         else if (i_dragIndex == DRAG_EQ_BOTTOM_INDEX)
         {
             window->draw(*i_equipmentSlotBottom->itemSprite());
             i_equipmentSlotBottom->itemText()->setPosition(sf::Vector2f(i_equipmentSlotBottom->itemSprite()->getPosition().x + 10,
                                                                       i_equipmentSlotBottom->itemSprite()->getPosition().y + 62));
-            i_equipmentSlotBottom->itemText()->render(window);
+            i_equipmentSlotBottom->itemText()->render(window, z);
         }
         else
         {
             window->draw(*slots[i_dragIndex]->itemSprite());
             slots[i_dragIndex]->itemText()->setPosition(sf::Vector2f(slots[i_dragIndex]->itemSprite()->getPosition().x + 10,
                                                                      slots[i_dragIndex]->itemSprite()->getPosition().y + 62));
-            slots[i_dragIndex]->itemText()->render(window);
+            slots[i_dragIndex]->itemText()->render(window, z);
         }
     }
 
-    i_tooltip.render(window);
+    i_tooltip.render(window, z);
 }

@@ -55,12 +55,12 @@ void PauseMenu::toggleMenu()
     p_active = !p_active;
 }
 
-void PauseMenu::render(sf::RenderWindow *window)
+void PauseMenu::render(sf::RenderWindow *window, uint8_t z)
 {
     if (!p_active) return;
-    Entity::render(window);
-    p_b_resume.render(window);
-    p_b_settings.render(window);
-    p_b_exit.render(window);
-    s_menu.render(window);
+    Entity::render(window, z);
+    p_b_resume.render(window, z);
+    p_b_settings.render(window, z);
+    p_b_exit.render(window, z);
+    s_menu.render(window, z);
 }

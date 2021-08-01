@@ -22,7 +22,7 @@ public:
     ~AnimatedSprite();
 
     void initialize() override;
-    void render(sf::RenderWindow* window) override;
+    void render(sf::RenderWindow* window, uint8_t z) override;
     void switchState(uint8_t, uint8_t);
     void setPosition(sf::Vector2f);
     void addLayer(string_t, Layer_Type);

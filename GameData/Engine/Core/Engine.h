@@ -6,15 +6,7 @@
 #include <memory>
 #include <SFML/Graphics.hpp>
 #include "AssetManager.h"
-#include "Global.h"
-
-/*
- *  Engine
- *
- *  DESC: Core engine header, stores key definitions used
- *        throughout the engine
- *
- */
+#include "CGlobal.h"
 
 // Globals
 extern sf::Font*                 GlobalFont;
@@ -41,5 +33,7 @@ typedef std::string string_t;
     #define dbg_log(message)
     #define dbg_err(message)
 #endif
+
+#define FRAMERATE_LIMIT 60
 
 #endif //ENFUSION_ENGINE_H

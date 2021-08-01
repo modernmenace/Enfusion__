@@ -30,7 +30,7 @@ public:
 
     virtual void initialize() {}
     virtual void update(sf::Time tickRate);
-    virtual void render(sf::RenderWindow *window);
+    virtual void render(sf::RenderWindow *window, uint8_t z = 0);
     virtual void handleInput(sf::Keyboard::Key);
     virtual void handleInput(sf::Mouse::Button button);
     virtual sf::FloatRect bounds() { return sf::FloatRect(0, 0, 0, 0); }

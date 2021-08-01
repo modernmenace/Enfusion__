@@ -1,5 +1,5 @@
-#ifndef ENFUSION___GLOBAL_H
-#define ENFUSION___GLOBAL_H
+#ifndef ENFUSION___CGLOBAL_H
+#define ENFUSION___CGLOBAL_H
 
 // if true, debug messages are enabled
 #define DEBUG_BUILD true
@@ -17,6 +17,4 @@
 
 #define MAX_COMPONENTS 6
 
-#define FRAMERATE_LIMIT 60
-
-#endif //ENFUSION___GLOBAL_H
+#endif //ENFUSION___CGLOBAL_H

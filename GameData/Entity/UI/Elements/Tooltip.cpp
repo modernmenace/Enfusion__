@@ -133,12 +133,12 @@ void Tooltip::show(Item* item, sf::Vector2f position)
  *
  ************************************************************************/
 
-void Tooltip::render(sf::RenderWindow* window)
+void Tooltip::render(sf::RenderWindow* window, uint8_t z)
 {
     if (!t_visible) return;
-    Entity::render(window);
+    Entity::render(window, z);
 
-    t_iName.render(window);
-    t_iDesc.render(window);
-    t_iType.render(window);
+    t_iName.render(window, z);
+    t_iDesc.render(window, z);
+    t_iType.render(window, z);
 }

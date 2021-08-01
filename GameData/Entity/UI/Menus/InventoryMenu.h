@@ -18,7 +18,7 @@ public:
     void initialize() override;
     void handleInput(sf::Mouse::Button)     override;
     void update(sf::Time tickRate)          override;
-    void render(sf::RenderWindow* window)   override;
+    void render(sf::RenderWindow* window, uint8_t z)  override;
     void toggleMenu();
     void updateSlots();
     inline bool active() { return menuActive; };

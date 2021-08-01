@@ -55,12 +55,12 @@ void ControlsMenu::show()
     c_active = true;
 }
 
-void ControlsMenu::render(sf::RenderWindow* window)
+void ControlsMenu::render(sf::RenderWindow* window, uint8_t z)
 {
     if (!c_active) return;
 
-    Entity::render(window);
-    applyButton.render(window);
-    cancelButton.render(window);
-    c_Area.render(window);
+    Entity::render(window, z);
+    applyButton.render(window, z);
+    cancelButton.render(window, z);
+    c_Area.render(window, z);
 }

@@ -137,13 +137,13 @@ void Hotbar::handleInput(sf::Mouse::Button button)
         updateSlots();
 }
 
-void Hotbar::render(sf::RenderWindow *window)
+void Hotbar::render(sf::RenderWindow *window, uint8_t z)
 {
-    Entity::render(window);
+    Entity::render(window, z);
 
     for(auto &s : slots)
-        s->render(window);
+        s->render(window, z);
 
     window->draw(selectionRect);
-    h_text->render(window);
+    h_text->render(window, z);
 }

@@ -2,7 +2,7 @@
 #define ENFUSION___SCRIPTENGINE_H
 
 #include <stdbool.h>
-#include "../Core/Global.h"
+#include "../Core/CGlobal.h"
 
 typedef struct
 {

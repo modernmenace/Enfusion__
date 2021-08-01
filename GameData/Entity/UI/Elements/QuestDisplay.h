@@ -9,7 +9,7 @@ class QuestDisplay : public Entity {
 public:
     QuestDisplay();
     void initialize() override;
-    void render(sf::RenderWindow*) override;
+    void render(sf::RenderWindow*, uint8_t z = 0) override;
 
 
 private:

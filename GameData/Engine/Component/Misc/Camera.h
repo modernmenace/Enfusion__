@@ -17,7 +17,7 @@ public:
 
     void initialize()                     override;
     void update(sf::Time tickRate)        override;
-    void render(sf::RenderWindow *window) override;
+    void render(sf::RenderWindow *window, uint8_t z = 0) override;
 
     sf::FloatRect getCameraView();
     sf::FloatRect getPlayerCenteredCameraView();

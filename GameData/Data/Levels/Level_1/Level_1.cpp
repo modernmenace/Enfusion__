@@ -67,6 +67,9 @@ void Level_1::initialize()
     map->initialize();
     hotbar.updateSlots();
 
+    //TODO: add static map objects from Map to level's entities
+    //TODO: for z-ordering reasons
+    //TODO: this requires staticmapobjects to be entities, which they should be
 
     #if DEBUG_ENABLE_DEBUG_MENU == 1
     dbg_playerPosText  = new TextDisplay("Test", sf::Vector2f(-950, -530), 12);
@@ -187,6 +190,8 @@ void Level_1::handleInput(sf::Keyboard::Key key)
 
 void Level_1::render(sf::RenderWindow *window)
 {
+    //TODO: the delay in renderng object sets here screws up positioning
+    //TODO: think of better way to do zordering
     map->render(window);
     map->renderObjectSet(window, 0); // Render objects under the player
     Level::render(window);

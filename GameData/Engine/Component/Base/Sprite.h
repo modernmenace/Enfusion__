@@ -10,7 +10,7 @@ public:
     Sprite(sf::Texture&);
 
     void initialize()                     override;
-    void render(sf::RenderWindow* window) override;
+    void render(sf::RenderWindow* window, uint8_t z) override;
     void setVisible(bool v) { s_visible = v; }
     sf::Vector2u center();
 

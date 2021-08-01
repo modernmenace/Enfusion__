@@ -21,19 +21,19 @@ Level::Level(string_t levelName, string_t background)
 
 Level::~Level()
 {
-    for(std::vector<Entity*>::iterator i = entities.begin(),
+    for(std::vector<RenderPair>::iterator i = entities.begin(),
             e = entities.end(); i != e; ++i)
-        delete (*i);
+        delete (i->entity);
 
     for(std::vector<Entity*>::iterator i = uiEntities.begin(),
-                e = entities.end(); i != e; ++i)
+                e = uiEntities.end(); i != e; ++i)
         delete (*i);
 }
 
 void Level::initialize()
 {
     for(auto &e : entities)
-        e->initialize();
+        e.entity->initialize();
 
     for (auto &e : uiEntities)
         e->initialize();
@@ -43,7 +43,7 @@ void Level::update(sf::Time tickRate)
 {
     if (l_state == GameState::RUNNING)
         for(auto &e : entities)
-            e->update(tickRate);
+            e.entity->update(tickRate);
 
     for (auto &e : uiEntities)
         e->update(tickRate);
@@ -53,8 +53,9 @@ void Level::render(sf::RenderWindow* window)
 {
     window->draw(background);
 
+    // assume entities are sorted here
     for(auto &e : entities)
-        e->render(window);
+        e.entity->render(window);
 }
 
 void Level::renderUI(sf::RenderWindow *window)
@@ -75,7 +76,7 @@ void Level::handleInput(sf::Keyboard::Key key)
 {
     if (l_state == GameState::RUNNING)
         for(auto &e : entities)
-            e->handleInput(key);
+            e.entity->handleInput(key);
 
     for(auto &e : uiEntities)
         e->handleInput(key);
@@ -85,7 +86,7 @@ void Level::handleInput(sf::Mouse::Button button)
 {
     if (l_state == GameState::RUNNING)
         for(auto &e : entities)
-            e->handleInput(button);
+            e.entity->handleInput(button);
 
     for(auto &e : uiEntities)
         e->handleInput(button);
@@ -95,7 +96,10 @@ void Level::removeEntity(Entity *e)
 {
     for(uint16_t i = 0; i < entities.size(); i++)
     {
-        if (entities[i] == e)
+        if (entities[i].entity == e)
+        {
+            delete entities[i].entity;
             entities.erase(entities.begin() + i);
+        }
     }
 }

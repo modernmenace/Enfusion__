@@ -29,9 +29,9 @@ public:
     inline void setState(GameState g) { l_state = g; }
     inline GameState state()          { return l_state; }
 
-    inline void addEntity(Entity* e)
+    inline void addEntity(Entity* e, uint8_t z = 0)
     {
-        entities.insert(entities.begin(), e);
+        entities.insert(entities.begin(), RenderPair {z, e});
     }
 
     inline void addUIEntity(Entity* e)
@@ -47,7 +47,13 @@ protected:
     sf::RectangleShape background;
     string_t levelName;
 
-    std::vector<Entity*> entities;
+    struct RenderPair
+    {
+        uint8_t z;
+        Entity* entity;
+    };
+
+    std::vector<RenderPair> entities;
     std::vector<Entity*> uiEntities;
 
     sf::View defaultView;

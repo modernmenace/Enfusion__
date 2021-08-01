@@ -13,7 +13,7 @@ public:
     Minimap(Entity* centerEntity, Level* level);
     void initialize()              override;
     void update(sf::Time)          override;
-    void render(sf::RenderWindow*) override;
+    void render(sf::RenderWindow*, uint8_t z = 0) override;
 
     inline void setTilemap(Tilemap* t) { m_tilemap = t; }
 

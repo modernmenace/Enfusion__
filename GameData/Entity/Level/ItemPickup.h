@@ -9,7 +9,7 @@ class ItemPickup : public Entity {
 
 public:
     ItemPickup(Item* item, uint8_t count = 1);
-    void render(sf::RenderWindow*)      override;
+    void render(sf::RenderWindow*, uint8_t z) override;
     void handleInput(sf::Keyboard::Key) override;
 
 private:

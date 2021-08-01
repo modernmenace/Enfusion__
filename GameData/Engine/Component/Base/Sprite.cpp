@@ -34,7 +34,7 @@ void Sprite::initialize()
     this->sprite.setScale(GLOBAL_SCALE_GAMEOBJECT);
 }
 
-void Sprite::render(sf::RenderWindow *window)
+void Sprite::render(sf::RenderWindow *window, uint8_t z)
 {
     if (s_visible)
         window->draw(sprite);
