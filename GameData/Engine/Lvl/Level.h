@@ -6,6 +6,7 @@
 #include "../Core/Engine.h"
 #include "../Entity/Entity.h"
 #include "../../Entity/Player.h"
+#include "../../Lvl/LvlStructs.h"
 
 enum GameState
 {
@@ -43,12 +44,6 @@ public:
 protected:
     sf::RectangleShape background;
     string_t levelName;
-
-    struct RenderPair
-    {
-        uint8_t z;
-        Entity* entity;
-    };
 
     std::vector<RenderPair> entities;
     std::vector<Entity*> uiEntities;

@@ -1,5 +1,8 @@
 #include "StaticMapObject.h"
 #include "../../LvlStructs.h"
+#include "../../../Engine/Lvl/LevelManager.h"
+#include "../../../Engine/Component/Misc/Camera.h"
+#include "../../../Engine/Component/Anim/AnimatedSprite.h"
 
 /************************************************************************
  * FUNCTION :       StaticMapObject::StaticMapObject
@@ -110,6 +113,65 @@ sf::Vector2u StaticMapObject::center()
 void StaticMapObject::render(sf::RenderWindow *window)
 {
     window->draw(o_sprite);
+}
+
+/************************************************************************
+ * FUNCTION :       StaticMapObject::update
+ *
+ * DESCRIPTION :
+ *       Update, check for events
+ *
+ *  INPUTS:  sf::Time tickRate : The current tick rate
+ *
+ *  OUTPUTS: NONE
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2021.08.01	    JCB     Documentation Start
+ *
+ ************************************************************************/
+
+void StaticMapObject::update(sf::Time tickRate)
+{
+    Player* player = LevelManager::Instance()->getCurrentLevel().player();
+
+    // TODO: Minimize calls to these?
+    sf::FloatRect pView   = player->getComponent<Camera>().getCameraView();
+    sf::Vector2u  pCenter = player->getComponent<AnimatedSprite>().center();
+
+    // Only update if in view
+    if (pView.intersects(bounds()))
+    {
+        // TODO: how to let level know about these changes?
+        //TODO: MAKE IT A COMPONENT!!!!!! <-- Thats what they are for!
+        //TODO: in the sort check, just skip entities without the component
+        if (pCenter.y > zOrderBoundary())
+            o_z = (player->z() - 1);
+        else
+            o_z = (player->z() + 1);
+
+        //TODO: check for player collision and direct to function below
+
+    }
+}
+
+/************************************************************************
+ * FUNCTION :       StaticMapObject::collideWithPlayer
+ *
+ * DESCRIPTION :
+ *       Update, check for events
+ *
+ *  INPUTS:  Player& player : Pointer to the player object
+ *
+ *  OUTPUTS: NONE
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2021.08.01	    JCB     Documentation Start
+ *
+ ************************************************************************/
+
+void StaticMapObject::collideWithPlayer(Player& player)
+{
+    // Handle player collisions
 }
 
 /************************************************************************

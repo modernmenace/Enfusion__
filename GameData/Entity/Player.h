@@ -22,10 +22,13 @@ public:
     void handleInput(sf::Mouse::Button button) override;
     sf::FloatRect bounds()                     override;
 
-    PlayerEquipment_t* equipment() { return &p_equipment; }
+    inline PlayerEquipment_t* equipment() { return &p_equipment; }
+    inline uint8_t z() { return p_z; }
 
 private:
     PlayerEquipment_t p_equipment;
+
+    uint8_t p_z = (Z_TOP / 2); // Allow room for things above and below
 
 };
 

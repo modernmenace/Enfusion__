@@ -3,6 +3,7 @@
 
 #include <bitset>
 #include "../../../Engine/Entity/Entity.h"
+#include "../../../Entity/Player.h"
 
 struct Tile;
 
@@ -12,10 +13,14 @@ public:
     StaticMapObject(string_t tileset, sf::IntRect texBounds);
     StaticMapObject(const StaticMapObject& obj);
 
-    virtual void     setPosition(Tile&);
-    void     render(sf::RenderWindow* window) override;
+    virtual void setPosition(Tile&);
+    virtual void collideWithPlayer(Player&);
+
+    void update(sf::Time tickRate)        override;
+    void render(sf::RenderWindow* window) override;
     virtual uint16_t zOrderBoundary();
 
+    inline uint8_t       z()       { return o_z; }
     inline sf::FloatRect bounds()  { return o_sprite.getGlobalBounds(); }
     inline Tile*         tile()    { return o_tile; }
 
@@ -31,7 +36,8 @@ protected:
     unsigned int       o_tileHeight;
     string_t           o_tileset;
 
-    Tile*        o_tile = nullptr;
+    uint8_t o_z    = Z_BOTTOM;
+    Tile*   o_tile = nullptr;
 
 };
 

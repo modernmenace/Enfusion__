@@ -47,5 +47,4 @@ void ItemPickup::pickup()
 {
     LevelManager::Instance()->getCurrentLevel().player()->getComponent<Inventory>().add(p_item, p_count);
     LevelManager::Instance()->getCurrentLevel().removeEntity(this);
-    delete this;
 }

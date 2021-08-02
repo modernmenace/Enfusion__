@@ -101,7 +101,6 @@ public:
         return *static_cast<T*>(componentMap.at(getComponentID<T>()).get());
     }
 
-
 private:
     std::map<ComponentID, std::unique_ptr<Component>> componentMap;
     std::bitset<MAX_COMPONENTS>                       componentIDSet;
