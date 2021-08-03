@@ -1,4 +1,5 @@
 #include "Level.h"
+#include "../Component/Base/Z.h"
 
 bool LEVEL_PAUSED = false;
 
@@ -21,9 +22,9 @@ Level::Level(string_t levelName, string_t background)
 
 Level::~Level()
 {
-    for(std::vector<RenderPair>::iterator i = entities.begin(),
+    for(std::vector<Entity*>::iterator i = entities.begin(),
             e = entities.end(); i != e; ++i)
-        delete (i->entity);
+        delete (*i);
 
     for(std::vector<Entity*>::iterator i = uiEntities.begin(),
                 e = uiEntities.end(); i != e; ++i)
@@ -33,7 +34,7 @@ Level::~Level()
 void Level::initialize()
 {
     for(auto &e : entities)
-        e.entity->initialize();
+        e->initialize();
 
     for (auto &e : uiEntities)
         e->initialize();
@@ -43,7 +44,7 @@ void Level::update(sf::Time tickRate)
 {
     if (l_state == GameState::RUNNING)
         for(auto &e : entities)
-            e.entity->update(tickRate);
+            e->update(tickRate);
 
     for (auto &e : uiEntities)
         e->update(tickRate);
@@ -51,14 +52,20 @@ void Level::update(sf::Time tickRate)
 
 void Level::addEntity(Entity *e, uint8_t z)
 {
-    entities.insert(entities.begin(), RenderPair {z, e});
+    entities.insert(entities.begin(), e);
 
     //right now sorting z-order every time an entity is added
     //this is probably inefficient
     std::sort(entities.begin(), entities.end(),
-            [](const RenderPair& left, const RenderPair& right)
+            [](const Entity* left, const Entity* right)
             {
-                return right.z > left.z;
+                if (!left->hasComponent<Z>())
+                    if (right->hasComponent<Z>())
+                        return false;
+                if (!right->hasComponent<Z>())
+                    return true; // prevent reaching below code if none have it
+
+                return right->getComponent<Z>().z() != 0;
             });
 }
 
@@ -68,7 +75,7 @@ void Level::render(sf::RenderWindow* window)
 
     // assume entities are sorted here
     for(auto &e : entities)
-        e.entity->render(window);
+        e->render(window);
 }
 
 void Level::renderUI(sf::RenderWindow *window)
@@ -89,7 +96,7 @@ void Level::handleInput(sf::Keyboard::Key key)
 {
     if (l_state == GameState::RUNNING)
         for(auto &e : entities)
-            e.entity->handleInput(key);
+            e->handleInput(key);
 
     for(auto &e : uiEntities)
         e->handleInput(key);
@@ -99,7 +106,7 @@ void Level::handleInput(sf::Mouse::Button button)
 {
     if (l_state == GameState::RUNNING)
         for(auto &e : entities)
-            e.entity->handleInput(button);
+            e->handleInput(button);
 
     for(auto &e : uiEntities)
         e->handleInput(button);
@@ -109,9 +116,9 @@ void Level::removeEntity(Entity *e)
 {
     for(uint16_t i = 0; i < entities.size(); i++)
     {
-        if (entities[i].entity == e)
+        if (entities[i] == e)
         {
-            delete entities[i].entity;
+            delete entities[i];
             entities.erase(entities.begin() + i);
         }
     }

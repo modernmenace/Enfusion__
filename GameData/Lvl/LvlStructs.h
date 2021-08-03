@@ -22,12 +22,6 @@ struct TileTexture
     float    weight;
 };
 
-struct RenderPair
-{
-    uint8_t z;
-    Entity* entity;
-};
-
 struct WeightedMapObject
 {
     StaticMapObject* obj;

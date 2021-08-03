@@ -3,6 +3,7 @@
 #include "../../../Engine/Lvl/LevelManager.h"
 #include "../../../Engine/Component/Misc/Camera.h"
 #include "../../../Engine/Component/Anim/AnimatedSprite.h"
+#include "../../../Engine/Component/Base/Z.h"
 
 /************************************************************************
  * FUNCTION :       StaticMapObject::StaticMapObject
@@ -29,6 +30,8 @@ StaticMapObject::StaticMapObject(string_t tileset, sf::IntRect texBounds) : o_sp
     o_sprite.setTextureRect(o_bounds);
     o_tileWidth  = (unsigned int)(o_sprite.getGlobalBounds().width / 32)  + 1;
     o_tileHeight = (unsigned int)(o_sprite.getGlobalBounds().height / 32) + 1;
+
+    addComponent<Z>(Z_BOTTOM);
 }
 
 /************************************************************************
@@ -110,9 +113,11 @@ sf::Vector2u StaticMapObject::center()
  *
  ************************************************************************/
 
+
 void StaticMapObject::render(sf::RenderWindow *window)
 {
-    window->draw(o_sprite);
+    if (o_inView)
+        window->draw(o_sprite);
 }
 
 /************************************************************************
@@ -141,16 +146,22 @@ void StaticMapObject::update(sf::Time tickRate)
     // Only update if in view
     if (pView.intersects(bounds()))
     {
-        // TODO: how to let level know about these changes?
-        //TODO: MAKE IT A COMPONENT!!!!!! <-- Thats what they are for!
-        //TODO: in the sort check, just skip entities without the component
+        o_inView = true;
+
+        //TODO: this isnt working, and is slow?
+        //TODO: probably not working because sort is never called on Level
+        //TODO: on level have flag and sue levelmanager to change it from Z comp
         if (pCenter.y > zOrderBoundary())
-            o_z = (player->z() - 1);
+            getComponent<Z>().setZ(player->z() - 1);
         else
-            o_z = (player->z() + 1);
+            getComponent<Z>().setZ(player->z() + 1);
 
         //TODO: check for player collision and direct to function below
 
+    }
+    else
+    {
+        o_inView = false;
     }
 }
 

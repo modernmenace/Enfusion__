@@ -7,6 +7,7 @@
 #include "../Engine/Lvl/LevelManager.h"
 #include "../Engine/Item/ItemRegistry.h"
 #include "../Data/Items.h"
+#include "../Engine/Component/Base/Z.h"
 
 /************************************************************************
  * FUNCTION :       Player::Player
@@ -31,6 +32,7 @@ Player::Player(sf::Vector2f position)
     addComponent<Camera>(CameraType::FOLLOW);
     addComponent<AnimatedMovement>();
     addComponent<Inventory>();
+    addComponent<Z>(Z_TOP);
     LevelManager::Instance()->setPlayer(this);
 }
 

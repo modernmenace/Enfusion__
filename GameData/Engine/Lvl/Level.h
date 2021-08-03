@@ -45,7 +45,7 @@ protected:
     sf::RectangleShape background;
     string_t levelName;
 
-    std::vector<RenderPair> entities;
+    std::vector<Entity*> entities;
     std::vector<Entity*> uiEntities;
 
     sf::View defaultView;

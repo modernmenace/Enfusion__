@@ -20,7 +20,7 @@ public:
     void render(sf::RenderWindow* window) override;
     virtual uint16_t zOrderBoundary();
 
-    inline uint8_t       z()       { return o_z; }
+    inline bool          inView()  { return o_inView; }
     inline sf::FloatRect bounds()  { return o_sprite.getGlobalBounds(); }
     inline Tile*         tile()    { return o_tile; }
 
@@ -36,8 +36,8 @@ protected:
     unsigned int       o_tileHeight;
     string_t           o_tileset;
 
-    uint8_t o_z    = Z_BOTTOM;
-    Tile*   o_tile = nullptr;
+    bool    o_inView = false;
+    Tile*   o_tile   = nullptr;
 
 };
 

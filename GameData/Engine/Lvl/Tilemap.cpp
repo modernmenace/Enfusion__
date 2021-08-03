@@ -196,32 +196,6 @@ void Tilemap::render(sf::RenderWindow *window)
 
 }
 
-//TODO: more efficient method of culling
-//TODO: order by distance and check less often for far ones?
-void Tilemap::renderObjectSet(sf::RenderWindow *window, bool objSet)
-{
-    Player* player = LevelManager::Instance()->getCurrentLevel().player();
-
-    sf::FloatRect pView   = player->getComponent<Camera>().getCameraView();
-    sf::Vector2u  pCenter = player->getComponent<AnimatedSprite>().center();
-
-    for(auto& m_mapObject : t_map->m_mapObjects)
-    {
-        if (m_mapObject.renderOverPlayer == objSet)
-        {
-            if (pCenter.y > m_mapObject.object->zOrderBoundary())
-                m_mapObject.renderOverPlayer = false;
-            else
-                m_mapObject.renderOverPlayer = true;
-
-            if (pView.intersects(m_mapObject.object->bounds()))
-            {
-                //m_mapObject.object->render(window);
-            }
-        }
-    }
-}
-
 #if DEBUG_ENABLE_TILE_OUTLINES == 1
 void Tilemap::showOutlines(bool show)
 {

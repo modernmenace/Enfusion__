@@ -16,7 +16,6 @@ public:
 
     void initialize();
     void render(sf::RenderWindow* window);
-    void renderObjectSet(sf::RenderWindow* window, bool objSet);
     void showOutlines(bool);
 
     inline uint16_t getTileSize()     { return tileSize; };
