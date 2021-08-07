@@ -148,13 +148,22 @@ void StaticMapObject::update(sf::Time tickRate)
     {
         o_inView = true;
 
+        uint8_t playerZ = player->z();
+        uint8_t thisZ   = getComponent<Z>().z();
+
         //TODO: this isnt working, and is slow?
         //TODO: probably not working because sort is never called on Level
         //TODO: on level have flag and sue levelmanager to change it from Z comp
         if (pCenter.y > zOrderBoundary())
-            getComponent<Z>().setZ(player->z() - 1);
+        {
+            if (thisZ > (playerZ - 1))
+                getComponent<Z>().setZ(playerZ - 1);
+        }
         else
-            getComponent<Z>().setZ(player->z() + 1);
+        {
+            if (thisZ < (playerZ + 1))
+                getComponent<Z>().setZ(playerZ + 1);
+        }
 
         //TODO: check for player collision and direct to function below
 

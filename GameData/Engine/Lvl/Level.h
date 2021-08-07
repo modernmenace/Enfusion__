@@ -30,6 +30,7 @@ public:
     inline void setState(GameState g) { l_state = g; }
     inline GameState state()          { return l_state; }
 
+    void sortZOrder();
     void addEntity(Entity* e, uint8_t z = 0);
 
     inline void addUIEntity(Entity* e)

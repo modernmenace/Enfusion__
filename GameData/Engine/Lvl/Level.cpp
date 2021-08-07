@@ -50,23 +50,28 @@ void Level::update(sf::Time tickRate)
         e->update(tickRate);
 }
 
+void Level::sortZOrder()
+{
+    //right now sorts all the entities, more efficient way?
+    std::sort(entities.begin(), entities.end(),
+              [](const Entity* left, const Entity* right)
+              {
+                  //TODO: this assertion is failing... why???
+                  assert(left && right);
+                  if (!left->hasComponent<Z>())
+                      if (right->hasComponent<Z>())
+                          return false;
+                  if (!right->hasComponent<Z>())
+                      return true; // prevent reaching below code if none have it
+
+                  return right->getComponent<Z>().z() != 0;
+              });
+}
+
 void Level::addEntity(Entity *e, uint8_t z)
 {
     entities.insert(entities.begin(), e);
-
-    //right now sorting z-order every time an entity is added
-    //this is probably inefficient
-    std::sort(entities.begin(), entities.end(),
-            [](const Entity* left, const Entity* right)
-            {
-                if (!left->hasComponent<Z>())
-                    if (right->hasComponent<Z>())
-                        return false;
-                if (!right->hasComponent<Z>())
-                    return true; // prevent reaching below code if none have it
-
-                return right->getComponent<Z>().z() != 0;
-            });
+    sortZOrder();
 }
 
 void Level::render(sf::RenderWindow* window)
