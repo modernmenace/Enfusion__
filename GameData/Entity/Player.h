@@ -25,11 +25,15 @@ public:
     inline PlayerEquipment_t* equipment() { return &p_equipment; }
     inline uint8_t z() { return p_z; }
 
+    sf::FloatRect getView(sf::Time tickRate);
+
 private:
     PlayerEquipment_t p_equipment;
 
     uint8_t p_z = (Z_TOP / 2); // Allow room for things above and below
 
+    sf::FloatRect v_lastView;
+    sf::Time      v_lastTick;
 };
 
 

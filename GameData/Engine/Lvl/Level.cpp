@@ -57,7 +57,9 @@ void Level::sortZOrder()
               [](const Entity* left, const Entity* right)
               {
                   //TODO: this assertion is failing... why???
-                  assert(left && right);
+                  assert(left != nullptr);
+                  assert(right != nullptr);
+
                   if (!left->hasComponent<Z>())
                       if (right->hasComponent<Z>())
                           return false;
@@ -70,6 +72,7 @@ void Level::sortZOrder()
 
 void Level::addEntity(Entity *e, uint8_t z)
 {
+    assert(e != nullptr);
     entities.insert(entities.begin(), e);
     sortZOrder();
 }

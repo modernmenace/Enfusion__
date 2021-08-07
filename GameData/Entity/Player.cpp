@@ -103,6 +103,32 @@ void Player::equipItem(Item* itm)
 }
 
 /************************************************************************
+ * FUNCTION :       Player::getView
+ *
+ * DESCRIPTION :
+ *       Returns the current player view
+ *
+ *  INPUTS:  sf::Time tickRate   |  The tick of the view
+ *
+ *  OUTPUTS: NONE
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2021.09.07 	    JCB     Documentation Start
+ *
+ ************************************************************************/
+
+sf::FloatRect Player::getView(sf::Time tickRate)
+{
+    if (tickRate != v_lastTick)
+    {
+        v_lastTick = tickRate;
+        v_lastView = getComponent<Camera>().getCameraView();
+    }
+
+    return v_lastView;
+}
+
+/************************************************************************
  * FUNCTION :       Player::unequipItem
  *
  * DESCRIPTION :

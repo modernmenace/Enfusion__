@@ -140,7 +140,7 @@ void StaticMapObject::update(sf::Time tickRate)
     Player* player = LevelManager::Instance()->getCurrentLevel().player();
 
     // TODO: Minimize calls to these?
-    sf::FloatRect pView   = player->getComponent<Camera>().getCameraView();
+    sf::FloatRect pView   = player->getView(tickRate);
     sf::Vector2u  pCenter = player->getComponent<AnimatedSprite>().center();
 
     // Only update if in view
@@ -151,9 +151,8 @@ void StaticMapObject::update(sf::Time tickRate)
         uint8_t playerZ = player->z();
         uint8_t thisZ   = getComponent<Z>().z();
 
-        //TODO: this isnt working, and is slow?
-        //TODO: probably not working because sort is never called on Level
-        //TODO: on level have flag and sue levelmanager to change it from Z comp
+        //TODO: this is slow and crashy - rethink
+
         if (pCenter.y > zOrderBoundary())
         {
             if (thisZ > (playerZ - 1))
