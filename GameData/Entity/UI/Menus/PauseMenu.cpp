@@ -19,8 +19,8 @@ void PauseMenu::initialize()
     p_b_settings.initialize();
     p_b_exit.initialize();
     s_menu.initialize();
-    getComponent<Sprite>().getSprite().setTextureRect(sf::IntRect(0, 0, 48, 48));
-    getComponent<Sprite>().getSprite().setScale(8, 12);
+    getComponent<Sprite>().getSprite()->setTextureRect(sf::IntRect(0, 0, 48, 48));
+    getComponent<Sprite>().getSprite()->setScale(8, 12);
 }
 
 void PauseMenu::handleInput(sf::Mouse::Button button)
@@ -29,16 +29,16 @@ void PauseMenu::handleInput(sf::Mouse::Button button)
     Entity::handleInput(button);
     s_menu.handleInput(button);
     if (s_menu.active()) return;
-    if (p_b_resume.getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition))
+    if (p_b_resume.getComponent<Sprite>().getSprite()->getGlobalBounds().contains(MousePosition))
     {
         p_active = false;
         LevelManager::Instance()->getCurrentLevel().setState(GameState::RUNNING);
     }
-    else if (p_b_settings.getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition))
+    else if (p_b_settings.getComponent<Sprite>().getSprite()->getGlobalBounds().contains(MousePosition))
     {
         s_menu.show();
     }
-    else if (p_b_exit.getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition))
+    else if (p_b_exit.getComponent<Sprite>().getSprite()->getGlobalBounds().contains(MousePosition))
     {
         exit(0);
     }

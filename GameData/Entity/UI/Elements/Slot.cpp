@@ -9,8 +9,8 @@ Slot::Slot(sf::Vector2f position, Inventory* inv, float scale, Item *item) : s_s
 
     addComponent<Position>(position);
     addComponent<Sprite>("UI/ui.png");
-    getComponent<Sprite>().getSprite().setTextureRect(sf::IntRect(66, 32, 16, 16));
-    getComponent<Sprite>().getSprite().setScale(scale * 6, scale * 6);
+    getComponent<Sprite>().getSprite()->setTextureRect(sf::IntRect(66, 32, 16, 16));
+    getComponent<Sprite>().getSprite()->setScale(scale * 6, scale * 6);
     s_text.initialize();
     s_text.setText("");
     auto s_x = getComponent<Position>().getPosition().x + 10;

@@ -1,7 +1,6 @@
 #include "StaticMapObject.h"
 #include "../../../Lvl/LvlStructs.h"
 #include "../../../Engine/Lvl/LevelManager.h"
-#include "../../../Engine/Component/Misc/Camera.h"
 #include "../../../Engine/Component/Anim/AnimatedSprite.h"
 #include "../../../Engine/Component/Base/Z.h"
 
@@ -21,17 +20,41 @@
  ************************************************************************/
 
 StaticMapObject::StaticMapObject(const StaticMapObject &obj) : StaticMapObject(obj.o_tileset, obj.o_bounds) { }
-StaticMapObject::StaticMapObject(string_t tileset, sf::IntRect texBounds) : o_sprite()
+StaticMapObject::StaticMapObject(string_t tileset, sf::IntRect texBounds)
 {
-    o_sprite.setTexture(AssetManager::Instance()->getTexture(tileset));
     o_bounds = texBounds;
     o_tileset = tileset;
-    o_sprite.setScale(GLOBAL_SCALE_GAMEOBJECT);
-    o_sprite.setTextureRect(o_bounds);
-    o_tileWidth  = (unsigned int)(o_sprite.getGlobalBounds().width / 32)  + 1;
-    o_tileHeight = (unsigned int)(o_sprite.getGlobalBounds().height / 32) + 1;
+
+    addComponent<Position>(sf::Vector2f(0, 0));
+    addComponent<Sprite>(tileset);
+
+    sf::Sprite* sprite = getComponent<Sprite>().getSprite();
+
+    sprite->setTextureRect(o_bounds);
+    o_tileWidth  = (unsigned int)(sprite->getGlobalBounds().width / 32)  + 1;
+    o_tileHeight = (unsigned int)(sprite->getGlobalBounds().height / 32) + 1;
 
     addComponent<Z>(Z_BOTTOM);
+}
+
+/************************************************************************
+ * FUNCTION :       StaticMapObject::bounds
+ *
+ * DESCRIPTION :
+ *       Returns the bounds of the map object
+ *
+ *  INPUTS:  NONE
+ *
+ *  OUTPUTS: NONE
+ *
+ *  VERSION   	DATE    		WHO     DETAIL
+ *  V1.00.00   	2021.08.08 	    JCB     Documentation Start
+ *
+ ************************************************************************/
+
+sf::FloatRect StaticMapObject::bounds()
+{
+    return getComponent<Sprite>().getSprite()->getGlobalBounds();
 }
 
 /************************************************************************
@@ -52,8 +75,11 @@ StaticMapObject::StaticMapObject(string_t tileset, sf::IntRect texBounds) : o_sp
 void StaticMapObject::setPosition(Tile& tile)
 {
     o_tile = &tile;
-    o_sprite.setPosition(o_tile->position);
-    sf::Rect<uint32_t> occTiles = resolvePositionRectToTileRect(o_sprite.getGlobalBounds());
+
+    getComponent<Position>().setPosition(&tile);
+    getComponent<Sprite>().updatePosition();
+
+    sf::Rect<uint32_t> occTiles = resolvePositionRectToTileRect(bounds());
 
     //below code for blocking whole sprite
     /*
@@ -90,34 +116,12 @@ sf::Vector2u StaticMapObject::center()
 {
     sf::Vector2u center;
 
-    sf::FloatRect gBounds = o_sprite.getGlobalBounds();
+    sf::FloatRect gBounds = bounds();
 
     center.x = gBounds.left + (gBounds.width / 2);
     center.y = gBounds.top  - (gBounds.height / 2);
 
     return center;
-}
-
-/************************************************************************
- * FUNCTION :       StaticMapObject::render
- *
- * DESCRIPTION :
- *       Renders the object
- *
- *  INPUTS:  sf::RenderWindow *window : pointer to the render window
- *
- *  OUTPUTS: NONE
- *
- *  VERSION   	DATE    		WHO     DETAIL
- *  V1.00.00   	2021.07.25 	    JCB     Documentation Start
- *
- ************************************************************************/
-
-
-void StaticMapObject::render(sf::RenderWindow *window)
-{
-    if (o_inView)
-        window->draw(o_sprite);
 }
 
 /************************************************************************
@@ -139,7 +143,6 @@ void StaticMapObject::update(sf::Time tickRate)
 {
     Player* player = LevelManager::Instance()->getCurrentLevel().player();
 
-    // TODO: Minimize calls to these?
     sf::FloatRect pView   = player->getView(tickRate);
     sf::Vector2u  pCenter = player->getComponent<AnimatedSprite>().center();
 

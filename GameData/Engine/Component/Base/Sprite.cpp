@@ -1,5 +1,4 @@
 #include "Sprite.h"
-#include "../../Entity/Entity.h"
 #include "../Base/Position.h"
 
 /*
@@ -38,6 +37,11 @@ void Sprite::render(sf::RenderWindow *window, uint8_t z)
 {
     if (s_visible)
         window->draw(sprite);
+}
+
+void Sprite::updatePosition()
+{
+    sprite.setPosition(entity->getComponent<Position>().getPosition());
 }
 
 sf::Vector2u Sprite::center()

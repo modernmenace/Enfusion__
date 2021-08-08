@@ -12,17 +12,17 @@ public:
     {
         addComponent<Position>(position);
         addComponent<Sprite>("UI/ui.png");
-        getComponent<Sprite>().getSprite().setTextureRect(sf::IntRect(48, 0, 18, 16));
-        getComponent<Sprite>().getSprite().setScale(5, 5);
+        getComponent<Sprite>().getSprite()->setTextureRect(sf::IntRect(48, 0, 18, 16));
+        getComponent<Sprite>().getSprite()->setScale(5, 5);
     }
 
     void set(bool status)
     {
         t_status = status;
         if (t_status)
-            getComponent<Sprite>().getSprite().setTextureRect(sf::IntRect(48, 17, 18, 16));
+            getComponent<Sprite>().getSprite()->setTextureRect(sf::IntRect(48, 17, 18, 16));
         else
-            getComponent<Sprite>().getSprite().setTextureRect(sf::IntRect(48, 0, 18, 16));
+            getComponent<Sprite>().getSprite()->setTextureRect(sf::IntRect(48, 0, 18, 16));
     }
     inline bool get()            { return t_status;   }
 

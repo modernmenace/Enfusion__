@@ -7,8 +7,8 @@ Minimap::Minimap(Entity* centerEntity, Level* level) : m_view(), m_center_marker
 {
     addComponent<Position>(sf::Vector2f(650, -525));
     addComponent<Sprite>("UI/ui.png");
-    getComponent<Sprite>().getSprite().setTextureRect(sf::IntRect(0, 0, 48, 48));
-    getComponent<Sprite>().getSprite().setScale(6, 6);
+    getComponent<Sprite>().getSprite()->setTextureRect(sf::IntRect(0, 0, 48, 48));
+    getComponent<Sprite>().getSprite()->setScale(6, 6);
 
     m_view.setViewport(sf::FloatRect(0.852, 0.033, 0.125, 0.22));
     m_view.setCenter(centerEntity->getComponent<Position>().getPosition());
@@ -25,8 +25,8 @@ void Minimap::initialize()
 {
     Entity::initialize();
     m_center_marker.initialize();
-    m_center_marker.getComponent<Sprite>().getSprite().setTextureRect(sf::IntRect(94, 76, 4, 4));
-    m_center_marker.getComponent<Sprite>().getSprite().setScale(sf::Vector2f(50, 50));
+    m_center_marker.getComponent<Sprite>().getSprite()->setTextureRect(sf::IntRect(94, 76, 4, 4));
+    m_center_marker.getComponent<Sprite>().getSprite()->setScale(sf::Vector2f(50, 50));
 }
 
 void Minimap::update(sf::Time tickRate)

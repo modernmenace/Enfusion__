@@ -19,7 +19,7 @@ public:
 
     uint16_t zOrderBoundary() override
     {
-        auto gBounds = o_sprite.getGlobalBounds();
+        auto gBounds = bounds();
         return gBounds.top - (gBounds.height / 1.5);
     }
 

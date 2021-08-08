@@ -40,8 +40,8 @@ Tooltip::Tooltip() : t_iName("", sf::Vector2f(0, 0), 20),
 
 void Tooltip::initialize()
 {
-    getComponent<Sprite>().getSprite().setTextureRect(sf::IntRect(0, 0, 48, 48));
-    getComponent<Sprite>().getSprite().setScale(4, 4);
+    getComponent<Sprite>().getSprite()->setTextureRect(sf::IntRect(0, 0, 48, 48));
+    getComponent<Sprite>().getSprite()->setScale(4, 4);
 
     t_iName.initialize();
     t_iDesc.initialize();
@@ -71,7 +71,7 @@ void Tooltip::show(Item* item, sf::Vector2f position)
 
     currentItem = item;
     getComponent<Position>().setPosition(position);
-    getComponent<Sprite>().getSprite().setPosition(position);
+    getComponent<Sprite>().getSprite()->setPosition(position);
     getComponent<Sprite>().setVisible(true);
 
     t_iName.setText(item->name());

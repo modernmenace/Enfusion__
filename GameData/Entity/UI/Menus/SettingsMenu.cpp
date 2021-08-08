@@ -16,8 +16,8 @@ SettingsMenu::SettingsMenu() : applyButton("Apply", sf::Vector2f(100, 150)),
 void SettingsMenu::initialize()
 {
     Entity::initialize();
-    getComponent<Sprite>().getSprite().setTextureRect(sf::IntRect(0, 0, 48, 48));
-    getComponent<Sprite>().getSprite().setScale(15, 15);
+    getComponent<Sprite>().getSprite()->setTextureRect(sf::IntRect(0, 0, 48, 48));
+    getComponent<Sprite>().getSprite()->setScale(15, 15);
     applyButton.initialize();
     cancelButton.initialize();
     controlsButton.initialize();
@@ -49,19 +49,19 @@ void SettingsMenu::handleInput(sf::Mouse::Button button)
 
     Entity::handleInput(button);
 
-    if (applyButton.getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition))
+    if (applyButton.getComponent<Sprite>().getSprite()->getGlobalBounds().contains(MousePosition))
     {
         hide();
     }
-    else if (cancelButton.getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition))
+    else if (cancelButton.getComponent<Sprite>().getSprite()->getGlobalBounds().contains(MousePosition))
     {
         hide();
     }
-    else if (controlsButton.getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition))
+    else if (controlsButton.getComponent<Sprite>().getSprite()->getGlobalBounds().contains(MousePosition))
     {
         c_menu.show();
     }
-    else if (s_fsrnTickBox.getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition))
+    else if (s_fsrnTickBox.getComponent<Sprite>().getSprite()->getGlobalBounds().contains(MousePosition))
     {
         s_fsrnTickBox.set(!s_fsrnTickBox.get());
     }

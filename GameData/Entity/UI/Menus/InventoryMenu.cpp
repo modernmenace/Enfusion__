@@ -82,8 +82,8 @@ void InventoryMenu::initialize()
 
 
 
-    getComponent<Sprite>().getSprite().setTextureRect(sf::IntRect(0, 0, 48, 48));
-    getComponent<Sprite>().getSprite().setScale(12, 15);
+    getComponent<Sprite>().getSprite()->setTextureRect(sf::IntRect(0, 0, 48, 48));
+    getComponent<Sprite>().getSprite()->setScale(12, 15);
     getComponent<Sprite>().setVisible(false);
 
     i_playerNameDisplay.initialize();
@@ -246,28 +246,28 @@ void InventoryMenu::update(sf::Time tickRate)
             if(i_mouseClock.getElapsedTime().asSeconds() > DRAG_THRESHOLD_S && !i_drag)
             {
                 int toDrag = -1;
-                sf::Sprite& s = getComponent<Sprite>().getSprite();
+                sf::Sprite* s = getComponent<Sprite>().getSprite();
 
                 for(int s = 0; s < slots.size(); s++)
                     if (slots[s]->item() != nullptr)
-                        if (slots[s]->getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition))
+                        if (slots[s]->getComponent<Sprite>().getSprite()->getGlobalBounds().contains(MousePosition))
                         {
                             toDrag = s;
                             break;
                         }
 
                 //check for equipment drag
-                if (i_equipmentSlotHead->getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition))
+                if (i_equipmentSlotHead->getComponent<Sprite>().getSprite()->getGlobalBounds().contains(MousePosition))
                 {
                     if (LevelManager::Instance()->getCurrentLevel().player()->equipment()->head != nullptr)
                         toDrag = DRAG_EQ_HEAD_INDEX;
                 }
-                else if (i_equipmentSlotTop->getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition))
+                else if (i_equipmentSlotTop->getComponent<Sprite>().getSprite()->getGlobalBounds().contains(MousePosition))
                 {
                     if (LevelManager::Instance()->getCurrentLevel().player()->equipment()->top != nullptr)
                         toDrag = DRAG_EQ_TOP_INDEX;
                 }
-                else if (i_equipmentSlotBottom->getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition))
+                else if (i_equipmentSlotBottom->getComponent<Sprite>().getSprite()->getGlobalBounds().contains(MousePosition))
                 {
                     if (LevelManager::Instance()->getCurrentLevel().player()->equipment()->bottom != nullptr)
                         toDrag = DRAG_EQ_BOTTOM_INDEX;
@@ -290,8 +290,8 @@ void InventoryMenu::update(sf::Time tickRate)
         {
             if (i_drag)
             {
-                sf::Sprite &i_m_s = getComponent<Sprite>().getSprite();
-                if (!i_m_s.getGlobalBounds().contains(MousePosition.x, MousePosition.y))
+                sf::Sprite *i_m_s = getComponent<Sprite>().getSprite();
+                if (!i_m_s->getGlobalBounds().contains(MousePosition.x, MousePosition.y))
                 {
                     if (i_dragIndex == DRAG_EQ_HEAD_INDEX)
                     {
@@ -334,7 +334,7 @@ void InventoryMenu::update(sf::Time tickRate)
                     bool wasSlot = false;
                     for(int s = 0; s < slots.size(); s++)
                     {
-                        if (slots[s]->getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition))
+                        if (slots[s]->getComponent<Sprite>().getSprite()->getGlobalBounds().contains(MousePosition))
                         {
                             if (i_dragIndex == DRAG_EQ_HEAD_INDEX)
                             {
@@ -370,9 +370,9 @@ void InventoryMenu::update(sf::Time tickRate)
                     {
                         if (i_dragIndex == DRAG_EQ_HEAD_INDEX || i_dragIndex == DRAG_EQ_TOP_INDEX || i_dragIndex == DRAG_EQ_BOTTOM_INDEX)
                             updateSlots();
-                        else if (i_equipmentSlotHead->getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition) ||
-                            i_equipmentSlotTop->getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition) ||
-                            i_equipmentSlotBottom->getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition))
+                        else if (i_equipmentSlotHead->getComponent<Sprite>().getSprite()->getGlobalBounds().contains(MousePosition) ||
+                            i_equipmentSlotTop->getComponent<Sprite>().getSprite()->getGlobalBounds().contains(MousePosition) ||
+                            i_equipmentSlotBottom->getComponent<Sprite>().getSprite()->getGlobalBounds().contains(MousePosition))
                         {
                             //treating all equipment slots as the same for now
                             auto* itm = i_entity->getComponent<Inventory>().item(i_dragIndex);
@@ -463,11 +463,11 @@ void InventoryMenu::update(sf::Time tickRate)
 
             if (!i_drag)
             {
-            sf::Sprite& s = getComponent<Sprite>().getSprite();
+            sf::Sprite* s = getComponent<Sprite>().getSprite();
 
             for(int s = 0; s < slots.size(); s++)
                 if (slots[s]->item() != nullptr)
-                    if (slots[s]->getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition))
+                    if (slots[s]->getComponent<Sprite>().getSprite()->getGlobalBounds().contains(MousePosition))
                     {
                         i_entity->getComponent<Inventory>().activated(s);
                         slots[s]->activateItem();
@@ -484,16 +484,16 @@ void InventoryMenu::update(sf::Time tickRate)
     }
 
     if (!i_drag) {
-        sf::Sprite &s = getComponent<Sprite>().getSprite();
+        sf::Sprite* s = getComponent<Sprite>().getSprite();
 
-        if (s.getGlobalBounds().contains(MousePosition))
+        if (s->getGlobalBounds().contains(MousePosition))
         {
             bool f = false;
             for (int s = 0; s < slots.size(); s++)
             {
                 if (slots[s]->item() != nullptr)
                 {
-                    if (slots[s]->getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition.x, MousePosition.y))
+                    if (slots[s]->getComponent<Sprite>().getSprite()->getGlobalBounds().contains(MousePosition.x, MousePosition.y))
                     {
                         auto t_pos = slots[s]->getComponent<Position>().getPosition();
                         t_pos.x += 96;
@@ -503,7 +503,7 @@ void InventoryMenu::update(sf::Time tickRate)
                 }
 
                 //check equipment slot hover
-                if (i_equipmentSlotHead->getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition.x, MousePosition.y)
+                if (i_equipmentSlotHead->getComponent<Sprite>().getSprite()->getGlobalBounds().contains(MousePosition.x, MousePosition.y)
                     && i_equipmentSlotHead->item() != nullptr)
                 {
                     auto t_pos = i_equipmentSlotHead->getComponent<Position>().getPosition();
@@ -511,7 +511,7 @@ void InventoryMenu::update(sf::Time tickRate)
                     i_tooltip.show(i_equipmentSlotHead->item(), t_pos);
                     f = true;
                 }
-                else if (i_equipmentSlotTop->getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition.x, MousePosition.y)
+                else if (i_equipmentSlotTop->getComponent<Sprite>().getSprite()->getGlobalBounds().contains(MousePosition.x, MousePosition.y)
                          && i_equipmentSlotTop->item() != nullptr)
                 {
                     auto t_pos = i_equipmentSlotTop->getComponent<Position>().getPosition();
@@ -519,7 +519,7 @@ void InventoryMenu::update(sf::Time tickRate)
                     i_tooltip.show(i_equipmentSlotTop->item(), t_pos);
                     f = true;
                 }
-                else if (i_equipmentSlotBottom->getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition.x, MousePosition.y)
+                else if (i_equipmentSlotBottom->getComponent<Sprite>().getSprite()->getGlobalBounds().contains(MousePosition.x, MousePosition.y)
                          && i_equipmentSlotBottom->item() != nullptr)
                 {
                     auto t_pos = i_equipmentSlotBottom->getComponent<Position>().getPosition();

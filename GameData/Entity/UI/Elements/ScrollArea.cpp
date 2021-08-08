@@ -30,8 +30,8 @@ void ScrollArea::initialize()
     s_scrollRect.setSize(sf::Vector2f(40, s_area.y));
     s_scrollRect.setFillColor(sf::Color(55, 42, 11, 75));
     s_scrollBar.initialize();
-    s_scrollBar.getComponent<Sprite>().getSprite().setTextureRect(sf::IntRect(93, 68, 4, 6));
-    s_scrollBar.getComponent<Sprite>().getSprite().setScale(10, 10);
+    s_scrollBar.getComponent<Sprite>().getSprite()->setTextureRect(sf::IntRect(93, 68, 4, 6));
+    s_scrollBar.getComponent<Sprite>().getSprite()->setScale(10, 10);
     updateScrollbar();
 }
 

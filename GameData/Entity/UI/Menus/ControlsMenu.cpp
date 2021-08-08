@@ -12,8 +12,8 @@ ControlsMenu::ControlsMenu(sf::Vector2f position) : applyButton("Apply", sf::Vec
 void ControlsMenu::initialize()
 {
     Entity::initialize();
-    getComponent<Sprite>().getSprite().setTextureRect(sf::IntRect(0, 0, 48, 48));
-    getComponent<Sprite>().getSprite().setScale(15, 15);
+    getComponent<Sprite>().getSprite()->setTextureRect(sf::IntRect(0, 0, 48, 48));
+    getComponent<Sprite>().getSprite()->setScale(15, 15);
     applyButton.initialize();
     cancelButton.initialize();
     c_Area.initialize();
@@ -40,11 +40,11 @@ void ControlsMenu::handleInput(sf::Mouse::Button button)
 {
     if (!c_active) return;
 
-    if (applyButton.getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition))
+    if (applyButton.getComponent<Sprite>().getSprite()->getGlobalBounds().contains(MousePosition))
     {
         //TODO: Implement this
     }
-    else if (cancelButton.getComponent<Sprite>().getSprite().getGlobalBounds().contains(MousePosition))
+    else if (cancelButton.getComponent<Sprite>().getSprite()->getGlobalBounds().contains(MousePosition))
     {
         hide();
     }

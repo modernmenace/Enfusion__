@@ -86,6 +86,7 @@ void Level::addEntity(Entity *e)
         entities.insert(entities.begin(), e);
 }
 
+//TODO: only render things in view
 void Level::render(sf::RenderWindow* window)
 {
     window->draw(background);

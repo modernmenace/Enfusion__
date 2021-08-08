@@ -14,8 +14,8 @@ void QuestDisplay::initialize()
     q_title.initialize();
     q_title.text().setFillColor(sf::Color::Yellow);
     q_dropBox.initialize();
-    q_dropBox.getComponent<Sprite>().getSprite().setTextureRect(sf::IntRect(72, 64, 18, 16));
-    q_dropBox.getComponent<Sprite>().getSprite().setScale(sf::Vector2f(2, 2));
+    q_dropBox.getComponent<Sprite>().getSprite()->setTextureRect(sf::IntRect(72, 64, 18, 16));
+    q_dropBox.getComponent<Sprite>().getSprite()->setScale(sf::Vector2f(2, 2));
 }
 
 void QuestDisplay::render(sf::RenderWindow* window)

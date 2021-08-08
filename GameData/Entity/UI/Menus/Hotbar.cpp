@@ -34,8 +34,8 @@ void Hotbar::initialize()
 {
     assert(i_entity->hasComponent<Inventory>());
     i_i = &i_entity->getComponent<Inventory>();
-    getComponent<Sprite>().getSprite().setTextureRect(sf::IntRect(0, 48, 49, 16));
-    getComponent<Sprite>().getSprite().setScale(15, 10);
+    getComponent<Sprite>().getSprite()->setTextureRect(sf::IntRect(0, 48, 49, 16));
+    getComponent<Sprite>().getSprite()->setScale(15, 10);
 
     sf::Vector2f slotPos(getComponent<Position>().getPosition().x + 75, getComponent<Position>().getPosition().y + 33);
     for(int i = 0; i < HOTBAR_SLOTS; i++)
@@ -48,7 +48,7 @@ void Hotbar::initialize()
     selectionRect.setOutlineColor(sf::Color::Black);
     selectionRect.setOutlineThickness(5.0f);
     selectionRect.setFillColor(sf::Color::Transparent);
-    selectionRect.setPosition(slots[i_i->activeItem()]->getComponent<Sprite>().getSprite().getPosition());
+    selectionRect.setPosition(slots[i_i->activeItem()]->getComponent<Sprite>().getSprite()->getPosition());
 
     h_text = new TextDisplay("Current Item: None",
             sf::Vector2f(-225, 320), 20);
@@ -120,13 +120,13 @@ void Hotbar::handleInput(sf::Keyboard::Key key)
             return;
         }
         i_i->setActive(selection);
-        selectionRect.setPosition(slots[i_i->activeItem()]->getComponent<Sprite>().getSprite().getPosition());
+        selectionRect.setPosition(slots[i_i->activeItem()]->getComponent<Sprite>().getSprite()->getPosition());
     }
     if (selection == 44)
         i_i->activeItem() != 0 ? i_i->setActive(i_i->activeItem()-1) : i_i->setActive(HOTBAR_SLOTS - 1);
     else if (selection == 45)
         i_i->activeItem() != HOTBAR_SLOTS - 1 ? i_i->setActive(i_i->activeItem()+1) : i_i->setActive(0);
-    selectionRect.setPosition(slots[i_i->activeItem()]->getComponent<Sprite>().getSprite().getPosition());
+    selectionRect.setPosition(slots[i_i->activeItem()]->getComponent<Sprite>().getSprite()->getPosition());
 
     updateSlots();
 }

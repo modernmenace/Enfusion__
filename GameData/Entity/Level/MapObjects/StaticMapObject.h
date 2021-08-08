@@ -17,20 +17,18 @@ public:
     virtual void collideWithPlayer(Player&);
 
     void update(sf::Time tickRate)        override;
-    void render(sf::RenderWindow* window) override;
     virtual uint16_t zOrderBoundary();
 
     inline bool          inView()  { return o_inView; }
-    inline sf::FloatRect bounds()  { return o_sprite.getGlobalBounds(); }
     inline Tile*         tile()    { return o_tile; }
 
-    sf::Vector2u center();
+    sf::Vector2u  center();
+    sf::FloatRect bounds() ;
 
     virtual StaticMapObject* createCopy() { return new StaticMapObject(*this); };
 
 protected:
     sf::Rect<uint32_t> o_tiles;
-    sf::Sprite         o_sprite;
     sf::IntRect        o_bounds;
     unsigned int       o_tileWidth;
     unsigned int       o_tileHeight;
