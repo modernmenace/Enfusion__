@@ -152,6 +152,8 @@ void StaticMapObject::update(sf::Time tickRate)
         uint8_t thisZ   = getComponent<Z>().z();
 
         //TODO: this is slow and crashy - rethink
+        //TODO: weird: sortZOrder every update in level works fine
+
 
         if (pCenter.y > zOrderBoundary())
         {

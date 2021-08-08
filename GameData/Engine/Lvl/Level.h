@@ -30,7 +30,6 @@ public:
     inline void setState(GameState g) { l_state = g; }
     inline GameState state()          { return l_state; }
 
-    void sortZOrder();
     void addEntity(Entity* e, uint8_t z = 0);
 
     inline void addUIEntity(Entity* e)
@@ -40,7 +39,8 @@ public:
 
     void removeEntity(Entity* e);
 
-    inline Player* player() { return l_player; }
+    inline Player* player()  { return l_player; }
+    inline void sortZOrder() { l_sortZOrderFlag = true; };
 
 protected:
     sf::RectangleShape background;
@@ -52,6 +52,9 @@ protected:
     sf::View defaultView;
     GameState l_state  = GameState::RUNNING;
     Player*   l_player = nullptr;
+
+    bool l_sortZOrderFlag = false;
+    void sortZOrderInternal();
 
 };
 

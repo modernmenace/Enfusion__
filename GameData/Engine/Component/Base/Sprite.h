@@ -6,8 +6,8 @@
 class Sprite : public Component {
 
 public:
-    Sprite(string_t spriteName = MISSING_TEXTURE);
-    Sprite(sf::Texture&);
+    explicit Sprite(string_t spriteName = MISSING_TEXTURE);
+    explicit Sprite(sf::Texture&);
 
     void initialize()                     override;
     void render(sf::RenderWindow* window, uint8_t z) override;

@@ -1,24 +1,18 @@
 #ifndef ENFUSION___Z_H
 #define ENFUSION___Z_H
 
-#include "../../Lvl/LevelManager.h"
 #include "../Component.h"
 
 class Z : public Component {
 
 public:
-    Z(uint8_t z = Z_BOTTOM)
-    {
-        z_z = z;
-    }
+    explicit Z(uint8_t z = Z_BOTTOM);
 
-    void setZ(uint8_t val)
-    {
-        z_z = val;
-        LevelManager::Instance()->getCurrentLevel().sortZOrder();
-    }
+    void setZ(uint8_t val);
 
     inline uint8_t z() const { return z_z; }
+
+    static bool compare(const Entity* left, const Entity* right);
 
 private:
     uint8_t z_z;

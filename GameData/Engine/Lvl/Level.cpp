@@ -48,26 +48,17 @@ void Level::update(sf::Time tickRate)
 
     for (auto &e : uiEntities)
         e->update(tickRate);
+
+    if (l_sortZOrderFlag)
+        sortZOrderInternal();
+
 }
 
-void Level::sortZOrder()
+void Level::sortZOrderInternal()
 {
     //right now sorts all the entities, more efficient way?
-    std::sort(entities.begin(), entities.end(),
-              [](const Entity* left, const Entity* right)
-              {
-                  //TODO: this assertion is failing... why???
-                  assert(left != nullptr);
-                  assert(right != nullptr);
-
-                  if (!left->hasComponent<Z>())
-                      if (right->hasComponent<Z>())
-                          return false;
-                  if (!right->hasComponent<Z>())
-                      return true; // prevent reaching below code if none have it
-
-                  return right->getComponent<Z>().z() != 0;
-              });
+    std::sort(entities.begin(), entities.end(), Z::compare);
+    l_sortZOrderFlag = false;
 }
 
 void Level::addEntity(Entity *e, uint8_t z)
