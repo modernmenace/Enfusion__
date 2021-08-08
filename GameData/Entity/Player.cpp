@@ -32,7 +32,7 @@ Player::Player(sf::Vector2f position)
     addComponent<Camera>(CameraType::FOLLOW);
     addComponent<AnimatedMovement>();
     addComponent<Inventory>();
-    addComponent<Z>(Z_TOP);
+    addComponent<Z>(Z_TOP / 2);
     LevelManager::Instance()->setPlayer(this);
 }
 
