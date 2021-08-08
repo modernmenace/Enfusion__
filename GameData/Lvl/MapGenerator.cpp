@@ -1,7 +1,7 @@
 #include "MapGenerator.h"
-#include "Biomes/Objects/Desert/Cactus.h"
-#include "Biomes/Objects/Desert/Cactus2.h"
-#include "Biomes/Objects/Desert/DeadTree.h"
+#include "../Entity/Level/MapObjects/Desert/Cactus.h"
+#include "../Entity/Level/MapObjects/Desert/Cactus2.h"
+#include "../Entity/Level/MapObjects/Desert/DeadTree.h"
 #include "../Engine/Lvl/LevelManager.h"
 
 MapGenerator* MapGenerator::m_Instance = nullptr;

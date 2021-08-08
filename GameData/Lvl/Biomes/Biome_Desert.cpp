@@ -1,5 +1,4 @@
 #include "Biome_Desert.h"
-#include "Objects/Desert/Cactus.h"
 #include <cmath>
 
 void Biome_Desert::generate(sf::Vector2i position, sf::Vector2i area, std::vector<Tile> *map, sf::Vector2i mapArea)

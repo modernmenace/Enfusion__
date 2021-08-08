@@ -3,7 +3,7 @@
 
 #include <bitset>
 #include "../../../Engine/Entity/Entity.h"
-#include "../../../Entity/Player.h"
+#include "../../Player.h"
 
 struct Tile;
 

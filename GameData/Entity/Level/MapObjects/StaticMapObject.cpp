@@ -1,5 +1,5 @@
 #include "StaticMapObject.h"
-#include "../../LvlStructs.h"
+#include "../../../Lvl/LvlStructs.h"
 #include "../../../Engine/Lvl/LevelManager.h"
 #include "../../../Engine/Component/Misc/Camera.h"
 #include "../../../Engine/Component/Anim/AnimatedSprite.h"
@@ -150,10 +150,6 @@ void StaticMapObject::update(sf::Time tickRate)
 
         uint8_t playerZ = player->z();
         uint8_t thisZ   = getComponent<Z>().z();
-
-        //TODO: this is slow and crashy - rethink
-        //TODO: weird: sortZOrder every update in level works fine
-
 
         if (pCenter.y > zOrderBoundary())
         {

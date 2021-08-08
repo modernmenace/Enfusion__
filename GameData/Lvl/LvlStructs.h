@@ -2,7 +2,7 @@
 #define ENFUSION___LVLSTRUCTS_H
 
 #include "../Engine/Core/Engine.h"
-#include "Biomes/Objects/StaticMapObject.h"
+#include "../Entity/Level/MapObjects/StaticMapObject.h"
 #include <vector>
 #include <cmath>
 

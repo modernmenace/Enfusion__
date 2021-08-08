@@ -3,7 +3,7 @@
 
 #include "../Engine/Core/Engine.h"
 #include "BiomeManager.h"
-#include "Biomes/Objects/StaticMapObject.h"
+#include "../Entity/Level/MapObjects/StaticMapObject.h"
 
 #define LEVEL_BIOME_SIZE_MIN 60
 #define LEVEL_BIOME_SIZE_MAX 200
