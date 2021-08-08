@@ -70,7 +70,7 @@ void Level_1::initialize()
     //add map objects to level entities
     auto* m_objVec = &MapGenerator::Instance()->map()->m_mapObjects;
     for(int i = 0; i < m_objVec->size(); i++)
-        addEntity(m_objVec->at(i).object, Z_BOTTOM);
+        addEntity(m_objVec->at(i).object);
 
     #if DEBUG_ENABLE_DEBUG_MENU == 1
     dbg_playerPosText  = new TextDisplay("Test", sf::Vector2f(-950, -530), 12);

@@ -29,11 +29,18 @@ Level::~Level()
     for(std::vector<Entity*>::iterator i = uiEntities.begin(),
                 e = uiEntities.end(); i != e; ++i)
         delete (*i);
+
+    for(std::vector<Entity*>::iterator i = entities_zOrdered.begin(),
+                e = entities_zOrdered.end(); i != e; ++i)
+        delete (*i);
 }
 
 void Level::initialize()
 {
     for(auto &e : entities)
+        e->initialize();
+
+    for (auto &e : entities_zOrdered)
         e->initialize();
 
     for (auto &e : uiEntities)
@@ -43,8 +50,13 @@ void Level::initialize()
 void Level::update(sf::Time tickRate)
 {
     if (l_state == GameState::RUNNING)
-        for(auto &e : entities)
+    {
+        for (auto &e : entities)
             e->update(tickRate);
+
+        for (auto &e : entities_zOrdered)
+            e->update(tickRate);
+    }
 
     for (auto &e : uiEntities)
         e->update(tickRate);
@@ -57,15 +69,21 @@ void Level::update(sf::Time tickRate)
 void Level::sortZOrderInternal()
 {
     //right now sorts all the entities, more efficient way?
-    std::sort(entities.begin(), entities.end(), Z::compare);
+    std::sort(entities_zOrdered.begin(), entities_zOrdered.end(), Z::compare);
     l_sortZOrderFlag = false;
 }
 
-void Level::addEntity(Entity *e, uint8_t z)
+void Level::addEntity(Entity *e)
 {
     assert(e != nullptr);
-    entities.insert(entities.begin(), e);
-    sortZOrder();
+
+    if (e->hasComponent<Z>())
+    {
+        entities_zOrdered.insert(entities_zOrdered.begin(), e);
+        sortZOrder();
+    }
+    else
+        entities.insert(entities.begin(), e);
 }
 
 void Level::render(sf::RenderWindow* window)
@@ -74,6 +92,9 @@ void Level::render(sf::RenderWindow* window)
 
     // assume entities are sorted here
     for(auto &e : entities)
+        e->render(window);
+
+    for (auto &e : entities_zOrdered)
         e->render(window);
 }
 
@@ -94,8 +115,13 @@ void Level::renderUI(sf::RenderWindow *window)
 void Level::handleInput(sf::Keyboard::Key key)
 {
     if (l_state == GameState::RUNNING)
-        for(auto &e : entities)
+    {
+        for (auto &e : entities)
             e->handleInput(key);
+
+        for (auto &e : entities_zOrdered)
+            e->handleInput(key);
+    }
 
     for(auto &e : uiEntities)
         e->handleInput(key);
@@ -104,8 +130,13 @@ void Level::handleInput(sf::Keyboard::Key key)
 void Level::handleInput(sf::Mouse::Button button)
 {
     if (l_state == GameState::RUNNING)
-        for(auto &e : entities)
+    {
+        for (auto &e : entities)
             e->handleInput(button);
+
+        for (auto &e : entities_zOrdered)
+            e->handleInput(button);
+    }
 
     for(auto &e : uiEntities)
         e->handleInput(button);
@@ -113,12 +144,26 @@ void Level::handleInput(sf::Mouse::Button button)
 
 void Level::removeEntity(Entity *e)
 {
-    for(uint16_t i = 0; i < entities.size(); i++)
+    if (e->hasComponent<Z>())
     {
-        if (entities[i] == e)
+        for(uint16_t i = 0; i < entities_zOrdered.size(); i++)
         {
-            delete entities[i];
-            entities.erase(entities.begin() + i);
+            if (entities_zOrdered[i] == e)
+            {
+                delete entities_zOrdered[i];
+                entities_zOrdered.erase(entities_zOrdered.begin() + i);
+            }
+        }
+    }
+    else
+    {
+        for(uint16_t i = 0; i < entities.size(); i++)
+        {
+            if (entities[i] == e)
+            {
+                delete entities[i];
+                entities.erase(entities.begin() + i);
+            }
         }
     }
 }

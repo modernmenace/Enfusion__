@@ -12,7 +12,7 @@ public:
 
     inline uint8_t z() const { return z_z; }
 
-    static bool compare(const Entity* left, const Entity* right);
+    static bool compare(Entity* left, Entity* right);
 
 private:
     uint8_t z_z;

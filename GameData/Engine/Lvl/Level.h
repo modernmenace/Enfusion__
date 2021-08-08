@@ -30,7 +30,7 @@ public:
     inline void setState(GameState g) { l_state = g; }
     inline GameState state()          { return l_state; }
 
-    void addEntity(Entity* e, uint8_t z = 0);
+    void addEntity(Entity* e);
 
     inline void addUIEntity(Entity* e)
     {
@@ -47,6 +47,7 @@ protected:
     string_t levelName;
 
     std::vector<Entity*> entities;
+    std::vector<Entity*> entities_zOrdered;
     std::vector<Entity*> uiEntities;
 
     sf::View defaultView;
