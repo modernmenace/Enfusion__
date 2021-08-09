@@ -11,5 +11,6 @@ Features:
  - Towns contain troops in addition to villagers, troops can be "called up" to follow lord into battle, however town is left unprotected
  - Building system for player
 
-
+Gameplay Loop:
+ - Build reputation with individuals in towns - fisherman, sell fish or challenge him - guards - help fight bandits etc
 
