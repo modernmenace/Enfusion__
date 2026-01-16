@@ -9,4 +9,5 @@ In-Progress (and abadoned) SFML-based Engine I worked on in my (very limited) co
  - Full inventory system, supporting drag and drop and dropping items into the world to be picked up
  - Dynamic tilemap world generation
  - Animated sprite movement with an overhead camera, following the player without moving over the edge of the map
+ - Efficient asset management system
 
