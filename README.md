@@ -1,6 +1,6 @@
 # Enfusion__
 
-In-Progress (and abadoned) SFML-based Engine I worked on in my (very limited) college free time to be used by my personal projects.
+In-Progress (and abandoned) SFML-based Engine I worked on in my (very limited) college free time to be used by my personal projects.
 
 # Features:
  - Fully functional entity-component system, allowing for streamlined game logic
