@@ -1,16 +1,12 @@
 # Enfusion__
-SFML-based Engine
-https://trello.com/b/EeKFcEfj/dev
 
-Features:
- - Procedurally Generated World
- - AI controlled and constructed towns which function as RTS players
- - Dynamic quest system for building reputation/leveling
- - Dungeons
- - "Vassal" type AI who control towns
- - Towns contain troops in addition to villagers, troops can be "called up" to follow lord into battle, however town is left unprotected
- - Building system for player
+In-Progress (and abadoned) SFML-based Engine I worked on in my (very limited) college free time to be used by my personal projects.
 
-Gameplay Loop:
- - Build reputation with individuals in towns - fisherman, sell fish or challenge him - guards - help fight bandits etc
+# Features:
+ - Fully functional entity-component system
+ - Python-based modding support, with a C layer supporting Python->C++ function calls (c++-side Function API incomplete due to unfinished engine)
+ - Dynamic sprite layers, supporting a functional clothing/weapon system with support for animations
+ - Full inventory system, supporting drag and drop and dropping items into the world to be picked up
+ - Dynamic tilemap world generation
+ - Animated sprite movement with an overhead camera, following the player without moving over the edge of the map
 
